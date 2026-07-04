@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Montrax — Premium Digital Studio</title>
+  <meta name="description" content="Montrax — a premium digital studio for design, web development, AI automation, SMM and branding. We build exceptional digital experiences." />
+  <meta name="theme-color" content="#040604" />
+  <meta property="og:title" content="Montrax — Premium Digital Studio" />
+  <meta property="og:description" content="Design · Web Development · AI Automation · Branding · SMM" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="img/icon/og-cover.svg" />
+  <link rel="icon" type="image/svg+xml" href="img/icon/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- LOADER -->
+  <div id="loader"><div class="loader-inner">
+    <svg class="loader-logo" viewBox="0 0 512 512" aria-hidden="true"><polygon points="111.6,439.4 48.4,420.6 70.3,462.6" fill="#fff"/><polygon points="463.6,420.6 400.4,439.4 441.7,462.6" fill="#fff"/><path class="lg-path" d="M80 430 L175 110 L256 290 L337 110 L432 430" fill="none" stroke="#fff" stroke-width="66" stroke-linejoin="miter" stroke-miterlimit="10"/></svg>
+    <div class="loader-word">MONTRA<span>X</span></div><div class="loader-bar"><i></i></div>
+  </div></div>
+
+  <div id="progress"></div>
+  <div class="cursor-dot"></div>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="container">
+      <a href="index.html#home" class="logo" data-magnetic>
+        <svg class="logo-mark" viewBox="0 0 512 512" aria-hidden="true"><polygon points="111.6,439.4 48.4,420.6 70.3,462.6" fill="currentColor"/><polygon points="463.6,420.6 400.4,439.4 441.7,462.6" fill="currentColor"/><path d="M80 430 L175 110 L256 290 L337 110 L432 430" fill="none" stroke="currentColor" stroke-width="66" stroke-linejoin="miter" stroke-miterlimit="10"/></svg>
+        <span class="wm">MONTRA<span>X</span></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html#home" data-i18n="nav_home">Home</a></li>
+        <li><a href="index.html#services" data-i18n="nav_services">Services</a></li>
+        <li><a href="portfolio.html" data-i18n="nav_portfolio">Portfolio</a></li>
+        <li><a href="index.html#about" data-i18n="nav_about">About</a></li>
+        <li><a href="index.html#contact" data-i18n="nav_contact">Contact</a></li>
+      </ul>
+      <div class="nav-right">
+        <div class="lang-switch" id="langSwitch"><button data-lang="uz">UZ</button><button data-lang="en" class="active">EN</button></div>
+        <a href="index.html#contact" class="btn btn--primary btn--sm" data-magnetic data-i18n="nav_cta">Start a Project</a>
+        <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="index.html#home" data-i18n="nav_home">Home</a>
+    <a href="index.html#services" data-i18n="nav_services">Services</a>
+    <a href="portfolio.html" data-i18n="nav_portfolio">Portfolio</a>
+    <a href="index.html#about" data-i18n="nav_about">About</a>
+    <a href="index.html#contact" data-i18n="nav_contact">Contact</a>
+    <a href="index.html#contact" class="btn btn--primary mm-cta" data-i18n="nav_cta">Start a Project</a>
+    <div class="mm-social">
+      <a href="https://t.me/Montrax_offical" target="_blank" rel="noopener" aria-label="Telegram"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.94 4.3L2.9 11.64c-1.06.4-1.05.98-.19 1.24l4.88 1.52 1.9 5.75c.24.65.12.9.78.9.48 0 .7-.22 1-.5l2.3-2.23 4.78 3.53c.88.48 1.5.23 1.72-.82L22.3 5.7c.32-1.3-.5-1.9-1.36-1.4z"/></svg></a>
+      <a href="https://www.instagram.com/montraxoffical/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+      <a href="https://github.com/islombekNew" target="_blank" rel="noopener" aria-label="GitHub"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49l-.01-1.9c-2.78.62-3.37-1.2-3.37-1.2-.46-1.18-1.11-1.5-1.11-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.55 2.34 1.1 2.91.84.09-.66.35-1.1.63-1.36-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.72 0 0 .84-.28 2.75 1.05a9.4 9.4 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.42.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9l-.01 2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg></a>
+    </div>
+  </div>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="home">
+      <div class="hero-grid"></div><div class="glow glow--a"></div><div class="glow glow--b"></div>
+      <div class="container">
+        <div class="hero-inner">
+          <span class="hero-badge reveal"><span class="dot"></span><span data-i18n="hero_badge">Available for new projects</span></span>
+          <h1 class="reveal" data-delay="1"><span data-i18n="hero_title_1">We craft</span> <span class="grad-text" data-i18n="hero_title_2">premium digital</span> <span data-i18n="hero_title_3">experiences.</span></h1>
+          <p class="lead reveal" data-delay="2" data-i18n="hero_lead">Montrax is a premium digital studio for design, web development, AI automation, branding and SMM.</p>
+          <div class="hero-cta reveal" data-delay="3">
+            <a href="index.html#contact" class="btn btn--primary" data-magnetic><span data-i18n="hero_cta_1">Start a Project</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a href="portfolio.html" class="btn btn--ghost" data-magnetic data-i18n="hero_cta_2">View Portfolio</a>
+          </div>
+          <div class="hero-mini reveal" data-delay="4">
+            <div class="m"><div class="n">3+</div><div class="l" data-i18n="hero_m1">Years of craft</div></div>
+            <div class="m"><div class="n">120+</div><div class="l" data-i18n="hero_m2">Projects delivered</div></div>
+            <div class="m"><div class="n">80+</div><div class="l" data-i18n="hero_m3">Happy clients</div></div>
+          </div>
+        </div>
+        <div class="hero-visual reveal rv-scale" data-delay="2">
+          <div class="hv-scene">
+            <div class="hv-orbit o1"></div><div class="hv-orbit o2"></div><div class="hv-orbit o3"></div>
+            <div class="hv-core"><svg class="logo-mark" viewBox="0 0 512 512" aria-hidden="true"><polygon points="111.6,439.4 48.4,420.6 70.3,462.6" fill="currentColor"/><polygon points="463.6,420.6 400.4,439.4 441.7,462.6" fill="currentColor"/><path d="M80 430 L175 110 L256 290 L337 110 L432 430" fill="none" stroke="currentColor" stroke-width="66" stroke-linejoin="miter" stroke-miterlimit="10"/></svg></div>
+            <span class="hv-spark s1"></span><span class="hv-spark s2"></span><span class="hv-spark s3"></span>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-ind"><div class="mouse"></div><span data-i18n="scroll">SCROLL</span></div>
+    </section>
+
+    <!-- STACK: everything below slides up over the sticky hero -->
+    <div class="page-stack">
+
+    <!-- CAROUSEL 1 · KEYWORD TICKER -->
+    <div class="marquee ticker section--tight">
+      <div class="marquee-track">
+        <span>Design</span><span class="star">✦</span><span>Web Development</span><span class="star">✦</span><span>AI Automation</span><span class="star">✦</span><span>Branding</span><span class="star">✦</span><span>UI/UX</span><span class="star">✦</span><span>SMM</span><span class="star">✦</span>
+        <span>Design</span><span class="star">✦</span><span>Web Development</span><span class="star">✦</span><span>AI Automation</span><span class="star">✦</span><span>Branding</span><span class="star">✦</span><span>UI/UX</span><span class="star">✦</span><span>SMM</span><span class="star">✦</span>
+      </div>
+    </div>
+
+    <!-- STATS -->
+    <section class="section section--tight" aria-label="Stats">
+      <div class="container">
+        <div class="stats">
+          <div class="stat reveal"><div class="num"><span data-count="120">0</span><span class="accent-text">+</span></div><div class="lbl" data-i18n="stat_projects">Projects Completed</div></div>
+          <div class="stat reveal" data-delay="1"><div class="num"><span data-count="80">0</span><span class="accent-text">+</span></div><div class="lbl" data-i18n="stat_clients">Happy Clients</div></div>
+          <div class="stat reveal" data-delay="2"><div class="num"><span data-count="20">0</span><span class="accent-text">+</span></div><div class="lbl" data-i18n="stat_tech">Technologies Used</div></div>
+          <div class="stat reveal" data-delay="3"><div class="num"><span data-count="99">0</span><span class="accent-text">%</span></div><div class="lbl" data-i18n="stat_satisfaction">Client Satisfaction</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="glow" style="width:400px;height:400px;top:20%;left:-160px;opacity:.5"></div>
+      <div class="container">
+        <div class="about-grid">
+          <div class="reveal rv-left">
+            <span class="eyebrow" data-i18n="about_eyebrow">About Montrax</span>
+            <h2 class="section-title"><span data-i18n="about_title_1">A studio built on</span> <span class="accent-text" data-i18n="about_title_2">precision & purpose.</span></h2>
+            <p class="section-desc" data-i18n="about_p1">We believe the work should speak for itself.</p>
+            <p class="section-desc" data-i18n="about_p2">We treat every project as a long-term partnership.</p>
+          </div>
+          <div class="value-cards">
+            <div class="value-card reveal" data-delay="1"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></div><h4 data-i18n="value1_t">Mission</h4><p data-i18n="value1_d">Digital products that convert.</p></div>
+            <div class="value-card reveal" data-delay="2"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/></svg></div><h4 data-i18n="value2_t">Vision</h4><p data-i18n="value2_d">A benchmark for premium craft.</p></div>
+            <div class="value-card reveal" data-delay="3"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg></div><h4 data-i18n="value3_t">Quality</h4><p data-i18n="value3_d">Every detail refined.</p></div>
+            <div class="value-card reveal" data-delay="4"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg></div><h4 data-i18n="value4_t">Innovation</h4><p data-i18n="value4_d">AI and modern tooling.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="section" id="services">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow" data-i18n="srv_eyebrow">What We Offer</span>
+          <h2 class="section-title"><span data-i18n="srv_title_1">Services that</span> <span class="accent-text" data-i18n="srv_title_2">deliver results.</span></h2>
+          <p class="section-desc" data-i18n="srv_desc">From concept to launch — engineered for measurable impact.</p>
+        </div>
+        <div class="services-grid">
+          <article class="service-card reveal" data-tilt><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div><h3 data-i18n="s1_t">Web Development</h3><p data-i18n="s1_d">High-performance sites and apps.</p></article>
+          <article class="service-card reveal" data-delay="1" data-tilt><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/><circle cx="11" cy="11" r="2"/></svg></div><h3 data-i18n="s2_t">UI/UX Design</h3><p data-i18n="s2_d">Intuitive, elegant interfaces.</p></article>
+          <article class="service-card reveal" data-delay="2" data-tilt><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 0 1 0 20 15 15 0 0 1 0-20z"/></svg></div><h3 data-i18n="s3_t">Brand Identity</h3><p data-i18n="s3_d">Systems that get recognized.</p></article>
+          <article class="service-card reveal" data-tilt><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/><path d="M16 2l6 6"/></svg></div><h3 data-i18n="s4_t">AI Automation</h3><p data-i18n="s4_d">Workflows that scale.</p></article>
+          <article class="service-card reveal" data-delay="1" data-tilt><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><h3 data-i18n="s5_t">Telegram Bots</h3><p data-i18n="s5_d">Bots for sales & support.</p></article>
+          <article class="service-card reveal" data-delay="2" data-tilt><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9z"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg></div><h3 data-i18n="s6_t">Social Media & SMM</h3><p data-i18n="s6_d">Content that grows audiences.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAROUSEL 2 · WORK SHOWCASE (images) -->
+    <section class="section--tight">
+      <div class="marquee marquee--img">
+        <div class="marquee-track">
+          <div class="mq-card portrait"><img src="img/imgs/poster-iphonevivo.jpg" alt="iPhone vs Vivo poster" loading="lazy" /></div>
+          <div class="mq-card"><img src="img/imgs/poster-oppo.jpg" alt="OPPO thumbnail" loading="lazy" /></div>
+          <div class="mq-card portrait"><img src="img/imgs/poster-ios27.jpg" alt="iOS 27 poster" loading="lazy" /></div>
+          <div class="mq-card"><img src="img/imgs/poster-realme.jpg" alt="Realme thumbnail" loading="lazy" /></div>
+          <div class="mq-card"><img src="img/imgs/work-2.jpg" alt="Product design" loading="lazy" /></div>
+          <div class="mq-card"><img src="img/imgs/work-6.png" alt="Product design" loading="lazy" /></div>
+          <!-- duplicate for seamless loop -->
+          <div class="mq-card portrait"><img src="img/imgs/poster-iphonevivo.jpg" alt="" loading="lazy" /></div>
+          <div class="mq-card"><img src="img/imgs/poster-oppo.jpg" alt="" loading="lazy" /></div>
+          <div class="mq-card portrait"><img src="img/imgs/poster-ios27.jpg" alt="" loading="lazy" /></div>
+          <div class="mq-card"><img src="img/imgs/poster-realme.jpg" alt="" loading="lazy" /></div>
+          <div class="mq-card"><img src="img/imgs/work-2.jpg" alt="" loading="lazy" /></div>
+          <div class="mq-card"><img src="img/imgs/work-6.png" alt="" loading="lazy" /></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section class="section" id="why">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow" data-i18n="why_eyebrow">Why Montrax</span>
+          <h2 class="section-title"><span data-i18n="why_title_1">Reasons clients</span> <span class="accent-text" data-i18n="why_title_2">choose us.</span></h2>
+        </div>
+        <div class="why-grid">
+          <div class="why-card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></div><h4 data-i18n="w1_t">Premium Quality</h4><p data-i18n="w1_d">Awwwards-level craft.</p></div>
+          <div class="why-card reveal" data-delay="1"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.3-4.3"/></svg></div><h4 data-i18n="w2_t">Attention to Detail</h4><p data-i18n="w2_d">Every pixel intentional.</p></div>
+          <div class="why-card reveal" data-delay="2"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div><h4 data-i18n="w3_t">Business-Oriented</h4><p data-i18n="w3_d">We design for outcomes.</p></div>
+          <div class="why-card reveal" data-delay="3"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h7l-1 8 10-12h-7z"/></svg></div><h4 data-i18n="w4_t">Modern Technology</h4><p data-i18n="w4_d">Latest tooling and AI.</p></div>
+          <div class="why-card reveal"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg></div><h4 data-i18n="w5_t">Fast Communication</h4><p data-i18n="w5_d">Quick, transparent.</p></div>
+          <div class="why-card reveal" data-delay="1"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h4 data-i18n="w6_t">Reliable Support</h4><p data-i18n="w6_d">Involved after launch.</p></div>
+          <div class="why-card reveal" data-delay="2"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.66 5A2 2 0 1 1 12 2.34"/><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5S5 13 5 15a7 7 0 0 0 7 7z"/></svg></div><h4 data-i18n="w7_t">Creative Solutions</h4><p data-i18n="w7_d">Original ideas.</p></div>
+          <div class="why-card reveal" data-delay="3"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><h4 data-i18n="w8_t">Long-Term Partner</h4><p data-i18n="w8_d">We grow with clients.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section class="section" id="process">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow" data-i18n="proc_eyebrow">How We Work</span>
+          <h2 class="section-title"><span data-i18n="proc_title_1">A process built for</span> <span class="accent-text" data-i18n="proc_title_2">clarity.</span></h2>
+        </div>
+        <div class="process-timeline">
+          <div class="step reveal"><div class="node">01</div><div class="body"><h4 data-i18n="p1_t">Discovery</h4><p data-i18n="p1_d">Understand your goals.</p></div></div>
+          <div class="step reveal" data-delay="1"><div class="node">02</div><div class="body"><h4 data-i18n="p2_t">Research</h4><p data-i18n="p2_d">Market and user research.</p></div></div>
+          <div class="step reveal" data-delay="1"><div class="node">03</div><div class="body"><h4 data-i18n="p3_t">Planning</h4><p data-i18n="p3_d">Scope and roadmap.</p></div></div>
+          <div class="step reveal" data-delay="1"><div class="node">04</div><div class="body"><h4 data-i18n="p4_t">Design</h4><p data-i18n="p4_d">Premium visuals.</p></div></div>
+          <div class="step reveal" data-delay="1"><div class="node">05</div><div class="body"><h4 data-i18n="p5_t">Development</h4><p data-i18n="p5_d">Clean engineering.</p></div></div>
+          <div class="step reveal" data-delay="1"><div class="node">06</div><div class="body"><h4 data-i18n="p6_t">Testing</h4><p data-i18n="p6_d">Rigorous QA.</p></div></div>
+          <div class="step reveal" data-delay="1"><div class="node">07</div><div class="body"><h4 data-i18n="p7_t">Delivery</h4><p data-i18n="p7_d">Smooth launch.</p></div></div>
+          <div class="step reveal" data-delay="1"><div class="node">08</div><div class="body"><h4 data-i18n="p8_t">Support</h4><p data-i18n="p8_d">Ongoing support.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO PREVIEW -->
+    <section class="section" id="portfolio">
+      <div class="glow" style="width:500px;height:500px;top:10%;right:-200px;opacity:.5"></div>
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow" data-i18n="pf_eyebrow">Featured Work</span>
+          <h2 class="section-title"><span data-i18n="pf_title_1">Selected</span> <span class="accent-text" data-i18n="pf_title_2">projects.</span></h2>
+          <p class="section-desc" data-i18n="pf_desc">A glimpse of the work we're proud of.</p>
+        </div>
+        <div class="portfolio-grid">
+          <a class="mockup reveal" href="https://amazing-paprenjak-720e4c.netlify.app/" target="_blank" rel="noopener" style="--mk-grad:radial-gradient(circle at 30% 20%,rgba(242,184,75,.28),transparent 60%),linear-gradient(160deg,#141007,#080604)">
+            <div class="bar"><div class="dots"><i></i><i></i><i></i></div><div class="url">savoro-restaurant.app</div></div>
+            <div class="screen"><div class="ct"><div class="kicker" data-i18n="prj1_kick">Restaurant · Web</div><h3 data-i18n="prj1_t">Savoro Restaurant</h3></div></div>
+            <div class="body"><div class="meta"><div class="t" data-i18n="prj1_cat">Website</div><div class="s">2025</div></div><span class="visit"><span data-i18n="pf_visit">Visit site</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></span></div>
+          </a>
+          <div class="work reveal tall" data-delay="1"><img src="img/imgs/poster-iphonevivo.jpg" alt="iPhone vs Vivo poster" loading="lazy" /><div class="view-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div><div class="overlay"><span class="cat" data-i18n="pw_cat_poster">Instagram Poster</span><h4>iPhone vs Vivo</h4><span class="client">SMM · 2025</span></div></div>
+          <div class="work reveal" data-delay="2"><img src="img/imgs/poster-oppo.jpg" alt="OPPO thumbnail" loading="lazy" /><div class="view-tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M7 7h10v10"/></svg></div><div class="overlay"><span class="cat" data-i18n="pw_cat_thumb">YouTube Thumbnail</span><h4>OPPO Find X9</h4><span class="client">Graphic · 2025</span></div></div>
+        </div>
+        <div style="text-align:center;margin-top:var(--s6)" class="reveal">
+          <a href="portfolio.html" class="btn btn--primary" data-magnetic><span data-i18n="pf_view_all">View full portfolio</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECH + CAROUSEL 3 (reverse tech marquee) -->
+    <section class="section" id="tech">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow" data-i18n="tech_eyebrow">Our Stack</span>
+          <h2 class="section-title"><span data-i18n="tech_title_1">Technologies &</span> <span class="accent-text" data-i18n="tech_title_2">tools.</span></h2>
+          <p class="section-desc" data-i18n="tech_desc">The modern toolkit we use.</p>
+        </div>
+      </div>
+      <div class="marquee rev slow" style="margin-top:var(--s5)">
+        <div class="marquee-track">
+          <span><span class="d"></span>React</span><span><span class="d"></span>Next.js</span><span><span class="d"></span>TypeScript</span><span><span class="d"></span>Node.js</span><span><span class="d"></span>Tailwind CSS</span><span><span class="d"></span>Figma</span><span><span class="d"></span>Photoshop</span><span><span class="d"></span>Supabase</span><span><span class="d"></span>MongoDB</span><span><span class="d"></span>OpenAI API</span><span><span class="d"></span>Claude API</span><span><span class="d"></span>Telegram Bot API</span>
+          <span><span class="d"></span>React</span><span><span class="d"></span>Next.js</span><span><span class="d"></span>TypeScript</span><span><span class="d"></span>Node.js</span><span><span class="d"></span>Tailwind CSS</span><span><span class="d"></span>Figma</span><span><span class="d"></span>Photoshop</span><span><span class="d"></span>Supabase</span><span><span class="d"></span>MongoDB</span><span><span class="d"></span>OpenAI API</span><span><span class="d"></span>Claude API</span><span><span class="d"></span>Telegram Bot API</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAROUSEL 4 · TESTIMONIALS (auto, never stops) -->
+    <section class="section" id="testimonials">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow" data-i18n="tst_eyebrow">Testimonials</span>
+          <h2 class="section-title"><span data-i18n="tst_title_1">What clients</span> <span class="accent-text" data-i18n="tst_title_2">say.</span></h2>
+        </div>
+      </div>
+      <div class="marquee testi-marquee">
+        <div class="marquee-track">
+          <div class="testi"><div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></div><blockquote data-i18n="tst1_q">"Genuinely feels premium."</blockquote><div class="person"><div class="avatar">JD</div><div><div class="name">Jasur D.</div><div class="role" data-i18n="tst1_r">Founder</div></div></div></div>
+          <div class="testi"><div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></div><blockquote data-i18n="tst2_q">"Fast and detail-oriented."</blockquote><div class="person"><div class="avatar">MK</div><div><div class="name">Malika K.</div><div class="role" data-i18n="tst2_r">Marketing Lead</div></div></div></div>
+          <div class="testi"><div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></div><blockquote data-i18n="tst3_q">"Like having a real partner."</blockquote><div class="person"><div class="avatar">RS</div><div><div class="name">Rustam S.</div><div class="role" data-i18n="tst3_r">CEO</div></div></div></div>
+          <!-- duplicate for seamless loop -->
+          <div class="testi"><div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></div><blockquote data-i18n="tst1_q">"Genuinely feels premium."</blockquote><div class="person"><div class="avatar">JD</div><div><div class="name">Jasur D.</div><div class="role" data-i18n="tst1_r">Founder</div></div></div></div>
+          <div class="testi"><div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></div><blockquote data-i18n="tst2_q">"Fast and detail-oriented."</blockquote><div class="person"><div class="avatar">MK</div><div><div class="name">Malika K.</div><div class="role" data-i18n="tst2_r">Marketing Lead</div></div></div></div>
+          <div class="testi"><div class="stars"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3 7h7l-5.5 4.5L18 21l-6-4-6 4 1.5-7.5L2 9h7z"/></svg></div><blockquote data-i18n="tst3_q">"Like having a real partner."</blockquote><div class="person"><div class="avatar">RS</div><div><div class="name">Rustam S.</div><div class="role" data-i18n="tst3_r">CEO</div></div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow" data-i18n="faq_eyebrow">FAQ</span>
+          <h2 class="section-title"><span data-i18n="faq_title_1">Frequently asked</span> <span class="accent-text" data-i18n="faq_title_2">questions.</span></h2>
+        </div>
+        <div class="faq-list">
+          <div class="faq-item reveal"><button class="faq-q"><span data-i18n="faq1_q">What services do you provide?</span><span class="plus"></span></button><div class="faq-a"><p data-i18n="faq1_a">Full-cycle digital solutions.</p></div></div>
+          <div class="faq-item reveal"><button class="faq-q"><span data-i18n="faq2_q">How long does a project take?</span><span class="plus"></span></button><div class="faq-a"><p data-i18n="faq2_a">It depends on scope.</p></div></div>
+          <div class="faq-item reveal"><button class="faq-q"><span data-i18n="faq3_q">Can international clients work with Montrax?</span><span class="plus"></span></button><div class="faq-a"><p data-i18n="faq3_a">Absolutely.</p></div></div>
+          <div class="faq-item reveal"><button class="faq-q"><span data-i18n="faq4_q">Do you provide revisions?</span><span class="plus"></span></button><div class="faq-a"><p data-i18n="faq4_a">Yes, every project includes revisions.</p></div></div>
+          <div class="faq-item reveal"><button class="faq-q"><span data-i18n="faq5_q">Can you redesign an existing project?</span><span class="plus"></span></button><div class="faq-a"><p data-i18n="faq5_a">Definitely.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="glow" style="width:520px;height:520px;top:0;left:50%;translate:-50% 0;opacity:.55"></div>
+      <div class="container">
+        <div class="section-head center reveal">
+          <span class="eyebrow" data-i18n="ct_eyebrow">Get in Touch</span>
+          <h2 class="section-title"><span data-i18n="ct_title_1">Let's build something</span> <span class="accent-text" data-i18n="ct_title_2">exceptional together.</span></h2>
+          <p class="section-desc" data-i18n="ct_desc">Tell us about your project.</p>
+        </div>
+        <div class="contact-single">
+          <form class="form reveal rv-scale" id="contactForm" novalidate>
+            <div class="form-fields">
+              <div class="form-row">
+                <div class="field"><label data-i18n="f_name">Full Name</label><input type="text" name="name" data-i18n-ph="f_name_ph" placeholder="Your name" required /></div>
+                <div class="field"><label data-i18n="f_email">Email</label><input type="email" name="email" placeholder="you@email.com" required /></div>
+              </div>
+              <div class="form-row">
+                <div class="field"><label data-i18n="f_tg">Telegram (optional)</label><input type="text" name="telegram" placeholder="@username" /></div>
+                <div class="field"><label data-i18n="f_company">Company (optional)</label><input type="text" name="company" data-i18n-ph="f_company_ph" placeholder="Company name" /></div>
+              </div>
+              <div class="form-row">
+                <div class="field"><label data-i18n="f_service">Service</label>
+                  <select name="service"><option data-i18n="f_svc_web">Web Development</option><option data-i18n="f_svc_design">UI/UX Design</option><option data-i18n="f_svc_brand">Brand Identity</option><option data-i18n="f_svc_ai">AI Automation</option><option data-i18n="f_svc_bot">Telegram Bot</option><option data-i18n="f_svc_smm">SMM</option><option data-i18n="f_svc_other">Other</option></select>
+                </div>
+                <div class="field"><label data-i18n="f_budget">Budget</label>
+                  <select name="budget"><option data-i18n="f_bud1">Under $500</option><option data-i18n="f_bud2">$500 – $2,000</option><option data-i18n="f_bud3">$2,000 – $5,000</option><option data-i18n="f_bud4">$5,000+</option></select>
+                </div>
+              </div>
+              <div class="field"><label data-i18n="f_msg">Project Description</label><textarea name="message" data-i18n-ph="f_msg_ph" placeholder="Tell us about your project..." required></textarea></div>
+              <button type="submit" class="btn btn--primary" data-magnetic><span data-i18n="f_submit">Send via Telegram</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg></button>
+            </div>
+            <div class="form-success" id="formSuccess"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg></div><h3 data-i18n="f_ok_t">Message ready!</h3><p class="section-desc" data-i18n="f_ok_d">We're opening Telegram.</p></div>
+          </form>
+          <div class="contact-social reveal">
+            <a href="https://t.me/Montrax_offical" target="_blank" rel="noopener" title="Telegram — @Montrax_offical" aria-label="Telegram" data-magnetic><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.94 4.3L2.9 11.64c-1.06.4-1.05.98-.19 1.24l4.88 1.52 1.9 5.75c.24.65.12.9.78.9.48 0 .7-.22 1-.5l2.3-2.23 4.78 3.53c.88.48 1.5.23 1.72-.82L22.3 5.7c.32-1.3-.5-1.9-1.36-1.4z"/></svg></a>
+            <a href="https://t.me/montrax_kanal" target="_blank" rel="noopener" title="Telegram channel — @montrax_kanal" aria-label="Telegram channel" data-magnetic><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.94 4.3L2.9 11.64c-1.06.4-1.05.98-.19 1.24l4.88 1.52 1.9 5.75c.24.65.12.9.78.9.48 0 .7-.22 1-.5l2.3-2.23 4.78 3.53c.88.48 1.5.23 1.72-.82L22.3 5.7c.32-1.3-.5-1.9-1.36-1.4z"/></svg></a>
+            <a href="https://www.instagram.com/montraxoffical/" target="_blank" rel="noopener" title="Instagram — @montraxoffical" aria-label="Instagram" data-magnetic><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+            <a href="https://github.com/islombekNew" target="_blank" rel="noopener" title="GitHub — @islombekNew" aria-label="GitHub" data-magnetic><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49l-.01-1.9c-2.78.62-3.37-1.2-3.37-1.2-.46-1.18-1.11-1.5-1.11-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.55 2.34 1.1 2.91.84.09-.66.35-1.1.63-1.36-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.72 0 0 .84-.28 2.75 1.05a9.4 9.4 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.42.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9l-.01 2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section section--tight">
+      <div class="container">
+        <div class="cta-band reveal rv-scale">
+          <div class="glow"></div>
+          <h2 data-i18n="cta_h">Let's build something exceptional together.</h2>
+          <p data-i18n="cta_p">Have a project in mind? Tell us about it.</p>
+          <a href="index.html#contact" class="btn btn--primary" data-magnetic><span data-i18n="cta_btn">Start a Project</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </div>
+    </section>
+    </div><!-- /page-stack -->
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="glow"></div>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html#home" class="logo"><svg class="logo-mark" viewBox="0 0 512 512" aria-hidden="true"><polygon points="111.6,439.4 48.4,420.6 70.3,462.6" fill="currentColor"/><polygon points="463.6,420.6 400.4,439.4 441.7,462.6" fill="currentColor"/><path d="M80 430 L175 110 L256 290 L337 110 L432 430" fill="none" stroke="currentColor" stroke-width="66" stroke-linejoin="miter" stroke-miterlimit="10"/></svg><span class="wm">MONTRA<span>X</span></span></a>
+          <p data-i18n="foot_desc">Premium digital studio.</p>
+          <div class="footer-social">
+            <a href="https://t.me/Montrax_offical" target="_blank" rel="noopener" aria-label="Telegram" data-magnetic><svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.94 4.3L2.9 11.64c-1.06.4-1.05.98-.19 1.24l4.88 1.52 1.9 5.75c.24.65.12.9.78.9.48 0 .7-.22 1-.5l2.3-2.23 4.78 3.53c.88.48 1.5.23 1.72-.82L22.3 5.7c.32-1.3-.5-1.9-1.36-1.4z"/></svg></a>
+            <a href="https://www.instagram.com/montraxoffical/" target="_blank" rel="noopener" aria-label="Instagram" data-magnetic><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+            <a href="https://github.com/islombekNew" target="_blank" rel="noopener" aria-label="GitHub" data-magnetic><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49l-.01-1.9c-2.78.62-3.37-1.2-3.37-1.2-.46-1.18-1.11-1.5-1.11-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.9 1.55 2.34 1.1 2.91.84.09-.66.35-1.1.63-1.36-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.72 0 0 .84-.28 2.75 1.05a9.4 9.4 0 0 1 5 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.42.2 2.46.1 2.72.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9l-.01 2.82c0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2z"/></svg></a>
+          </div>
+        </div>
+        <div><h5 data-i18n="foot_nav">Navigation</h5><ul><li><a href="index.html#services" data-i18n="nav_services">Services</a></li><li><a href="portfolio.html" data-i18n="nav_portfolio">Portfolio</a></li><li><a href="index.html#about" data-i18n="nav_about">About</a></li><li><a href="index.html#contact" data-i18n="nav_contact">Contact</a></li></ul></div>
+        <div><h5 data-i18n="foot_srv">Services</h5><ul><li><a href="index.html#services" data-i18n="s1_t">Web Development</a></li><li><a href="index.html#services" data-i18n="s2_t">UI/UX Design</a></li><li><a href="index.html#services" data-i18n="s4_t">AI Automation</a></li><li><a href="index.html#services" data-i18n="s3_t">Brand Identity</a></li></ul></div>
+        <div><h5 data-i18n="foot_contact">Contact</h5><ul><li><a href="https://t.me/Montrax_offical" target="_blank" rel="noopener">Telegram</a></li><li><a href="https://www.instagram.com/montraxoffical/" target="_blank" rel="noopener">Instagram</a></li><li><a href="https://github.com/islombekNew" target="_blank" rel="noopener">GitHub</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <span>© <span class="year"></span> Montrax. <span data-i18n="foot_rights">All rights reserved.</span></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/lang.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

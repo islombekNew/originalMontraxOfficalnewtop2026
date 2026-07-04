@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MONTRAX — Grafik Dizayn Portfolio</title>
+    <meta name="description" content="Brend identifikatsiya, UI/UX dizayn va motion graphics — Figma, Illustrator va After Effects bilan yaratilgan vizual loyihalar.">
+    <meta name="theme-color" content="#0a0d1a">
+    <link rel="canonical" href="https://montrax.uz/design.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="MONTRAX — Grafik Dizayn Portfolio">
+    <meta property="og:description" content="Brend identifikatsiya, UI/UX dizayn va motion graphics loyihalari.">
+    <meta property="og:image" content="./img/icon/og-cover.svg">
+    <meta property="og:locale" content="uz_UZ">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/svg+xml" href="./img/icon/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,200;0,300;0,400;0,600;0,700;1,300&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="base.css">
+    <script src="./icons.js"></script>
+    <style>
+        /* ── DESIGN PAGE OVERRIDES ── */
+        ::-webkit-scrollbar-thumb {
+            background: var(--plasma)
+        }
+
+        /* PAGE HERO */
+        .page-hero {
+            min-height: 62vh;
+            display: flex;
+            align-items: center;
+            padding: 140px 60px 80px;
+            position: relative;
+            overflow: hidden;
+            background: var(--steel)
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(123, 47, 255, .04) 1px, transparent 1px), linear-gradient(90deg, rgba(123, 47, 255, .04) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gd 25s linear infinite
+        }
+
+        @keyframes gd {
+            0% {
+                background-position: 0 0
+            }
+
+            100% {
+                background-position: 60px 60px
+            }
+        }
+
+        .page-hero::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 50%;
+            background: radial-gradient(ellipse at right center, rgba(123, 47, 255, .1), transparent 70%);
+            pointer-events: none
+        }
+
+        .ph-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px
+        }
+
+        .ph-bread {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 10px;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: var(--silver);
+            margin-bottom: 24px;
+            font-family: var(--font-d);
+            opacity: 0;
+            animation: fadeUp .7s ease .1s forwards
+        }
+
+        .ph-bread a {
+            color: var(--silver);
+            text-decoration: none;
+            transition: color .3s
+        }
+
+        .ph-bread a:hover {
+            color: var(--plasma)
+        }
+
+        .ph-bread span {
+            color: var(--plasma)
+        }
+
+        .ph-title {
+            font-family: var(--font-d);
+            font-weight: 900;
+            font-size: clamp(34px, 6vw, 78px);
+            line-height: 1.05;
+            color: var(--white);
+            margin-bottom: 18px;
+            opacity: 0;
+            animation: fadeUp .7s ease .3s forwards
+        }
+
+        .ph-title span {
+            color: var(--plasma)
+        }
+
+        .ph-sub {
+            font-size: 16px;
+            color: var(--silver);
+            line-height: 1.75;
+            font-weight: 300;
+            max-width: 520px;
+            opacity: 0;
+            animation: fadeUp .7s ease .5s forwards
+        }
+
+        .tool-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 32px;
+            opacity: 0;
+            animation: fadeUp .7s ease .7s forwards
+        }
+
+        .tool-tag {
+            padding: 8px 18px;
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .6);
+            border-radius: 2px;
+            font-size: 11px;
+            color: var(--silver);
+            font-family: var(--font-d);
+            letter-spacing: .1em;
+            transition: all .3s
+        }
+
+        .tool-tag:hover,
+        .tool-tag.active {
+            border-color: var(--plasma);
+            color: var(--plasma);
+            background: rgba(123, 47, 255, .08);
+            box-shadow: var(--glow-p)
+        }
+
+        /* ══ FEATURED WORKS — masonry ══ */
+        #featured {
+            background: var(--abyss);
+            position: relative;
+            overflow: hidden
+        }
+
+        #featured::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(ellipse, rgba(123, 47, 255, .06) 0%, transparent 70%);
+            pointer-events: none
+        }
+
+        .fw-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            grid-template-rows: repeat(7, 80px);
+            gap: 14px;
+            margin-bottom: 56px;
+        }
+
+        .fw-card {
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 8px;
+            overflow: hidden;            transition: all .45s cubic-bezier(.17, .67, .2, 1);
+            position: relative;
+        }
+
+        .fw-card:hover {
+            border-color: var(--plasma);
+            box-shadow: var(--glow-p);
+            transform: scale(1.02) translateY(-2px)
+        }
+
+        /* Grid positions */
+        .fw-1 {
+            grid-column: 1/7;
+            grid-row: 1/5
+        }
+
+        .fw-2 {
+            grid-column: 7/10;
+            grid-row: 1/3
+        }
+
+        .fw-3 {
+            grid-column: 10/13;
+            grid-row: 1/4
+        }
+
+        .fw-4 {
+            grid-column: 7/10;
+            grid-row: 3/5
+        }
+
+        .fw-5 {
+            grid-column: 10/13;
+            grid-row: 4/7
+        }
+
+        .fw-6 {
+            grid-column: 1/5;
+            grid-row: 5/8
+        }
+
+        .fw-7 {
+            grid-column: 5/10;
+            grid-row: 5/8
+        }
+
+        /* Card inner */
+        .fw-bg {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity .4s;
+        }
+
+        .fw-icon {
+            font-size: clamp(32px, 5vw, 64px);
+            opacity: .35;
+            transition: opacity .4s, transform .4s;
+            filter: drop-shadow(0 0 20px rgba(123, 47, 255, .4));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .fw-card:hover .fw-icon {
+            opacity: .65;
+            transform: scale(1.15) rotate(-6deg)
+        }
+
+        /* Image slot — rasm qo'shish uchun */
+        .fw-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.7;
+            transition: opacity .4s, transform .4s;
+        }
+
+        .fw-card:hover .fw-img {
+            opacity: 0.85;
+            transform: scale(1.05)
+        }
+
+        .fw-ov {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 13, 26, .97) 0%, rgba(10, 13, 26, .4) 50%, transparent 100%);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            opacity: 0;
+            transform: translateY(8px);
+            transition: all .4s;
+            z-index: 3;
+        }
+
+        .fw-card:hover .fw-ov {
+            opacity: 1;
+            transform: translateY(0)
+        }
+
+        .fw-cat {
+            font-size: 9px;
+            letter-spacing: .35em;
+            text-transform: uppercase;
+            color: var(--plasma);
+            font-family: var(--font-d);
+            margin-bottom: 5px
+        }
+
+        .fw-title {
+            font-family: var(--font-d);
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: .08em;
+            margin-bottom: 5px
+        }
+
+        .fw-desc {
+            font-size: 11px;
+            color: var(--silver);
+            line-height: 1.5
+        }
+
+        /* ══ CATEGORIES ══ */
+        #categories {
+            background: var(--steel)
+        }
+
+        .cat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px
+        }
+
+        .cat-card {
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 8px;
+            padding: 34px 28px;            transition: all .4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cat-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--plasma), var(--electric));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .4s
+        }
+
+        .cat-card:hover {
+            border-color: rgba(123, 47, 255, .4);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .3)
+        }
+
+        .cat-card:hover::before {
+            transform: scaleX(1)
+        }
+
+        .cat-icon-w {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            background: rgba(123, 47, 255, .1);
+            border: 1px solid rgba(123, 47, 255, .2);
+            margin-bottom: 20px;
+            transition: transform .4s
+        }
+
+        .cat-card:hover .cat-icon-w {
+            transform: scale(1.1) rotate(-5deg)
+        }
+
+        .cat-title {
+            font-family: var(--font-d);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: .1em;
+            margin-bottom: 10px
+        }
+
+        .cat-desc {
+            font-size: 13px;
+            color: var(--silver);
+            line-height: 1.7;
+            margin-bottom: 18px
+        }
+
+        .cat-count {
+            font-family: var(--font-d);
+            font-size: 11px;
+            letter-spacing: .2em;
+            color: var(--plasma)
+        }
+
+        /* ══ BRAND PROJECTS ══ */
+        #brand-projects {
+            background: var(--abyss)
+        }
+
+        .bp-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2px
+        }
+
+        .bp-item {
+            display: grid;
+            grid-template-columns: 70px 1fr auto auto;
+            align-items: center;
+            gap: 16px;
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 6px;
+            padding: 24px 28px;            transition: all .4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bp-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 0;
+            background: linear-gradient(90deg, rgba(123, 47, 255, .08), transparent);
+            transition: width .4s
+        }
+
+        .bp-item:hover {
+            border-color: var(--plasma);
+            transform: translateX(5px)
+        }
+
+        .bp-item:hover::before {
+            width: 100%
+        }
+
+        .bp-glyph {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            background: rgba(123, 47, 255, .1);
+            border: 1px solid rgba(123, 47, 255, .2)
+        }
+
+        .bp-title {
+            font-family: var(--font-d);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: .07em;
+            margin-bottom: 5px;
+            transition: color .3s
+        }
+
+        .bp-item:hover .bp-title {
+            color: var(--plasma)
+        }
+
+        .bp-desc {
+            font-size: 13px;
+            color: var(--silver)
+        }
+
+        .bp-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end
+        }
+
+        .bp-tag {
+            padding: 4px 12px;
+            background: rgba(45, 58, 92, .5);
+            border: 1px solid rgba(45, 58, 92, .7);
+            border-radius: 2px;
+            font-size: 10px;
+            color: var(--silver);
+            letter-spacing: .1em
+        }
+
+        .bp-year {
+            font-family: var(--font-d);
+            font-size: 12px;
+            color: var(--slate);
+            letter-spacing: .15em;
+            min-width: 50px;
+            text-align: right
+        }
+
+        .bp-arr {
+            font-size: 20px;
+            color: var(--plasma);
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all .3s;
+            margin-left: 12px
+        }
+
+        .bp-item:hover .bp-arr {
+            opacity: 1;
+            transform: translateX(0)
+        }
+
+        /* ══ GALLERY — FIXED GRID ══ */
+        #gallery {
+            background: var(--steel)
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 44px
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            background: transparent;
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 20px;
+            font-family: var(--font-d);
+            font-size: 10px;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--silver);            transition: all .3s
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: var(--plasma);
+            color: var(--plasma);
+            background: rgba(123, 47, 255, .07)
+        }
+
+        /* ── Gallery grid — no aspect-ratio, fixed heights ── */
+        .gal-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            grid-auto-rows: 220px;
+            /* Fixed height — hamma card ko'rinadi */
+        }
+
+        .gal-card {
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 8px;
+            overflow: hidden;            transition: all .4s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .gal-card.wide {
+            grid-column: span 2
+        }
+
+        .gal-card.tall {
+            grid-row: span 2
+        }
+
+        .gal-card:hover {
+            border-color: var(--plasma);
+            box-shadow: var(--glow-p);
+            transform: translateY(-4px)
+        }
+
+        .gal-img {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 120px;
+        }
+
+        /* Rasm uchun joy */
+        .gal-img img.gal-photo {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.75;
+            transition: opacity .4s, transform .4s;
+        }
+
+        .gal-card:hover .gal-img img.gal-photo {
+            opacity: 0.9;
+            transform: scale(1.05)
+        }
+
+        /* Emoji icon (rasm bo'lmaganda) */
+        .gal-emoji {
+            font-size: 42px;
+            position: relative;
+            z-index: 1;
+            transition: all .4s;
+            opacity: .75;
+            filter: drop-shadow(0 0 16px rgba(123, 47, 255, .5));
+        }
+
+        .gal-card:hover .gal-emoji {
+            opacity: 1;
+            transform: scale(1.1) rotate(-5deg)
+        }
+
+        .gal-body {
+            padding: 14px 16px;
+            background: var(--chrome);
+            flex-shrink: 0;
+        }
+
+        .gal-cat {
+            font-size: 9px;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: var(--plasma);
+            margin-bottom: 4px;
+            font-family: var(--font-d)
+        }
+
+        .gal-title {
+            font-family: var(--font-d);
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: .06em
+        }
+
+        /* ══ SKILLS ══ */
+        #design-skills {
+            background: var(--abyss)
+        }
+
+        .ds-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 56px;
+            align-items: start
+        }
+
+        .sg-t {
+            font-family: var(--font-d);
+            font-size: 11px;
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 22px;
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .sg-t::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(45, 58, 92, .6), transparent)
+        }
+
+        .sk-item {
+            margin-bottom: 18px
+        }
+
+        .sk-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 7px
+        }
+
+        .sk-name {
+            font-size: 13px;
+            color: var(--frost)
+        }
+
+        .sk-pct {
+            font-family: var(--font-d);
+            font-size: 11px;
+            color: var(--plasma)
+        }
+
+        .sk-track {
+            height: 3px;
+            background: var(--slate);
+            border-radius: 2px;
+            overflow: hidden
+        }
+
+        .sk-fill {
+            height: 100%;
+            border-radius: 2px;
+            background: linear-gradient(90deg, var(--pulse), var(--plasma));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 1.4s cubic-bezier(.17, .67, .2, 1)
+        }
+
+        .sk-fill.go {
+            transform: scaleX(1)
+        }
+
+        .soft-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 14px
+        }
+
+        .soft-chip {
+            padding: 8px 16px;
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .6);
+            border-radius: 2px;
+            font-size: 11px;
+            color: var(--silver);
+            font-family: var(--font-d);
+            letter-spacing: .1em;
+            transition: all .3s
+        }
+
+        .soft-chip:hover {
+            border-color: var(--plasma);
+            color: var(--plasma);
+            background: rgba(123, 47, 255, .07)
+        }
+
+        /* CTA plasma variant */
+        #cta-des .cta-line {
+            background: linear-gradient(90deg, transparent, var(--plasma), transparent)
+        }
+
+        #cta-des .cta-eye {
+            color: var(--plasma)
+        }
+
+        /* Responsive */
+        @media(max-width:1200px) {
+            .fw-grid {
+                grid-template-rows: repeat(8, 70px)
+            }
+        }
+
+        @media(max-width:1024px) {
+            .fw-grid {
+                grid-template-columns: repeat(6, 1fr);
+                grid-template-rows: repeat(8, 90px);
+            }
+
+            .fw-1 {
+                grid-column: 1/4;
+                grid-row: 1/3
+            }
+
+            .fw-2 {
+                grid-column: 4/7;
+                grid-row: 1/2
+            }
+
+            .fw-3 {
+                grid-column: 4/7;
+                grid-row: 2/3
+            }
+
+            .fw-4 {
+                grid-column: 1/4;
+                grid-row: 3/4
+            }
+
+            .fw-5 {
+                grid-column: 4/7;
+                grid-row: 3/4
+            }
+
+            .fw-6 {
+                grid-column: 1/4;
+                grid-row: 4/5
+            }
+
+            .fw-7 {
+                grid-column: 4/7;
+                grid-row: 4/5
+            }
+
+            .cat-grid {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .gal-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: 200px
+            }
+
+            .gal-card.wide {
+                grid-column: span 1
+            }
+
+            .gal-card.tall {
+                grid-row: span 1
+            }
+
+            .ds-grid {
+                grid-template-columns: 1fr
+            }
+
+            .bp-item {
+                grid-template-columns: 60px 1fr auto
+            }
+
+            .bp-tags {
+                display: none
+            }
+
+            .page-hero {
+                padding: 130px 32px 70px
+            }
+        }
+
+        @media(max-width:768px) {
+            .page-hero {
+                padding: 110px 20px 56px
+            }
+
+            .fw-grid {
+                display: flex;
+                flex-wrap: wrap;
+                height: auto
+            }
+
+            .fw-1,
+            .fw-2,
+            .fw-3,
+            .fw-4,
+            .fw-5,
+            .fw-6,
+            .fw-7 {
+                flex: 1 1 calc(50% - 7px);
+                height: 180px;
+                grid-column: unset;
+                grid-row: unset
+            }
+
+            .cat-grid {
+                grid-template-columns: 1fr
+            }
+
+            .gal-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-auto-rows: 180px
+            }
+
+            .ds-grid {
+                grid-template-columns: 1fr
+            }
+
+            .bp-item {
+                grid-template-columns: 1fr;
+                padding: 18px
+            }
+
+            .bp-glyph,
+            .bp-arr,
+            .bp-year {
+                display: none
+            }
+
+            .sec-label::before {
+                display: none
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#featured" class="skip-link">Asosiy mazmunga o'tish</a>
+
+    <!-- MOBILE MENU -->
+    <div class="mob-menu" id="mobMenu">
+        <a href="index.html" data-i18n="nav_home">Asosiy</a>
+        <a href="frontend.html" data-i18n="nav_frontend">Frontend</a>
+        <a href="design.html" data-i18n="nav_design">Dizayn</a>
+    
+        <a href="contact.html" data-i18n="nav_contact">Aloqa</a>
+        <a href="contact.html" class="mob-cta" data-i18n="nav_hire">Yollash</a>
+        <div class="mob-lang">
+            <button class="lang-btn" data-lang="uz" onclick="setLang('uz')">UZ</button>
+            <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+            <button class="lang-btn" data-lang="ru" onclick="setLang('ru')">RU</button>
+        </div>
+    </div>
+
+    <!-- NAV -->
+    <nav id="nav" style="border-bottom-color:rgba(123,47,255,.1)">
+        <a href="index.html" class="nav-logo">MO<span>N</span>TRAX</a>
+        <ul class="nav-links">
+            <li><a href="index.html" data-i18n="nav_home">Asosiy</a></li>
+            <li><a href="frontend.html" data-i18n="nav_frontend">Frontend</a></li>
+            <li><a href="design.html" class="active" style="color:var(--plasma)" data-i18n="nav_design">Dizayn</a></li>
+   
+            <li><a href="contact.html" data-i18n="nav_contact">Aloqa</a></li>
+        </ul>
+        <div class="nav-right">
+            <div class="lang-switcher">
+                <button class="lang-btn" data-lang="uz" onclick="setLang('uz')">UZ</button>
+                <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" data-lang="ru" onclick="setLang('ru')">RU</button>
+            </div>
+            <a href="contact.html" class="nav-cta" data-i18n="nav_hire">Yollash</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Menyuni ochish" aria-expanded="false"
+            aria-controls="mobMenu"><span></span><span></span><span></span></button>
+    </nav>
+
+    <!-- PAGE HERO -->
+    <div class="page-hero">
+        <div class="ph-content">
+            <div class="ph-bread">
+                <a href="index.html" data-i18n="nav_home">Asosiy</a> /
+                <span data-i18n="nav_design">Dizayn</span>
+            </div>
+            <h1 class="ph-title">Grafik <span data-i18n="nav_design">Dizayn</span></h1>
+            <p class="ph-sub" data-i18n="ph_design_sub">Brend identifikatsiya, UI/UX, motion graphics va vizual
+                kommunikatsiya — niyat bilan yaratilgan va aniqlik bilan amalga oshirilgan.</p>
+            <div class="tool-tags">
+                <span class="tool-tag active">Figma</span>
+                <span class="tool-tag">Illustrator</span>
+                <span class="tool-tag">Photoshop</span>
+                <span class="tool-tag">After Effects</span>
+                <span class="tool-tag">Blender</span>
+                <span class="tool-tag">Spline</span>
+                <span class="tool-tag">Framer</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- STATS -->
+    <div class="stats-row">
+        <div class="stat-cell reveal">
+            <span class="stat-num" style="color:var(--white)">7<span class="u"
+                    style="color:var(--plasma)">+</span></span>
+            <span class="stat-lbl" data-i18n="stat_design_projects">Dizayn Vositalari</span>
+        </div>
+        <div class="stat-cell reveal rd1">
+            <span class="stat-num" style="color:var(--white)">15<span class="u"
+                    style="color:var(--plasma)">+</span></span>
+            <span class="stat-lbl" data-i18n="stat_brand_identities">Bajarilgan Loyiha</span>
+        </div>
+        <div class="stat-cell reveal rd2">
+            <span class="stat-num" style="color:var(--white)">1<span class="u"
+                    style="color:var(--plasma)">+</span></span>
+            <span class="stat-lbl" data-i18n="hero_stat3_lbl">Yillik Tajriba</span>
+        </div>
+        <div class="stat-cell reveal rd3">
+            <span class="stat-num" style="color:var(--white)">3<span class="u"
+                    style="color:var(--plasma)"></span></span>
+            <span class="stat-lbl" data-i18n="stat_avg_rating">Fokus Yo'nalish</span>
+        </div>
+    </div>
+
+    <!-- ══ FEATURED WORKS ══ -->
+    <section id="featured">
+        <div class="sec-label plasma reveal" data-n="01"><span data-i18n="sec_featured_label">Tanlangan Ishlar</span>
+        </div>
+        <h2 class="sec-title reveal rd1" data-i18n="sec_featured_title">Vizual hikoyalar <span class="ap">rezonans
+                qiladi.</span></h2>
+        <p class="sec-desc reveal rd2" data-i18n="sec_featured_desc">Brend identifikatsiya, UI dizayn va vizual
+            kommunikatsiya bo'yicha tanlangan loyihalar.</p>
+
+        <div class="fw-grid reveal rd3">
+            <!-- Card 1 — katta chapda -->
+            <div class="fw-card fw-1" style="background:linear-gradient(135deg,#1A0A40,#7B2FFF 60%,#00C8FF)">
+                <!-- Rasm joyi: <img class="fw-img" src="./img/works/nexus-brand.jpg" alt="NEXUS Brand"> -->
+                <div class="fw-bg">
+                    <div class="fw-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 2v6M12 16v6M2 12h6M16 12h6M5.5 5.5l4 4M14.5 14.5l4 4M18.5 5.5l-4 4M9.5 14.5l-4 4"/></svg></span></div>
+                </div>
+                <div class="fw-ov">
+                    <div class="fw-cat" data-i18n="cat_brand">Brand Identity</div>
+                    <div class="fw-title" data-i18n="fw1_title">NEXUS — To'liq Brend Tizimi</div>
+                    <div class="fw-desc" data-i18n="fw1_desc">Logo, tipografiya, rang tizimi, garov va brend
+                        ko'rsatmalari.</div>
+                </div>
+            </div>
+            <!-- Card 2 -->
+            <div class="fw-card fw-2" style="background:linear-gradient(135deg,#200A1A,#FF3D8A)">
+                <!-- <img class="fw-img" src="./img/works/editorial.jpg" alt="Editorial"> -->
+                <div class="fw-bg">
+                    <div class="fw-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.2-4.8L16.6 3.8a1.8 1.8 0 0 1 2.6 0l1 1a1.8 1.8 0 0 1 0 2.6L8.8 18.8 4 20z"/><path d="M14.5 6.5l3 3"/></svg></span></div>
+                </div>
+                <div class="fw-ov">
+                    <div class="fw-cat" data-i18n="cat_editorial">Editorial</div>
+                    <div class="fw-title" data-i18n="fw2_title">Jurnal Maket Tizimi</div>
+                    <div class="fw-desc" data-i18n="fw2_desc">Zamonaviy editorial dizayn tizimi.</div>
+                </div>
+            </div>
+            <!-- Card 3 -->
+            <div class="fw-card fw-3" style="background:linear-gradient(135deg,#0A1A0A,#00FFB3)">
+                <!-- <img class="fw-img" src="./img/works/fintech.jpg" alt="Fintech"> -->
+                <div class="fw-bg">
+                    <div class="fw-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></svg></span></div>
+                </div>
+                <div class="fw-ov">
+                    <div class="fw-cat" data-i18n="cat_uiux">UI/UX Dizayn</div>
+                    <div class="fw-title" data-i18n="fw3_title">Fintech Ilova Interfeysi</div>
+                    <div class="fw-desc" data-i18n="fw3_desc">40+ ekranli mobil bank UI.</div>
+                </div>
+            </div>
+            <!-- Card 4 -->
+            <div class="fw-card fw-4" style="background:linear-gradient(135deg,#1A1A0A,#FFB800)">
+                <!-- <img class="fw-img" src="./img/works/motion.jpg" alt="Motion"> -->
+                <div class="fw-bg">
+                    <div class="fw-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span></div>
+                </div>
+                <div class="fw-ov">
+                    <div class="fw-cat" data-i18n="cat_motion">Motion Dizayn</div>
+                    <div class="fw-title" data-i18n="fw4_title">Animatsiyali Brend To'plami</div>
+                    <div class="fw-desc" data-i18n="fw4_desc">Logo animatsiyalari va o'tishlar.</div>
+                </div>
+            </div>
+            <!-- Card 5 -->
+            <div class="fw-card fw-5" style="background:linear-gradient(135deg,#1A0F0A,#FF6B35)">
+                <!-- <img class="fw-img" src="./img/works/packaging.jpg" alt="Packaging"> -->
+                <div class="fw-bg">
+                    <div class="fw-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 5H4.5A1.5 1.5 0 0 0 3 6.5C3 8.5 4.5 10 7 10M17 5h2.5A1.5 1.5 0 0 1 21 6.5C21 8.5 19.5 10 17 10"/><path d="M9 20h6M12 14v6"/></svg></span></div>
+                </div>
+                <div class="fw-ov">
+                    <div class="fw-cat" data-i18n="cat_packaging">Qadoqlash</div>
+                    <div class="fw-title" data-i18n="fw5_title">Premium Mahsulot Liniyasi</div>
+                    <div class="fw-desc" data-i18n="fw5_desc">Kosmetika brendi uchun hashamatli qadoqlash.</div>
+                </div>
+            </div>
+            <!-- Card 6 -->
+            <div class="fw-card fw-6" style="background:linear-gradient(135deg,#0A0D1A,#00C8FF)">
+                <!-- <img class="fw-img" src="./img/works/webdesign.jpg" alt="Web Design"> -->
+                <div class="fw-bg">
+                    <div class="fw-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.5 2.6 3.8 6 3.8 9.5s-1.3 6.9-3.8 9.5c-2.5-2.6-3.8-6-3.8-9.5s1.3-6.9 3.8-9.5z"/></svg></span></div>
+                </div>
+                <div class="fw-ov">
+                    <div class="fw-cat" data-i18n="cat_webdesign">Veb Dizayn</div>
+                    <div class="fw-title" data-i18n="fw6_title">Agentlik Sayti Qayta Dizayni</div>
+                    <div class="fw-desc" data-i18n="fw6_desc">Maxsus illustratsiyalar va mikro-animatsiyalar bilan
+                        to'liq veb sayt o'zgarishi.</div>
+                </div>
+            </div>
+            <!-- Card 7 -->
+            <div class="fw-card fw-7" style="background:linear-gradient(135deg,#1A1A2A,#7B2FFF)">
+                <!-- <img class="fw-img" src="./img/works/icons.jpg" alt="Icon Library"> -->
+                <div class="fw-bg">
+                    <div class="fw-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 1 1 9-9c0 1.5-1 2.5-2.5 2.5H16a2 2 0 0 0-1.4 3.4c.5.5.5 1.4-.2 1.8-.7.4-1.5.3-2.4.3z"/><circle cx="7.5" cy="10.5" r="1.2"/><circle cx="11" cy="7" r="1.2"/><circle cx="15.5" cy="8" r="1.2"/></svg></span></div>
+                </div>
+                <div class="fw-ov">
+                    <div class="fw-cat" data-i18n="cat_illustration">Illustratsiya</div>
+                    <div class="fw-title" data-i18n="fw7_title">Maxsus Ikonlar Kutubxonasi</div>
+                    <div class="fw-desc" data-i18n="fw7_desc">SaaS mahsuloti uchun 200+ maxsus ikonlar va
+                        illustratsiyalar.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ CATEGORIES ══ -->
+    <section id="categories">
+        <div class="sec-label plasma reveal" data-n="02"><span data-i18n="sec_disciplines_label">Nima Qilaman</span>
+        </div>
+        <h2 class="sec-title reveal rd1">Dizayn <span class="ap" data-i18n="sec_disciplines_title">yo'nalishlari</span>
+        </h2>
+        <p class="sec-desc reveal rd2" data-i18n="sec_disciplines_desc">Kontseptsiyadan oxirgi pikselgacha — har bir
+            yo'nalish g'oyaga xizmat qiladi.</p>
+        <div class="cat-grid">
+            <div class="cat-card reveal">
+                <div class="cat-icon-w"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 2v6M12 16v6M2 12h6M16 12h6M5.5 5.5l4 4M14.5 14.5l4 4M18.5 5.5l-4 4M9.5 14.5l-4 4"/></svg></span></div>
+                <div class="cat-title" data-i18n="srv2_title">Brend Identifikatsiya</div>
+                <div class="cat-desc" data-i18n="cat_brand_desc">Logo tizimlari, rang paletrasi, tipografiya va brend
+                    ko'rsatmalari — tezda tanish bo'ladigan to'liq vizual til.</div>
+                <div class="cat-count">08 <span data-i18n="cat_projects">Ta Loyiha</span></div>
+            </div>
+            <div class="cat-card reveal rd1">
+                <div class="cat-icon-w"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></svg></span></div>
+                <div class="cat-title" data-i18n="srv3_title">UI / UX Dizayn</div>
+                <div class="cat-desc" data-i18n="cat_uiux_desc">Foydalanuvchi tadqiqoti, wireframelar, interaktiv
+                    prototiplar va ishlab chiqishga tayyor Figma dizaynlar.</div>
+                <div class="cat-count">12 <span data-i18n="cat_projects">Ta Loyiha</span></div>
+            </div>
+            <div class="cat-card reveal rd2">
+                <div class="cat-icon-w"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span></div>
+                <div class="cat-title" data-i18n="srv5_title">Motion Dizayn</div>
+                <div class="cat-desc" data-i18n="cat_motion_desc">Logo animatsiyalari, UI o'tishlari va brend harakat
+                    to'plamlari.</div>
+                <div class="cat-count">06 <span data-i18n="cat_projects">Ta Loyiha</span></div>
+            </div>
+            <div class="cat-card reveal rd3">
+                <div class="cat-icon-w"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8.5V3h12v5.5"/><rect x="3" y="8.5" width="18" height="8" rx="1.5"/><rect x="6" y="14.5" width="12" height="6.5"/></svg></span></div>
+                <div class="cat-title" data-i18n="cat_print_title">Bosma va Qadoqlash</div>
+                <div class="cat-desc" data-i18n="cat_print_desc">Mahsulot qadoqlash, editorial maketlar va tijorat
+                    garovlar — ekrandan fizikka to'g'ri tarjima.</div>
+                <div class="cat-count">05 <span data-i18n="cat_projects">Ta Loyiha</span></div>
+            </div>
+            <div class="cat-card reveal">
+                <div class="cat-icon-w"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 1 1 9-9c0 1.5-1 2.5-2.5 2.5H16a2 2 0 0 0-1.4 3.4c.5.5.5 1.4-.2 1.8-.7.4-1.5.3-2.4.3z"/><circle cx="7.5" cy="10.5" r="1.2"/><circle cx="11" cy="7" r="1.2"/><circle cx="15.5" cy="8" r="1.2"/></svg></span></div>
+                <div class="cat-title" data-i18n="cat_illus_title">Illustratsiya</div>
+                <div class="cat-desc" data-i18n="cat_illus_desc">Maxsus vektor illustratsiyalar, ikonlar kutubxonasi va
+                    infografika.</div>
+                <div class="cat-count">07 <span data-i18n="cat_projects">Ta Loyiha</span></div>
+            </div>
+            <div class="cat-card reveal rd1">
+                <div class="cat-icon-w"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.5 2.6 3.8 6 3.8 9.5s-1.3 6.9-3.8 9.5c-2.5-2.6-3.8-6-3.8-9.5s1.3-6.9 3.8-9.5z"/></svg></span></div>
+                <div class="cat-title" data-i18n="cat_web_title">Veb Dizayn</div>
+                <div class="cat-desc" data-i18n="cat_web_desc">Landing sahifalar va veb ilova interfeyslari —
+                    konversiya, mavjudlik va vizual ta'sir uchun.</div>
+                <div class="cat-count">10 <span data-i18n="cat_projects">Ta Loyiha</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ BRAND PROJECTS ══ -->
+    <section id="brand-projects">
+        <div class="sec-label plasma reveal" data-n="03"><span data-i18n="sec_brand_label">Brend Loyihalari</span></div>
+        <h2 class="sec-title reveal rd1">Identifikatsiya <span class="ap" data-i18n="sec_brand_title">ishlari</span>
+        </h2>
+        <p class="sec-desc reveal rd2" data-i18n="sec_brand_desc">Brendlarni noldan qurishdan — strategiya, vizual
+            identifikatsiya va tizim.</p>
+        <div class="bp-list reveal rd3">
+            <div class="bp-item">
+                <div class="bp-glyph"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 2v6M12 16v6M2 12h6M16 12h6M5.5 5.5l4 4M14.5 14.5l4 4M18.5 5.5l-4 4M9.5 14.5l-4 4"/></svg></span></div>
+                <div>
+                    <div class="bp-title">NEXUS — Tech Startup</div>
+                    <div class="bp-desc" data-i18n="bp1_desc">To'liq brend identifikatsiya: logo, tur, rang tizimi,
+                        ko'rsatmalar, ish yuritish</div>
+                </div>
+                <div class="bp-tags"><span class="bp-tag">Logo</span><span class="bp-tag">Brand Guide</span><span
+                        class="bp-tag">Figma</span></div>
+                <span class="bp-year">2024</span>
+                <div class="bp-arr">→</div>
+            </div>
+            <div class="bp-item">
+                <div class="bp-glyph"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 9.5 4.5 4h15l1 5.5"/><path d="M3.5 9.5a2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0 2.5 2.5 0 0 0 5 0"/><path d="M4.5 9.8V20h15V9.8M10 20v-5h4v5"/></svg></span></div>
+                <div>
+                    <div class="bp-title">VERDURE — Organik Oziq-Ovqat</div>
+                    <div class="bp-desc" data-i18n="bp2_desc">Ekologik brend: yer paletrasi, maxsus yozuv, qadoqlash,
+                        ijtimoiy shablonlar</div>
+                </div>
+                <div class="bp-tags"><span class="bp-tag">Qadoqlash</span><span class="bp-tag">Logo</span><span
+                        class="bp-tag">Illustrator</span></div>
+                <span class="bp-year">2024</span>
+                <div class="bp-arr">→</div>
+            </div>
+            <div class="bp-item">
+                <div class="bp-glyph"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span></div>
+                <div>
+                    <div class="bp-title">VOLT — Energiya Ichimligi</div>
+                    <div class="bp-desc" data-i18n="bp3_desc">Qalin mahsulot brendi: agressiv tipografiya, neon
+                        aksantlar, quti dizayni</div>
+                </div>
+                <div class="bp-tags"><span class="bp-tag">Mahsulot</span><span class="bp-tag">Motion</span><span
+                        class="bp-tag">3D</span></div>
+                <span class="bp-year">2023</span>
+                <div class="bp-arr">→</div>
+            </div>
+            <div class="bp-item">
+                <div class="bp-glyph"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18"/><path d="M8 8h2M14 8h2M8 12h2M14 12h2M8 16h2M14 16h2"/></svg></span></div>
+                <div>
+                    <div class="bp-title">AURUM — Hashamatli Ko'chmas Mulk</div>
+                    <div class="bp-desc" data-i18n="bp4_desc">Premium identifikatsiya: oltin va qora palitra, serif so'z
+                        belgisi, broshyura tizimi</div>
+                </div>
+                <div class="bp-tags"><span class="bp-tag">Bosma</span><span class="bp-tag">Brend</span><span
+                        class="bp-tag">Belgishunoslik</span></div>
+                <span class="bp-year">2023</span>
+                <div class="bp-arr">→</div>
+            </div>
+            <div class="bp-item">
+                <div class="bp-glyph"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 8.5 12 4l10 4.5-10 4.5z"/><path d="M6.5 10.7v4.6c0 1.7 2.5 3.2 5.5 3.2s5.5-1.5 5.5-3.2v-4.6M20 9v6.5"/></svg></span></div>
+                <div>
+                    <div class="bp-title">APEX — EdTech Platforma</div>
+                    <div class="bp-desc" data-i18n="bp5_desc">Maxsus illustratsiyalar, ikonlar to'plami, UI to'plami va
+                        kirish animatsiyalari</div>
+                </div>
+                <div class="bp-tags"><span class="bp-tag">Illustratsiya</span><span class="bp-tag">UI Kit</span><span
+                        class="bp-tag">Motion</span></div>
+                <span class="bp-year">2023</span>
+                <div class="bp-arr">→</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ GALLERY ══ -->
+    <section id="gallery">
+        <div class="sec-label plasma reveal" data-n="04"><span data-i18n="sec_gallery_label">Galereya</span></div>
+        <h2 class="sec-title reveal rd1">Dizayn <span class="ap" data-i18n="sec_gallery_title">arxivi</span></h2>
+        <p class="sec-desc reveal rd2" data-i18n="sec_gallery_desc">Barcha yo'nalishlardan tanlangan namunalar.</p>
+        <div class="filter-row reveal rd3">
+            <button class="filter-btn active" onclick="filterGal(this,'all')" data-i18n="filter_all">Barchasi</button>
+            <button class="filter-btn" onclick="filterGal(this,'brand')" data-i18n="filter_brand">Brending</button>
+            <button class="filter-btn" onclick="filterGal(this,'ui')" data-i18n="filter_ui">UI/UX</button>
+            <button class="filter-btn" onclick="filterGal(this,'print')" data-i18n="filter_print">Bosma</button>
+            <button class="filter-btn" onclick="filterGal(this,'motion')" data-i18n="filter_motion">Motion</button>
+        </div>
+        <div class="gal-grid" id="galGrid"></div>
+    </section>
+
+    <!-- ══ SKILLS ══ -->
+    <section id="design-skills">
+        <div class="sec-label plasma reveal" data-n="05"><span data-i18n="sec_skills_label">Ko'nikmalar</span></div>
+        <h2 class="sec-title reveal rd1">Ijodiy <span class="ap" data-i18n="sec_skills_title">vositalar</span></h2>
+        <div class="ds-grid">
+            <div class="reveal rd1">
+                <div style="margin-bottom:36px">
+                    <div class="sg-t" data-i18n="sk_software">Dizayn Dasturlari</div>
+                    <div class="sk-item">
+                        <div class="sk-head"><span class="sk-name">Figma</span><span class="sk-pct">97%</span></div>
+                        <div class="sk-track">
+                            <div class="sk-fill"></div>
+                        </div>
+                    </div>
+                    <div class="sk-item">
+                        <div class="sk-head"><span class="sk-name">Adobe Illustrator</span><span
+                                class="sk-pct">94%</span></div>
+                        <div class="sk-track">
+                            <div class="sk-fill"></div>
+                        </div>
+                    </div>
+                    <div class="sk-item">
+                        <div class="sk-head"><span class="sk-name">Adobe Photoshop</span><span class="sk-pct">90%</span>
+                        </div>
+                        <div class="sk-track">
+                            <div class="sk-fill"></div>
+                        </div>
+                    </div>
+                    <div class="sk-item">
+                        <div class="sk-head"><span class="sk-name">After Effects</span><span class="sk-pct">82%</span>
+                        </div>
+                        <div class="sk-track">
+                            <div class="sk-fill"></div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="sg-t" data-i18n="sk_3d">3D va Motion</div>
+                    <div class="sk-item">
+                        <div class="sk-head"><span class="sk-name">Blender</span><span class="sk-pct">75%</span></div>
+                        <div class="sk-track">
+                            <div class="sk-fill"></div>
+                        </div>
+                    </div>
+                    <div class="sk-item">
+                        <div class="sk-head"><span class="sk-name">Spline</span><span class="sk-pct">85%</span></div>
+                        <div class="sk-track">
+                            <div class="sk-fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="reveal rd2">
+                <div style="margin-bottom:36px">
+                    <div class="sg-t" data-i18n="sk_disciplines">Dizayn Yo'nalishlari</div>
+                    <div class="sk-item">
+                        <div class="sk-head"><span class="sk-name" data-i18n="srv2_title">Brend
+                                Identifikatsiya</span><span class="sk-pct">96%</span></div>
+                        <div class="sk-track">
+                            <div class="sk-fill"></div>
+                        </div>
+                    </div>
+                    <div class="sk-item">
+                        <div class="sk-head"><span class="sk-name" data-i18n="srv3_title">UI/UX Dizayn</span><span
+                                class="sk-pct">93%</span></div>
+                        <div class="sk-track">
+                            <div class="sk-fill"></div>
+                        </div>
+                    </div>
+                    <div class="sk-item">
+                        <div class="sk-head"><span class="sk-name" data-i18n="sk_typography">Tipografiya</span><span
+                                class="sk-pct">91%</span></div>
+                        <div class="sk-track">
+                            <div class="sk-fill"></div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="sg-t" data-i18n="sk_other_tools">Boshqa Vositalar</div>
+                    <div class="soft-chips">
+                        <span class="soft-chip">InDesign</span><span class="soft-chip">Framer</span>
+                        <span class="soft-chip">Webflow</span><span class="soft-chip">Procreate</span>
+                        <span class="soft-chip">Cinema 4D</span><span class="soft-chip">Lottie</span>
+                        <span class="soft-chip">Protopie</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ══ CTA ══ -->
+    <section id="cta-des" class="cta-section" style="background:var(--abyss)">
+        <div class="cta-line top"></div>
+        <div class="cta-line bot"></div>
+        <div class="cta-eye reveal" data-i18n="cta_design_eye">Dizayn loyihangiz bormi?</div>
+        <h2 class="cta-title reveal rd1" data-i18n="cta_design_title">Keling ajralib <span class="ap">turadigan</span>
+            narsa yarataylik.</h2>
+        <p class="cta-desc reveal rd2" data-i18n="cta_design_desc">Ajoyib dizayn ko'rilish va eslab qolish o'rtasidagi
+            farq. Brendingizni unutilmas qilaylik.</p>
+        <div class="cta-btns reveal rd3">
+            <a href="contact.html" class="btn-p" data-i18n="cta_design_btn">Loyiha Boshlash →</a>
+            <a href="frontend.html" class="btn-o" data-i18n="cta_see_frontend">Frontend Ishlarini Ko'rish</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="site-footer">
+        <div class="foot-grid">
+            <div>
+                <span class="foot-brand-name">MONTRAX</span>
+                <p class="foot-tag" data-i18n="foot_desc">Frontend Dasturchi va Grafik Dizayner.</p>
+                <div class="foot-socs">
+                    <a href="https://t.me/montrax_offical" target="_blank" rel="noopener" class="soc-btn" aria-label="Telegram"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4 3 11.2l6 2.2M21 4 15.5 20l-6.5-6.6M21 4 9 13.4v6.1"/></svg></span></a>
+                    <a href="https://instagram.com/montrax_offical" target="_blank" rel="noopener" class="soc-btn" aria-label="Instagram"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1"/></svg></span></a>
+                </div>
+            </div>
+            <div>
+                <div class="foot-col-t" data-i18n="foot_services">Xizmatlar</div>
+                <ul class="foot-links">
+                    <li><a href="design.html" data-i18n="srv2_title">Brend Identity</a></li>
+                    <li><a href="design.html" data-i18n="srv3_title">UI/UX Dizayn</a></li>
+                    <li><a href="design.html" data-i18n="srv5_title">Motion Dizayn</a></li>
+                    <li><a href="pricing.html" data-i18n="nav_pricing">Narxlar</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="foot-col-t" data-i18n="foot_navigate">Navigatsiya</div>
+                <ul class="foot-links">
+                    <li><a href="index.html" data-i18n="nav_home">Asosiy</a></li>
+                    <li><a href="frontend.html" data-i18n="nav_frontend">Frontend</a></li>
+                    <li><a href="pricing.html" data-i18n="nav_pricing">Narxlar</a></li>
+                    <li><a href="contact.html" data-i18n="nav_contact">Aloqa</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="foot-col-t" data-i18n="foot_touch">Bog'laning</div>
+                <div style="display:flex;flex-direction:column;gap:10px">
+                    <a href="contact.html" class="btn-p" style="justify-content:center" data-i18n="nav_hire">Yollash</a>
+                    <a href="pricing.html" class="btn-o" style="justify-content:center"
+                        data-i18n="nav_pricing">Narxlar</a>
+                </div>
+            </div>
+        </div>
+        <div class="foot-bottom">
+            <span class="foot-copy">© 2025 <span>MONTRAX</span>. <span data-i18n="foot_copy">Barcha huquqlar
+                    himoyalangan.</span></span>
+            <span class="foot-made"><span class="mtx-ico heart" aria-hidden="true" style="color:var(--pulse)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.2S3 15 3 8.7A4.7 4.7 0 0 1 12 6a4.7 4.7 0 0 1 9 2.7C21 15 12 20.2 12 20.2z"/></svg></span> <span data-i18n="foot_made">Elektr aniqlik bilan yaratilgan</span></span>
+        </div>
+    </footer>
+
+    <script src="lang.js"></script>
+    <script>
+        /* ── NAV ── */
+        window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('sc', scrollY > 60));
+        const ham = document.getElementById('hamburger'), mob = document.getElementById('mobMenu');
+        ham.addEventListener('click', () => { const open = ham.classList.toggle('open'); mob.classList.toggle('open'); ham.setAttribute('aria-expanded', open) });
+        mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { ham.classList.remove('open'); mob.classList.remove('open'); ham.setAttribute('aria-expanded', false) }));
+
+        /* ── GALLERY DATA ── */
+        const galItems = [
+            {
+                cat: 'brand', cl_key: 'filter_brand', cl: 'Brending', title: 'NEXUS Logo Tizimi',
+   /* img: './img/gallery/nexus-logo.jpg', */ icon: 'star',
+                bg: 'linear-gradient(135deg,#1A0A40,#7B2FFF)', wide: true
+            },
+            {
+                cat: 'ui', cl_key: 'filter_ui', cl: 'UI/UX', title: 'Fintech Dashboard',
+   /* img: './img/gallery/fintech-dash.jpg', */ icon: 'chart',
+                bg: 'linear-gradient(135deg,#0A0D1A,#00C8FF)'
+            },
+            {
+                cat: 'motion', cl_key: 'filter_motion', cl: 'Motion', title: 'Logo Animatsiya',
+   /* img: './img/gallery/logo-anim.jpg', */ icon: 'bolt',
+                bg: 'linear-gradient(135deg,#1A1200,#FFB800)'
+            },
+            {
+                cat: 'print', cl_key: 'filter_print', cl: 'Bosma', title: 'Tadbir Posteri',
+   /* img: './img/gallery/poster.jpg', */ icon: 'image',
+                bg: 'linear-gradient(135deg,#1A0A0A,#FF3D8A)', tall: true
+            },
+            {
+                cat: 'brand', cl_key: 'filter_brand', cl: 'Brending', title: 'Rang Tizimi',
+   /* img: './img/gallery/color-system.jpg', */ icon: 'palette',
+                bg: 'linear-gradient(135deg,#0F1628,#7B2FFF)'
+            },
+            {
+                cat: 'ui', cl_key: 'filter_ui', cl: 'UI/UX', title: 'Mobil Ilova UI',
+   /* img: './img/gallery/mobile-ui.jpg', */ icon: 'mobile',
+                bg: 'linear-gradient(135deg,#0A0D1A,#00FFB3)'
+            },
+            {
+                cat: 'print', cl_key: 'filter_print', cl: 'Bosma', title: 'Brend Kantselyariyasi',
+   /* img: './img/gallery/stationery.jpg', */ icon: 'document',
+                bg: 'linear-gradient(135deg,#1A2240,#C8D4F0)'
+            },
+            {
+                cat: 'brand', cl_key: 'filter_brand', cl: 'Brending', title: 'Tipografiya Tizimi',
+   /* img: './img/gallery/typography.jpg', */ icon: 'pen',
+                bg: 'linear-gradient(135deg,#1A0020,#FF3D8A)'
+            },
+            {
+                cat: 'motion', cl_key: 'filter_motion', cl: 'Motion', title: 'UI O\'tishlar',
+   /* img: './img/gallery/ui-transitions.jpg', */ icon: 'swirl',
+                bg: 'linear-gradient(135deg,#0A1A1A,#00FFB3)'
+            },
+            {
+                cat: 'ui', cl_key: 'filter_ui', cl: 'UI/UX', title: 'Komponent Kutubxona',
+   /* img: './img/gallery/components.jpg', */ icon: 'puzzle',
+                bg: 'linear-gradient(135deg,#1A1A2A,#7B2FFF)'
+            },
+            {
+                cat: 'print', cl_key: 'filter_print', cl: 'Bosma', title: 'Qadoqlash Dizayni',
+   /* img: './img/gallery/packaging.jpg', */ icon: 'box',
+                bg: 'linear-gradient(135deg,#1A1200,#FFB800)'
+            },
+            {
+                cat: 'brand', cl_key: 'filter_brand', cl: 'Brending', title: 'Ikonlar Tizimi',
+   /* img: './img/gallery/icons.jpg', */ icon: 'hexagon',
+                bg: 'linear-gradient(135deg,#0A1A0A,#00C8FF)', wide: true
+            },
+        ];
+
+        function renderGal(filter) {
+            const grid = document.getElementById('galGrid');
+            const items = filter === 'all' ? galItems : galItems.filter(i => i.cat === filter);
+            grid.innerHTML = items.map(i => `
+  <div class="gal-card${i.wide ? ' wide' : ''}${i.tall ? ' tall' : ''}">
+    <div class="gal-img" style="background:${i.bg}">
+      ${i.img ? `<img class="gal-photo" src="${i.img}" alt="${i.title}" loading="lazy">` : ''}
+      <span class="gal-emoji" style="${i.img ? 'opacity:.3' : ''}">${mtxIcon(i.icon)}</span>
+    </div>
+    <div class="gal-body">
+      <div class="gal-cat">${i.cl}</div>
+      <div class="gal-title">${i.title}</div>
+    </div>
+  </div>`).join('');
+        }
+
+        function filterGal(btn, f) {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            renderGal(f);
+        }
+        renderGal('all');
+
+        /* ── SKILL BARS ── */
+        const skillObs = new IntersectionObserver(es => es.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.querySelectorAll('.sk-fill').forEach((f, i) => {
+                    setTimeout(() => f.classList.add('go'), i * 90);
+                });
+            }
+        }), { threshold: .25 });
+        skillObs.observe(document.getElementById('design-skills'));
+
+        /* ── REVEAL ── */
+        const ro = new IntersectionObserver(es => es.forEach(e => {
+            if (e.isIntersecting) e.target.classList.add('visible');
+        }), { threshold: .08 });
+        document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MONTRAX — Frontend Dasturlash Portfolio</title>
+    <meta name="description" content="React, Next.js, Vue.js va Three.js asosida yaratilgan yuqori unumli frontend loyihalar portfoliosi.">
+    <meta name="theme-color" content="#0a0d1a">
+    <link rel="canonical" href="https://montrax.uz/frontend.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="MONTRAX — Frontend Dasturlash Portfolio">
+    <meta property="og:description" content="React, Next.js, Vue.js va Three.js asosida yaratilgan yuqori unumli frontend loyihalar.">
+    <meta property="og:image" content="./img/icon/og-cover.svg">
+    <meta property="og:locale" content="uz_UZ">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/svg+xml" href="./img/icon/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,200;0,300;0,400;0,600;0,700;1,300&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="base.css">
+    <script src="./icons.js"></script>
+    <style>
+        .page-hero {
+            min-height: 62vh;
+            display: flex;
+            align-items: center;
+            padding: 140px 60px 80px;
+            position: relative;
+            overflow: hidden;
+            background: var(--steel)
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(0, 200, 255, .03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 200, 255, .03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gd 25s linear infinite
+        }
+
+        @keyframes gd {
+            0% {
+                background-position: 0 0
+            }
+
+            100% {
+                background-position: 60px 60px
+            }
+        }
+
+        .page-hero::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 50%;
+            background: radial-gradient(ellipse at right center, rgba(0, 200, 255, .08), transparent 70%);
+            pointer-events: none
+        }
+
+        .ph-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px
+        }
+
+        .ph-bread {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 10px;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: var(--silver);
+            margin-bottom: 24px;
+            font-family: var(--font-d);
+            opacity: 0;
+            animation: fadeUp .7s ease .1s forwards
+        }
+
+        .ph-bread a {
+            color: var(--silver);
+            text-decoration: none;
+            transition: color .3s
+        }
+
+        .ph-bread a:hover {
+            color: var(--electric)
+        }
+
+        .ph-bread span {
+            color: var(--electric)
+        }
+
+        .ph-title {
+            font-family: var(--font-d);
+            font-weight: 900;
+            font-size: clamp(34px, 6vw, 78px);
+            line-height: 1.05;
+            color: var(--white);
+            margin-bottom: 18px;
+            opacity: 0;
+            animation: fadeUp .7s ease .3s forwards
+        }
+
+        .ph-title span {
+            color: var(--electric)
+        }
+
+        .ph-sub {
+            font-size: 16px;
+            color: var(--silver);
+            line-height: 1.75;
+            font-weight: 300;
+            max-width: 520px;
+            opacity: 0;
+            animation: fadeUp .7s ease .5s forwards
+        }
+
+        .tech-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 32px;
+            opacity: 0;
+            animation: fadeUp .7s ease .7s forwards
+        }
+
+        .tech-tag {
+            padding: 8px 18px;
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .6);
+            border-radius: 2px;
+            font-size: 11px;
+            color: var(--silver);
+            font-family: var(--font-d);
+            letter-spacing: .1em;
+            transition: all .3s
+        }
+
+        .tech-tag:hover,
+        .tech-tag.active {
+            border-color: var(--electric);
+            color: var(--electric);
+            background: rgba(0, 200, 255, .07);
+            box-shadow: var(--glow-e)
+        }
+
+        #case-studies {
+            background: var(--steel)
+        }
+
+        .case-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2px
+        }
+
+        .case-item {
+            display: grid;
+            grid-template-columns: 70px 1fr auto auto;
+            align-items: center;
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 4px;
+            padding: 26px 30px;            transition: all .4s;
+            position: relative;
+            overflow: hidden;
+            gap: 16px
+        }
+
+        .case-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 0;
+            background: linear-gradient(90deg, rgba(0, 200, 255, .07), transparent);
+            transition: width .4s
+        }
+
+        .case-item:hover {
+            border-color: var(--electric);
+            transform: translateX(5px)
+        }
+
+        .case-item:hover::before {
+            width: 100%
+        }
+
+        .case-num {
+            font-family: var(--font-d);
+            font-size: 11px;
+            color: var(--slate);
+            letter-spacing: .2em
+        }
+
+        .case-title {
+            font-family: var(--font-d);
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: .07em;
+            margin-bottom: 5px;
+            transition: color .3s
+        }
+
+        .case-item:hover .case-title {
+            color: var(--electric)
+        }
+
+        .case-desc {
+            font-size: 13px;
+            color: var(--silver);
+            line-height: 1.5
+        }
+
+        .case-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end
+        }
+
+        .case-tag {
+            padding: 4px 12px;
+            background: rgba(45, 58, 92, .5);
+            border: 1px solid rgba(45, 58, 92, .7);
+            border-radius: 2px;
+            font-size: 10px;
+            color: var(--silver);
+            letter-spacing: .1em
+        }
+
+        .case-arr {
+            font-size: 20px;
+            color: var(--electric);
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all .3s;
+            margin-left: 16px
+        }
+
+        .case-item:hover .case-arr {
+            opacity: 1;
+            transform: translateX(0)
+        }
+
+        #projects-grid {
+            background: var(--abyss)
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 44px
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            background: transparent;
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 2px;
+            font-family: var(--font-d);
+            font-size: 10px;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--silver);            transition: all .3s
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            border-color: var(--electric);
+            color: var(--electric);
+            background: rgba(0, 200, 255, .07)
+        }
+
+        .proj-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px
+        }
+
+        .pg-card {
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 6px;
+            overflow: hidden;            transition: all .4s;
+            position: relative
+        }
+
+        .pg-card:hover {
+            border-color: var(--electric);
+            box-shadow: var(--glow-e);
+            transform: translateY(-8px)
+        }
+
+        .pg-card.featured {
+            grid-column: span 2
+        }
+
+        .pg-img {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden
+        }
+
+        .pg-card:not(.featured) .pg-img {
+            height: 200px
+        }
+
+        .pg-card.featured .pg-img {
+            height: 270px
+        }
+
+        .pg-img .icon-wrap {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            background: rgba(255, 255, 255, .1);
+            border: 1px solid rgba(255, 255, 255, .15);
+            backdrop-filter: blur(10px);
+            z-index: 2;
+            position: relative;
+            transition: transform .4s
+        }
+
+        .pg-card:hover .icon-wrap {
+            transform: scale(1.12) rotate(-6deg)
+        }
+
+        .pg-img::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(0, 200, 255, .05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 200, 255, .05) 1px, transparent 1px);
+            background-size: 26px 26px
+        }
+
+        .pg-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(10, 13, 26, .92) 0%, transparent 55%);
+            opacity: 0;
+            transition: opacity .4s;
+            display: flex;
+            align-items: flex-end;
+            padding: 18px;
+            z-index: 3
+        }
+
+        .pg-card:hover .pg-overlay {
+            opacity: 1
+        }
+
+        .pg-launch {
+            font-family: var(--font-d);
+            font-size: 10px;
+            letter-spacing: .2em;
+            color: var(--electric);
+            text-transform: uppercase
+        }
+
+        .pg-body {
+            padding: 18px 20px
+        }
+
+        .pg-cat {
+            font-size: 9px;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: var(--electric);
+            margin-bottom: 6px;
+            font-family: var(--font-d)
+        }
+
+        .pg-title {
+            font-family: var(--font-d);
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 7px;
+            letter-spacing: .07em
+        }
+
+        .pg-desc {
+            font-size: 12px;
+            color: var(--silver);
+            line-height: 1.6;
+            margin-bottom: 12px
+        }
+
+        .pg-tags {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap
+        }
+
+        .pg-tag {
+            padding: 3px 8px;
+            background: rgba(45, 58, 92, .5);
+            border: 1px solid rgba(45, 58, 92, .7);
+            border-radius: 2px;
+            font-size: 9px;
+            color: var(--silver);
+            letter-spacing: .08em
+        }
+
+        #skills-sec {
+            background: var(--steel)
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 56px;
+            align-items: start
+        }
+
+        .sg-t {
+            font-family: var(--font-d);
+            font-size: 11px;
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 22px;
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .sg-t::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(45, 58, 92, .6), transparent)
+        }
+
+        .sk-item {
+            margin-bottom: 18px
+        }
+
+        .sk-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 7px
+        }
+
+        .sk-name {
+            font-size: 13px;
+            color: var(--frost);
+            letter-spacing: .04em
+        }
+
+        .sk-pct {
+            font-family: var(--font-d);
+            font-size: 11px;
+            color: var(--electric)
+        }
+
+        .sk-track {
+            height: 3px;
+            background: var(--slate);
+            border-radius: 2px;
+            overflow: hidden
+        }
+
+        .sk-fill {
+            height: 100%;
+            border-radius: 2px;
+            background: linear-gradient(90deg, var(--plasma), var(--electric));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 1.4s cubic-bezier(.17, .67, .2, 1)
+        }
+
+        .sk-fill.go {
+            transform: scaleX(1)
+        }
+
+        .tool-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 14px
+        }
+
+        .tool-chip {
+            padding: 8px 16px;
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .6);
+            border-radius: 2px;
+            font-size: 11px;
+            color: var(--silver);
+            font-family: var(--font-d);
+            letter-spacing: .1em;
+            transition: all .3s
+        }
+
+        .tool-chip:hover {
+            border-color: var(--electric);
+            color: var(--electric);
+            background: rgba(0, 200, 255, .06)
+        }
+
+        #process-sec {
+            background: var(--abyss);
+            position: relative;
+            overflow: hidden
+        }
+
+        #process-sec::before {
+            content: '';
+            position: absolute;
+            left: -200px;
+            top: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(ellipse, rgba(0, 200, 255, .05), transparent 70%);
+            pointer-events: none
+        }
+
+        .process-steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px
+        }
+
+        .step-card {
+            background: var(--steel);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 6px;
+            padding: 30px 26px;
+            position: relative;            transition: all .4s;
+            overflow: hidden
+        }
+
+        .step-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--plasma), var(--electric));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .4s
+        }
+
+        .step-card:hover {
+            border-color: rgba(0, 200, 255, .2);
+            transform: translateY(-6px)
+        }
+
+        .step-card:hover::before {
+            transform: scaleX(1)
+        }
+
+        .step-num {
+            font-family: var(--font-d);
+            font-size: 46px;
+            font-weight: 900;
+            color: rgba(45, 58, 92, .5);
+            position: absolute;
+            top: 14px;
+            right: 18px;
+            line-height: 1
+        }
+
+        .step-icon-w {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            background: rgba(0, 200, 255, .08);
+            border: 1px solid rgba(0, 200, 255, .15);
+            margin-bottom: 16px
+        }
+
+        .step-title {
+            font-family: var(--font-d);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: .1em;
+            margin-bottom: 10px
+        }
+
+        .step-desc {
+            font-size: 12px;
+            color: var(--silver);
+            line-height: 1.7
+        }
+
+        #cta-fe {
+            background: var(--steel)
+        }
+
+        @media(max-width:1024px) {
+            .proj-grid {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .pg-card.featured {
+                grid-column: span 1
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr
+            }
+
+            .process-steps {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .case-item {
+                grid-template-columns: 60px 1fr auto
+            }
+
+            .case-tags {
+                display: none
+            }
+
+            .page-hero {
+                padding: 130px 32px 70px
+            }
+        }
+
+        @media(max-width:768px) {
+            .page-hero {
+                padding: 110px 20px 56px
+            }
+
+            .proj-grid {
+                grid-template-columns: 1fr
+            }
+
+            .process-steps {
+                grid-template-columns: 1fr
+            }
+
+            .case-item {
+                grid-template-columns: 1fr;
+                padding: 18px
+            }
+
+            .case-num,
+            .case-arr {
+                display: none
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#case-studies" class="skip-link">Asosiy mazmunga o'tish</a>
+    <div class="mob-menu" id="mobMenu">
+        <a href="index.html" data-i18n="nav_home">Asosiy</a>
+        <a href="frontend.html" data-i18n="nav_frontend">Frontend</a>
+        <a href="design.html" data-i18n="nav_design">Dizayn</a>
+
+        <a href="contact.html" data-i18n="nav_contact">Aloqa</a>
+        <a href="contact.html" class="mob-cta" data-i18n="nav_hire">Yollash</a>
+        <div class="mob-lang">
+            <button class="lang-btn" data-lang="uz" onclick="setLang('uz')">UZ</button>
+            <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+            <button class="lang-btn" data-lang="ru" onclick="setLang('ru')">RU</button>
+        </div>
+    </div>
+
+    <nav id="nav">
+        <a href="index.html" class="nav-logo">MO<span>N</span>TRAX</a>
+        <ul class="nav-links">
+            <li><a href="index.html" data-i18n="nav_home">Asosiy</a></li>
+            <li><a href="frontend.html" class="active" data-i18n="nav_frontend">Frontend</a></li>
+            <li><a href="design.html" data-i18n="nav_design">Dizayn</a></li>
+
+            <li><a href="contact.html" data-i18n="nav_contact">Aloqa</a></li>
+        </ul>
+        <div class="nav-right">
+            <div class="lang-switcher">
+                <button class="lang-btn" data-lang="uz" onclick="setLang('uz')">UZ</button>
+                <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" data-lang="ru" onclick="setLang('ru')">RU</button>
+            </div>
+            <a href="contact.html" class="nav-cta" data-i18n="nav_hire">Yollash</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Menyuni ochish" aria-expanded="false"
+            aria-controls="mobMenu"><span></span><span></span><span></span></button>
+    </nav>
+
+    <div class="page-hero">
+        <div class="ph-content">
+            <div class="ph-bread"><a href="index.html" data-i18n="nav_home">Asosiy</a> / <span
+                    data-i18n="nav_frontend">Frontend</span></div>
+            <h1 class="ph-title">Frontend <span>Development</span></h1>
+            <p class="ph-sub">Zamonaviy freymvorklar va eng yangi texnologiyalar bilan yuqori unumli, vizual jihatdan
+                ajoyib veb-ilovalar yaratish.</p>
+            <div class="tech-tags">
+                <span class="tech-tag active">React</span><span class="tech-tag">Next.js</span><span
+                    class="tech-tag">Vue.js</span>
+                <span class="tech-tag">Svelte</span><span class="tech-tag">Three.js</span><span
+                    class="tech-tag">GSAP</span><span class="tech-tag">TypeScript</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="stats-row">
+        <div class="stat-cell reveal"><span class="stat-num">7<span class="u">+</span></span><span
+                class="stat-lbl">Texnologiya va Freymvork</span></div>
+        <div class="stat-cell reveal rd1"><span class="stat-num">15<span class="u">+</span></span><span
+                class="stat-lbl">Bajarilgan Loyiha</span></div>
+        <div class="stat-cell reveal rd2"><span class="stat-num">3<span class="u"></span></span><span
+                class="stat-lbl">Asosiy Framework</span></div>
+        <div class="stat-cell reveal rd3"><span class="stat-num">100<span class="u">%</span></span><span
+                class="stat-lbl">TypeScript va Responsive Standart</span></div>
+    </div>
+
+    <section id="case-studies">
+        <div class="sec-label reveal" data-n="01">Tanlangan Case Study</div>
+        <h2 class="sec-title reveal rd1">Ishlangan <span class="ae">loyihalar.</span></h2>
+        <p class="sec-desc reveal rd2">O'lchanadigan natijalar va haqiqiy ta'sir ko'rsatgan loyihalar.</p>
+        <div class="case-list reveal rd3">
+            <div class="case-item"><span class="case-num">01</span>
+                <div>
+                    <div class="case-title">E-Commerce Platform</div>
+                    <div class="case-desc">React, real-time inventar, AI tavsiyalar va Stripe integratsiyasi</div>
+                </div>
+                <div class="case-tags"><span class="case-tag">React</span><span class="case-tag">Node.js</span><span
+                        class="case-tag">MongoDB</span><span class="case-tag">Stripe</span></div>
+                <div class="case-arr">→</div>
+            </div>
+            <div class="case-item"><span class="case-num">02</span>
+                <div>
+                    <div class="case-title">SaaS Admin Dashboard</div>
+                    <div class="case-desc">Next.js enterprise platforma, real-time analitika va rol-asosli kirish</div>
+                </div>
+                <div class="case-tags"><span class="case-tag">Next.js</span><span class="case-tag">Prisma</span><span
+                        class="case-tag">PostgreSQL</span></div>
+                <div class="case-arr">→</div>
+            </div>
+            <div class="case-item"><span class="case-num">03</span>
+                <div>
+                    <div class="case-title">3D Mahsulot Konfigurator</div>
+                    <div class="case-desc">Three.js mahsulot ko'rgazmasi, real-time material almashtirish va AR preview
+                    </div>
+                </div>
+                <div class="case-tags"><span class="case-tag">Three.js</span><span class="case-tag">WebGL</span><span
+                        class="case-tag">GSAP</span></div>
+                <div class="case-arr">→</div>
+            </div>
+            <div class="case-item"><span class="case-num">04</span>
+                <div>
+                    <div class="case-title">Kripto Savdo Platformasi</div>
+                    <div class="case-desc">Real-time WebSocket bozor ma'lumotlari, TradingView integratsiyasi</div>
+                </div>
+                <div class="case-tags"><span class="case-tag">Vue.js</span><span class="case-tag">WebSocket</span><span
+                        class="case-tag">Chart.js</span></div>
+                <div class="case-arr">→</div>
+            </div>
+            <div class="case-item"><span class="case-num">05</span>
+                <div>
+                    <div class="case-title">AI Kontent Platformasi</div>
+                    <div class="case-desc">AI-asosli CMS, dinamik OG generatsiya va edge keshlash</div>
+                </div>
+                <div class="case-tags"><span class="case-tag">Next.js</span><span class="case-tag">OpenAI</span><span
+                        class="case-tag">Vercel</span></div>
+                <div class="case-arr">→</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects-grid">
+        <div class="sec-label reveal" data-n="02">Barcha Loyihalar</div>
+        <h2 class="sec-title reveal rd1">To'liq <span class="ae">portfolio</span></h2>
+        <p class="sec-desc reveal rd2">Har bir loyiha — yangi muammo, yangi yechim.</p>
+        <div class="filter-row reveal rd3">
+            <button class="filter-btn active" onclick="filterProjs(this,'all')">Barchasi</button>
+            <button class="filter-btn" onclick="filterProjs(this,'react')">React</button>
+            <button class="filter-btn" onclick="filterProjs(this,'nextjs')">Next.js</button>
+            <button class="filter-btn" onclick="filterProjs(this,'3d')">3D / WebGL</button>
+            <button class="filter-btn" onclick="filterProjs(this,'vue')">Vue</button>
+        </div>
+        <div class="proj-grid" id="projGrid"></div>
+    </section>
+
+    <section id="skills-sec">
+        <div class="sec-label reveal" data-n="03">Texnik Ko'nikmalar</div>
+        <h2 class="sec-title reveal rd1">Tech <span class="ae">stack</span></h2>
+        <div class="skills-grid">
+            <div class="reveal rd2">
+                <div style="margin-bottom:36px">
+                    <div class="sg-t">Freymvorklar va Kutubxonalar</div>
+                    <div class="sk-item">
+                        <div class="sk-head"><span class="sk-name">React / Next.js</span><span class="sk-pct">95%</span>
+                        </div>
+                        <div class="sk-track">
+                            <div class="sk-fill"></div>
+                        </div>
+                    </div>
+                    <div class="sk-item">
+                        <div class="sk-head"><span class="sk-name">Vue.js / Nuxt</span><span class="sk-pct">88%</span>
+                        </div>
+                        <div class="sk-track">
+                            <div class="sk-fill"></div>
+                        </div>
+                    </div>
+                    <div class="sk-item">
+                        <div class="sk-head"><span class="sk-name">TypeScript</span><span class="sk-pct">92%</span>
+                        </div>
+                        <div class="sk-track">
+                            <div class="sk-fill"></div>
+                        </div>
+                    </div>
+                    <div class="sk-item">
+                        <div class="sk-head"><span class="sk-name">Svelte / SvelteKit</span><span
+                                class="sk-pct">80%</span></div>
+                        <div class="sk-track">
+                            <div class="sk-fill"></div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="sg-t">Animatsiya va 3D</div>
+                    <div class="sk-item">
+                        <div class="sk-head"><span class="sk-name">GSAP / Framer Motion</span><span
+                                class="sk-pct">90%</span></div>
+                        <div class="sk-track">
+                            <div class="sk-fill"></div>
+                        </div>
+                    </div>
+                    <div class="sk-item">
+                        <div class="sk-head"><span class="sk-name">Three.js / WebGL</span><span
+                                class="sk-pct">75%</span></div>
+                        <div class="sk-track">
+                            <div class="sk-fill"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="reveal rd3">
+                <div style="margin-bottom:36px">
+                    <div class="sg-t">Backend va Ma'lumotlar Bazasi</div>
+                    <div class="sk-item">
+                        <div class="sk-head"><span class="sk-name">Node.js / Express</span><span
+                                class="sk-pct">85%</span></div>
+                        <div class="sk-track">
+                            <div class="sk-fill"></div>
+                        </div>
+                    </div>
+                    <div class="sk-item">
+                        <div class="sk-head"><span class="sk-name">PostgreSQL / MongoDB</span><span
+                                class="sk-pct">82%</span></div>
+                        <div class="sk-track">
+                            <div class="sk-fill"></div>
+                        </div>
+                    </div>
+                    <div class="sk-item">
+                        <div class="sk-head"><span class="sk-name">Supabase / Firebase</span><span
+                                class="sk-pct">88%</span></div>
+                        <div class="sk-track">
+                            <div class="sk-fill"></div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="sg-t">Asboblar</div>
+                    <div class="tool-chips">
+                        <span class="tool-chip">Tailwind</span><span class="tool-chip">Figma</span><span
+                            class="tool-chip">Vite</span>
+                        <span class="tool-chip">Docker</span><span class="tool-chip">Vercel</span><span
+                            class="tool-chip">GitHub</span>
+                        <span class="tool-chip">Storybook</span><span class="tool-chip">Prisma</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="process-sec">
+        <div class="sec-label reveal" data-n="04">Jarayonim</div>
+        <h2 class="sec-title reveal rd1">Qanday <span class="ae">ishlayman</span></h2>
+        <p class="sec-desc reveal rd2">Har safar izchil, yuqori sifatli natijalar beradigan tuzilgan yondashuv.</p>
+        <div class="process-steps">
+            <div class="step-card reveal"><span class="step-num">01</span>
+                <div class="step-icon-w"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9.5"/><circle cx="12" cy="12" r="5.5"/><circle cx="12" cy="12" r="1.5"/></svg></span></div>
+                <div class="step-title">Kashfiyot</div>
+                <div class="step-desc">Maqsadlar, auditoriya va texnik talablarni chuqur o'rganish.</div>
+            </div>
+            <div class="step-card reveal rd1"><span class="step-num">02</span>
+                <div class="step-icon-w"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3.5h4V6a2 2 0 1 0 0 4V13H10a2 2 0 1 1-4 0H3.5V9a2 2 0 1 0 0-4V3.5H6a2 2 0 1 1 4 0z"/><path d="M13 13h3a2 2 0 1 0 4 0h.5v7.5H13z"/></svg></span></div>
+                <div class="step-title">Arxitektura</div>
+                <div class="step-desc">Komponent tuzilmasi, holat boshqaruvi va API dizayni.</div>
+            </div>
+            <div class="step-card reveal rd2"><span class="step-num">03</span>
+                <div class="step-icon-w"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span></div>
+                <div class="step-title">Ishlab Chiqish</div>
+                <div class="step-desc">Toza kod, piksel-mukammal amalga oshirish va ishlash optimallashtirish.</div>
+            </div>
+            <div class="step-card reveal rd3"><span class="step-num">04</span>
+                <div class="step-icon-w"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 2.5c3 1 5 3 6 6-3 .5-5.5 1.5-8 4-1.8 1.8-2.7 3.6-3.2 5-1 .1-2 0-2.8-.8-.8-.8-.9-1.8-.8-2.8 1.4-.5 3.2-1.4 5-3.2 2.5-2.5 3.5-5 4-8z"/><path d="M8.5 15.5 4 20M6 13c-1.5 0-3 .5-4 2 1.7.3 2.7.9 3.3 1.7M11 18c0 1.5-.5 3-2 4-.3-1.7-.9-2.7-1.7-3.3"/><circle cx="15.5" cy="8.5" r="1.2"/></svg></span></div>
+                <div class="step-title">Ishga Tushirish</div>
+                <div class="step-desc">Testlash, CI/CD, joylashtirish va kerak bo'lsa doimiy qo'llab-quvvatlash.</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cta-fe" class="cta-section">
+        <div class="cta-line top"></div>
+        <div class="cta-line bot"></div>
+        <div class="cta-eye reveal">Loyihangiz bormi?</div>
+        <h2 class="cta-title reveal rd1">Keling birgalikda ajoyib narsa <span class="ae">yarataylik.</span></h2>
+        <p class="cta-desc reveal rd2">Boshlashga tayyormisiz? Keling loyihangiz haqida gaplashaylik.</p>
+        <div class="cta-btns reveal rd3">
+            <a href="contact.html" class="btn-e">Loyiha Boshlash →</a>
+            <a href="design.html" class="btn-o" data-i18n="nav_design">Dizayn Ishlarini Ko'rish</a>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="foot-grid">
+            <div>
+                <span class="foot-brand-name">MONTRAX</span>
+                <p class="foot-tag" data-i18n="foot_desc">Frontend Dasturchi va Grafik Dizayner.</p>
+                <div class="foot-socs">
+                    <a href="https://t.me/montrax_offical" target="_blank" rel="noopener" class="soc-btn" aria-label="Telegram"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4 3 11.2l6 2.2M21 4 15.5 20l-6.5-6.6M21 4 9 13.4v6.1"/></svg></span></a>
+                    <a href="https://instagram.com/montrax_offical" target="_blank" rel="noopener" class="soc-btn" aria-label="Instagram"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1"/></svg></span></a>
+                </div>
+            </div>
+            <div>
+                <div class="foot-col-t" data-i18n="foot_services">Xizmatlar</div>
+                <ul class="foot-links">
+                    <li><a href="frontend.html">Frontend Dev</a></li>
+                    <li><a href="design.html">UI/UX Dizayn</a></li>
+                    <li><a href="pricing.html">Narxlar</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="foot-col-t" data-i18n="foot_navigate">Navigatsiya</div>
+                <ul class="foot-links">
+                    <li><a href="index.html" data-i18n="nav_home">Asosiy</a></li>
+                    <li><a href="design.html" data-i18n="nav_design">Dizayn</a></li>
+                    <li><a href="pricing.html" data-i18n="nav_pricing">Narxlar</a></li>
+                    <li><a href="contact.html" data-i18n="nav_contact">Aloqa</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="foot-col-t" data-i18n="foot_touch">Bog'laning</div>
+                <div style="display:flex;flex-direction:column;gap:10px"><a href="contact.html" class="btn-e"
+                        style="justify-content:center" data-i18n="nav_hire">Yollash</a><a href="pricing.html"
+                        class="btn-o" style="justify-content:center" data-i18n="nav_pricing">Narxlar</a></div>
+            </div>
+        </div>
+        <div class="foot-bottom">
+            <span class="foot-copy">© 2025 <span>MONTRAX</span>. <span data-i18n="foot_copy">Barcha huquqlar
+                    himoyalangan.</span></span>
+            <span class="foot-made"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.2S3 15 3 8.7A4.7 4.7 0 0 1 12 6a4.7 4.7 0 0 1 9 2.7C21 15 12 20.2 12 20.2z"/></svg></span> <span data-i18n="foot_made">Elektr aniqlik bilan yaratilgan</span></span>
+        </div>
+    </footer>
+
+    <script src="lang.js"></script>
+    <script>
+        window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('sc', scrollY > 60));
+        const ham = document.getElementById('hamburger'), mob = document.getElementById('mobMenu');
+        ham.addEventListener('click', () => { const open = ham.classList.toggle('open'); mob.classList.toggle('open'); ham.setAttribute('aria-expanded', open) });
+        mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { ham.classList.remove('open'); mob.classList.remove('open'); ham.setAttribute('aria-expanded', 'false') }));
+
+        const allProjs = [
+            { cat: 'react', label: 'React', title: 'E-Commerce Dashboard', desc: 'Real-time analitika, inventar boshqaruvi va Stripe to\'lovlar.', tags: ['React', 'Node.js', 'MongoDB'], icon: 'bolt', bg: 'linear-gradient(135deg,#0F1628,#1A2240)', featured: true },
+            { cat: 'nextjs', label: 'Next.js', title: 'SaaS Landing Page', desc: 'A/B testlash va dinamik personalizatsiya bilan yuqori konversiyali sahifa.', tags: ['Next.js', 'GSAP', 'Tailwind'], icon: 'rocket', bg: 'linear-gradient(135deg,#0A0D1A,#1A2240)' },
+            { cat: '3d', label: 'Three.js', title: '3D Product Viewer', desc: 'WebGL-asosli 360° mahsulot konfigurator.', tags: ['Three.js', 'WebGL', 'GSAP'], icon: 'globe', bg: 'linear-gradient(135deg,#0F1628,#0A0D1A)' },
+            { cat: 'vue', label: 'Vue.js', title: 'Portfolio CMS', desc: 'Markdown muharrir va SEO vositalari bilan maxsus CMS.', tags: ['Vue', 'Vuex', 'Firebase'], icon: 'star', bg: 'linear-gradient(135deg,#1A2240,#0F1628)' },
+            { cat: 'react', label: 'React', title: 'Crypto Tracker', desc: 'Real-time bozor ma\'lumotlari va narx ogohlantirishlari.', tags: ['React', 'Chart.js', 'WebSocket'], icon: 'chart', bg: 'linear-gradient(135deg,#0A0D1A,#1A2240)' },
+            { cat: 'nextjs', label: 'Next.js', title: 'AI Blog Platform', desc: 'GPT-asosli kontent platforma va SEO optimallashtirish.', tags: ['Next.js', 'OpenAI', 'Vercel'], icon: 'brain', bg: 'linear-gradient(135deg,#1A2240,#0F1628)' },
+            { cat: 'vue', label: 'Vue.js', title: 'Restaurant POS', desc: 'Oshxona displey va xodimlar boshqaruvi bilan POS tizimi.', tags: ['Vue', 'Electron', 'SQLite'], icon: 'store', bg: 'linear-gradient(135deg,#0F1628,#1A2240)' },
+            { cat: '3d', label: 'WebGL', title: 'Interactive Data Globe', desc: 'Dunyo bo\'ylab real-time ma\'lumotlar oqimining 3D globus vizualizatsiyasi.', tags: ['D3.js', 'Three.js', 'Canvas'], icon: 'globe', bg: 'linear-gradient(135deg,#0A0D1A,#0F1628)' },
+            { cat: 'react', label: 'React', title: 'Design System', desc: 'Storybook bilan 50+ hujjatlangan komponentlar.', tags: ['React', 'Storybook', 'Jest'], icon: 'palette', bg: 'linear-gradient(135deg,#1A2240,#0A0D1A)' },
+        ];
+
+        function renderProjs(filter) {
+            const grid = document.getElementById('projGrid');
+            const list = filter === 'all' ? allProjs : allProjs.filter(p => p.cat === filter);
+            grid.innerHTML = list.map(p => `<div class="pg-card${p.featured && filter === 'all' ? ' featured' : ''}">
+    <div class="pg-img" style="background:${p.bg};position:relative;overflow:hidden">
+      <div class="icon-wrap" style="position:relative;z-index:1">${mtxIcon(p.icon)}</div>
+      <div class="pg-overlay"><span class="pg-launch">Ko'rish →</span></div>
+    </div>
+    <div class="pg-body"><div class="pg-cat">${p.label}</div><div class="pg-title">${p.title}</div><div class="pg-desc">${p.desc}</div>
+    <div class="pg-tags">${p.tags.map(t => `<span class="pg-tag">${t}</span>`).join('')}</div></div>
+  </div>`).join('');
+        }
+        function filterProjs(btn, f) { document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); renderProjs(f) }
+        renderProjs('all');
+
+        const skillObs = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.querySelectorAll('.sk-fill').forEach((f, i) => { const pcts = [95, 88, 92, 80, 90, 75, 85, 82, 88]; setTimeout(() => f.classList.add('go'), i * 80) }) }), { threshold: .3 });
+        skillObs.observe(document.getElementById('skills-sec'));
+
+        const ro = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }), { threshold: .08 });
+        document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+    </script>
+</body>
+
+</html>

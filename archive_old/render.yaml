@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: montrax-backend
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: ADMIN_PASS
+        value: montrax2026  # O'zgartiring!
+      - key: SUPABASE_URL
+        value: https://gpkeveskzbmagjchgkos.supabase.co
+      - key: SUPABASE_ANON_KEY
+        value: sb_publishable_pweQB7vrqJkE317d2gjhaQ_lAGQE_U2
+      - key: NETLIFY_URL
+        value: https://your-site.netlify.app  # Netlify URL ni qo'ying

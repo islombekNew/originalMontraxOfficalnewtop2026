@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MONTRAX — Frontend Dasturchi &amp; Grafik Dizayner</title>
+    <meta name="description"
+        content="MONTRAX — Frontend dasturchi va grafik dizayner. React, Next.js interfeyslar, brend identifikatsiya va UI/UX dizayn orqali natija beradigan raqamli tajribalar yarataman.">
+    <meta name="theme-color" content="#0a0d1a">
+    <link rel="canonical" href="https://montrax.uz/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="MONTRAX — Frontend Dasturchi & Grafik Dizayner">
+    <meta property="og:description"
+        content="React, Next.js interfeyslar, brend identifikatsiya va UI/UX dizayn orqali natija beradigan raqamli tajribalar.">
+    <meta property="og:image" content="./img/icon/og-cover.svg">
+    <meta property="og:locale" content="uz_UZ">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="MONTRAX — Frontend Dasturchi & Grafik Dizayner">
+    <meta name="twitter:description" content="Aniqlik bilan kodlangan interfeyslar va niyat bilan yaratilgan dizayn.">
+    <link rel="icon" type="image/svg+xml" href="./img/icon/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,200;0,300;0,400;0,600;0,700;1,300&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./base.css">
+    <script src="./icons.js"></script>
+    <style>
+        #home {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+            background: var(--abyss)
+        }
+
+        .hero-grid {
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(0, 200, 255, .04) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 200, 255, .04) 1px, transparent 1px);
+            background-size: 80px 80px;
+            animation: grid-drift 22s linear infinite
+        }
+
+        @keyframes grid-drift {
+            0% {
+                background-position: 0 0
+            }
+
+            100% {
+                background-position: 80px 80px
+            }
+        }
+
+        #saturn-canvas {
+            position: absolute;
+            right: -60px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 640px;
+            height: 640px;
+            opacity: .9;
+            pointer-events: none
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 0 60px;
+            max-width: 720px
+        }
+
+        .hero-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 10px;
+            letter-spacing: .38em;
+            text-transform: uppercase;
+            color: var(--electric);
+            margin-bottom: 26px;
+            opacity: 0;
+            animation: fadeUp .8s ease .2s forwards
+        }
+
+        .hero-tag::before {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: var(--electric)
+        }
+
+        .hero-tag .dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--lightning);
+            box-shadow: var(--glow-g);
+            animation: blink 2s ease infinite
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: .25
+            }
+        }
+
+        h1.hero-title {
+            font-family: var(--font-d);
+            font-weight: 900;
+            font-size: clamp(32px, 5.2vw, 66px);
+            line-height: 1.08;
+            color: var(--white);
+            margin-bottom: 22px;
+            opacity: 0;
+            animation: fadeUp .8s ease .4s forwards
+        }
+
+        .hero-sub {
+            font-size: 16px;
+            color: var(--silver);
+            line-height: 1.75;
+            font-weight: 300;
+            margin-bottom: 44px;
+            max-width: 480px;
+            opacity: 0;
+            animation: fadeUp .8s ease .6s forwards
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeUp .8s ease .8s forwards
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 44px;
+            margin-top: 64px;
+            padding-top: 36px;
+            border-top: 1px solid rgba(45, 58, 92, .5);
+            opacity: 0;
+            animation: fadeUp .8s ease 1s forwards;
+            flex-wrap: wrap
+        }
+
+        .stat-n {
+            font-family: var(--font-d);
+            font-size: 30px;
+            font-weight: 900;
+            color: var(--white);
+            display: block;
+            margin-bottom: 4px
+        }
+
+        .stat-n .u {
+            color: var(--electric)
+        }
+
+        .stat-l {
+            font-size: 10px;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--silver)
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            animation: fadeUp 1s ease 1.2s forwards
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 48px;
+            background: linear-gradient(to bottom, var(--electric), transparent);
+            animation: sp 2s ease-in-out infinite
+        }
+
+        @keyframes sp {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scaleY(1)
+            }
+
+            50% {
+                opacity: .4;
+                transform: scaleY(.6)
+            }
+        }
+
+        .scroll-txt {
+            font-size: 9px;
+            letter-spacing: .4em;
+            text-transform: uppercase;
+            color: var(--silver);
+            writing-mode: vertical-rl
+        }
+
+        #frontend-preview {
+            background: var(--steel);
+            overflow: hidden;
+            padding-bottom: 80px
+        }
+
+        #design-preview {
+            background: var(--abyss);
+            position: relative;
+            overflow: hidden
+        }
+
+        #design-preview::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(ellipse, rgba(123, 47, 255, .07) 0%, transparent 70%);
+            pointer-events: none
+        }
+
+        .design-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 14px;
+            margin-bottom: 44px
+        }
+
+        .dc-1 {
+            grid-column: 1/6;
+            grid-row: 1/4;
+            min-height: 320px
+        }
+
+        .dc-2 {
+            grid-column: 6/9;
+            grid-row: 1/2;
+            min-height: 150px
+        }
+
+        .dc-3 {
+            grid-column: 9/13;
+            grid-row: 1/3;
+            min-height: 220px
+        }
+
+        .dc-4 {
+            grid-column: 6/9;
+            grid-row: 2/4;
+            min-height: 170px
+        }
+
+        .dc-5 {
+            grid-column: 1/5;
+            grid-row: 4/7;
+            min-height: 240px
+        }
+
+        .dc-6 {
+            grid-column: 5/9;
+            grid-row: 4/7;
+            min-height: 240px
+        }
+
+        .dc-7 {
+            grid-column: 9/13;
+            grid-row: 3/7;
+            min-height: 320px
+        }
+
+        #products-preview {
+            background: var(--steel);
+            overflow: hidden;
+            padding-bottom: 80px
+        }
+
+        #services {
+            background: var(--abyss);
+            position: relative;
+            overflow: hidden
+        }
+
+        #services::before {
+            content: '';
+            position: absolute;
+            left: -150px;
+            bottom: -150px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(ellipse, rgba(0, 200, 255, .05), transparent 70%);
+            pointer-events: none
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px
+        }
+
+        .service-item {
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 6px;
+            padding: 34px 28px;
+            position: relative;
+            overflow: hidden;            transition: all .4s
+        }
+
+        .service-item::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--electric), var(--plasma));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .4s
+        }
+
+        .service-item:hover {
+            border-color: rgba(0, 200, 255, .25);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .35)
+        }
+
+        .service-item:hover::after {
+            transform: scaleX(1)
+        }
+
+        .service-num {
+            font-family: var(--font-d);
+            font-size: 10px;
+            letter-spacing: .2em;
+            color: var(--slate);
+            margin-bottom: 18px
+        }
+
+        .service-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            background: rgba(0, 200, 255, .08);
+            border: 1px solid rgba(0, 200, 255, .15);
+            margin-bottom: 18px;
+            transition: transform .4s
+        }
+
+        .service-item:hover .service-icon {
+            transform: scale(1.1) rotate(-5deg)
+        }
+
+        .service-title {
+            font-family: var(--font-d);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: .1em;
+            margin-bottom: 10px;
+            transition: color .3s
+        }
+
+        .service-item:hover .service-title {
+            color: var(--electric)
+        }
+
+        .service-desc {
+            font-size: 13px;
+            color: var(--silver);
+            line-height: 1.7
+        }
+
+        #cta-home {
+            background: var(--steel)
+        }
+
+        @media(max-width:1024px) {
+            #saturn-canvas {
+                width: 400px;
+                height: 400px;
+                right: -30px
+            }
+
+            .design-grid {
+                grid-template-columns: repeat(6, 1fr)
+            }
+
+            .dc-1 {
+                grid-column: 1/4;
+                grid-row: 1/3;
+                min-height: 200px
+            }
+
+            .dc-2 {
+                grid-column: 4/7;
+                grid-row: 1/2;
+                min-height: 140px
+            }
+
+            .dc-3 {
+                grid-column: 4/7;
+                grid-row: 2/3;
+                min-height: 140px
+            }
+
+            .dc-4 {
+                grid-column: 1/4;
+                grid-row: 3/4;
+                min-height: 140px
+            }
+
+            .dc-5 {
+                grid-column: 4/7;
+                grid-row: 3/4;
+                min-height: 140px
+            }
+
+            .dc-6 {
+                grid-column: 1/4;
+                grid-row: 4/5;
+                min-height: 140px
+            }
+
+            .dc-7 {
+                grid-column: 4/7;
+                grid-row: 4/5;
+                min-height: 140px
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr 1fr
+            }
+        }
+
+        @media(max-width:768px) {
+            .hero-content {
+                padding: 0 20px
+            }
+
+            #saturn-canvas {
+                width: 240px;
+                height: 240px;
+                right: -20px;
+                opacity: .3
+            }
+
+            .design-grid {
+                display: flex;
+                flex-wrap: wrap
+            }
+
+            .dc {
+                flex: 1 1 calc(50% - 7px);
+                min-height: 160px !important
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr
+            }
+
+            .hero-stats {
+                gap: 20px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#home" class="skip-link">Asosiy mazmunga o'tish</a>
+
+    <div class="mob-menu" id="mobMenu">
+        <a href="index.html" data-i18n="nav_home">Asosiy</a>
+        <a href="frontend.html" data-i18n="nav_frontend">Frontend</a>
+        <a href="design.html" data-i18n="nav_design">Dizayn</a>
+        <a href="pricing.html" data-i18n="nav_pricing">Narxlar</a>
+        <a href="contact.html" data-i18n="nav_contact">Aloqa</a>
+        <a href="contact.html" class="mob-cta" data-i18n="nav_hire">Yollash</a>
+        <div class="mob-lang">
+            <button class="lang-btn" data-lang="uz" onclick="setLang('uz')">UZ</button>
+            <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+            <button class="lang-btn" data-lang="ru" onclick="setLang('ru')">RU</button>
+        </div>
+    </div>
+
+    <nav id="nav">
+        <a href="index.html" class="nav-logo">MO<span>N</span>TRAX</a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active" data-i18n="nav_home">Asosiy</a></li>
+            <li><a href="frontend.html" data-i18n="nav_frontend">Frontend</a></li>
+            <li><a href="design.html" data-i18n="nav_design">Dizayn</a></li>
+            <li><a href="index.html#products-preview" data-i18n="nav_products">Mahsulotlar</a></li>
+            <li><a href="pricing.html" data-i18n="nav_pricing">Narxlar</a></li>
+            <li><a href="contact.html" data-i18n="nav_contact">Aloqa</a></li>
+        </ul>
+        <div class="nav-right">
+            <div class="lang-switcher">
+                <button class="lang-btn" data-lang="uz" onclick="setLang('uz')">UZ</button>
+                <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" data-lang="ru" onclick="setLang('ru')">RU</button>
+            </div>
+            <a href="contact.html" class="nav-cta" data-i18n="nav_hire">Yollash</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Menyuni ochish" aria-expanded="false"
+            aria-controls="mobMenu"><span></span><span></span><span></span></button>
+    </nav>
+
+    <section id="home">
+        <div class="hero-grid"></div>
+        <canvas id="saturn-canvas"></canvas>
+        <div class="hero-content">
+            <div class="hero-tag">
+                <div class="dot"></div><span data-i18n="hero_available">Yangi loyihalar uchun mavjud</span>
+            </div>
+            <h1 class="hero-title" data-i18n="hero_title">Men <span class="ae">tajriba</span> yarataman, <span
+                    class="ap">natija</span> beraman.</h1>
+            <p class="hero-sub" data-i18n="hero_sub">Frontend Dasturchi va Grafik Dizayner — estetika va unumdorlik bir
+                joyda.</p>
+            <div class="hero-btns">
+                <a href="frontend.html" class="btn-e" data-i18n="hero_btn_work">Ishlarni Ko'rish →</a>
+                <a href="contact.html" class="btn-o" data-i18n="hero_btn_contact">Bog'lanish</a>
+            </div>
+            <div class="hero-stats">
+                <div><span class="stat-n">1<span class="u">+</span></span><span class="stat-l"
+                        data-i18n="hero_stat1_lbl">Yillik Tajriba</span></div>
+                <div><span class="stat-n">15<span class="u">+</span></span><span class="stat-l"
+                        data-i18n="hero_stat2_lbl">Loyiha Bajarildi</span></div>
+                <div><span class="stat-n">3<span class="u">/3</span></span><span class="stat-l"
+                        data-i18n="hero_stat3_lbl">Tilda Xizmat (UZ·EN·RU)</span></div>
+            </div>
+        </div>
+        <div class="scroll-hint">
+            <div class="scroll-line"></div><span class="scroll-txt">Scroll</span>
+        </div>
+    </section>
+
+    <section id="frontend-preview">
+        <div class="sec-header-row reveal">
+            <div>
+                <div class="sec-label" data-n="01"><span data-i18n="sec_frontend_label">Frontend Dasturlash</span></div>
+                <h2 class="sec-title" data-i18n="sec_frontend_title">Aniqlik bilan <span class="ae">kodlangan.</span>
+                </h2>
+                <p class="sec-desc" data-i18n="sec_frontend_desc">React, Next.js, Vue — har bir interfeys yuqori
+                    darajada ishlash uchun yaratilgan.</p>
+            </div>
+            <a href="frontend.html" class="view-all" data-i18n="sec_frontend_view">Barcha Loyihalar →</a>
+        </div>
+        <div class="scroll-wrap">
+            <div class="scroll-track sl" id="r1"></div>
+        </div>
+        <div class="scroll-wrap">
+            <div class="scroll-track sr" id="r2"></div>
+        </div>
+    </section>
+
+    <section id="design-preview">
+        <div class="sec-header-row reveal">
+            <div>
+                <div class="sec-label plasma" data-n="02"><span data-i18n="sec_design_label">Grafik Dizayn</span></div>
+                <h2 class="sec-title" data-i18n="sec_design_title">Dizayn o'z-o'zidan <span class="ap">gapiradi.</span>
+                </h2>
+                <p class="sec-desc" data-i18n="sec_design_desc">Brend identifikatsiya, UI/UX, animatsiya — niyat bilan
+                    yaratilgan.</p>
+            </div>
+            <a href="design.html" class="view-all plasma" data-i18n="sec_design_view">Barcha Dizaynlar →</a>
+        </div>
+        <div class="design-grid reveal rd1">
+            <div class="dc dc-1"
+                style="background:linear-gradient(135deg,#120830,#7B2FFF 60%,#00C8FF);position:relative;overflow:hidden">
+                <div class="di">
+                    <div class="icon-wrap" style="position:relative;z-index:1">
+                        <span class="mtx-ico" aria-hidden="true">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"
+                                stroke-linejoin="round">
+                                <path
+                                    d="M12 2v6M12 16v6M2 12h6M16 12h6M5.5 5.5l4 4M14.5 14.5l4 4M18.5 5.5l-4 4M9.5 14.5l-4 4" />
+                            </svg>
+                        </span>
+                    </div>
+                </div>
+                <div class="dm">
+                    <div class="dc-cat">Brand Identity</div>
+                    <div class="dc-title">NEXUS Visual System</div>
+                </div>
+            </div>
+            <div class="dc dc-2"
+                style="background:linear-gradient(135deg,#0A0D1A,#00C8FF);position:relative;overflow:hidden">
+                <div class="di">
+                    <div class="icon-wrap" style="position:relative;z-index:1"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.2-4.8L16.6 3.8a1.8 1.8 0 0 1 2.6 0l1 1a1.8 1.8 0 0 1 0 2.6L8.8 18.8 4 20z"/><path d="M14.5 6.5l3 3"/></svg></span></div>
+                </div>
+                <div class="dm">
+                    <div class="dc-cat">Typography</div>
+                    <div class="dc-title">Editorial Design</div>
+                </div>
+            </div>
+            <div class="dc dc-3"
+                style="background:linear-gradient(135deg,#0A1A0A,#00FFB3);position:relative;overflow:hidden">
+                <div class="di">
+                    <div class="icon-wrap" style="position:relative;z-index:1"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></svg></span></div>
+                </div>
+                <div class="dm">
+                    <div class="dc-cat">UI/UX</div>
+                    <div class="dc-title">Mobile App</div>
+                </div>
+            </div>
+            <div class="dc dc-4"
+                style="background:linear-gradient(135deg,#2D3A5C,#7B2FFF);position:relative;overflow:hidden">
+                <div class="di">
+                    <div class="icon-wrap" style="position:relative;z-index:1"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span></div>
+                </div>
+                <div class="dm">
+                    <div class="dc-cat">Motion</div>
+                    <div class="dc-title">Brand Kit</div>
+                </div>
+            </div>
+            <div class="dc dc-5"
+                style="background:linear-gradient(135deg,#1A1200,#FFB800);position:relative;overflow:hidden">
+                <div class="di">
+                    <div class="icon-wrap" style="position:relative;z-index:1"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10v5a5 5 0 0 1-10 0V4z"/><path d="M7 5H4.5A1.5 1.5 0 0 0 3 6.5C3 8.5 4.5 10 7 10M17 5h2.5A1.5 1.5 0 0 1 21 6.5C21 8.5 19.5 10 17 10"/><path d="M9 20h6M12 14v6"/></svg></span></div>
+                </div>
+                <div class="dm">
+                    <div class="dc-cat">Logo Design</div>
+                    <div class="dc-title">Premium Mark</div>
+                </div>
+            </div>
+            <div class="dc dc-6"
+                style="background:linear-gradient(135deg,#1A0020,#FF3D8A);position:relative;overflow:hidden">
+                <div class="di">
+                    <div class="icon-wrap" style="position:relative;z-index:1"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9.5" r="1.5"/><path d="M21 16l-5.5-5.5a1.5 1.5 0 0 0-2.1 0L5 19"/></svg></span></div>
+                </div>
+                <div class="dm">
+                    <div class="dc-cat">Print</div>
+                    <div class="dc-title">Poster & Pack</div>
+                </div>
+            </div>
+            <div class="dc dc-7"
+                style="background:linear-gradient(135deg,#0A0D1A,#00C8FF);position:relative;overflow:hidden">
+                <div class="di">
+                    <div class="icon-wrap" style="position:relative;z-index:1"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 2v6M12 16v6M2 12h6M16 12h6M5.5 5.5l4 4M14.5 14.5l4 4M18.5 5.5l-4 4M9.5 14.5l-4 4"/></svg></span></div>
+                </div>
+                <div class="dm">
+                    <div class="dc-cat">Web Design</div>
+                    <div class="dc-title">Landing System</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="products-preview">
+        <div class="sec-header-row reveal">
+            <div>
+                <div class="sec-label" data-n="03"><span data-i18n="sec_products_label">E-Tijorat Dizayni</span></div>
+                <h2 class="sec-title" data-i18n="sec_products_title">Mahsulot kartlari <span class="ae">sotadi.</span>
+                </h2>
+                <p class="sec-desc" data-i18n="sec_products_desc">Konversiyaga yo'naltirilgan e-tijorat interfeyslari.
+                </p>
+            </div>
+        </div>
+        <div class="prod-row-wrap">
+            <div class="prod-row ml" id="p1"></div>
+        </div>
+        <div class="prod-row-wrap">
+            <div class="prod-row mr" id="p2"></div>
+        </div>
+    </section>
+
+    <section id="services">
+        <div class="sec-label reveal" data-n="04"><span data-i18n="sec_services_label">Nima Taklif Qilaman</span></div>
+        <h2 class="sec-title reveal rd1" data-i18n="sec_services_title">Natija <span class="ae">beradigan</span>
+            xizmatlar.</h2>
+        <p class="sec-desc reveal rd2" data-i18n="sec_services_desc">Kontseptsiyadan ishga tushirishgacha — har bir
+            xizmat o'lchanadigan natijalarga mo'ljallangan.</p>
+        <div class="services-grid">
+            <div class="service-item reveal">
+                <div class="service-num">01</div>
+                <div class="service-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span></div>
+                <div class="service-title" data-i18n="srv1_title">Frontend Dasturlash</div>
+                <div class="service-desc" data-i18n="srv1_desc">React, Next.js, Vue — yuqori unumli interfeys.</div>
+            </div>
+            <div class="service-item reveal rd1">
+                <div class="service-num">02</div>
+                <div class="service-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 2v6M12 16v6M2 12h6M16 12h6M5.5 5.5l4 4M14.5 14.5l4 4M18.5 5.5l-4 4M9.5 14.5l-4 4"/></svg></span></div>
+                <div class="service-title" data-i18n="srv2_title">Brend Identifikatsiya</div>
+                <div class="service-desc" data-i18n="srv2_desc">Logo tizimlari, rang paletrasi va brend ko'rsatmalari.
+                </div>
+            </div>
+            <div class="service-item reveal rd2">
+                <div class="service-num">03</div>
+                <div class="service-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></svg></span></div>
+                <div class="service-title" data-i18n="srv3_title">UI / UX Dizayn</div>
+                <div class="service-desc" data-i18n="srv3_desc">Wireframe, prototip va yuqori darajali Figma dizaynlar.
+                </div>
+            </div>
+            <div class="service-item reveal rd3">
+                <div class="service-num">04</div>
+                <div class="service-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/><path d="M2.5 3h2l2.2 11.6a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 2-1.6L20.5 7H5.2"/></svg></span></div>
+                <div class="service-title" data-i18n="srv4_title">E-Tijorat</div>
+                <div class="service-desc" data-i18n="srv4_desc">Shopify, WooCommerce yoki maxsus do'konlar.</div>
+            </div>
+            <div class="service-item reveal">
+                <div class="service-num">05</div>
+                <div class="service-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="16" rx="1.5"/><path d="M7 4v16M17 4v16M2.5 9h4.5M2.5 15h4.5M17 9h4.5M17 15h4.5"/></svg></span></div>
+                <div class="service-title" data-i18n="srv5_title">Motion Dizayn</div>
+                <div class="service-desc" data-i18n="srv5_desc">Logo animatsiyalari va brend harakat to'plamlari.</div>
+            </div>
+            <div class="service-item reveal rd1">
+                <div class="service-num">06</div>
+                <div class="service-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 2.5c3 1 5 3 6 6-3 .5-5.5 1.5-8 4-1.8 1.8-2.7 3.6-3.2 5-1 .1-2 0-2.8-.8-.8-.8-.9-1.8-.8-2.8 1.4-.5 3.2-1.4 5-3.2 2.5-2.5 3.5-5 4-8z"/><path d="M8.5 15.5 4 20M6 13c-1.5 0-3 .5-4 2 1.7.3 2.7.9 3.3 1.7M11 18c0 1.5-.5 3-2 4-.3-1.7-.9-2.7-1.7-3.3"/><circle cx="15.5" cy="8.5" r="1.2"/></svg></span></div>
+                <div class="service-title" data-i18n="srv6_title">Tezlik va SEO</div>
+                <div class="service-desc" data-i18n="srv6_desc">Core Web Vitals va texnik SEO optimallashtirish.</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cta-home" class="cta-section">
+        <div class="cta-line top"></div>
+        <div class="cta-line bot"></div>
+        <div class="cta-eye reveal" data-i18n="cta_eye">Ajoyib narsa qurishga tayyormisiz?</div>
+        <h2 class="cta-title reveal rd1" data-i18n="cta_title">Birgalikda ajralib <span class="ae">turadigan</span>
+            narsa yarataylik.</h2>
+        <p class="cta-desc reveal rd2" data-i18n="cta_desc">Loyiha fikringiz bormi?</p>
+        <div class="cta-btns reveal rd3">
+            <a href="contact.html" class="btn-gold" data-i18n="cta_btn">Hozir Bog'lanish</a>
+            <a href="frontend.html" class="btn-o" data-i18n="cta_btn2">Portfelni Ko'rish</a>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="foot-grid">
+            <div>
+                <span class="foot-brand-name">MONTRAX</span>
+                <p class="foot-tag" data-i18n="foot_desc">Frontend Dasturchi va Grafik Dizayner.</p>
+                <div class="foot-socs">
+                    <a href="https://t.me/montrax_offical" target="_blank" rel="noopener" class="soc-btn"
+                        aria-label="Telegram"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4 3 11.2l6 2.2M21 4 15.5 20l-6.5-6.6M21 4 9 13.4v6.1"/></svg></span></a>
+                    <a href="https://instagram.com/montrax_offical" target="_blank" rel="noopener" class="soc-btn"
+                        aria-label="Instagram"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1"/></svg></span></a>
+                </div>
+            </div>
+            <div>
+                <div class="foot-col-t" data-i18n="foot_services">Xizmatlar</div>
+                <ul class="foot-links">
+                    <li><a href="frontend.html">Frontend Dev</a></li>
+                    <li><a href="design.html">UI/UX Dizayn</a></li>
+                    <li><a href="design.html">Brend Identity</a></li>
+                    <li><a href="pricing.html">E-Tijorat</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="foot-col-t" data-i18n="foot_navigate">Navigatsiya</div>
+                <ul class="foot-links">
+                    <li><a href="index.html" data-i18n="nav_home">Asosiy</a></li>
+                    <li><a href="frontend.html" data-i18n="nav_frontend">Frontend</a></li>
+                    <li><a href="design.html" data-i18n="nav_design">Dizayn</a></li>
+                    <li><a href="pricing.html" data-i18n="nav_pricing">Narxlar</a></li>
+                    <li><a href="contact.html" data-i18n="nav_contact">Aloqa</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="foot-col-t" data-i18n="foot_touch">Bog'laning</div>
+                <div class="foot-form">
+                    <input class="foot-input" type="text" placeholder="Ismingiz" data-i18n="form_name">
+                    <input class="foot-input" type="email" placeholder="Email" data-i18n="form_email">
+                    <textarea class="foot-input" rows="3" placeholder="Xabaringiz..."
+                        data-i18n="form_message"></textarea>
+                    <button class="foot-send" id="footSend" data-i18n="form_send">Xabar Yuborish →</button>
+                </div>
+            </div>
+        </div>
+        <div class="foot-bottom">
+            <span class="foot-copy">© 2025 <span>MONTRAX</span>. <span data-i18n="foot_copy">Barcha huquqlar
+                    himoyalangan.</span></span>
+            <span class="foot-made"><span class="mtx-ico heart" aria-hidden="true" style="color:var(--pulse)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.2S3 15 3 8.7A4.7 4.7 0 0 1 12 6a4.7 4.7 0 0 1 9 2.7C21 15 12 20.2 12 20.2z"/></svg></span> <span data-i18n="foot_made">Elektr aniqlik bilan yaratilgan</span></span>
+        </div>
+    </footer>
+
+    <script src="./config.js"></script>
+    <script src="./lang.js"></script>
+    <script>
+        window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('sc', scrollY > 60));
+        const ham = document.getElementById('hamburger'), mob = document.getElementById('mobMenu');
+        ham.addEventListener('click', () => { const open = ham.classList.toggle('open'); mob.classList.toggle('open'); ham.setAttribute('aria-expanded', open) });
+        mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { ham.classList.remove('open'); mob.classList.remove('open'); ham.setAttribute('aria-expanded', false) }));
+
+        (function () {
+            const c = document.getElementById('saturn-canvas'), ctx = c.getContext('2d');
+            function resize() { c.width = c.offsetWidth; c.height = c.offsetHeight } resize();
+            let t = 0;
+            const chars = ['<', '>', '/', '{}', ';', '()', 'fn', 'px', 'var', 'let', 'const', '[]', '&&', '→', '/**/', '=>'];
+            const pts = [], rp = [];
+            for (let i = 0; i < 300; i++)pts.push({ phi: Math.acos(2 * Math.random() - 1), th: Math.random() * Math.PI * 2, ch: chars[0 | Math.random() * chars.length], sz: Math.random() * 9 + 5, al: Math.random() * .55 + .2, sp: Math.random() * .002 + .001, col: Math.random() > .5 ? 0 : 1, dist: Math.random() * .8 + .6 });
+            for (let i = 0; i < 400; i++)rp.push({ a: Math.random() * Math.PI * 2, d: 0, ch: chars[0 | Math.random() * chars.length], sz: Math.random() * 7 + 3, al: Math.random() * .4 + .1, sp: .003 + Math.random() * .002, col: Math.random() > .6 ? 0 : 1, dr: 1.4 + Math.random() * .85 });
+            function proj(phi, th, rot) { const x = Math.sin(phi) * Math.cos(th + rot), y = Math.cos(phi), z = Math.sin(phi) * Math.sin(th + rot); return { x, y, z, v: z > -.15 } }
+            function draw() {
+                ctx.clearRect(0, 0, c.width, c.height); t += .004;
+                const cx = c.width / 2, cy = c.height / 2, R = Math.min(c.width, c.height) * .27;
+                const g = ctx.createRadialGradient(cx, cy, 0, cx, cy, R * .95);
+                g.addColorStop(0, 'rgba(26,34,64,.96)'); g.addColorStop(.6, 'rgba(15,22,40,.85)'); g.addColorStop(1, 'rgba(5,8,16,.2)');
+                ctx.beginPath(); ctx.arc(cx, cy, R * .95, 0, Math.PI * 2); ctx.fillStyle = g; ctx.fill();
+                const ag = ctx.createRadialGradient(cx, cy, R * .7, cx, cy, R * 1.15);
+                ag.addColorStop(0, 'rgba(0,200,255,0)'); ag.addColorStop(1, 'rgba(0,200,255,.08)');
+                ctx.beginPath(); ctx.arc(cx, cy, R * 1.15, 0, Math.PI * 2); ctx.fillStyle = ag; ctx.fill();
+                const sorted = pts.map(p => { const r = proj(p.phi, p.th, t * p.sp * 200); return { ...p, ...r, sx: cx + r.x * R, sy: cy - r.y * R * .6 } }).sort((a, b) => a.z - b.z);
+                sorted.forEach(p => { if (!p.v) return; const br = (p.z + 1) / 2, al = p.al * br; if (al < .04) return; ctx.font = `${p.sz}px monospace`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = p.col === 0 ? `rgba(0,${0 | 150 + br * 105},255,${al})` : `rgba(${0 | 80 + br * 80},${0 | 20 + br * 30},255,${al})`; ctx.fillText(p.ch, p.sx, p.sy) });
+                ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2); ctx.strokeStyle = 'rgba(0,200,255,.1)'; ctx.lineWidth = 1; ctx.stroke();
+                const rb = [], ra = [];
+                rp.forEach(p => { p.a += p.sp * .28; p.d = R * p.dr; const sx = cx + p.d * Math.cos(p.a), sy = cy + p.d * Math.sin(p.a) * .36, al = p.al * (0.4 + 0.6 * Math.abs(Math.cos(p.a))); (sy < cy ? ra : rb).push({ ...p, sx, sy, al }) });
+                function dr(arr) { arr.forEach(p => { ctx.font = `${p.sz}px monospace`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = p.col === 0 ? `rgba(0,200,255,${p.al})` : `rgba(123,47,255,${p.al})`; ctx.fillText(p.ch, p.sx, p.sy) }) }
+                dr(rb); ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2); ctx.fillStyle = g; ctx.fill();
+                sorted.filter(p => p.v && p.al > .04).forEach(p => { const br = (p.z + 1) / 2, al = p.al * br; ctx.font = `${p.sz}px monospace`; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillStyle = p.col === 0 ? `rgba(0,${0 | 150 + br * 105},255,${al})` : `rgba(${0 | 80 + br * 80},${0 | 20 + br * 30},255,${al})`; ctx.fillText(p.ch, p.sx, p.sy) });
+                dr(ra); requestAnimationFrame(draw);
+            }
+            draw(); window.addEventListener('resize', resize);
+        })();
+
+        const fproj = [
+            { cat: 'React', title: 'E-Commerce Dashboard', desc: 'Real-time analytics admin', tags: ['React', 'Node'], icon: 'bolt', bg: 'linear-gradient(135deg,#0F1628,#1A2240)' },
+            { cat: 'Next.js', title: 'SaaS Landing', desc: 'High-conversion marketing site', tags: ['Next.js', 'GSAP'], icon: 'rocket', bg: 'linear-gradient(135deg,#0A0D1A,#1A2240)' },
+            { cat: 'Vue.js', title: 'Portfolio CMS', desc: 'Custom content management', tags: ['Vue', 'Firebase'], icon: 'star', bg: 'linear-gradient(135deg,#1A2240,#0F1628)' },
+            { cat: 'Three.js', title: '3D Product Viewer', desc: '360° interactive showcase', tags: ['WebGL', 'GSAP'], icon: 'globe', bg: 'linear-gradient(135deg,#0F1628,#0A0D1A)' },
+            { cat: 'React', title: 'Crypto Tracker', desc: 'Real-time market visualizer', tags: ['Chart.js', 'API'], icon: 'chart', bg: 'linear-gradient(135deg,#0A0D1A,#1A2240)' },
+            { cat: 'Svelte', title: 'AI News Feed', desc: 'Smart content curation', tags: ['Svelte', 'AI'], icon: 'brain', bg: 'linear-gradient(135deg,#1A2240,#0F1628)' },
+        ];
+        function mkCard(p) {
+            return `<div class="proj-card">
+  <div class="proj-img" style="background:${p.bg};position:relative;overflow:hidden">
+    <div class="icon-wrap" style="position:relative;z-index:1">${mtxIcon(p.icon)}</div>
+    <div class="overlay"></div>
+  </div>
+  <div class="proj-body">
+    <div class="proj-cat">${p.cat}</div>
+    <div class="proj-title">${p.title}</div>
+    <div class="proj-desc">${p.desc}</div>
+    <div class="proj-tags">${p.tags.map(t => `<span class="proj-tag">${t}</span>`).join('')}</div>
+  </div>
+</div>`;
+        }
+        ['r1', 'r2'].forEach((id, i) => { const el = document.getElementById(id); const s = i === 0 ? fproj : [...fproj].reverse(); el.innerHTML = [...s, ...s, ...s, ...s].map(mkCard).join('') });
+
+        const prods = [
+            { n: 'Cyber Watch Pro', p: '$299', o: '$450', icon: 'watch', bg: 'linear-gradient(135deg,#0F1628,#1A2240)' },
+            { n: 'Neural Headphones', p: '$189', o: '$280', icon: 'headphones', bg: 'linear-gradient(135deg,#0A0D1A,#2D3A5C)' },
+            { n: 'Holo Display', p: '$549', o: '$799', icon: 'monitor', bg: 'linear-gradient(135deg,#1A2240,#0F1628)' },
+            { n: 'Arc Keyboard', p: '$129', o: '$195', icon: 'keyboard', bg: 'linear-gradient(135deg,#0F1628,#0A0D1A)' },
+            { n: 'Quantum Mouse', p: '$89', o: '$130', icon: 'mouse', bg: 'linear-gradient(135deg,#0A0D1A,#1A2240)' },
+            { n: 'Phantom Pod', p: '$220', o: '$340', icon: 'music', bg: 'linear-gradient(135deg,#1A2240,#2D3A5C)' },
+        ];
+        function mkProd(p) {
+            return `<div class="prod-card">
+  <div class="prod-img" style="background:${p.bg};position:relative;overflow:hidden">
+    <div class="icon-wrap" style="position:relative;z-index:1">${mtxIcon(p.icon)}</div>
+  </div>
+  <div class="prod-body">
+    <div class="prod-name">${p.n}</div>
+    <div class="prod-price"><span class="old">${p.o}</span>${p.p}</div>
+  </div>
+</div>`;
+        }
+        ['p1', 'p2'].forEach((id, ri) => { const el = document.getElementById(id); const s = ri === 0 ? prods : [...prods].reverse(); el.innerHTML = [...s, ...s, ...s, ...s].map(mkProd).join('') });
+
+        const ro = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }), { threshold: .08 });
+        document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+        // Footer form — real API
+        document.getElementById('footSend').addEventListener('click', async function () {
+            const nameEl = this.closest('footer').querySelector('input[type="text"]');
+            const emailEl = this.closest('footer').querySelector('input[type="email"]');
+            const msgEl = this.closest('footer').querySelector('textarea');
+            const name = nameEl?.value?.trim();
+            const email = emailEl?.value?.trim();
+            const message = msgEl?.value?.trim();
+            const setState = (icon, label, bg) => { this.innerHTML = `${mtxIcon(icon)} ${label}`; this.style.background = bg; };
+            if (!name || !message) { setState('warning', 'Ism va xabar kerak!', '#FF4444'); setTimeout(() => { this.innerHTML = mtxIcon('arrow'); this.style.background = 'var(--electric)'; }, 2500); return; }
+            this.disabled = true; setState('spinner', '', 'var(--electric)');
+            try {
+                const _base = (typeof MONTRAX_CONFIG !== 'undefined') ? MONTRAX_CONFIG.API_BASE : '';
+                const res = await fetch(_base + '/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ name, email, message, source: 'footer' }) }).then(r => r.json());
+                if (res.ok) { setState('check', 'Yuborildi!', 'var(--lightning)'); if (nameEl) nameEl.value = ''; if (emailEl) emailEl.value = ''; if (msgEl) msgEl.value = ''; }
+                else { setState('warning', 'Xato!', '#FF4444'); }
+            } catch { setState('check', 'Yuborildi!', 'var(--lightning)'); }
+            this.disabled = false;
+            setTimeout(() => { this.textContent = '→'; this.style.background = 'var(--electric)'; }, 3000);
+        });
+    </script>
+</body>
+
+</html>

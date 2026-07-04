@@ -1,0 +1,22 @@
+{
+  "name": "montrax-portfolio",
+  "version": "1.0.0",
+  "description": "MONTRAX Portfolio — Backend Server",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.10.2",
+    "@supabase/supabase-js": "^2.105.3",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.0.0",
+    "ws": "^8.18.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "author": "MONTRAX",
+  "license": "MIT"
+}

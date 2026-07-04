@@ -1,0 +1,5 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Montrax">
+  <polygon points="111.6,439.4 48.4,420.6 70.3,462.6" fill="#FFFFFF"/>
+  <polygon points="463.6,420.6 400.4,439.4 441.7,462.6" fill="#FFFFFF"/>
+  <path d="M80 430 L175 110 L256 290 L337 110 L432 430" fill="none" stroke="#FFFFFF" stroke-width="66" stroke-linejoin="miter" stroke-miterlimit="10"/>
+</svg>

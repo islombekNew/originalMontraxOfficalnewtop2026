@@ -1,0 +1,3138 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>MONTRAX — Admin Panel</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,200;0,300;0,400;0,600;0,700;1,300&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --abyss: #0A0D1A;
+            --steel: #0F1628;
+            --chrome: #1A2240;
+            --slate: #2D3A5C;
+            --silver: #8A97B8;
+            --frost: #C8D4F0;
+            --white: #EEF3FF;
+            --electric: #00C8FF;
+            --plasma: #7B2FFF;
+            --lightning: #00FFB3;
+            --gold: #FFB800;
+            --pulse: #FF3D8A;
+            --danger: #FF4444;
+            --glow-e: 0 0 20px rgba(0, 200, 255, .5), 0 0 60px rgba(0, 200, 255, .15);
+            --glow-p: 0 0 20px rgba(123, 47, 255, .5), 0 0 60px rgba(123, 47, 255, .15);
+            --glow-g: 0 0 20px rgba(0, 255, 179, .4), 0 0 40px rgba(0, 255, 179, .1);
+            --font-d: 'Orbitron', monospace;
+            --font-b: 'Exo 2', sans-serif;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--abyss);
+            color: var(--frost);
+            font-family: var(--font-b);
+            overflow-x: hidden;
+            cursor: none;
+            min-height: 100vh
+        }
+
+        ::-webkit-scrollbar {
+            width: 4px
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--steel)
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--electric);
+            border-radius: 2px
+        }
+
+        /* ── CURSOR ── */
+        .cur {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--electric);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            box-shadow: var(--glow-e);
+            transition: transform .1s
+        }
+
+        .cur-ring {
+            position: fixed;
+            width: 32px;
+            height: 32px;
+            border: 1px solid rgba(0, 200, 255, .4);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%, -50%);
+            transition: all .12s
+        }
+
+        /* ── LOGIN SCREEN ── */
+        #loginScreen {
+            position: fixed;
+            inset: 0;
+            background: var(--abyss);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 5000;
+            background-image: linear-gradient(rgba(0, 200, 255, .03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 200, 255, .03) 1px, transparent 1px);
+            background-size: 60px 60px
+        }
+
+        .login-box {
+            background: var(--steel);
+            border: 1px solid rgba(0, 200, 255, .2);
+            border-radius: 12px;
+            padding: 48px 44px;
+            width: 100%;
+            max-width: 420px;
+            position: relative;
+            overflow: hidden
+        }
+
+        .login-box::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(ellipse, rgba(0, 200, 255, .08), transparent 70%);
+            pointer-events: none
+        }
+
+        .login-logo {
+            font-family: var(--font-d);
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: .3em;
+            color: var(--white);
+            text-align: center;
+            margin-bottom: 6px
+        }
+
+        .login-logo span {
+            color: var(--electric)
+        }
+
+        .login-tag {
+            text-align: center;
+            font-size: 10px;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: var(--silver);
+            margin-bottom: 36px
+        }
+
+        .login-label {
+            font-family: var(--font-d);
+            font-size: 10px;
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            color: var(--silver);
+            display: block;
+            margin-bottom: 8px
+        }
+
+        .login-input {
+            width: 100%;
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 6px;
+            padding: 14px 18px;
+            color: var(--frost);
+            font-family: var(--font-b);
+            font-size: 14px;
+            outline: none;
+            transition: all .3s;
+            margin-bottom: 16px
+        }
+
+        .login-input:focus {
+            border-color: var(--electric);
+            box-shadow: 0 0 0 3px rgba(0, 200, 255, .1)
+        }
+
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(90deg, var(--electric), var(--plasma));
+            color: var(--abyss);
+            border: none;
+            padding: 16px;
+            font-family: var(--font-d);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            cursor: none;
+            border-radius: 6px;
+            transition: all .3s;
+            margin-top: 8px
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 200, 255, .4)
+        }
+
+        .login-err {
+            text-align: center;
+            color: var(--pulse);
+            font-size: 13px;
+            margin-top: 12px;
+            display: none
+        }
+
+        .login-err.show {
+            display: block
+        }
+
+        @keyframes shake {
+
+            0%,
+            100% {
+                transform: translateX(0)
+            }
+
+            20% {
+                transform: translateX(-8px)
+            }
+
+            40% {
+                transform: translateX(8px)
+            }
+
+            60% {
+                transform: translateX(-5px)
+            }
+
+            80% {
+                transform: translateX(5px)
+            }
+        }
+
+        /* ── SIDEBAR ── */
+        .layout {
+            display: flex;
+            min-height: 100vh
+        }
+
+        .sidebar {
+            width: 240px;
+            background: var(--steel);
+            border-right: 1px solid rgba(45, 58, 92, .4);
+            display: flex;
+            flex-direction: column;
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            z-index: 100;
+            transition: transform .35s cubic-bezier(.77, 0, .175, 1)
+        }
+
+        .sidebar.closed {
+            transform: translateX(-240px)
+        }
+
+        .sb-logo {
+            padding: 26px 24px 20px;
+            border-bottom: 1px solid rgba(45, 58, 92, .4)
+        }
+
+        .sb-logo-text {
+            font-family: var(--font-d);
+            font-size: 18px;
+            font-weight: 900;
+            letter-spacing: .25em;
+            color: var(--white)
+        }
+
+        .sb-logo-text span {
+            color: var(--electric)
+        }
+
+        .sb-role {
+            font-size: 10px;
+            letter-spacing: .2em;
+            color: var(--electric);
+            text-transform: uppercase;
+            margin-top: 4px
+        }
+
+        .sb-nav {
+            flex: 1;
+            padding: 16px 12px;
+            overflow-y: auto
+        }
+
+        .sb-section {
+            font-size: 9px;
+            letter-spacing: .35em;
+            text-transform: uppercase;
+            color: var(--slate);
+            padding: 14px 12px 8px
+        }
+
+        .sb-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 11px 14px;
+            border-radius: 6px;
+            cursor: none;
+            transition: all .3s;
+            margin-bottom: 2px;
+            text-decoration: none;
+            color: var(--silver);
+            font-size: 13px;
+            position: relative
+        }
+
+        .sb-link:hover {
+            background: var(--chrome);
+            color: var(--white)
+        }
+
+        .sb-link.active {
+            background: rgba(0, 200, 255, .1);
+            color: var(--electric);
+            border: 1px solid rgba(0, 200, 255, .15)
+        }
+
+        .sb-link .sb-icon {
+            font-size: 18px;
+            width: 22px;
+            text-align: center;
+            flex-shrink: 0
+        }
+
+        .sb-badge {
+            margin-left: auto;
+            background: var(--pulse);
+            color: var(--white);
+            font-family: var(--font-d);
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 20px;
+            min-width: 22px;
+            text-align: center
+        }
+
+        .sb-badge.green {
+            background: var(--lightning);
+            color: var(--abyss)
+        }
+
+        .sb-bottom {
+            padding: 16px;
+            border-top: 1px solid rgba(45, 58, 92, .4)
+        }
+
+        .sb-user {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .sb-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--electric), var(--plasma));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-d);
+            font-size: 14px;
+            font-weight: 900;
+            color: var(--abyss);
+            flex-shrink: 0
+        }
+
+        .sb-uname {
+            font-family: var(--font-d);
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: .08em;
+            display: block
+        }
+
+        .sb-ustatus {
+            font-size: 11px;
+            color: var(--lightning);
+            display: flex;
+            align-items: center;
+            gap: 5px
+        }
+
+        .sb-ustatus::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--lightning);
+            display: inline-block;
+            animation: blink 2s ease infinite
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: .3
+            }
+        }
+
+        .logout-btn {
+            background: none;
+            border: 1px solid rgba(255, 68, 68, .3);
+            color: var(--danger);
+            font-family: var(--font-d);
+            font-size: 10px;
+            letter-spacing: .15em;
+            padding: 7px 14px;
+            border-radius: 4px;
+            cursor: none;
+            transition: all .3s;
+            margin-left: auto
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 68, 68, .1);
+            border-color: var(--danger)
+        }
+
+        /* ── MAIN CONTENT ── */
+        .main {
+            margin-left: 240px;
+            flex: 1;
+            padding: 0;
+            transition: margin-left .35s
+        }
+
+        .main.expanded {
+            margin-left: 0
+        }
+
+        /* ── TOPBAR ── */
+        .topbar {
+            background: var(--steel);
+            border-bottom: 1px solid rgba(45, 58, 92, .4);
+            padding: 16px 28px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 90;
+            backdrop-filter: blur(10px)
+        }
+
+        .topbar-left {
+            display: flex;
+            align-items: center;
+            gap: 14px
+        }
+
+        .menu-toggle {
+            background: none;
+            border: 1px solid rgba(45, 58, 92, .5);
+            color: var(--silver);
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: none;
+            transition: all .3s;
+            font-size: 18px
+        }
+
+        .menu-toggle:hover {
+            border-color: var(--electric);
+            color: var(--electric)
+        }
+
+        .topbar-title {
+            font-family: var(--font-d);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: .12em
+        }
+
+        .topbar-right {
+            display: flex;
+            align-items: center;
+            gap: 14px
+        }
+
+        .topbar-time {
+            font-family: var(--font-d);
+            font-size: 12px;
+            color: var(--silver);
+            letter-spacing: .1em
+        }
+
+        .notif-btn {
+            position: relative;
+            background: none;
+            border: 1px solid rgba(45, 58, 92, .5);
+            color: var(--silver);
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: none;
+            transition: all .3s;
+            font-size: 18px
+        }
+
+        .notif-btn:hover {
+            border-color: var(--electric);
+            color: var(--electric)
+        }
+
+        .notif-dot {
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            width: 10px;
+            height: 10px;
+            background: var(--pulse);
+            border-radius: 50%;
+            border: 2px solid var(--steel);
+            animation: notif-pulse 2s ease infinite
+        }
+
+        @keyframes notif-pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 61, 138, .5)
+            }
+
+            50% {
+                box-shadow: 0 0 0 6px rgba(255, 61, 138, 0)
+            }
+        }
+
+        .view-site-btn {
+            background: transparent;
+            border: 1px solid rgba(0, 200, 255, .3);
+            color: var(--electric);
+            font-family: var(--font-d);
+            font-size: 10px;
+            letter-spacing: .15em;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: none;
+            transition: all .3s;
+            text-decoration: none
+        }
+
+        .view-site-btn:hover {
+            background: rgba(0, 200, 255, .08);
+            border-color: var(--electric)
+        }
+
+        /* ── PAGES (tabs) ── */
+        .page {
+            display: none;
+            padding: 28px
+        }
+
+        .page.active {
+            display: block;
+            animation: fadeIn .4s ease
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        /* ── DASHBOARD ── */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 24px
+        }
+
+        .stat-card {
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 8px;
+            padding: 22px 24px;
+            position: relative;
+            overflow: hidden;
+            transition: all .35s;
+            cursor: default
+        }
+
+        .stat-card:hover {
+            border-color: rgba(0, 200, 255, .2);
+            transform: translateY(-3px)
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            transition: background .35s
+        }
+
+        .stat-card:nth-child(1)::before {
+            background: var(--electric)
+        }
+
+        .stat-card:nth-child(2)::before {
+            background: var(--plasma)
+        }
+
+        .stat-card:nth-child(3)::before {
+            background: var(--lightning)
+        }
+
+        .stat-card:nth-child(4)::before {
+            background: var(--gold)
+        }
+
+        .stat-icon {
+            font-size: 28px;
+            margin-bottom: 12px
+        }
+
+        .stat-val {
+            font-family: var(--font-d);
+            font-size: 30px;
+            font-weight: 900;
+            color: var(--white);
+            display: block;
+            margin-bottom: 4px
+        }
+
+        .stat-lbl {
+            font-size: 12px;
+            color: var(--silver);
+            letter-spacing: .08em
+        }
+
+        .stat-change {
+            font-size: 11px;
+            margin-top: 8px;
+            font-family: var(--font-d)
+        }
+
+        .stat-change.up {
+            color: var(--lightning)
+        }
+
+        .stat-change.down {
+            color: var(--pulse)
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 20px
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 20px
+        }
+
+        .card {
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 8px;
+            padding: 22px 24px
+        }
+
+        .card-title {
+            font-family: var(--font-d);
+            font-size: 11px;
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between
+        }
+
+        .card-title span {
+            font-size: 10px;
+            color: var(--electric);
+            cursor: none;
+            letter-spacing: .15em
+        }
+
+        /* Chart bars */
+        .chart-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            height: 100px
+        }
+
+        .bar-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px
+        }
+
+        .bar-fill {
+            width: 100%;
+            border-radius: 3px 3px 0 0;
+            transition: height .8s cubic-bezier(.17, .67, .2, 1);
+            min-height: 4px
+        }
+
+        .bar-lbl {
+            font-size: 9px;
+            color: var(--silver);
+            letter-spacing: .05em;
+            font-family: var(--font-d)
+        }
+
+        /* Recent activity */
+        .activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(45, 58, 92, .3);
+            transition: background .2s
+        }
+
+        .activity-item:last-child {
+            border-bottom: none
+        }
+
+        .act-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            flex-shrink: 0
+        }
+
+        .act-text {
+            flex: 1;
+            font-size: 13px;
+            color: var(--frost);
+            line-height: 1.4
+        }
+
+        .act-time {
+            font-size: 11px;
+            color: var(--slate);
+            font-family: var(--font-d);
+            white-space: nowrap
+        }
+
+        .act-badge {
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 10px;
+            font-family: var(--font-d);
+            font-weight: 700;
+            letter-spacing: .08em;
+            white-space: nowrap
+        }
+
+        .badge-new {
+            background: rgba(0, 200, 255, .15);
+            color: var(--electric);
+            border: 1px solid rgba(0, 200, 255, .2)
+        }
+
+        .badge-read {
+            background: rgba(45, 58, 92, .4);
+            color: var(--silver);
+            border: 1px solid rgba(45, 58, 92, .5)
+        }
+
+        .badge-done {
+            background: rgba(0, 255, 179, .15);
+            color: var(--lightning);
+            border: 1px solid rgba(0, 255, 179, .2)
+        }
+
+        .badge-paid {
+            background: rgba(255, 184, 0, .15);
+            color: var(--gold);
+            border: 1px solid rgba(255, 184, 0, .2)
+        }
+
+        .badge-pending {
+            background: rgba(123, 47, 255, .15);
+            color: var(--plasma);
+            border: 1px solid rgba(123, 47, 255, .2)
+        }
+
+        /* ── CHAT PAGE ── */
+        .chat-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 0;
+            height: calc(100vh - 80px);
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 10px;
+            overflow: hidden
+        }
+
+        .chat-users {
+            border-right: 1px solid rgba(45, 58, 92, .4);
+            display: flex;
+            flex-direction: column
+        }
+
+        .chat-search {
+            padding: 14px;
+            border-bottom: 1px solid rgba(45, 58, 92, .4)
+        }
+
+        .chat-search-input {
+            width: 100%;
+            background: var(--steel);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 6px;
+            padding: 10px 14px;
+            color: var(--frost);
+            font-family: var(--font-b);
+            font-size: 13px;
+            outline: none;
+            transition: border-color .3s
+        }
+
+        .chat-search-input:focus {
+            border-color: var(--electric)
+        }
+
+        .chat-user-list {
+            flex: 1;
+            overflow-y: auto
+        }
+
+        .chat-user-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px;
+            cursor: none;
+            transition: background .25s;
+            border-bottom: 1px solid rgba(45, 58, 92, .2);
+            position: relative
+        }
+
+        .chat-user-item:hover,
+        .chat-user-item.active {
+            background: rgba(0, 200, 255, .07)
+        }
+
+        .chat-user-item.active {
+            border-left: 2px solid var(--electric)
+        }
+
+        .chat-user-item.has-unread::after {
+            content: attr(data-unread);
+            position: absolute;
+            right: 14px;
+            top: 14px;
+            background: var(--pulse);
+            color: var(--white);
+            font-family: var(--font-d);
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 20px
+        }
+
+        .cu-av {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--slate), var(--chrome));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-d);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--frost);
+            flex-shrink: 0;
+            position: relative
+        }
+
+        .cu-av .online-dot {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--lightning);
+            border: 2px solid var(--chrome)
+        }
+
+        .cu-info {
+            flex: 1;
+            min-width: 0
+        }
+
+        .cu-name {
+            font-family: var(--font-d);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: .06em;
+            display: block;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis
+        }
+
+        .cu-preview {
+            font-size: 11px;
+            color: var(--silver);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+            margin-top: 2px
+        }
+
+        .cu-time {
+            font-size: 10px;
+            color: var(--slate);
+            font-family: var(--font-d);
+            white-space: nowrap
+        }
+
+        /* Chat window */
+        .chat-window {
+            display: flex;
+            flex-direction: column
+        }
+
+        .cw-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(45, 58, 92, .4);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: rgba(0, 200, 255, .04)
+        }
+
+        .cw-av {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--slate), var(--chrome));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-d);
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--frost)
+        }
+
+        .cw-name {
+            font-family: var(--font-d);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: .08em;
+            display: block
+        }
+
+        .cw-status {
+            font-size: 11px;
+            color: var(--lightning);
+            display: flex;
+            align-items: center;
+            gap: 5px
+        }
+
+        .cw-status::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--lightning);
+            display: inline-block;
+            animation: blink 2s ease infinite
+        }
+
+        .cw-actions {
+            margin-left: auto;
+            display: flex;
+            gap: 8px
+        }
+
+        .cw-act-btn {
+            background: none;
+            border: 1px solid rgba(45, 58, 92, .5);
+            color: var(--silver);
+            width: 34px;
+            height: 34px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: none;
+            transition: all .3s;
+            font-size: 16px
+        }
+
+        .cw-act-btn:hover {
+            border-color: var(--electric);
+            color: var(--electric)
+        }
+
+        .cw-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px
+        }
+
+        .cw-messages::-webkit-scrollbar {
+            width: 3px
+        }
+
+        .cw-messages::-webkit-scrollbar-thumb {
+            background: var(--slate)
+        }
+
+        .amsg {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end
+        }
+
+        .amsg.admin-msg {
+            flex-direction: row-reverse
+        }
+
+        .amsg-av {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-family: var(--font-d);
+            font-weight: 700
+        }
+
+        .amsg-av.from-admin {
+            background: linear-gradient(135deg, var(--electric), var(--plasma));
+            color: var(--abyss)
+        }
+
+        .amsg-av.from-user {
+            background: var(--slate);
+            color: var(--frost)
+        }
+
+        .amsg-bubble {
+            max-width: 320px;
+            padding: 11px 16px;
+            border-radius: 12px;
+            font-size: 13px;
+            line-height: 1.55
+        }
+
+        .amsg.from-user .amsg-bubble {
+            background: var(--steel);
+            color: var(--frost);
+            border-bottom-left-radius: 4px;
+            border: 1px solid rgba(45, 58, 92, .5)
+        }
+
+        .amsg.admin-msg .amsg-bubble {
+            background: linear-gradient(135deg, rgba(0, 200, 255, .2), rgba(123, 47, 255, .15));
+            color: var(--white);
+            border-bottom-right-radius: 4px;
+            border: 1px solid rgba(0, 200, 255, .2)
+        }
+
+        .amsg-meta {
+            font-size: 10px;
+            color: var(--slate);
+            margin-top: 4px;
+            display: block
+        }
+
+        .cw-footer {
+            padding: 14px 18px;
+            border-top: 1px solid rgba(45, 58, 92, .4);
+            display: flex;
+            gap: 10px;
+            align-items: flex-end
+        }
+
+        .cw-input {
+            flex: 1;
+            background: var(--steel);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 8px;
+            padding: 12px 16px;
+            color: var(--frost);
+            font-family: var(--font-b);
+            font-size: 13px;
+            outline: none;
+            transition: border-color .3s;
+            resize: none;
+            max-height: 120px;
+            overflow-y: auto;
+            line-height: 1.5
+        }
+
+        .cw-input:focus {
+            border-color: var(--electric)
+        }
+
+        .cw-btns {
+            display: flex;
+            gap: 8px;
+            flex-direction: column
+        }
+
+        .cw-send {
+            background: var(--electric);
+            border: none;
+            color: var(--abyss);
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: none;
+            transition: all .3s;
+            font-size: 18px;
+            font-weight: 700
+        }
+
+        .cw-send:hover {
+            background: var(--white);
+            transform: scale(1.05)
+        }
+
+        .cw-emoji {
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .5);
+            color: var(--silver);
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: none;
+            transition: all .3s;
+            font-size: 18px
+        }
+
+        .cw-emoji:hover {
+            border-color: var(--electric);
+            color: var(--electric)
+        }
+
+        .cw-templates {
+            padding: 8px 18px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            border-top: 1px solid rgba(45, 58, 92, .3)
+        }
+
+        .tmpl-btn {
+            padding: 6px 12px;
+            background: rgba(0, 200, 255, .06);
+            border: 1px solid rgba(0, 200, 255, .15);
+            border-radius: 20px;
+            font-size: 11px;
+            color: var(--electric);
+            cursor: none;
+            transition: all .3s;
+            font-family: var(--font-d);
+            letter-spacing: .05em;
+            white-space: nowrap
+        }
+
+        .tmpl-btn:hover {
+            background: rgba(0, 200, 255, .12);
+            border-color: var(--electric)
+        }
+
+        .no-chat-selected {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 16px
+        }
+
+        .no-chat-icon {
+            font-size: 60px;
+            opacity: .3
+        }
+
+        .no-chat-txt {
+            font-family: var(--font-d);
+            font-size: 13px;
+            color: var(--slate);
+            letter-spacing: .2em;
+            text-align: center
+        }
+
+        /* ── MESSAGES (forms) ── */
+        .msg-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2px
+        }
+
+        .msg-item {
+            display: grid;
+            grid-template-columns: auto 1fr auto auto;
+            align-items: center;
+            gap: 16px;
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 6px;
+            padding: 18px 20px;
+            cursor: none;
+            transition: all .35s;
+            position: relative;
+            overflow: hidden
+        }
+
+        .msg-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 0;
+            background: linear-gradient(90deg, rgba(0, 200, 255, .06), transparent);
+            transition: width .35s
+        }
+
+        .msg-item:hover {
+            border-color: rgba(0, 200, 255, .2);
+            transform: translateX(4px)
+        }
+
+        .msg-item:hover::before {
+            width: 100%
+        }
+
+        .msg-item.unread {
+            border-left: 3px solid var(--electric)
+        }
+
+        .msg-av2 {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--slate), var(--chrome));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-d);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--frost);
+            flex-shrink: 0
+        }
+
+        .msg-sender {
+            font-family: var(--font-d);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: .07em;
+            margin-bottom: 4px
+        }
+
+        .msg-preview {
+            font-size: 13px;
+            color: var(--silver);
+            line-height: 1.4
+        }
+
+        .msg-email {
+            font-size: 11px;
+            color: var(--slate);
+            margin-top: 2px
+        }
+
+        .msg-meta {
+            text-align: right;
+            min-width: 100px
+        }
+
+        .msg-date {
+            font-size: 11px;
+            color: var(--slate);
+            font-family: var(--font-d);
+            display: block;
+            margin-bottom: 6px
+        }
+
+        .msg-actions {
+            display: flex;
+            gap: 6px;
+            justify-content: flex-end
+        }
+
+        .act-btn {
+            padding: 5px 12px;
+            border-radius: 4px;
+            font-family: var(--font-d);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .1em;
+            cursor: none;
+            transition: all .3s;
+            border: 1px solid transparent
+        }
+
+        .act-btn.reply {
+            background: rgba(0, 200, 255, .1);
+            color: var(--electric);
+            border-color: rgba(0, 200, 255, .2)
+        }
+
+        .act-btn.reply:hover {
+            background: var(--electric);
+            color: var(--abyss)
+        }
+
+        .act-btn.done {
+            background: rgba(0, 255, 179, .1);
+            color: var(--lightning);
+            border-color: rgba(0, 255, 179, .2)
+        }
+
+        .act-btn.done:hover {
+            background: var(--lightning);
+            color: var(--abyss)
+        }
+
+        .act-btn.del {
+            background: rgba(255, 68, 68, .1);
+            color: var(--danger);
+            border-color: rgba(255, 68, 68, .2)
+        }
+
+        .act-btn.del:hover {
+            background: var(--danger);
+            color: var(--white)
+        }
+
+        /* MODAL */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(5, 8, 16, .85);
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(6px)
+        }
+
+        .modal-overlay.show {
+            display: flex;
+            animation: fadeIn .3s ease
+        }
+
+        .modal {
+            background: var(--steel);
+            border: 1px solid rgba(0, 200, 255, .2);
+            border-radius: 12px;
+            padding: 36px;
+            max-width: 560px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative
+        }
+
+        .modal-title {
+            font-family: var(--font-d);
+            font-size: 16px;
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: .1em;
+            margin-bottom: 20px
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: 1px solid rgba(45, 58, 92, .5);
+            color: var(--silver);
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            cursor: none;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all .3s
+        }
+
+        .modal-close:hover {
+            border-color: var(--electric);
+            color: var(--electric)
+        }
+
+        .modal-field {
+            margin-bottom: 16px
+        }
+
+        .modal-label {
+            font-family: var(--font-d);
+            font-size: 10px;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--silver);
+            display: block;
+            margin-bottom: 6px
+        }
+
+        .modal-val {
+            font-size: 14px;
+            color: var(--frost);
+            background: var(--chrome);
+            padding: 12px 16px;
+            border-radius: 6px;
+            border: 1px solid rgba(45, 58, 92, .4);
+            line-height: 1.5;
+            word-break: break-word
+        }
+
+        .modal-reply-input {
+            width: 100%;
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 6px;
+            padding: 12px 16px;
+            color: var(--frost);
+            font-family: var(--font-b);
+            font-size: 13px;
+            outline: none;
+            resize: vertical;
+            min-height: 100px;
+            transition: border-color .3s
+        }
+
+        .modal-reply-input:focus {
+            border-color: var(--electric)
+        }
+
+        .modal-send-btn {
+            background: var(--electric);
+            color: var(--abyss);
+            border: none;
+            padding: 13px 28px;
+            font-family: var(--font-d);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            cursor: none;
+            border-radius: 6px;
+            transition: all .3s;
+            margin-top: 12px
+        }
+
+        .modal-send-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--glow-e)
+        }
+
+        /* ── PROJECTS ── */
+        .projects-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px
+        }
+
+        .add-btn {
+            background: linear-gradient(90deg, var(--electric), var(--plasma));
+            color: var(--abyss);
+            border: none;
+            padding: 11px 22px;
+            font-family: var(--font-d);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .15em;
+            text-transform: uppercase;
+            cursor: none;
+            border-radius: 6px;
+            transition: all .3s
+        }
+
+        .add-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--glow-e)
+        }
+
+        .proj-table {
+            width: 100%;
+            border-collapse: collapse
+        }
+
+        .proj-table th {
+            text-align: left;
+            padding: 12px 16px;
+            font-family: var(--font-d);
+            font-size: 10px;
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            color: var(--silver);
+            background: var(--steel);
+            border-bottom: 1px solid rgba(45, 58, 92, .4)
+        }
+
+        .proj-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid rgba(45, 58, 92, .25);
+            font-size: 13px;
+            color: var(--frost);
+            transition: background .2s
+        }
+
+        .proj-table tr:hover td {
+            background: rgba(0, 200, 255, .03)
+        }
+
+        .proj-thumb {
+            width: 40px;
+            height: 40px;
+            border-radius: 6px;
+            object-fit: cover;
+            background: var(--slate);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            border: 1px solid rgba(45, 58, 92, .5)
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px
+        }
+
+        .s-active {
+            background: var(--lightning);
+            box-shadow: 0 0 8px rgba(0, 255, 179, .5)
+        }
+
+        .s-progress {
+            background: var(--gold);
+            box-shadow: 0 0 8px rgba(255, 184, 0, .5)
+        }
+
+        .s-done {
+            background: var(--electric);
+            box-shadow: 0 0 8px rgba(0, 200, 255, .5)
+        }
+
+        .s-pause {
+            background: var(--pulse);
+            box-shadow: 0 0 8px rgba(255, 61, 138, .5)
+        }
+
+        /* ── SETTINGS ── */
+        .settings-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px
+        }
+
+        .setting-card {
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 8px;
+            padding: 24px
+        }
+
+        .setting-title {
+            font-family: var(--font-d);
+            font-size: 11px;
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            color: var(--electric);
+            margin-bottom: 18px
+        }
+
+        .setting-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(45, 58, 92, .3)
+        }
+
+        .setting-item:last-child {
+            border-bottom: none
+        }
+
+        .setting-key {
+            font-size: 13px;
+            color: var(--frost)
+        }
+
+        .setting-val {
+            font-size: 13px;
+            color: var(--silver)
+        }
+
+        .toggle {
+            position: relative;
+            width: 44px;
+            height: 24px
+        }
+
+        .toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0
+        }
+
+        .toggle-slider {
+            position: absolute;
+            inset: 0;
+            background: var(--slate);
+            border-radius: 24px;
+            cursor: none;
+            transition: .3s
+        }
+
+        .toggle-slider:before {
+            content: '';
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            left: 3px;
+            bottom: 3px;
+            background: var(--silver);
+            border-radius: 50%;
+            transition: .3s
+        }
+
+        .toggle input:checked+.toggle-slider {
+            background: var(--electric)
+        }
+
+        .toggle input:checked+.toggle-slider:before {
+            transform: translateX(20px);
+            background: var(--abyss)
+        }
+
+        .setting-input {
+            background: var(--steel);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 4px;
+            padding: 8px 12px;
+            color: var(--frost);
+            font-family: var(--font-b);
+            font-size: 13px;
+            outline: none;
+            width: 180px;
+            transition: border-color .3s
+        }
+
+        .setting-input:focus {
+            border-color: var(--electric)
+        }
+
+        .save-settings-btn {
+            background: var(--electric);
+            color: var(--abyss);
+            border: none;
+            padding: 12px 24px;
+            font-family: var(--font-d);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            cursor: none;
+            border-radius: 6px;
+            transition: all .3s;
+            margin-top: 16px
+        }
+
+        .save-settings-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--glow-e)
+        }
+
+        /* NOTIFICATION TOAST */
+        .toast {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: var(--steel);
+            border: 1px solid rgba(0, 200, 255, .3);
+            border-radius: 8px;
+            padding: 14px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            z-index: 9000;
+            transform: translateX(120%);
+            transition: transform .35s cubic-bezier(.17, .67, .2, 1);
+            min-width: 280px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, .4)
+        }
+
+        .toast.show {
+            transform: translateX(0)
+        }
+
+        .toast.error {
+            border-color: rgba(255, 68, 68, .3)
+        }
+
+        .toast-icon {
+            font-size: 22px
+        }
+
+        .toast-text {
+            font-size: 13px;
+            color: var(--frost);
+            flex: 1
+        }
+
+        /* Responsive */
+        @media(max-width:1200px) {
+            .stats-row {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .settings-grid {
+                grid-template-columns: 1fr
+            }
+        }
+
+        @media(max-width:900px) {
+            .sidebar {
+                transform: translateX(-240px)
+            }
+
+            .sidebar.mobile-open {
+                transform: translateX(0)
+            }
+
+            .main {
+                margin-left: 0
+            }
+
+            .chat-layout {
+                grid-template-columns: 1fr
+            }
+
+            .chat-users {
+                display: none
+            }
+
+            .chat-users.mobile-show {
+                display: flex;
+                position: fixed;
+                inset: 0;
+                z-index: 500;
+                background: var(--steel)
+            }
+
+            .grid-2,
+            .grid-3 {
+                grid-template-columns: 1fr
+            }
+        }
+
+        @media(max-width:600px) {
+            .page {
+                padding: 16px
+            }
+
+            .stats-row {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .topbar {
+                padding: 12px 16px
+            }
+
+            .msg-item {
+                grid-template-columns: auto 1fr;
+                gap: 10px
+            }
+
+            .msg-meta {
+                display: none
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="cur" id="cur"></div>
+    <div class="cur-ring" id="curRing"></div>
+
+    <!-- ── LOGIN ── -->
+    <div id="loginScreen">
+        <div class="login-box">
+            <div class="login-logo">MO<span>N</span>TRAX</div>
+            <div class="login-tag">Admin Panel · Kirish</div>
+            <label class="login-label">Telefon raqam</label>
+            <input class="login-input" type="text" id="loginPhone" placeholder="+998 88 255 28 82"
+                value="+998882552882">
+            <label class="login-label">Parol</label>
+            <input class="login-input" type="password" id="loginPass" placeholder="Parolni kiriting"
+                onkeydown="if(event.key==='Enter')doLogin()">
+            <button class="login-btn" id="loginBtn" onclick="doLogin()">Kirish →</button>
+            <div class="login-err" id="loginErr">Telefon raqam yoki parol noto'g'ri!</div>
+            <div style="text-align:center;margin-top:20px;font-size:11px;color:var(--slate)"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 20 6v6c0 5-3.5 8-8 9.5-4.5-1.5-8-4.5-8-9.5V6z"/><path d="M8.5 12l2.4 2.4L15.5 9.5"/></svg></span> Xavfsiz kirish · SSL
+                himoyasi</div>
+        </div>
+    </div>
+
+    <!-- ── TOAST ── -->
+    <div class="toast" id="toast">
+        <span class="toast-icon" id="toastIcon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 6.5"/></svg></span></span>
+        <span class="toast-text" id="toastText"></span>
+    </div>
+
+    <!-- ── MODAL ── -->
+    <div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this)closeModal()">
+        <div class="modal" id="modalBox">
+            <button class="modal-close" onclick="closeModal()"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg></span></button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- ── LAYOUT ── -->
+    <div class="layout" id="appLayout" style="display:none">
+
+        <!-- SIDEBAR -->
+        <nav class="sidebar" id="sidebar">
+            <div class="sb-logo">
+                <div class="sb-logo-text">MO<span>N</span>TRAX</div>
+                <div class="sb-role">Admin Panel</div>
+            </div>
+            <div class="sb-nav">
+                <div class="sb-section">Asosiy</div>
+                <a class="sb-link active" onclick="showPage('dashboard',this)">
+                    <span class="sb-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M12 20V4M20 20v-7"/><path d="M2.5 20h19"/></svg></span></span> Dashboard
+                </a>
+                <a class="sb-link" onclick="showPage('chat',this)">
+                    <span class="sb-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 4.5h17v12h-9.5L6 20v-3.5h-2.5z"/></svg></span></span> Live Chat
+                    <span class="sb-badge" id="chatBadge">3</span>
+                </a>
+                <a class="sb-link" onclick="showPage('messages',this)">
+                    <span class="sb-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg></span></span> Xabarlar
+                    <span class="sb-badge" id="msgBadge">5</span>
+                </a>
+
+                <div class="sb-section">Kontent</div>
+                <a class="sb-link" onclick="showPage('projects',this)">
+                    <span class="sb-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2.5h9l3 3v16H6z"/><path d="M15 2.5V5.5h3M9 11h6M9 15h6"/></svg></span></span> Loyihalar
+                </a>
+                <a class="sb-link" onclick="showPage('portfolio',this)">
+                    <span class="sb-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 1 1 9-9c0 1.5-1 2.5-2.5 2.5H16a2 2 0 0 0-1.4 3.4c.5.5.5 1.4-.2 1.8-.7.4-1.5.3-2.4.3z"/><circle cx="7.5" cy="10.5" r="1.2"/><circle cx="11" cy="7" r="1.2"/><circle cx="15.5" cy="8" r="1.2"/></svg></span></span> Portfolio
+                </a>
+                <a class="sb-link" onclick="showPage('services',this)">
+                    <span class="sb-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span></span> Xizmatlar
+                </a>
+
+                <div class="sb-section">Moliya</div>
+                <a class="sb-link" onclick="showPage('orders',this)">
+                    <span class="sb-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="2"/><path d="M2.5 9.5h19M6 15h4"/></svg></span></span> Buyurtmalar
+                    <span class="sb-badge green" id="orderBadge">2</span>
+                </a>
+                <a class="sb-link" onclick="showPage('pricing',this)">
+                    <span class="sb-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M9.5 8.5h3.7a2 2 0 0 1 0 4H9.5m0 0h4a2 2 0 0 1 0 4H9.5m2-9v10.5"/></svg></span></span> Narxlar
+                </a>
+
+                <div class="sb-section">Sozlamalar</div>
+                <a class="sb-link" onclick="showPage('settings',this)">
+                    <span class="sb-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="14.5" r="4.5"/><path d="M10.8 11.2 19.5 2.5M16.5 5.5l2.3 2.3M19 3l2 2"/></svg></span></span> Sozlamalar
+                </a>
+                <a class="sb-link" href="index.html" target="_blank" style="color:var(--electric)">
+                    <span class="sb-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.5 2.6 3.8 6 3.8 9.5s-1.3 6.9-3.8 9.5c-2.5-2.6-3.8-6-3.8-9.5s1.3-6.9 3.8-9.5z"/></svg></span></span> Saytni Ko'rish
+                </a>
+            </div>
+            <div class="sb-bottom">
+                <div class="sb-user">
+                    <div class="sb-avatar">M</div>
+                    <div>
+                        <span class="sb-uname">MONTRAX</span>
+                        <span class="sb-ustatus">Online</span>
+                    </div>
+                    <button class="logout-btn" onclick="doLogout()">Chiqish</button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- MAIN -->
+        <div class="main" id="mainContent">
+
+            <!-- TOPBAR -->
+            <div class="topbar">
+                <div class="topbar-left">
+                    <button class="menu-toggle" onclick="toggleSidebar()"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3.5 6.5h17M3.5 12h17M3.5 17.5h17"/></svg></span></button>
+                    <div class="topbar-title" id="pageTitle">Dashboard</div>
+                </div>
+                <div class="topbar-right">
+                    <div class="topbar-time" id="topbarTime"></div>
+                    <button class="notif-btn"
+                        onclick="showPage('chat',document.querySelector('.sb-link:nth-child(3)'))">
+                        <span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 4.5h17v12h-9.5L6 20v-3.5h-2.5z"/></svg></span><span class="notif-dot"></span>
+                    </button>
+                    <a href="index.html" target="_blank" class="view-site-btn"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="12" cy="12" r="9.5"/><path d="M2.5 12h19M12 2.5c2.5 2.6 3.8 6 3.8 9.5s-1.3 6.9-3.8 9.5c-2.5-2.6-3.8-6-3.8-9.5s1.3-6.9 3.8-9.5z"/></svg></span> Sayt</a>
+                </div>
+            </div>
+
+            <!-- ═══ DASHBOARD PAGE ═══ -->
+            <div class="page active" id="page-dashboard">
+                <div class="stats-row">
+                    <div class="stat-card">
+                        <div class="stat-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg></span></div>
+                        <span class="stat-val" id="totalMsg">24</span>
+                        <span class="stat-lbl">Jami Xabarlar</span>
+                        <div class="stat-change up">↑ +3 bugun</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 4.5h17v12h-9.5L6 20v-3.5h-2.5z"/></svg></span></div>
+                        <span class="stat-val" id="totalChat">8</span>
+                        <span class="stat-lbl">Chat Suhbatlar</span>
+                        <div class="stat-change up">↑ 3 faol</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2.5h9l3 3v16H6z"/><path d="M15 2.5V5.5h3M9 11h6M9 15h6"/></svg></span></div>
+                        <span class="stat-val" id="totalProj">12</span>
+                        <span class="stat-lbl">Loyihalar</span>
+                        <div class="stat-change up">↑ 2 jarayonda</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M9.5 8.5h3.7a2 2 0 0 1 0 4H9.5m0 0h4a2 2 0 0 1 0 4H9.5m2-9v10.5"/></svg></span></div>
+                        <span class="stat-val" id="totalRev">$8.4k</span>
+                        <span class="stat-lbl">Bu Oy Daromad</span>
+                        <div class="stat-change up">↑ +22%</div>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-title">Haftalik Xabarlar <span onclick="showPage('messages',null)">Barchasi
+                                →</span></div>
+                        <div class="chart-bars" id="chartBars"></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Yangi Xabarlar <span onclick="showPage('messages',null)">Ko'rish
+                                →</span></div>
+                        <div class="activity-list" id="recentActivity"></div>
+                    </div>
+                </div>
+
+                <div class="grid-3">
+                    <div class="card">
+                        <div class="card-title">Tezkor Harakatlar</div>
+                        <div style="display:flex;flex-direction:column;gap:10px">
+                            <button class="add-btn" style="width:100%" onclick="showPage('messages',null)"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg></span> Xabarlarni
+                                Ko'rish</button>
+                            <button class="add-btn"
+                                style="width:100%;background:linear-gradient(90deg,var(--plasma),var(--electric))"
+                                onclick="showPage('chat',null)"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 4.5h17v12h-9.5L6 20v-3.5h-2.5z"/></svg></span> Chatga O'tish</button>
+                            <button class="add-btn"
+                                style="width:100%;background:linear-gradient(90deg,var(--gold),#FF8C00)"
+                                onclick="showPage('projects',null)"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2.5h9l3 3v16H6z"/><path d="M15 2.5V5.5h3M9 11h6M9 15h6"/></svg></span> Loyihalar</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Status</div>
+                        <div class="activity-list">
+                            <div class="activity-item">
+                                <div class="act-dot" style="background:var(--lightning)"></div><span
+                                    class="act-text">Sayt — Online</span><span class="act-time">Faol</span>
+                            </div>
+                            <div class="activity-item">
+                                <div class="act-dot" style="background:var(--electric)"></div><span
+                                    class="act-text">Chat tizimi</span><span class="act-time">Ulangan</span>
+                            </div>
+                            <div class="activity-item">
+                                <div class="act-dot" style="background:var(--gold)"></div><span class="act-text">Email
+                                    xizmat</span><span class="act-time">Ishlaydi</span>
+                            </div>
+                            <div class="activity-item">
+                                <div class="act-dot" style="background:var(--lightning)"></div><span
+                                    class="act-text">Xavfsizlik</span><span class="act-time">OK</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-title">Xizmat Ulashuvi</div>
+                        <div style="display:flex;flex-direction:column;gap:10px">
+                            <div
+                                style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(45,58,92,.3)">
+                                <span style="font-size:13px;color:var(--silver)">Frontend</span><span
+                                    style="font-family:var(--font-d);font-size:13px;color:var(--electric)">42%</span>
+                            </div>
+                            <div
+                                style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(45,58,92,.3)">
+                                <span style="font-size:13px;color:var(--silver)">Dizayn</span><span
+                                    style="font-family:var(--font-d);font-size:13px;color:var(--plasma)">31%</span>
+                            </div>
+                            <div
+                                style="display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid rgba(45,58,92,.3)">
+                                <span style="font-size:13px;color:var(--silver)">E-Tijorat</span><span
+                                    style="font-family:var(--font-d);font-size:13px;color:var(--gold)">18%</span>
+                            </div>
+                            <div style="display:flex;justify-content:space-between;align-items:center;padding:8px 0">
+                                <span style="font-size:13px;color:var(--silver)">Boshqa</span><span
+                                    style="font-family:var(--font-d);font-size:13px;color:var(--lightning)">9%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ LIVE CHAT PAGE ═══ -->
+            <div class="page" id="page-chat">
+                <div class="chat-layout">
+                    <div class="chat-users">
+                        <div class="chat-search">
+                            <input class="chat-search-input" placeholder="Foydalanuvchilarni qidirish..."
+                                oninput="filterChatUsers(this.value)">
+                        </div>
+                        <div class="chat-user-list" id="chatUserList"></div>
+                    </div>
+                    <div class="chat-window" id="chatWindowArea">
+                        <div class="no-chat-selected">
+                            <div class="no-chat-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 4.5h17v12h-9.5L6 20v-3.5h-2.5z"/></svg></span></div>
+                            <div class="no-chat-txt">Suhbatni tanlang<br>yoki yangi xabarni kuting</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ═══ MESSAGES PAGE ═══ -->
+            <div class="page" id="page-messages">
+                <div
+                    style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+                    <div>
+                        <div
+                            style="font-family:var(--font-d);font-size:14px;font-weight:700;color:var(--white);letter-spacing:.1em;margin-bottom:4px">
+                            Barcha Xabarlar</div>
+                        <div style="font-size:13px;color:var(--silver)">Form orqali kelgan xabarlar</div>
+                    </div>
+                    <div style="display:flex;gap:10px;flex-wrap:wrap">
+                        <button class="tmpl-btn" onclick="filterMsgs('all')" id="fAll"
+                            style="background:rgba(0,200,255,.15);border-color:var(--electric);color:var(--electric)">Barchasi</button>
+                        <button class="tmpl-btn" onclick="filterMsgs('unread')" id="fUnread">O'qilmagan</button>
+                        <button class="tmpl-btn" onclick="filterMsgs('done')" id="fDone">Bajarilgan</button>
+                    </div>
+                </div>
+                <div class="msg-list" id="msgList"></div>
+            </div>
+
+            <!-- ═══ PROJECTS PAGE ═══ -->
+            <div class="page" id="page-projects">
+                <div class="projects-header">
+                    <div>
+                        <div
+                            style="font-family:var(--font-d);font-size:14px;font-weight:700;color:var(--white);letter-spacing:.1em;margin-bottom:4px">
+                            Loyihalar</div>
+                        <div style="font-size:13px;color:var(--silver)">Aktiv va tugallangan loyihalar</div>
+                    </div>
+                    <button class="add-btn" onclick="openAddProject()">+ Yangi Loyiha</button>
+                </div>
+                <div class="card" style="overflow-x:auto">
+                    <table class="proj-table">
+                        <thead>
+                            <tr>
+                                <th>Loyiha</th>
+                                <th>Mijoz</th>
+                                <th>Xizmat</th>
+                                <th>Byudjet</th>
+                                <th>Deadline</th>
+                                <th>Status</th>
+                                <th>Harakat</th>
+                            </tr>
+                        </thead>
+                        <tbody id="projTableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ═══ PORTFOLIO PAGE ═══ -->
+            <div class="page" id="page-portfolio">
+                <div class="projects-header">
+                    <div>
+                        <div
+                            style="font-family:var(--font-d);font-size:14px;font-weight:700;color:var(--white);letter-spacing:.1em;margin-bottom:4px">
+                            Portfolio Ishlari</div>
+                        <div style="font-size:13px;color:var(--silver)">Saytda ko'rsatiladigan ishlar</div>
+                    </div>
+                    <button class="add-btn"
+                        onclick="showToast('success','Portfolio qo\'shish funksiyasi tayyorlanmoqda...')">+ Ish
+                        Qo'shish</button>
+                </div>
+                <div class="card">
+                    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px"
+                        id="portfolioGrid"></div>
+                </div>
+            </div>
+
+            <!-- ═══ SERVICES PAGE ═══ -->
+            <div class="page" id="page-services">
+                <div class="card">
+                    <div class="card-title">Xizmatlar Boshqaruvi</div>
+                    <div id="servicesList"></div>
+                </div>
+            </div>
+
+            <!-- ═══ ORDERS PAGE ═══ -->
+            <div class="page" id="page-orders">
+                <div class="projects-header">
+                    <div>
+                        <div
+                            style="font-family:var(--font-d);font-size:14px;font-weight:700;color:var(--white);letter-spacing:.1em;margin-bottom:4px">
+                            Buyurtmalar</div>
+                        <div style="font-size:13px;color:var(--silver)">To'lov va buyurtmalar tarixi</div>
+                    </div>
+                </div>
+                <div class="card" style="overflow-x:auto">
+                    <table class="proj-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Mijoz</th>
+                                <th>Xizmat</th>
+                                <th>Summa</th>
+                                <th>To'lov</th>
+                                <th>Sana</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="ordersBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- ═══ PRICING PAGE ═══ -->
+            <div class="page" id="page-pricing">
+                <div class="card">
+                    <div class="card-title">Narxlar Boshqaruvi</div>
+                    <div id="pricingAdmin"></div>
+                </div>
+            </div>
+
+            <!-- ═══ SETTINGS PAGE ═══ -->
+            <div class="page" id="page-settings">
+                <div class="settings-grid">
+                    <div class="setting-card">
+                        <div class="setting-title">Sayt Sozlamalari</div>
+                        <div class="setting-item"><span class="setting-key">Sayt nomi</span><input class="setting-input"
+                                id="set_sitename" value="MONTRAX"></div>
+                        <div class="setting-item"><span class="setting-key">Asosiy til</span>
+                            <select class="setting-input" id="set_lang" style="appearance:none;height:36px">
+                                <option value="uz">UZ — O'zbek</option>
+                                <option value="en">EN — English</option>
+                                <option value="ru">RU — Русский</option>
+                            </select>
+                        </div>
+                        <div class="setting-item"><span class="setting-key">Telegram havolasi</span><input
+                                class="setting-input" id="set_telegram" placeholder="https://t.me/montrax"></div>
+                        <div class="setting-item"><span class="setting-key">Instagram havolasi</span><input
+                                class="setting-input" id="set_instagram" placeholder="https://instagram.com/montrax">
+                        </div>
+                        <div class="setting-item"><span class="setting-key">Chat holati</span><label
+                                class="toggle"><input type="checkbox" id="set_chat" checked><span
+                                    class="toggle-slider"></span></label></div>
+                        <div class="setting-item"><span class="setting-key">Sayt holati (Online)</span><label
+                                class="toggle"><input type="checkbox" id="set_online" checked><span
+                                    class="toggle-slider"></span></label></div>
+                        <button class="save-settings-btn" onclick="saveSettings()"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4.5" width="14" height="17" rx="2"/><rect x="9" y="2.5" width="6" height="3.5" rx="1"/><path d="M8.5 12h7M8.5 16h7"/></svg></span> Saqlash</button>
+                    </div>
+                    <div class="setting-card">
+                        <div class="setting-title">Bildirishnomalar</div>
+                        <div class="setting-item"><span class="setting-key">Browser bildirishnoma</span><label
+                                class="toggle"><input type="checkbox" id="notif_browser" checked><span
+                                    class="toggle-slider"></span></label></div>
+                        <div class="setting-item"><span class="setting-key">Chat bildirishnoma</span><label
+                                class="toggle"><input type="checkbox" checked><span
+                                    class="toggle-slider"></span></label></div>
+                        <div class="setting-item"><span class="setting-key">Yangi xabar tovushi</span><label
+                                class="toggle"><input type="checkbox" checked><span
+                                    class="toggle-slider"></span></label></div>
+                        <button class="save-settings-btn" onclick="requestNotifPermission()">Bildirishnomalarni
+                            Yoqish</button>
+                    </div>
+                    <div class="setting-card">
+                        <div class="setting-title">Xavfsizlik</div>
+                        <div class="setting-item"><span class="setting-key">Eski parol</span><input
+                                class="setting-input" type="password" id="set_oldpass" placeholder="••••••••"></div>
+                        <div class="setting-item"><span class="setting-key">Yangi parol</span><input
+                                class="setting-input" type="password" id="set_newpass" placeholder="Kamida 8 ta belgi">
+                        </div>
+                        <div class="setting-item"><span class="setting-key">Tasdiqlash</span><input
+                                class="setting-input" type="password" id="set_confpass"
+                                placeholder="Yangi parolni qayta kiriting"></div>
+                        <div class="setting-item"><span class="setting-key">So'nggi kirish</span><span
+                                class="setting-val" id="lastLogin">—</span></div>
+                        <button class="save-settings-btn" onclick="changePassword()"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="14.5" r="4.5"/><path d="M10.8 11.2 19.5 2.5M16.5 5.5l2.3 2.3M19 3l2 2"/></svg></span> Parolni O'zgartirish</button>
+                    </div>
+                    <div class="setting-card">
+                        <div class="setting-title">Sessiya Ma'lumotlari</div>
+                        <div class="setting-item"><span class="setting-key">Admin telefon</span><span
+                                class="setting-val" id="sbAdminPhone">—</span></div>
+                        <div class="setting-item"><span class="setting-key">Sessiya muddati</span><span
+                                class="setting-val">8 soat</span></div>
+                        <div class="setting-item"><span class="setting-key">Server holati</span><span
+                                class="setting-val" style="color:var(--lightning)">● Online</span></div>
+                        <div class="setting-item"><span class="setting-key">Rate Limiting</span><span
+                                class="setting-val" style="color:var(--lightning)">● Faol</span></div>
+                        <div class="setting-item"><span class="setting-key">XSS Himoya</span><span class="setting-val"
+                                style="color:var(--lightning)">● Faol</span></div>
+                        <button class="save-settings-btn"
+                            style="background:rgba(255,68,68,.15);border-color:rgba(255,68,68,.3);color:var(--danger)"
+                            onclick="doLogout()"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h10a5.5 5.5 0 0 1 0 11h-3"/><path d="M8 5 4 9.5 8 14"/></svg></span> Chiqish</button>
+                    </div>
+                </div>
+            </div>
+
+        </div><!-- /main -->
+    </div><!-- /layout -->
+
+    <script src="./icons.js"></script>
+    <script src="config.js"></script>
+    <script>
+        /* ─── API HELPER ─── */
+        const API_BASE = (typeof MONTRAX_CONFIG !== 'undefined') ? MONTRAX_CONFIG.API_BASE : '';
+        let AUTH_TOKEN = localStorage.getItem('mx_token') || '';
+        let ADMIN_PHONE = localStorage.getItem('mx_phone') || '';
+
+        async function api(method, endpoint, body) {
+            const opts = {
+                method,
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + AUTH_TOKEN }
+            };
+            if (body) opts.body = JSON.stringify(body);
+            const res = await fetch(API_BASE + endpoint, opts);
+            const data = await res.json();
+            if (res.status === 401 && endpoint !== '/api/login') { doLogout(); return null; }
+            return data;
+        }
+
+        /* ─── CURSOR ─── */
+        const cur = document.getElementById('cur'), ring = document.getElementById('curRing');
+        let mx = 0, my = 0, rx = 0, ry = 0;
+        document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cur.style.left = mx + 'px'; cur.style.top = my + 'px' });
+        (function lr() { rx += (mx - rx) * .12; ry += (my - ry) * .12; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(lr) })();
+        document.querySelectorAll('a,button,.proj-card,.dc,.service-item').forEach(el => {
+            el.addEventListener('mouseenter', () => { cur.style.transform = 'translate(-50%,-50%) scale(3)'; ring.style.transform = 'translate(-50%,-50%) scale(1.6)'; ring.style.borderColor = 'rgba(0,200,255,.7)' });
+            el.addEventListener('mouseleave', () => { cur.style.transform = 'translate(-50%,-50%) scale(1)'; ring.style.transform = 'translate(-50%,-50%) scale(1)'; ring.style.borderColor = 'rgba(0,200,255,.4)' });
+        });
+
+        /* ─── LOGIN ─── */
+        function showLoginMsg(text, type) {
+            const el = document.getElementById('loginErr');
+            el.textContent = text;
+            el.className = 'login-err show';
+            if (type === 'success') el.style.color = 'var(--lightning)';
+            else el.style.color = 'var(--pulse)';
+        }
+
+        async function doLogin() {
+            const phone = document.getElementById('loginPhone').value.trim();
+            const pass = document.getElementById('loginPass').value.trim();
+            if (!phone || !pass) { showLoginMsg('Telefon va parolni kiriting!'); return; }
+            const btn = document.getElementById('loginBtn');
+            if (btn) { btn.disabled = true; btn.textContent = 'Tekshirilmoqda...'; }
+            try {
+                const _apiBase = (typeof MONTRAX_CONFIG !== 'undefined') ? MONTRAX_CONFIG.API_BASE : '';
+                const data = await fetch(_apiBase + '/api/login', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ phone, pass }) }).then(r => r.json());
+                if (data.ok) {
+                    AUTH_TOKEN = data.token;
+                    ADMIN_PHONE = data.phone;
+                    localStorage.setItem('mx_token', data.token);
+                    localStorage.setItem('mx_phone', data.phone);
+                    localStorage.setItem('mx_last_login', new Date().toLocaleString('uz-UZ'));
+                    document.getElementById('loginScreen').style.display = 'none';
+                    document.getElementById('appLayout').style.display = 'flex';
+                    initApp();
+                } else {
+                    showLoginMsg(data.error || 'Xato!');
+                    document.getElementById('loginBox').style.animation = 'shake .5s ease';
+                    setTimeout(() => document.getElementById('loginBox').style.animation = '', 500);
+                }
+            } catch (err) { console.error(err); showLoginMsg('Server ulangmagan! Railway URL ni config.js ga yozing.'); }
+            if (btn) { btn.disabled = false; btn.textContent = 'Kirish →'; }
+        }
+
+        async function doLogout() {
+            await fetch(API_BASE + '/api/logout', { method: 'POST', headers: { 'Authorization': 'Bearer ' + AUTH_TOKEN } }).catch(() => { });
+            AUTH_TOKEN = ''; ADMIN_PHONE = '';
+            localStorage.removeItem('mx_token'); localStorage.removeItem('mx_phone');
+            if (ws) { ws.close(); ws = null; }
+            document.getElementById('loginScreen').style.display = 'flex';
+            document.getElementById('appLayout').style.display = 'none';
+            document.getElementById('loginPhone').value = ''; document.getElementById('loginPass').value = '';
+        }
+
+        document.getElementById('loginPass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+        document.getElementById('loginPhone').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+        /* ─── SESSION CHECK ─── */
+        (async () => {
+            if (AUTH_TOKEN) {
+                const data = await fetch(API_BASE + '/api/me', { headers: { 'Authorization': 'Bearer ' + AUTH_TOKEN } }).then(r => r.json()).catch(() => ({ ok: false }));
+                if (data.ok) {
+                    ADMIN_PHONE = data.phone;
+                    document.getElementById('loginScreen').style.display = 'none';
+                    document.getElementById('appLayout').style.display = 'flex';
+                    initApp();
+                } else {
+                    AUTH_TOKEN = ''; localStorage.removeItem('mx_token');
+                    document.getElementById('loginScreen').style.display = 'flex';
+                    document.getElementById('appLayout').style.display = 'none';
+                }
+            } else {
+                document.getElementById('loginScreen').style.display = 'flex';
+                document.getElementById('appLayout').style.display = 'none';
+            }
+        })();
+
+        /* ─── INIT ─── */
+        let ws = null;
+        async function initApp() {
+            updateClock();
+            setInterval(updateClock, 1000);
+            document.getElementById('lastLogin').textContent = localStorage.getItem('mx_last_login') || '—';
+            document.getElementById('sbAdminPhone').textContent = ADMIN_PHONE.replace('998', '+998 ');
+            renderChart();
+            await loadStats();
+            await loadMessages();
+            await loadProjects();
+            await loadPortfolio();
+            await loadOrders();
+            loadSettings();
+            connectAdminWS();
+        }
+
+        function updateClock() {
+            const now = new Date();
+            const el = document.getElementById('topbarTime');
+            if (el) el.textContent = now.toLocaleTimeString('uz-UZ', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+        }
+
+        /* ─── SIDEBAR ─── */
+        let sidebarOpen = true;
+        function toggleSidebar() {
+            sidebarOpen = !sidebarOpen;
+            const sb = document.getElementById('sidebar');
+            const mn = document.getElementById('mainContent');
+            if (window.innerWidth > 900) { sb.classList.toggle('closed', !sidebarOpen); mn.classList.toggle('expanded', !sidebarOpen); }
+            else { sb.classList.toggle('mobile-open', sidebarOpen); }
+        }
+
+        const pageTitles = { dashboard: 'Dashboard', chat: 'Live Chat', messages: 'Xabarlar', projects: 'Loyihalar', portfolio: 'Portfolio', services: 'Xizmatlar', orders: 'Buyurtmalar', pricing: 'Narxlar', settings: 'Sozlamalar' };
+
+        function showPage(id, linkEl) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const pg = document.getElementById('page-' + id);
+            if (pg) pg.classList.add('active');
+            document.querySelectorAll('.sb-link').forEach(l => l.classList.remove('active'));
+            if (linkEl) linkEl.classList.add('active');
+            const pt = document.getElementById('pageTitle');
+            if (pt) pt.textContent = pageTitles[id] || id;
+            if (id === 'chat') { loadChats(); }
+            if (id === 'messages') { loadMessages(); }
+            if (id === 'projects') { loadProjects(); }
+            if (id === 'portfolio') { loadPortfolio(); }
+            if (id === 'orders') { loadOrders(); }
+            if (id === 'dashboard') { loadStats(); }
+            if (id === 'settings') { loadSettings(); }
+        }
+
+        /* ─── CHART ─── */
+        function renderChart() {
+            const data = [4, 7, 3, 9, 6, 11, 8];
+            const days = ['Du', 'Se', 'Ch', 'Pa', 'Ju', 'Sh', 'Ya'];
+            const max = Math.max(...data);
+            const bars = document.getElementById('chartBars');
+            if (!bars) return;
+            bars.innerHTML = data.map((v, i) => `<div class="bar-item"><div class="bar-fill" style="height:${(v / max) * 84}px;background:linear-gradient(to top,var(--plasma),var(--electric));opacity:${i === 6 ? 1 : .7}"></div><div class="bar-lbl">${days[i]}</div></div>`).join('');
+        }
+
+        /* ─── STATS ─── */
+        async function loadStats() {
+            const data = await api('GET', '/api/stats');
+            if (!data || !data.ok) return;
+            const s = data.stats;
+            const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+            set('totalMsg', s.totalMessages || 0);
+            set('totalProj', s.totalProjects || 0);
+            set('totalChat', s.onlineUsers || 0);
+            set('totalRev', '$' + (s.totalRevenue || 0).toLocaleString());
+            // Update badges
+            const mb = document.getElementById('msgBadge');
+            if (mb) { mb.textContent = s.unreadMessages || 0; }
+            // Update activity
+            renderActivity(s);
+        }
+
+        function renderActivity(s) {
+            const el = document.getElementById('recentActivity');
+            if (!el || !db_messages.length) return;
+            el.innerHTML = db_messages.slice(0, 5).map(m => `
+  <div class="activity-item">
+    <div class="act-dot" style="background:${m.status === 'unread' ? 'var(--electric)' : m.status === 'done' ? 'var(--lightning)' : 'var(--slate)'}"></div>
+    <span class="act-text"><strong style="color:var(--white)">${m.name}</strong> — ${m.subject || 'Xabar'}</span>
+    <span class="act-badge ${m.status === 'unread' ? 'badge-new' : m.status === 'done' ? 'badge-done' : 'badge-read'}">${m.status === 'unread' ? 'Yangi' : m.status === 'done' ? 'Bajarildi' : "O'qilgan"}</span>
+    <span class="act-time">${new Date(m.createdAt).toLocaleString('uz-UZ', { day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit' })}</span>
+  </div>`).join('');
+        }
+
+        /* ─── MESSAGES ─── */
+        let db_messages = [];
+        let msgFilter = 'all';
+
+        async function loadMessages() {
+            const data = await api('GET', '/api/messages?status=' + msgFilter);
+            if (!data || !data.ok) return;
+            db_messages = data.messages;
+            renderMessages();
+        }
+
+        function renderMessages() {
+            const list = document.getElementById('msgList');
+            if (!list) return;
+            if (!db_messages.length) { list.innerHTML = '<div style="text-align:center;color:var(--silver);padding:40px">Xabarlar yo\'q</div>'; return; }
+            list.innerHTML = db_messages.map(m => `
+  <div class="msg-item ${m.status === 'unread' ? 'unread' : ''}" id="msgItem${m.id}">
+    <div class="msg-av2">${m.name.charAt(0).toUpperCase()}</div>
+    <div style="flex:1;min-width:0">
+      <div class="msg-sender">${escHtml(m.name)} ${m.email ? `<small style="color:var(--silver);font-size:11px">&lt;${escHtml(m.email)}&gt;</small>` : ''}</div>
+      <div class="msg-preview">${escHtml(m.subject || 'Xabar')} — ${escHtml(m.message.substring(0, 80))}${m.message.length > 80 ? '...' : ''}</div>
+      <div class="msg-email">${m.service || '—'} · ${m.budget || '—'} · ${m.phone || '—'}</div>
+    </div>
+    <div class="msg-meta">
+      <span class="msg-date">${new Date(m.createdAt).toLocaleDateString('uz-UZ')}</span>
+      <div class="msg-actions">
+        <button class="act-btn reply" onclick="openMsgModal('${m.id}')">Javob</button>
+        <button class="act-btn done" onclick="markMsgDone('${m.id}')">✓</button>
+        <button class="act-btn del" onclick="deleteMsgAPI('${m.id}')">✕</button>
+      </div>
+    </div>
+    <span class="act-badge ${m.status === 'unread' ? 'badge-new' : m.status === 'done' ? 'badge-done' : 'badge-read'}">${m.status === 'unread' ? 'Yangi' : m.status === 'done' ? 'Bajarildi' : "O'qilgan"}</span>
+  </div>`).join('');
+        }
+
+        function escHtml(str) { return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+
+        async function filterMsgs(f) {
+            msgFilter = f;
+            document.querySelectorAll('#page-messages .tmpl-btn').forEach(b => { b.style.background = ''; b.style.borderColor = ''; b.style.color = ''; });
+            const map = { all: 'fAll', unread: 'fUnread', done: 'fDone' };
+            const el = document.getElementById(map[f]);
+            if (el) { el.style.background = 'rgba(0,200,255,.15)'; el.style.borderColor = 'var(--electric)'; el.style.color = 'var(--electric)'; }
+            await loadMessages();
+        }
+
+        async function markMsgDone(id) {
+            const data = await api('PUT', '/api/messages/' + id, { status: 'done' });
+            if (data && data.ok) { showToast('success', 'Bajarilgan deb belgilandi ✓'); await loadMessages(); loadStats(); }
+            else showToast('error', 'Xato yuz berdi!');
+        }
+
+        async function deleteMsgAPI(id) {
+            if (!confirm("Bu xabarni o'chirmoqchimisiz?")) return;
+            const data = await api('DELETE', '/api/messages/' + id);
+            if (data && data.ok) { showToast('success', "Xabar o'chirildi"); await loadMessages(); loadStats(); }
+            else showToast('error', 'Xato!');
+        }
+
+        function openMsgModal(id) {
+            const m = db_messages.find(x => x.id === id);
+            if (!m) return;
+            api('PUT', '/api/messages/' + id, { status: 'read' });
+            document.getElementById('modalContent').innerHTML = `
+  <div class="modal-title">📧 Xabarga Javob — ${escHtml(m.name)}</div>
+  <div class="modal-field"><div class="modal-label">Yuboruvchi</div><div class="modal-val">${escHtml(m.name)} · ${escHtml(m.email || '—')}</div></div>
+  <div class="modal-field"><div class="modal-label">Telefon</div><div class="modal-val">${escHtml(m.phone || '—')}</div></div>
+  <div class="modal-field"><div class="modal-label">Xizmat / Byudjet</div><div class="modal-val">${escHtml(m.service || '—')} / ${escHtml(m.budget || '—')}</div></div>
+  <div class="modal-field"><div class="modal-label">Mavzu</div><div class="modal-val">${escHtml(m.subject || '—')}</div></div>
+  <div class="modal-field"><div class="modal-label">Xabar</div><div class="modal-val" style="white-space:pre-wrap">${escHtml(m.message)}</div></div>
+  <div class="modal-field"><div class="modal-label">Javob yozing</div>
+    <textarea class="modal-reply-input" id="replyText" placeholder="Javobingizni yozing...">Salom ${escHtml(m.name.split(' ')[0])}! Xabaringiz uchun rahmat. Loyihangiz bilan qiziqib qoldim. Tafsilotlarni muhokama qilish uchun Telegram orqali bog'laning: @montrax</textarea>
+  </div>
+  <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <button class="modal-send-btn" onclick="sendReply('${m.id}')">📧 Email orqali</button>
+    <a href="https://t.me/montrax" target="_blank" class="modal-send-btn" style="text-decoration:none;background:linear-gradient(90deg,#2AABEE,#1A8AC4)">📱 Telegram</a>
+    <button class="modal-send-btn" style="background:var(--plasma)" onclick="markMsgDone('${m.id}');closeModal()">✓ Bajarildi</button>
+  </div>`;
+            document.getElementById('modalOverlay').classList.add('show');
+        }
+
+        async function sendReply(id) {
+            const text = document.getElementById('replyText').value;
+            if (!text.trim()) { showToast('error', 'Javob matni bo\'sh!'); return; }
+            showToast('success', 'Javob yuborildi! ✅');
+            await markMsgDone(id);
+            closeModal();
+        }
+
+        function closeModal() { document.getElementById('modalOverlay').classList.remove('show'); }
+        window.addEventListener('click', e => { if (e.target.id === 'modalOverlay') closeModal(); });
+
+        /* ─── PROJECTS ─── */
+        let db_projects = [];
+
+        async function loadProjects() {
+            const data = await api('GET', '/api/projects');
+            if (!data || !data.ok) return;
+            db_projects = data.projects;
+            renderProjects();
+        }
+
+        function renderProjects() {
+            const body = document.getElementById('projTableBody');
+            if (!body) return;
+            const statusMap = { active: 'Faol', progress: 'Jarayonda', done: 'Bajarildi', pause: "To'xtatildi" };
+            const statusClass = { active: 's-active', progress: 's-progress', done: 's-done', pause: 's-pause' };
+            if (!db_projects.length) { body.innerHTML = '<tr><td colspan="7" style="text-align:center;color:var(--silver);padding:30px">Loyihalar yo\'q</td></tr>'; return; }
+            body.innerHTML = db_projects.map(p => `
+  <tr>
+    <td>
+      <div style="display:flex;align-items:center;gap:10px">
+        ${p.img ? `<img src="${escHtml(p.img)}" alt="${escHtml(p.name)}" style="width:44px;height:44px;object-fit:cover;border-radius:6px;border:1px solid rgba(45,58,92,.5)">` : `<div class="proj-thumb">${p.thumb || '🗂️'}</div>`}
+        <div>
+          <div style="font-family:var(--font-d);font-size:13px;font-weight:700;color:var(--white)">${escHtml(p.name)}</div>
+          <div style="font-size:11px;color:var(--silver)">#${p.id} · ${escHtml(p.desc || '').substring(0, 40)}</div>
+        </div>
+      </div>
+    </td>
+    <td>${escHtml(p.client)}</td>
+    <td><span style="font-family:var(--font-d);font-size:11px;color:var(--electric);background:rgba(0,200,255,.1);padding:3px 10px;border-radius:4px">${escHtml(p.service)}</span></td>
+    <td style="font-family:var(--font-d);color:var(--gold)">${escHtml(p.budget)}</td>
+    <td style="color:var(--silver)">${escHtml(p.deadline)}</td>
+    <td><span class="status-dot ${statusClass[p.status] || 's-active'}"></span>${statusMap[p.status] || p.status}</td>
+    <td><div style="display:flex;gap:6px">
+      <button class="act-btn reply" onclick="editProject(${p.id})">✏️</button>
+      <button class="act-btn done" onclick="markProjDone(${p.id})">✓</button>
+      <button class="act-btn del" onclick="deleteProjectAPI(${p.id})">✕</button>
+    </div></td>
+  </tr>`).join('');
+        }
+
+        async function deleteProjectAPI(id) {
+            if (!confirm("Loyihani o'chirmoqchimisiz?")) return;
+            const data = await api('DELETE', '/api/projects/' + id);
+            if (data && data.ok) { showToast('success', "Loyiha o'chirildi"); await loadProjects(); }
+            else showToast('error', 'Xato!');
+        }
+
+        async function markProjDone(id) {
+            const data = await api('PUT', '/api/projects/' + id, { status: 'done' });
+            if (data && data.ok) { showToast('success', 'Bajarildi! ✓'); await loadProjects(); }
+            else showToast('error', 'Xato!');
+        }
+
+        function editProject(id) {
+            const p = db_projects.find(x => x.id === id);
+            if (!p) return;
+            document.getElementById('modalContent').innerHTML = `
+  <div class="modal-title">✏️ Loyihani Tahrirlash</div>
+  <div class="modal-field"><div class="modal-label">Loyiha nomi *</div><input class="modal-reply-input" id="ep_name" value="${escHtml(p.name)}" style="height:44px;resize:none"></div>
+  <div class="modal-field"><div class="modal-label">Mijoz</div><input class="modal-reply-input" id="ep_client" value="${escHtml(p.client)}" style="height:44px;resize:none"></div>
+  <div class="modal-field"><div class="modal-label">Xizmat</div>
+    <select class="modal-reply-input" id="ep_service" style="height:44px;resize:none;appearance:none">
+      ${['Frontend', 'Dizayn', 'E-Tijorat', 'Motion', 'To\'liq', 'Backend', 'UI/UX'].map(s => `<option ${p.service === s ? 'selected' : ''}>${s}</option>`).join('')}
+    </select></div>
+  <div class="modal-field"><div class="modal-label">Byudjet</div><input class="modal-reply-input" id="ep_budget" value="${escHtml(p.budget)}" style="height:44px;resize:none"></div>
+  <div class="modal-field"><div class="modal-label">Deadline</div><input class="modal-reply-input" id="ep_deadline" type="date" value="${p.deadline || ''}" style="height:44px;resize:none"></div>
+  <div class="modal-field"><div class="modal-label">Holat</div>
+    <select class="modal-reply-input" id="ep_status" style="height:44px;resize:none;appearance:none">
+      ${[['active', "Faol"], ['progress', 'Jarayonda'], ['done', 'Bajarildi'], ['pause', "To'xtatildi"]].map(([v, l]) => `<option value="${v}" ${p.status === v ? 'selected' : ''}>${l}</option>`).join('')}
+    </select></div>
+  <div class="modal-field"><div class="modal-label">Rasm URL (ixtiyoriy)</div><input class="modal-reply-input" id="ep_img" value="${escHtml(p.img || '')}" placeholder="https://..." style="height:44px;resize:none"></div>
+  <div class="modal-field"><div class="modal-label">Loyiha URL</div><input class="modal-reply-input" id="ep_url" value="${escHtml(p.url || '#')}" placeholder="https://..." style="height:44px;resize:none"></div>
+  <div class="modal-field"><div class="modal-label">Tavsif</div><textarea class="modal-reply-input" id="ep_desc" rows="3">${escHtml(p.desc || '')}</textarea></div>
+  <button class="modal-send-btn" onclick="updateProject(${p.id})">💾 Saqlash</button>`;
+            document.getElementById('modalOverlay').classList.add('show');
+        }
+
+        async function updateProject(id) {
+            const body = {
+                name: document.getElementById('ep_name').value,
+                client: document.getElementById('ep_client').value,
+                service: document.getElementById('ep_service').value,
+                budget: document.getElementById('ep_budget').value,
+                deadline: document.getElementById('ep_deadline').value,
+                status: document.getElementById('ep_status').value,
+                img: document.getElementById('ep_img').value,
+                url: document.getElementById('ep_url').value,
+                desc: document.getElementById('ep_desc').value,
+            };
+            if (!body.name) { showToast('error', 'Loyiha nomi kerak!'); return; }
+            const data = await api('PUT', '/api/projects/' + id, body);
+            if (data && data.ok) { showToast('success', 'Loyiha yangilandi! ✅'); closeModal(); await loadProjects(); }
+            else showToast('error', data?.error || 'Xato!');
+        }
+
+        function openAddProject() {
+            document.getElementById('modalContent').innerHTML = `
+  <div class="modal-title">+ Yangi Loyiha Qo'shish</div>
+  <div class="modal-field"><div class="modal-label">Loyiha nomi *</div><input class="modal-reply-input" id="np_name" placeholder="Loyiha nomi" style="height:44px;resize:none"></div>
+  <div class="modal-field"><div class="modal-label">Mijoz</div><input class="modal-reply-input" id="np_client" placeholder="Mijoz ismi" style="height:44px;resize:none"></div>
+  <div class="modal-field"><div class="modal-label">Xizmat</div>
+    <select class="modal-reply-input" id="np_service" style="height:44px;resize:none;appearance:none">
+      <option>Frontend</option><option>Dizayn</option><option>E-Tijorat</option><option>Motion</option><option>To'liq</option><option>Backend</option><option>UI/UX</option>
+    </select></div>
+  <div class="modal-field"><div class="modal-label">Byudjet</div><input class="modal-reply-input" id="np_budget" placeholder="$1,000" style="height:44px;resize:none"></div>
+  <div class="modal-field"><div class="modal-label">Deadline</div><input class="modal-reply-input" id="np_deadline" type="date" style="height:44px;resize:none"></div>
+  <div class="modal-field"><div class="modal-label">Rasm URL (ixtiyoriy)</div><input class="modal-reply-input" id="np_img" placeholder="https://picsum.photos/800/400" style="height:44px;resize:none"></div>
+  <div class="modal-field"><div class="modal-label">Tavsif</div><textarea class="modal-reply-input" id="np_desc" rows="3" placeholder="Loyiha haqida..."></textarea></div>
+  <button class="modal-send-btn" onclick="saveProject()">💾 Saqlash</button>`;
+            document.getElementById('modalOverlay').classList.add('show');
+        }
+
+        async function saveProject() {
+            const name = document.getElementById('np_name').value;
+            if (!name) { showToast('error', 'Loyiha nomini kiriting!'); return; }
+            const body = { name, client: document.getElementById('np_client').value, service: document.getElementById('np_service').value, budget: document.getElementById('np_budget').value || '—', deadline: document.getElementById('np_deadline').value || '—', status: 'active', thumb: '🗂️', img: document.getElementById('np_img').value, desc: document.getElementById('np_desc').value };
+            const data = await api('POST', '/api/projects', body);
+            if (data && data.ok) { showToast('success', "Yangi loyiha qo'shildi! ✅"); closeModal(); await loadProjects(); }
+            else showToast('error', data?.error || 'Xato!');
+        }
+
+        /* ─── PORTFOLIO ─── */
+        let db_portfolio = [];
+
+        async function loadPortfolio() {
+            const data = await api('GET', '/api/portfolio');
+            if (!data || !data.ok) return;
+            db_portfolio = data.portfolio;
+            renderPortfolio();
+        }
+
+        function renderPortfolio() {
+            const grid = document.getElementById('portfolioGrid');
+            if (!grid) return;
+            if (!db_portfolio.length) { grid.innerHTML = '<div style="text-align:center;color:var(--silver);padding:40px;grid-column:1/-1">Portfolio bo\'sh</div>'; return; }
+            grid.innerHTML = db_portfolio.map(i => `
+  <div style="background:var(--steel);border:1px solid rgba(45,58,92,.5);border-radius:8px;overflow:hidden;transition:all .3s" onmouseenter="this.style.borderColor='rgba(0,200,255,.3)'" onmouseleave="this.style.borderColor='rgba(45,58,92,.5)'">
+    <div style="height:140px;background:${i.bg};display:flex;align-items:center;justify-content:center;font-size:36px;position:relative;overflow:hidden">
+      ${i.img ? `<img src="${escHtml(i.img)}" alt="${escHtml(i.title)}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" onerror="this.style.display='none'">` : ''}
+      <span style="position:relative;z-index:1;text-shadow:0 2px 8px rgba(0,0,0,.5)">${i.icon}</span>
+    </div>
+    <div style="padding:12px 14px">
+      <div style="font-family:var(--font-d);font-size:12px;font-weight:700;color:var(--white);margin-bottom:4px">${escHtml(i.title)}</div>
+      <div style="font-size:11px;color:var(--electric);font-family:var(--font-d);letter-spacing:.1em;margin-bottom:6px">${escHtml(i.cat)}</div>
+      <div style="font-size:11px;color:var(--silver);margin-bottom:10px">${escHtml((i.desc || '').substring(0, 60))}</div>
+      <div style="display:flex;gap:6px">
+        <button class="act-btn reply" style="font-size:10px;padding:4px 8px" onclick="editPortfolioItem(${i.id})">✏️</button>
+        ${i.url && i.url != '#' ? `<a href="${escHtml(i.url)}" target="_blank" class="act-btn" style="font-size:10px;padding:4px 8px;background:rgba(0,200,255,.1);color:var(--electric);border:1px solid rgba(0,200,255,.2);border-radius:4px;text-decoration:none">🔗</a>` : ''}
+        <button class="act-btn del" style="font-size:10px;padding:4px 8px" onclick="deletePortfolioItem(${i.id})">✕</button>
+      </div>
+    </div>
+  </div>`).join('');
+        }
+
+        async function deletePortfolioItem(id) {
+            if (!confirm("Portfolio elementini o'chirmoqchimisiz?")) return;
+            const data = await api('DELETE', '/api/portfolio/' + id);
+            if (data && data.ok) { showToast('success', "O'chirildi"); await loadPortfolio(); }
+            else showToast('error', 'Xato!');
+        }
+
+        function editPortfolioItem(id) {
+            const i = db_portfolio.find(x => x.id === id);
+            if (!i) return;
+            document.getElementById('modalContent').innerHTML = `
+  <div class="modal-title">✏️ Portfolio Tahrirlash</div>
+  <div class="modal-field"><div class="modal-label">Sarlavha *</div><input class="modal-reply-input" id="ep_title" value="${escHtml(i.title)}" style="height:44px;resize:none"></div>
+  <div class="modal-field"><div class="modal-label">Kategoriya</div><input class="modal-reply-input" id="ep_cat" value="${escHtml(i.cat)}" style="height:44px;resize:none"></div>
+  <div class="modal-field"><div class="modal-label">Emoji icon</div><input class="modal-reply-input" id="ep_icon" value="${escHtml(i.icon)}" style="height:44px;resize:none;width:80px"></div>
+  <div class="modal-field"><div class="modal-label">Rasm URL</div><input class="modal-reply-input" id="ep_img2" value="${escHtml(i.img || '')}" placeholder="https://..." style="height:44px;resize:none"></div>
+  <div class="modal-field"><div class="modal-label">Loyiha URL</div><input class="modal-reply-input" id="ep_url2" value="${escHtml(i.url || '#')}" style="height:44px;resize:none"></div>
+  <div class="modal-field"><div class="modal-label">Tavsif</div><textarea class="modal-reply-input" id="ep_desc2" rows="3">${escHtml(i.desc || '')}</textarea></div>
+  <button class="modal-send-btn" onclick="updatePortfolioItem(${i.id})">💾 Saqlash</button>`;
+            document.getElementById('modalOverlay').classList.add('show');
+        }
+
+        async function updatePortfolioItem(id) {
+            const body = { title: document.getElementById('ep_title').value, cat: document.getElementById('ep_cat').value, icon: document.getElementById('ep_icon').value, img: document.getElementById('ep_img2').value, url: document.getElementById('ep_url2').value, desc: document.getElementById('ep_desc2').value };
+            if (!body.title) { showToast('error', 'Sarlavha kerak!'); return; }
+            const data = await api('PUT', '/api/portfolio/' + id, body);
+            if (data && data.ok) { showToast('success', 'Yangilandi! ✅'); closeModal(); await loadPortfolio(); }
+            else showToast('error', 'Xato!');
+        }
+
+        function openAddPortfolio() {
+            document.getElementById('modalContent').innerHTML = `
+  <div class="modal-title">+ Portfolio Qo'shish</div>
+  <div class="modal-field"><div class="modal-label">Sarlavha *</div><input class="modal-reply-input" id="pp_title" placeholder="Loyiha nomi" style="height:44px;resize:none"></div>
+  <div class="modal-field"><div class="modal-label">Kategoriya</div><input class="modal-reply-input" id="pp_cat" placeholder="React, UI/UX, Brending..." style="height:44px;resize:none"></div>
+  <div class="modal-field"><div class="modal-label">Emoji icon</div><input class="modal-reply-input" id="pp_icon" value="⚡" style="height:44px;resize:none;width:80px"></div>
+  <div class="modal-field"><div class="modal-label">Rasm URL (ixtiyoriy)</div><input class="modal-reply-input" id="pp_img" placeholder="https://picsum.photos/600/400" style="height:44px;resize:none"></div>
+  <div class="modal-field"><div class="modal-label">Loyiha URL (ixtiyoriy)</div><input class="modal-reply-input" id="pp_url" placeholder="https://..." style="height:44px;resize:none"></div>
+  <div class="modal-field"><div class="modal-label">Tavsif</div><textarea class="modal-reply-input" id="pp_desc" rows="3" placeholder="Loyiha haqida qisqacha..."></textarea></div>
+  <button class="modal-send-btn" onclick="savePortfolioItem()">💾 Saqlash</button>`;
+            document.getElementById('modalOverlay').classList.add('show');
+        }
+
+        async function savePortfolioItem() {
+            const title = document.getElementById('pp_title').value;
+            if (!title) { showToast('error', 'Sarlavha kerak!'); return; }
+            const body = { title, cat: document.getElementById('pp_cat').value || '—', icon: document.getElementById('pp_icon').value || '⚡', img: document.getElementById('pp_img').value, url: document.getElementById('pp_url').value || '#', desc: document.getElementById('pp_desc').value };
+            const data = await api('POST', '/api/portfolio', body);
+            if (data && data.ok) { showToast('success', "Qo'shildi! ✅"); closeModal(); await loadPortfolio(); }
+            else showToast('error', 'Xato!');
+        }
+
+        /* ─── ORDERS ─── */
+        let db_orders = [];
+
+        async function loadOrders() {
+            const data = await api('GET', '/api/orders');
+            if (!data || !data.ok) return;
+            db_orders = data.orders;
+            renderOrders();
+        }
+
+        function renderOrders() {
+            const body = document.getElementById('ordersBody');
+            if (!body) return;
+            if (!db_orders.length) { body.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--silver);padding:30px">Buyurtmalar yo\'q</td></tr>'; return; }
+            body.innerHTML = db_orders.map(o => `
+  <tr>
+    <td style="font-family:var(--font-d);color:var(--electric)">${escHtml(o.id)}</td>
+    <td style="font-weight:600;color:var(--white)">${escHtml(o.client)}</td>
+    <td>${escHtml(o.service)}</td>
+    <td style="font-family:var(--font-d);color:var(--gold)">${escHtml(o.amount)}</td>
+    <td>${escHtml(o.method)}</td>
+    <td style="color:var(--silver)">${escHtml(o.date)}</td>
+    <td><span class="act-badge ${o.status === 'paid' ? 'badge-done' : o.status === 'cancelled' ? 'badge-del' : 'badge-pending'}">${o.status === 'paid' ? "To'langan" : o.status === 'cancelled' ? "Bekor qilingan" : 'Kutilmoqda'}</span></td>
+    <td><div style="display:flex;gap:5px">
+      ${o.status !== 'paid' ? `<button class="act-btn done" onclick="markOrderPaid('${escHtml(o.id)}')">✓ To'landi</button>` : ''}
+      <button class="act-btn del" onclick="deleteOrderAPI('${escHtml(o.id)}')">✕</button>
+    </div></td>
+  </tr>`).join('');
+        }
+
+        async function markOrderPaid(id) {
+            const data = await api('PUT', '/api/orders/' + id, { status: 'paid' });
+            if (data && data.ok) { showToast('success', "To'langan deb belgilandi ✓"); await loadOrders(); loadStats(); }
+            else showToast('error', 'Xato!');
+        }
+
+        async function deleteOrderAPI(id) {
+            if (!confirm("Buyurtmani o'chirmoqchimisiz?")) return;
+            const data = await api('DELETE', '/api/orders/' + id);
+            if (data && data.ok) { showToast('success', "O'chirildi"); await loadOrders(); }
+            else showToast('error', 'Xato!');
+        }
+
+        function openAddOrder() {
+            document.getElementById('modalContent').innerHTML = `
+  <div class="modal-title">+ Yangi Buyurtma</div>
+  <div class="modal-field"><div class="modal-label">Mijoz *</div><input class="modal-reply-input" id="no_client" placeholder="Mijoz ismi" style="height:44px;resize:none"></div>
+  <div class="modal-field"><div class="modal-label">Xizmat</div><select class="modal-reply-input" id="no_service" style="height:44px;resize:none;appearance:none"><option>Frontend</option><option>Dizayn</option><option>E-Tijorat</option><option>Motion</option><option>To'liq</option></select></div>
+  <div class="modal-field"><div class="modal-label">Summa</div><input class="modal-reply-input" id="no_amount" placeholder="$1,000" style="height:44px;resize:none"></div>
+  <div class="modal-field"><div class="modal-label">To'lov usuli</div><select class="modal-reply-input" id="no_method" style="height:44px;resize:none;appearance:none"><option>Karta</option><option>Kripto</option><option>Bank</option><option>Payme</option><option>Click</option></select></div>
+  <div class="modal-field"><div class="modal-label">Holat</div><select class="modal-reply-input" id="no_status" style="height:44px;resize:none;appearance:none"><option value="pending">Kutilmoqda</option><option value="paid">To'langan</option></select></div>
+  <button class="modal-send-btn" onclick="saveOrder()">💾 Saqlash</button>`;
+            document.getElementById('modalOverlay').classList.add('show');
+        }
+
+        async function saveOrder() {
+            const client = document.getElementById('no_client').value;
+            if (!client) { showToast('error', 'Mijoz ismi kerak!'); return; }
+            const body = { client, service: document.getElementById('no_service').value, amount: document.getElementById('no_amount').value || '—', method: document.getElementById('no_method').value, status: document.getElementById('no_status').value };
+            const data = await api('POST', '/api/orders', body);
+            if (data && data.ok) { showToast('success', "Buyurtma qo'shildi! ✅"); closeModal(); await loadOrders(); }
+            else showToast('error', 'Xato!');
+        }
+
+        /* ─── SETTINGS ─── */
+        async function loadSettings() {
+            const data = await api('GET', '/api/settings');
+            if (!data || !data.ok) return;
+            const s = data.settings;
+            const setVal = (id, val) => { const el = document.getElementById(id); if (el) { if (el.type === 'checkbox') el.checked = val; else el.value = val; } };
+            setVal('set_sitename', s.siteName || 'MONTRAX');
+            setVal('set_lang', s.defaultLang || 'uz');
+            setVal('set_chat', s.chatEnabled !== false);
+            setVal('set_online', s.siteOnline !== false);
+            setVal('set_telegram', s.telegramLink || '');
+            setVal('set_instagram', s.instagramLink || '');
+        }
+
+        async function saveSettings() {
+            const body = {
+                siteName: document.getElementById('set_sitename')?.value || 'MONTRAX',
+                defaultLang: document.getElementById('set_lang')?.value || 'uz',
+                chatEnabled: document.getElementById('set_chat')?.checked !== false,
+                siteOnline: document.getElementById('set_online')?.checked !== false,
+                telegramLink: document.getElementById('set_telegram')?.value || '',
+                instagramLink: document.getElementById('set_instagram')?.value || '',
+            };
+            const data = await api('PUT', '/api/settings', body);
+            if (data && data.ok) showToast('success', 'Sozlamalar saqlandi! ✅');
+            else showToast('error', 'Xato!');
+        }
+
+        async function changePassword() {
+            const oldP = document.getElementById('set_oldpass')?.value;
+            const newP = document.getElementById('set_newpass')?.value;
+            const cnfP = document.getElementById('set_confpass')?.value;
+            if (!oldP || !newP || !cnfP) { showToast('error', "Barcha maydonlarni to'ldiring!"); return; }
+            if (newP !== cnfP) { showToast('error', 'Yangi parollar mos emas!'); return; }
+            if (newP.length < 8) { showToast('error', 'Parol kamida 8 ta belgi!'); return; }
+            const data = await api('POST', '/api/change-password', { oldPass: oldP, newPass: newP });
+            if (data && data.ok) { showToast('success', "Parol o'zgartirildi! Qayta kiring."); setTimeout(doLogout, 2000); }
+            else showToast('error', data?.error || 'Xato!');
+        }
+
+        /* ─── SERVICES (frontend render) ─── */
+        function renderServices() {
+            const svcs = [
+                { icon: '⚡', name: 'Frontend Dasturlash', price: '$499+', status: true },
+                { icon: '✦', name: 'Brend Identifikatsiya', price: '$399+', status: true },
+                { icon: '📱', name: 'UI/UX Dizayn', price: '$299+', status: true },
+                { icon: '🛒', name: 'E-Tijorat', price: '$599+', status: true },
+                { icon: '🎬', name: 'Motion Dizayn', price: '$249+', status: false },
+                { icon: '🚀', name: 'Tezlik va SEO', price: '$199+', status: true },
+            ];
+            const el = document.getElementById('servicesList');
+            if (!el) return;
+            el.innerHTML = svcs.map((s, i) => `
+  <div class="setting-item">
+    <span class="setting-key">${s.icon} ${s.name}</span>
+    <div style="display:flex;align-items:center;gap:14px">
+      <input class="setting-input" id="svc_price_${i}" value="${s.price}" style="width:100px">
+      <label class="toggle"><input type="checkbox" id="svc_on_${i}" ${s.status ? 'checked' : ''}><span class="toggle-slider"></span></label>
+    </div>
+  </div>`).join('') + '<button class="save-settings-btn" onclick="showToast(\'success\',\'Xizmatlar saqlandi!\')">Saqlash</button>';
+        }
+
+        /* ─── PRICING ─── */
+        function renderPricingAdmin() {
+            const plans = [
+                { name: "Boshlang'ich", price: '$499', yearly: '$399', features: ['Landing sahifa', '3 sahifagacha', 'Asosiy SEO'] },
+                { name: 'Professional', price: '$1,299', yearly: '$999', features: ['10 sahifagacha', 'Animatsiyalar', 'E-tijorat', 'Brend'] },
+                { name: 'Elite', price: 'Muzokarali', yearly: '—', features: ['Cheksiz', '3D/WebGL', 'Backend', '6 oy support'] },
+            ];
+            const el = document.getElementById('pricingAdmin');
+            if (!el) return;
+            el.innerHTML = `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px">
+  ${plans.map(p => `<div style="background:var(--steel);border:1px solid rgba(45,58,92,.5);border-radius:8px;padding:22px">
+    <div style="font-family:var(--font-d);font-size:14px;font-weight:700;color:var(--white);margin-bottom:12px">${p.name}</div>
+    <div class="setting-item"><span class="setting-key">Oylik narx</span><input class="setting-input" value="${p.price}" style="width:120px"></div>
+    <div class="setting-item"><span class="setting-key">Yillik narx</span><input class="setting-input" value="${p.yearly}" style="width:120px"></div>
+    <div style="margin-top:12px;font-family:var(--font-d);font-size:10px;color:var(--silver);letter-spacing:.15em;margin-bottom:8px">XUSUSIYATLAR</div>
+    ${p.features.map(f => `<div style="font-size:12px;color:var(--frost);padding:4px 0;border-bottom:1px solid rgba(45,58,92,.2)">✓ ${f}</div>`).join('')}
+  </div>`).join('')}
+  </div>
+  <button class="save-settings-btn" onclick="showToast('success','Narxlar yangilandi!')" style="margin-top:16px">Saqlash</button>`;
+        }
+
+        /* ─── CHAT (Live) ─── */
+        let db_chats = [];
+        let activeChatUserId = null;
+
+        async function loadChats() {
+            const data = await api('GET', '/api/chats');
+            if (!data || !data.ok) return;
+            db_chats = data.chats;
+            renderChatUsers();
+        }
+
+        function renderChatUsers() {
+            const list = document.getElementById('chatUserList');
+            if (!list) return;
+            if (!db_chats.length) { list.innerHTML = '<div style="text-align:center;color:var(--silver);padding:30px;font-size:13px">Hali chat yo\'q</div>'; return; }
+            list.innerHTML = db_chats.map(c => `
+  <div class="chat-user-item ${c.unread ? 'has-unread' : ''}" data-unread="${c.unread || ''}" data-id="${escHtml(c.userId)}" onclick="openChatAPI('${escHtml(c.userId)}')">
+    <div class="cu-av">${c.name.charAt(0).toUpperCase()}${c.online ? '<div class="online-dot"></div>' : ''}</div>
+    <div class="cu-info">
+      <span class="cu-name">${escHtml(c.name)}</span>
+      <span class="cu-preview">${escHtml((c.lastMsg || '').substring(0, 40))}</span>
+    </div>
+    <span class="cu-time">${escHtml(c.lastTime || '')}</span>
+  </div>`).join('');
+        }
+
+        function filterChatUsers(q) {
+            document.querySelectorAll('.chat-user-item').forEach(el => {
+                el.style.display = el.querySelector('.cu-name').textContent.toLowerCase().includes(q.toLowerCase()) ? '' : 'none';
+            });
+        }
+
+        async function openChatAPI(userId) {
+            activeChatUserId = userId;
+            const data = await api('GET', '/api/chats/' + userId);
+            if (!data || !data.ok) return;
+            const conv = data.chat;
+            const cInfo = db_chats.find(c => c.userId === userId);
+
+            document.querySelectorAll('.chat-user-item').forEach(el => {
+                el.classList.toggle('active', el.dataset.id === userId);
+                if (el.dataset.id === userId) { el.classList.remove('has-unread'); el.removeAttribute('data-unread'); }
+            });
+
+            const area = document.getElementById('chatWindowArea');
+            area.innerHTML = `
+  <div class="cw-header">
+    <div class="cw-av">${conv.name.charAt(0).toUpperCase()}</div>
+    <div>
+      <span class="cw-name">${escHtml(conv.name)}</span>
+      <span class="cw-status">${cInfo?.online ? 'Online' : 'Offline'}</span>
+    </div>
+    <div class="cw-actions">
+      <button class="cw-act-btn" title="Chatni tozalash" onclick="clearChatAPI('${escHtml(userId)}')">🗑️</button>
+      <button class="cw-act-btn" title="Telegram" onclick="window.open('https://t.me/montrax')">📱</button>
+    </div>
+  </div>
+  <div class="cw-templates">
+    <button class="tmpl-btn" onclick="insertTemplate('Salom! Yordam bera olamanmi? 😊')">👋 Salom</button>
+    <button class="tmpl-btn" onclick="insertTemplate('Narxlar haqida: $499 dan boshlab.')">💰 Narx</button>
+    <button class="tmpl-btn" onclick="insertTemplate('Portfolio sahifalarini ko\\'ring: frontend.html va design.html')">🎨 Portfolio</button>
+    <button class="tmpl-btn" onclick="insertTemplate('Telegram: @montrax — tez javob beraman!')">📱 Telegram</button>
+    <button class="tmpl-btn" onclick="insertTemplate('Rahmat! Yaqin orada bog\\'lanaman. 🙏')">🙏 Rahmat</button>
+  </div>
+  <div class="cw-messages" id="cwMsgs">${(conv.messages || []).map(renderMsg).join('')}</div>
+  <div class="cw-footer">
+    <textarea class="cw-input" id="cwInput" placeholder="Xabar yozing..." rows="1" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();adminSendMsg()}" oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,120)+'px'"></textarea>
+    <div class="cw-btns">
+      <button class="cw-send" onclick="adminSendMsg()">➤</button>
+    </div>
+  </div>`;
+            scrollChatBottom();
+
+            // Mark read via WS
+            if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ type: 'mark_read', userId }));
+
+            // Update badge
+            const totalUnread = db_chats.reduce((s, c) => s + (c.userId === userId ? 0 : c.unread || 0), 0);
+            if (cb) cb.textContent = totalUnread || '0';
+        }
+
+        async function clearChatAPI(userId) {
+            if (!confirm("Bu chatni o'chirmoqchimisiz?")) return;
+            const data = await api('DELETE', '/api/chats/' + userId);
+            if (data && data.ok) { showToast('success', "Chat o'chirildi"); document.getElementById('chatWindowArea').innerHTML = ''; activeChatUserId = null; await loadChats(); }
+            else showToast('error', 'Xato!');
+        }
+
+        function renderMsg(m) {
+            const isAdmin = m.from === 'admin';
+            return `<div class="amsg ${isAdmin ? 'admin-msg' : 'from-user'}">
+    <div class="amsg-av ${isAdmin ? 'from-admin' : 'from-user'}">${isAdmin ? 'M' : 'U'}</div>
+    <div>
+      <div class="amsg-bubble">${escHtml(m.text)}</div>
+      <span class="amsg-meta">${escHtml(m.time || '')}</span>
+    </div>
+  </div>`;
+        }
+
+        function adminSendMsg() {
+            const input = document.getElementById('cwInput');
+            const text = (input?.value || '').trim();
+            if (!text || !activeChatUserId) return;
+            const now = new Date().toLocaleTimeString('uz-UZ', { hour: '2-digit', minute: '2-digit' });
+            const msg = { from: 'admin', text, time: now };
+            const msgs = document.getElementById('cwMsgs');
+            if (msgs) { msgs.insertAdjacentHTML('beforeend', renderMsg(msg)); scrollChatBottom(); }
+            if (input) { input.value = ''; input.style.height = 'auto'; }
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({ type: 'adminMsg', to: activeChatUserId, text }));
+            }
+        }
+
+        function insertTemplate(text) {
+            const input = document.getElementById('cwInput');
+            if (input) { input.value = text; input.focus(); input.style.height = 'auto'; input.style.height = Math.min(input.scrollHeight, 120) + 'px'; }
+        }
+
+        function scrollChatBottom() {
+            setTimeout(() => { const m = document.getElementById('cwMsgs'); if (m) m.scrollTop = m.scrollHeight; }, 50);
+        }
+
+        /* ─── WebSocket (Admin) ─── */
+        function connectAdminWS() {
+            if (!AUTH_TOKEN) return;
+            const protocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            try {
+                const _wsUrl = (typeof MONTRAX_CONFIG !== 'undefined') ? MONTRAX_CONFIG.WS_URL : protocol + '//' + location.host;
+                ws = new WebSocket(_wsUrl);
+                ws.onopen = () => {
+                    ws.send(JSON.stringify({ type: 'admin', token: AUTH_TOKEN }));
+                };
+                ws.onmessage = e => {
+                    try {
+                        const d = JSON.parse(e.data);
+                        if (d.type === 'error') { console.warn('WS auth failed'); return; }
+                        if (d.type === 'new_message') {
+                            const mb = document.getElementById('msgBadge');
+                            if (mb) mb.textContent = parseInt(mb.textContent || '0') + 1;
+                            showToast('success', '📧 Yangi xabar: ' + (d.message?.name || '') + ' — ' + (d.message?.subject || '').substring(0, 30));
+                            if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
+                                new Notification('MONTRAX — Yangi Xabar', { body: (d.message?.name || '') + ': ' + (d.message?.message || '').substring(0, 60) });
+                            }
+                            db_messages.unshift(d.message);
+                            renderMessages();
+                        }
+                        if (d.type === 'msg' && d.from === 'user') {
+                            let chat = db_chats.find(c => c.userId === d.userId);
+                            if (!chat) { chat = { userId: d.userId, name: d.name || 'Yangi Foydalanuvchi', lastMsg: d.text, lastTime: d.time, unread: 0, online: true, msgCount: 0 }; db_chats.unshift(chat); }
+                            chat.lastMsg = d.text; chat.lastTime = d.time; chat.unread = (chat.unread || 0) + 1; chat.online = true;
+                            if (d.userId === activeChatUserId) {
+                                const msgs = document.getElementById('cwMsgs');
+                                if (msgs) { msgs.insertAdjacentHTML('beforeend', renderMsg({ from: 'user', text: d.text, time: d.time })); scrollChatBottom(); }
+                                chat.unread = 0;
+                                if (ws && ws.readyState === WebSocket.OPEN) ws.send(JSON.stringify({ type: 'mark_read', userId: d.userId }));
+                            }
+                            renderChatUsers();
+                            if (cb) cb.textContent = db_chats.reduce((s, c) => s + (c.unread || 0), 0) || '0';
+                            showToast('success', '💬 ' + (d.name || 'User') + ': ' + d.text.substring(0, 40));
+                            if (typeof Notification !== 'undefined' && Notification.permission === 'granted') {
+                                new Notification('MONTRAX Chat', { body: (d.name || 'User') + ': ' + d.text });
+                            }
+                        }
+                        if (d.type === 'user_online') {
+                            const c = db_chats.find(x => x.userId === d.userId);
+                            if (c) { c.online = true; renderChatUsers(); }
+                            if (cb && parseInt(cb.textContent || '0') > 0) cb.style.background = 'var(--lightning)';
+                        }
+                        if (d.type === 'user_offline') {
+                            const c = db_chats.find(x => x.userId === d.userId);
+                            if (c) { c.online = false; renderChatUsers(); }
+                        }
+                    } catch { }
+                };
+                ws.onerror = () => { setTimeout(connectAdminWS, 5000); };
+                ws.onclose = () => { setTimeout(connectAdminWS, 5000); };
+            } catch (e) { setTimeout(connectAdminWS, 5000); }
+        }
+
+        /* ─── TOAST ─── */
+        let toastTimer;
+        function showToast(type, text) {
+            const t = document.getElementById('toast');
+            const icon = document.getElementById('toastIcon');
+            const txt = document.getElementById('toastText');
+            if (!t || !icon || !txt) return;
+            icon.innerHTML = type === 'success' ? mtxIcon('check') : mtxIcon('close');
+            txt.textContent = text;
+            t.className = 'toast ' + (type === 'error' ? 'error' : '') + ' show';
+            clearTimeout(toastTimer);
+            toastTimer = setTimeout(() => t.classList.remove('show'), 3500);
+        }
+
+        /* ─── NOTIFICATION PERMISSION ─── */
+        function requestNotifPermission() {
+            if ('Notification' in window) {
+                Notification.requestPermission().then(p => {
+                    showToast(p === 'granted' ? 'success' : 'error', p === 'granted' ? 'Bildirishnomalar yoqildi! 🔔' : 'Bildirishnomalar rad etildi');
+                });
+            } else {
+                showToast('error', 'Brauzeringiz bildirishnomalarni qo\'llab-quvvatlamaydi');
+            }
+        }
+        if ('Notification' in window && Notification.permission === 'default') {
+            setTimeout(() => Notification.requestPermission(), 3000);
+        }
+
+        /* ─── Init render for services/pricing (non-API) ─── */
+        setTimeout(() => { renderServices(); renderPricingAdmin(); renderChart(); }, 100);
+    </script>
+</body>
+
+</html> 

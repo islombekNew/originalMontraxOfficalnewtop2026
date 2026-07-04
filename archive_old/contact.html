@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MONTRAX — Bog'lanish</title>
+    <meta name="description"
+        content="MONTRAX bilan bog'laning — frontend dasturlash yoki grafik dizayn loyihangizni muhokama qilish uchun Telegram, email yoki forma orqali yozing.">
+    <meta name="theme-color" content="#0a0d1a">
+    <link rel="canonical" href="https://montrax.uz/contact.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="MONTRAX — Bog'lanish">
+    <meta property="og:description" content="Loyihangiz haqida gaplashamiz — frontend va dizayn xizmatlari.">
+    <meta property="og:image" content="./img/icon/og-cover.svg">
+    <meta property="og:locale" content="uz_UZ">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/svg+xml" href="./img/icon/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,200;0,300;0,400;0,600;0,700;1,300&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="base.css">
+    <script src="./icons.js"></script>
+    <style>
+        .page-hero {
+            min-height: 55vh;
+            display: flex;
+            align-items: center;
+            padding: 130px 60px 70px;
+            position: relative;
+            overflow: hidden;
+            background: var(--steel);
+            text-align: left
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(0, 200, 255, .03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 200, 255, .03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gd 25s linear infinite
+        }
+
+        @keyframes gd {
+            0% {
+                background-position: 0 0
+            }
+
+            100% {
+                background-position: 60px 60px
+            }
+        }
+
+        .page-hero::after {
+            content: '';
+            position: absolute;
+            right: -100px;
+            top: -100px;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(ellipse, rgba(0, 200, 255, .08), transparent 70%);
+            pointer-events: none
+        }
+
+        /* CONTACT LAYOUT */
+        #contact-main {
+            background: var(--abyss);
+            padding: 80px 60px
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 80px;
+            align-items: start;
+            max-width: 1200px;
+            margin: 0 auto
+        }
+
+        /* LEFT INFO */
+        /* .contact-info {} */
+
+        .info-block {
+            margin-bottom: 36px;
+            padding: 28px;
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 8px;
+            transition: all .3s;
+            cursor: default
+        }
+
+        .info-block:hover {
+            border-color: rgba(0, 200, 255, .25);
+            transform: translateX(4px)
+        }
+
+        .info-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(0, 200, 255, .1);
+            border: 1px solid rgba(0, 200, 255, .2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 14px;
+            transition: transform .4s
+        }
+
+        .info-block:hover .info-icon {
+            transform: scale(1.1) rotate(-5deg)
+        }
+
+        .info-label {
+            font-family: var(--font-d);
+            font-size: 10px;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: var(--electric);
+            margin-bottom: 6px
+        }
+
+        .info-value {
+            font-size: 15px;
+            color: var(--frost);
+            font-weight: 400;
+            line-height: 1.5
+        }
+
+        .info-sub {
+            font-size: 12px;
+            color: var(--silver);
+            margin-top: 4px
+        }
+
+        /* SOCIAL LINKS */
+        .social-section {
+            margin-bottom: 36px
+        }
+
+        .social-title {
+            font-family: var(--font-d);
+            font-size: 11px;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: var(--white);
+            margin-bottom: 18px
+        }
+
+        .social-links {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 18px;
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 6px;
+            text-decoration: none;
+            transition: all .35s
+        }
+
+        .social-link:hover {
+            transform: translateY(-3px)
+        }
+
+        .social-link.tg:hover {
+            border-color: #2AABEE;
+            box-shadow: 0 0 20px rgba(42, 171, 238, .3)
+        }
+
+        .social-link.ig:hover {
+            border-color: #E4405F;
+            box-shadow: 0 0 20px rgba(228, 64, 95, .3)
+        }
+
+        .social-link.be:hover {
+            border-color: #1769FF;
+            box-shadow: 0 0 20px rgba(23, 105, 255, .3)
+        }
+
+        .social-link.gh:hover {
+            border-color: var(--electric);
+            box-shadow: var(--glow-e)
+        }
+
+        .social-link.ln:hover {
+            border-color: #0A66C2;
+            box-shadow: 0 0 20px rgba(10, 102, 194, .3)
+        }
+
+        .social-link.dr:hover {
+            border-color: #EA4C89;
+            box-shadow: 0 0 20px rgba(234, 76, 137, .3)
+        }
+
+        .sl-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+            font-weight: 700;
+            font-family: var(--font-d)
+        }
+
+        /* .sl-info {} */
+
+        .sl-name {
+            font-family: var(--font-d);
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: .08em;
+            display: block
+        }
+
+        .sl-handle {
+            font-size: 11px;
+            color: var(--silver)
+        }
+
+        /* FORM */
+        .contact-form-wrap {
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 12px;
+            padding: 44px;
+            position: relative;
+            overflow: hidden
+        }
+
+        .contact-form-wrap::before {
+            content: '';
+            position: absolute;
+            top: -100px;
+            right: -100px;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(ellipse, rgba(0, 200, 255, .05), transparent 70%);
+            pointer-events: none
+        }
+
+        .form-title {
+            font-family: var(--font-d);
+            font-size: 22px;
+            font-weight: 900;
+            color: var(--white);
+            letter-spacing: .1em;
+            margin-bottom: 6px
+        }
+
+        .form-sub {
+            font-size: 13px;
+            color: var(--silver);
+            margin-bottom: 36px;
+            line-height: 1.6
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 16px
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 16px
+        }
+
+        .form-group.full {
+            grid-column: span 2
+        }
+
+        .form-label {
+            font-family: var(--font-d);
+            font-size: 10px;
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            color: var(--silver)
+        }
+
+        .form-input {
+            background: var(--steel);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 6px;
+            padding: 14px 18px;
+            color: var(--frost);
+            font-family: var(--font-b);
+            font-size: 14px;
+            outline: none;
+            transition: all .3s;
+            width: 100%
+        }
+
+        .form-input::placeholder {
+            color: var(--slate)
+        }
+
+        .form-input:focus {
+            border-color: var(--electric);
+            box-shadow: 0 0 0 3px rgba(0, 200, 255, .1)
+        }
+
+        textarea.form-input {
+            resize: vertical;
+            min-height: 140px
+        }
+
+        select.form-input {            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238A97B8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 16px center
+        }
+
+        .form-budget {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap
+        }
+
+        .budget-chip {
+            padding: 8px 16px;
+            background: var(--steel);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 20px;
+            font-size: 12px;
+            color: var(--silver);            transition: all .3s;
+            font-family: var(--font-d);
+            letter-spacing: .08em
+        }
+
+        .budget-chip.active,
+        .budget-chip:hover {
+            border-color: var(--electric);
+            color: var(--electric);
+            background: rgba(0, 200, 255, .08)
+        }
+
+        .form-btn {
+            width: 100%;
+            background: linear-gradient(90deg, var(--electric), var(--plasma));
+            color: var(--abyss);
+            border: none;
+            padding: 18px;
+            font-family: var(--font-d);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .25em;
+            text-transform: uppercase;            border-radius: 6px;
+            transition: all .35s;
+            margin-top: 8px;
+            position: relative;
+            overflow: hidden
+        }
+
+        .form-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, var(--plasma), var(--electric));
+            opacity: 0;
+            transition: opacity .35s
+        }
+
+        .form-btn:hover::before {
+            opacity: 1
+        }
+
+        .form-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 40px rgba(0, 200, 255, .4)
+        }
+
+        .form-btn span {
+            position: relative;
+            z-index: 1
+        }
+
+        .form-success {
+            display: none;
+            text-align: center;
+            padding: 40px 20px
+        }
+
+        .form-success.show {
+            display: block
+        }
+
+        .success-icon {
+            font-size: 56px;
+            margin-bottom: 20px;
+            display: block;
+            animation: bounceIn .6s ease
+        }
+
+        @keyframes bounceIn {
+            0% {
+                transform: scale(0)
+            }
+
+            60% {
+                transform: scale(1.1)
+            }
+
+            100% {
+                transform: scale(1)
+            }
+        }
+
+        .success-title {
+            font-family: var(--font-d);
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--white);
+            margin-bottom: 10px;
+            letter-spacing: .1em
+        }
+
+        .success-desc {
+            font-size: 14px;
+            color: var(--silver);
+            line-height: 1.6
+        }
+
+        /* MAP/LOCATION */
+        #location-sec {
+            background: var(--steel);
+            padding: 80px 60px
+        }
+
+        .location-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto
+        }
+
+        .location-map {
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 12px;
+            height: 360px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden
+        }
+
+        .location-map::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(0, 200, 255, .04) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 200, 255, .04) 1px, transparent 1px);
+            background-size: 40px 40px
+        }
+
+        .map-pin {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -60%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            animation: float 3s ease-in-out infinite
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(-50%, -60%)
+            }
+
+            50% {
+                transform: translate(-50%, -70%)
+            }
+        }
+
+        .map-pin-dot {
+            width: 20px;
+            height: 20px;
+            background: var(--electric);
+            border-radius: 50%;
+            box-shadow: var(--glow-e);
+            position: relative
+        }
+
+        .map-pin-dot::after {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 200, 255, .4);
+            animation: ping 2s ease infinite
+        }
+
+        @keyframes ping {
+            0% {
+                transform: scale(1);
+                opacity: .7
+            }
+
+            100% {
+                transform: scale(2.5);
+                opacity: 0
+            }
+        }
+
+        .map-pin-stem {
+            width: 2px;
+            height: 20px;
+            background: linear-gradient(to bottom, var(--electric), transparent)
+        }
+
+        .map-city {
+            font-family: var(--font-d);
+            font-size: 12px;
+            letter-spacing: .2em;
+            color: var(--electric);
+            margin-top: 4px;
+            text-shadow: var(--glow-e)
+        }
+
+        /* .location-info {} */
+
+        .avail-card {
+            background: var(--chrome);
+            border: 1px solid rgba(0, 200, 255, .2);
+            border-radius: 8px;
+            padding: 28px;
+            margin-bottom: 20px
+        }
+
+        .avail-title {
+            font-family: var(--font-d);
+            font-size: 11px;
+            letter-spacing: .3em;
+            text-transform: uppercase;
+            color: var(--electric);
+            margin-bottom: 16px
+        }
+
+        .avail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(45, 58, 92, .3)
+        }
+
+        .avail-item:last-child {
+            border-bottom: none
+        }
+
+        .avail-key {
+            font-size: 13px;
+            color: var(--silver)
+        }
+
+        .avail-val {
+            font-size: 13px;
+            color: var(--frost);
+            font-weight: 500;
+            text-align: right
+        }
+
+        .avail-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--lightning);
+            box-shadow: var(--glow-g);
+            display: inline-block;
+            margin-right: 8px;
+            animation: blink 2s ease infinite
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1
+            }
+
+            50% {
+                opacity: .3
+            }
+        }
+
+        /* ── LIVE CHAT WIDGET ── */
+        .chat-widget {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 9990;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 12px
+        }
+
+        .chat-bubble {
+            width: 62px;
+            height: 62px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--electric), var(--plasma));
+            display: flex;
+            align-items: center;
+            justify-content: center;            box-shadow: 0 4px 24px rgba(0, 200, 255, .4), 0 0 40px rgba(0, 200, 255, .15);
+            transition: all .35s;
+            position: relative;
+            border: none
+        }
+
+        .chat-bubble:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 32px rgba(0, 200, 255, .6), 0 0 60px rgba(0, 200, 255, .25)
+        }
+
+        .chat-bubble svg {
+            width: 28px;
+            height: 28px;
+            fill: var(--abyss);
+            transition: transform .3s
+        }
+
+        .chat-bubble.open svg {
+            transform: rotate(180deg)
+        }
+
+        .chat-notif {
+            position: absolute;
+            top: -3px;
+            right: -3px;
+            width: 18px;
+            height: 18px;
+            background: var(--pulse);
+            border-radius: 50%;
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-d);
+            border: 2px solid var(--abyss);
+            animation: notif-pulse 2s ease infinite
+        }
+
+        @keyframes notif-pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 61, 138, .5)
+            }
+
+            50% {
+                box-shadow: 0 0 0 8px rgba(255, 61, 138, 0)
+            }
+        }
+
+        .chat-panel {
+            width: 340px;
+            background: var(--steel);
+            border: 1px solid rgba(0, 200, 255, .2);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .5), var(--glow-e);
+            display: none;
+            flex-direction: column;
+            max-height: 520px
+        }
+
+        .chat-panel.show {
+            display: flex;
+            animation: slideUp .35s cubic-bezier(.17, .67, .2, 1)
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, rgba(0, 200, 255, .15), rgba(123, 47, 255, .1));
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            border-bottom: 1px solid rgba(0, 200, 255, .1)
+        }
+
+        .chat-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--electric), var(--plasma));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-d);
+            font-size: 16px;
+            font-weight: 900;
+            color: var(--abyss);
+            flex-shrink: 0
+        }
+
+        /* .chat-info {} */
+
+        .chat-name {
+            font-family: var(--font-d);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: .08em;
+            display: block;
+            margin-bottom: 2px
+        }
+
+        .chat-status {
+            font-size: 11px;
+            color: var(--lightning);
+            display: flex;
+            align-items: center;
+            gap: 5px
+        }
+
+        .chat-status::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--lightning);
+            box-shadow: var(--glow-g);
+            display: inline-block;
+            animation: blink 2s ease infinite
+        }
+
+        .chat-close {
+            margin-left: auto;
+            background: none;
+            border: none;
+            color: var(--silver);
+            font-size: 20px;            padding: 4px;
+            line-height: 1;
+            transition: color .3s
+        }
+
+        .chat-close:hover {
+            color: var(--white)
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-height: 200px;
+            max-height: 280px
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 2px
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: var(--slate);
+            border-radius: 2px
+        }
+
+        .msg {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end
+        }
+
+        .msg.user {
+            flex-direction: row-reverse
+        }
+
+        .msg-av {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-family: var(--font-d);
+            font-weight: 700
+        }
+
+        .msg-av.admin {
+            background: linear-gradient(135deg, var(--electric), var(--plasma));
+            color: var(--abyss)
+        }
+
+        .msg-av.user-av {
+            background: var(--chrome);
+            color: var(--electric);
+            border: 1px solid rgba(0, 200, 255, .3)
+        }
+
+        .msg-bubble {
+            max-width: 220px;
+            padding: 10px 14px;
+            border-radius: 12px;
+            font-size: 13px;
+            line-height: 1.5
+        }
+
+        .msg.admin .msg-bubble {
+            background: var(--chrome);
+            color: var(--frost);
+            border-bottom-left-radius: 4px;
+            border: 1px solid rgba(45, 58, 92, .5)
+        }
+
+        .msg.user .msg-bubble {
+            background: linear-gradient(135deg, var(--electric), rgba(0, 200, 255, .7));
+            color: var(--abyss);
+            font-weight: 500;
+            border-bottom-right-radius: 4px
+        }
+
+        .msg-time {
+            font-size: 10px;
+            color: var(--slate);
+            margin-top: 3px;
+            display: block
+        }
+
+        .typing-indicator {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            padding: 6px 0
+        }
+
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--silver);
+            animation: typing .8s ease infinite
+        }
+
+        .typing-dot:nth-child(2) {
+            animation-delay: .15s
+        }
+
+        .typing-dot:nth-child(3) {
+            animation-delay: .3s
+        }
+
+        @keyframes typing {
+
+            0%,
+            100% {
+                opacity: .3;
+                transform: translateY(0)
+            }
+
+            50% {
+                opacity: 1;
+                transform: translateY(-3px)
+            }
+        }
+
+        .chat-footer {
+            padding: 14px 16px;
+            border-top: 1px solid rgba(45, 58, 92, .3);
+            display: flex;
+            gap: 10px;
+            align-items: center
+        }
+
+        .chat-input {
+            flex: 1;
+            background: var(--abyss);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 8px;
+            padding: 11px 14px;
+            color: var(--frost);
+            font-family: var(--font-b);
+            font-size: 13px;
+            outline: none;
+            transition: border-color .3s;
+            resize: none
+        }
+
+        .chat-input:focus {
+            border-color: var(--electric)
+        }
+
+        .chat-send {
+            width: 40px;
+            height: 40px;
+            background: var(--electric);
+            border: none;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;            transition: all .3s;
+            flex-shrink: 0
+        }
+
+        .chat-send:hover {
+            background: var(--white);
+            transform: scale(1.05)
+        }
+
+        .chat-send svg {
+            width: 18px;
+            height: 18px;
+            fill: var(--abyss)
+        }
+
+        .chat-quick {
+            padding: 0 16px 14px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap
+        }
+
+        .quick-btn {
+            padding: 6px 12px;
+            background: rgba(0, 200, 255, .08);
+            border: 1px solid rgba(0, 200, 255, .2);
+            border-radius: 20px;
+            font-size: 11px;
+            color: var(--electric);            transition: all .3s;
+            font-family: var(--font-d);
+            letter-spacing: .06em
+        }
+
+        .quick-btn:hover {
+            background: rgba(0, 200, 255, .15);
+            border-color: var(--electric)
+        }
+
+        /* PAYMENT SECTION */
+        #payment-sec {
+            background: var(--abyss);
+            padding: 80px 60px
+        }
+
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 1100px;
+            margin: 0 auto 48px
+        }
+
+        .pay-card {
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 10px;
+            padding: 32px 26px;
+            text-align: center;
+            transition: all .4s;            position: relative;
+            overflow: hidden
+        }
+
+        .pay-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--electric), var(--plasma));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .4s
+        }
+
+        .pay-card:hover {
+            border-color: rgba(0, 200, 255, .25);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .3)
+        }
+
+        .pay-card:hover::before {
+            transform: scaleX(1)
+        }
+
+        .pay-icon {
+            font-size: 42px;
+            margin-bottom: 18px;
+            display: block
+        }
+
+        .pay-name {
+            font-family: var(--font-d);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: .1em;
+            margin-bottom: 10px
+        }
+
+        .pay-desc {
+            font-size: 13px;
+            color: var(--silver);
+            line-height: 1.6;
+            margin-bottom: 20px
+        }
+
+        .pay-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            background: rgba(0, 200, 255, .1);
+            border: 1px solid rgba(0, 200, 255, .2);
+            border-radius: 20px;
+            font-size: 10px;
+            color: var(--electric);
+            font-family: var(--font-d);
+            letter-spacing: .1em
+        }
+
+        #cta-con {
+            background: var(--steel)
+        }
+
+        /* RESPONSIVE */
+        @media(max-width:1024px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 48px
+            }
+
+            .social-links {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .location-grid {
+                grid-template-columns: 1fr
+            }
+
+            .payment-grid {
+                grid-template-columns: 1fr 1fr
+            }
+
+            #contact-main,
+            #location-sec,
+            #payment-sec {
+                padding: 70px 32px
+            }
+        }
+
+        @media(max-width:768px) {
+            .page-hero {
+                padding: 110px 20px 56px
+            }
+
+            #contact-main,
+            #location-sec,
+            #payment-sec {
+                padding: 60px 20px
+            }
+
+            .form-row {
+                grid-template-columns: 1fr
+            }
+
+            .form-group.full {
+                grid-column: span 1
+            }
+
+            .contact-form-wrap {
+                padding: 28px 20px
+            }
+
+            .social-links {
+                grid-template-columns: 1fr
+            }
+
+            .payment-grid {
+                grid-template-columns: 1fr
+            }
+
+            .chat-panel {
+                width: calc(100vw - 40px);
+                right: 0;
+                left: 0;
+                margin: 0 auto;
+                bottom: 90px;
+                position: fixed
+            }
+
+            .chat-widget {
+                bottom: 20px;
+                right: 20px
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#contact-main" class="skip-link">Asosiy mazmunga o'tish</a>
+    <div class="mob-menu" id="mobMenu">
+        <a href="index.html" data-i18n="nav_home">Asosiy</a>
+        <a href="frontend.html" data-i18n="nav_frontend">Frontend</a>
+        <a href="design.html" data-i18n="nav_design">Dizayn</a>
+
+        <a href="contact.html" data-i18n="nav_contact">Aloqa</a>
+        <a href="contact.html" class="mob-cta" data-i18n="nav_hire">Yollash</a>
+        <div class="mob-lang">
+            <button class="lang-btn" data-lang="uz" onclick="setLang('uz')">UZ</button>
+            <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+            <button class="lang-btn" data-lang="ru" onclick="setLang('ru')">RU</button>
+        </div>
+    </div>
+
+    <nav id="nav">
+        <a href="index.html" class="nav-logo">MO<span>N</span>TRAX</a>
+        <ul class="nav-links">
+            <li><a href="index.html" data-i18n="nav_home">Asosiy</a></li>
+            <li><a href="frontend.html" data-i18n="nav_frontend">Frontend</a></li>
+            <li><a href="design.html" data-i18n="nav_design">Dizayn</a></li>
+
+            <li><a href="contact.html" class="active" data-i18n="nav_contact">Aloqa</a></li>
+        </ul>
+        <div class="nav-right">
+            <div class="lang-switcher">
+                <button class="lang-btn" data-lang="uz" onclick="setLang('uz')">UZ</button>
+                <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" data-lang="ru" onclick="setLang('ru')">RU</button>
+            </div>
+            <a href="contact.html" class="nav-cta" data-i18n="nav_hire">Yollash</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Menyuni ochish" aria-expanded="false"
+            aria-controls="mobMenu"><span></span><span></span><span></span></button>
+    </nav>
+
+    <!-- HERO -->
+    <div class="page-hero">
+        <div style="position:relative;z-index:1;max-width:700px">
+            <div class="ph-bread"
+                style="display:flex;align-items:center;gap:10px;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--silver);margin-bottom:24px;font-family:var(--font-d);opacity:0;animation:fadeUp .7s ease .1s forwards">
+                <a href="index.html" style="color:var(--silver);text-decoration:none" data-i18n="nav_home">Asosiy</a> /
+                <span style="color:var(--electric)" data-i18n="nav_contact">Aloqa</span>
+            </div>
+            <h1 style="font-family:var(--font-d);font-weight:900;font-size:clamp(34px,6vw,76px);line-height:1.05;color:var(--white);margin-bottom:18px;opacity:0;animation:fadeUp .7s ease .3s forwards"
+                data-i18n="contact_title">Keling, <span class="ae">gaplashaylik.</span></h1>
+            <p style="font-size:16px;color:var(--silver);line-height:1.75;font-weight:300;max-width:520px;opacity:0;animation:fadeUp .7s ease .5s forwards"
+                data-i18n="contact_desc">Loyiha fikringiz, savol yoki hamkorlik — istalgan narsada yozing.</p>
+        </div>
+    </div>
+
+    <!-- MAIN CONTACT -->
+    <div id="contact-main">
+        <div class="contact-grid">
+
+            <!-- LEFT -->
+            <div class="contact-info">
+                <div class="info-block reveal">
+                    <div class="info-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2"/><path d="M3.5 6.5 12 13l8.5-6.5"/></svg></span></div>
+                    <div class="info-label" data-i18n="contact_info_title">Aloqa Ma'lumotlari</div>
+                    <div class="info-value">islombeksobirjonov1821@gmail.com</div>
+                    <div class="info-sub">Loyiha uchun bog'laning</div>
+                </div>
+                <div class="info-block reveal rd1">
+                    <div class="info-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 7v5l3.5 2"/></svg></span></div>
+                    <div class="info-label" data-i18n="contact_hours">Ish Soatlari</div>
+                    <div class="info-value" data-i18n="contact_hours_val">Dush — Shan: 9:00 — 22:00</div>
+                    <div class="info-sub">(UZT, Toshkent vaqti)</div>
+                </div>
+                <div class="info-block reveal rd2">
+                    <div class="info-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span></div>
+                    <div class="info-label" data-i18n="contact_response">Javob Vaqti</div>
+                    <div class="info-value" data-i18n="contact_response_val">Odatda 2 soat ichida</div>
+                    <div class="info-sub"><span class="avail-dot"></span>Hozir online</div>
+                </div>
+                <div class="info-block reveal rd3">
+                    <div class="info-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21.5S4.5 14.5 4.5 9.5A7.5 7.5 0 0 1 19.5 9.5C19.5 14.5 12 21.5 12 21.5z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span></div>
+                    <div class="info-label" data-i18n="contact_location">Joylashuv</div>
+                    <div class="info-value" data-i18n="contact_location_val">Toshkent, O'zbekiston</div>
+                    <div class="info-sub">Remote ishlash — dunyo bo'ylab</div>
+                </div>
+
+                <!-- SOCIALS -->
+                <div class="social-section reveal">
+                    <div class="social-title" data-i18n="contact_social_title">Ijtimoiy Tarmoqlar</div>
+                    <div class="social-links">
+                        <a href="https://t.me/montrax_offical" target="_blank" class="social-link tg" rel="noopener">
+                            <div class="sl-icon" style="background:rgba(42,171,238,.15);color:#2AABEE"><span
+                                    class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M21 4 3 11.2l6 2.2M21 4 15.5 20l-6.5-6.6M21 4 9 13.4v6.1" />
+                                    </svg></span></div>
+                            <div class="sl-info"><span class="sl-name">Telegram</span><span
+                                    class="sl-handle">@Montrax_offical</span></div>
+                        </a>
+                        <a href="https://instagram.com/montrax_offical" target="_blank" class="social-link ig"
+                            rel="noopener">
+                            <div class="sl-icon" style="background:rgba(228,64,95,.15);color:#E4405F"><span
+                                    class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <rect x="3" y="3" width="18" height="18" rx="5" />
+                                        <circle cx="12" cy="12" r="4.2" />
+                                        <circle cx="17.2" cy="6.8" r="1" />
+                                    </svg></span></div>
+                            <div class="sl-info"><span class="sl-name">Instagram</span><span
+                                    class="sl-handle">@Montrax_offical</span></div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RIGHT: FORM -->
+            <div class="reveal rd1">
+                <div class="contact-form-wrap">
+                    <div id="formContent">
+                        <div class="form-title">Loyiha Yuboring <span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13.5 2.5c3 1 5 3 6 6-3 .5-5.5 1.5-8 4-1.8 1.8-2.7 3.6-3.2 5-1 .1-2 0-2.8-.8-.8-.8-.9-1.8-.8-2.8 1.4-.5 3.2-1.4 5-3.2 2.5-2.5 3.5-5 4-8z"/><path d="M8.5 15.5 4 20M6 13c-1.5 0-3 .5-4 2 1.7.3 2.7.9 3.3 1.7M11 18c0 1.5-.5 3-2 4-.3-1.7-.9-2.7-1.7-3.3"/><circle cx="15.5" cy="8.5" r="1.2"/></svg></span></div>
+                        <div class="form-sub">To'ldiring — 24 soat ichida javob beraman va loyiha haqida batafsil
+                            gaplashamiz.</div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" data-i18n="form_name">Ismingiz</label>
+                                <input class="form-input" type="text" id="fname" placeholder="Ismingiz"
+                                    autocomplete="name">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" data-i18n="form_email">Email</label>
+                                <input class="form-input" type="email" id="femail" placeholder="email@example.com"
+                                    autocomplete="email">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label">Telefon</label>
+                                <input class="form-input" type="tel" id="fphone" placeholder="+998 90 000 00 00"
+                                    autocomplete="tel">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label">Xizmat Turi</label>
+                                <select class="form-input" id="fservice">
+                                    <option value="">Tanlang...</option>
+                                    <option value="frontend">Frontend Dasturlash</option>
+                                    <option value="design">Grafik Dizayn</option>
+                                    <option value="branding">Brend Identifikatsiya</option>
+                                    <option value="ecommerce">E-Tijorat</option>
+                                    <option value="motion">Motion Dizayn</option>
+                                    <option value="full">To'liq Loyiha</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Byudjet</label>
+                            <div class="form-budget">
+                                <span class="budget-chip" onclick="selectBudget(this,'$500-$1000')">$500 — $1k</span>
+                                <span class="budget-chip" onclick="selectBudget(this,'$1000-$2500')">$1k — $2.5k</span>
+                                <span class="budget-chip" onclick="selectBudget(this,'$2500-$5000')">$2.5k — $5k</span>
+                                <span class="budget-chip" onclick="selectBudget(this,'$5000+')">$5k+</span>
+                                <span class="budget-chip" onclick="selectBudget(this,'custom')">Muhokama qilish</span>
+                            </div>
+                            <input type="hidden" id="fbudget">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" data-i18n="form_subject">Loyiha Haqida</label>
+                            <input class="form-input" type="text" id="fsubject"
+                                placeholder="Loyiha nomi yoki qisqacha tavsif">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" data-i18n="form_message">Xabar</label>
+                            <textarea class="form-input" id="fmessage" rows="5"
+                                placeholder="Loyihangiz haqida batafsil aytib bering — maqsad, auditoriya, muddatlar..."></textarea>
+                        </div>
+
+                        <!-- File upload slot -->
+                        <div class="form-group">
+                            <label class="form-label">Fayl Yuklash (ixtiyoriy)</label>
+                            <div style="border:2px dashed rgba(45,58,92,.6);border-radius:6px;padding:20px;text-align:centertransition:border-color .3s"
+                                id="fileDropZone">
+                                <!-- Faylni shu yerga tashlang yoki bosing -->
+                                <div style="font-size:28px;margin-bottom:8px"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18.5 8.5 9.9 17a3.5 3.5 0 0 1-5-5l9.2-9.2a2.5 2.5 0 0 1 3.5 3.5L9.2 14.7a1 1 0 0 1-1.4-1.4l7.1-7.1"/></svg></span></div>
+                                <div style="font-size:13px;color:var(--silver)">Brief, eskiz yoki reference fayllarini
+                                    yuklang</div>
+                                <div style="font-size:11px;color:var(--slate);margin-top:4px">PDF, PNG, JPG, DOCX — maks
+                                    10MB</div>
+                                <input type="file" id="ffile" multiple accept=".pdf,.png,.jpg,.jpeg,.docx,.doc"
+                                    style="display:none">
+                            </div>
+                        </div>
+
+                        <button class="form-btn" onclick="submitForm()">
+                            <span data-i18n="form_send">Xabar Yuborish →</span>
+                        </button>
+
+                        <div style="text-align:center;margin-top:16px;font-size:12px;color:var(--slate)">
+                            <span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 20 6v6c0 5-3.5 8-8 9.5-4.5-1.5-8-4.5-8-9.5V6z"/><path d="M8.5 12l2.4 2.4L15.5 9.5"/></svg></span> Ma'lumotlaringiz xavfsiz va uchinchi shaxslarga berilmaydi
+                        </div>
+                    </div>
+
+                    <div class="form-success" id="formSuccess">
+                        <span class="success-icon mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 6.5"/></svg></span>
+                        <div class="success-title" data-i18n="form_sent">Xabar yuborildi!</div>
+                        <div class="success-desc">Rahmat! 24 soat ichida javob beraman. Tez muloqot uchun Telegram
+                            orqali bog'lanishingiz mumkin.</div>
+                        <a href="https://t.me/montrax_offical" target="_blank" class="btn-e"
+                            style="margin-top:24px;display:inline-flex">Telegram orqali bog'lanish →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PAYMENT METHODS -->
+    <section id="payment-sec">
+        <div style="max-width:1100px;margin:0 auto">
+            <div class="sec-label reveal" data-n="">To'lov Usullari</div>
+            <h2 class="sec-title reveal rd1">Qulay <span class="ae">to'lov</span> qiling.</h2>
+            <p class="sec-desc reveal rd2">Xalqaro va mahalliy to'lov tizimlari qabul qilinadi. Loyiha boshida 50%
+                avans.</p>
+            <div class="payment-grid">
+                <div class="pay-card reveal">
+                    <span class="pay-icon mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="2"/><path d="M2.5 9.5h19M6 15h4"/></svg></span>
+                    <div class="pay-name">Karta Orqali</div>
+                    <div class="pay-desc">Visa, Mastercard, Humo, Uzcard. Xavfsiz va tez to'lov.</div>
+                    <span class="pay-badge">Xavfsiz SSL</span>
+                </div>
+                <div class="pay-card reveal rd1">
+                    <span class="pay-icon mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M9.5 8.5h3.7a2 2 0 0 1 0 4H9.5m0 0h4a2 2 0 0 1 0 4H9.5m2-9v10.5"/></svg></span>
+                    <div class="pay-name">Kripto To'lov</div>
+                    <div class="pay-desc">USDT (TRC20/ERC20), Bitcoin, Ethereum qabul qilinadi.</div>
+                    <span class="pay-badge">P2P ham mumkin</span>
+                </div>
+                <div class="pay-card reveal rd2">
+                    <span class="pay-icon mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 4l9 6.5"/><path d="M4.5 10.5h15V19h-15zM7.5 10.5V19M12 10.5V19M16.5 10.5V19M3 19h18"/></svg></span>
+                    <div class="pay-name">Bank O'tkazmasi</div>
+                    <div class="pay-desc">Swift, SEPA va mahalliy bank o'tkazmalari. Shartnoma taqdim etiladi.</div>
+                    <span class="pay-badge">Rasmiy hujjat</span>
+                </div>
+                <div class="pay-card reveal rd3">
+                    <span class="pay-icon mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></svg></span>
+                    <div class="pay-name">Click / Payme</div>
+                    <div class="pay-desc">O'zbekiston ichida Click va Payme orqali to'lov imkoni.</div>
+                    <span class="pay-badge">Onlayn</span>
+                </div>
+                <div class="pay-card reveal">
+                    <span class="pay-icon mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 4.5h17v12h-9.5L6 20v-3.5h-2.5z"/></svg></span>
+                    <div class="pay-name">PayPal / Wise</div>
+                    <div class="pay-desc">Xalqaro mijozlar uchun PayPal va Wise orqali to'lov.</div>
+                    <span class="pay-badge">Xalqaro</span>
+                </div>
+                <div class="pay-card reveal rd1"
+                    style="border-color:rgba(0,200,255,.2);background:linear-gradient(135deg,var(--chrome),rgba(0,200,255,.04))">
+                    <span class="pay-icon mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3.5h4V6a2 2 0 1 0 0 4V13H10a2 2 0 1 1-4 0H3.5V9a2 2 0 1 0 0-4V3.5H6a2 2 0 1 1 4 0z"/><path d="M13 13h3a2 2 0 1 0 4 0h.5v7.5H13z"/></svg></span>
+                    <div class="pay-name">Maxsus Kelishuv</div>
+                    <div class="pay-desc">Katta loyihalar uchun bosqichma-bosqich to'lov rejasi tuzilib, shartnoma
+                        imzolanadi.</div>
+                    <span class="pay-badge" style="border-color:var(--electric);color:var(--electric)">Muzokarali</span>
+                </div>
+            </div>
+
+            <div
+                style="background:var(--chrome);border:1px solid rgba(0,200,255,.15);border-radius:10px;padding:32px;max-width:800px;margin:0 auto">
+                <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:24px;text-align:center">
+                    <div>
+                        <div style="font-size:32px;margin-bottom:8px"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4.5" width="14" height="17" rx="2"/><rect x="9" y="2.5" width="6" height="3.5" rx="1"/><path d="M8.5 12h7M8.5 16h7"/></svg></span></div>
+                        <div
+                            style="font-family:var(--font-d);font-size:12px;color:var(--electric);letter-spacing:.1em;margin-bottom:6px">
+                            SHARTNOMA</div>
+                        <div style="font-size:13px;color:var(--silver)">Har bir loyiha uchun rasmiy shartnoma imzolanadi
+                        </div>
+                    </div>
+                    <div>
+                        <div style="font-size:32px;margin-bottom:8px"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5 20 6v6c0 5-3.5 8-8 9.5-4.5-1.5-8-4.5-8-9.5V6z"/><path d="M8.5 12l2.4 2.4L15.5 9.5"/></svg></span></div>
+                        <div
+                            style="font-family:var(--font-d);font-size:12px;color:var(--electric);letter-spacing:.1em;margin-bottom:6px">
+                            KAFOLAT</div>
+                        <div style="font-size:13px;color:var(--silver)">Loyiha topshirilgandan so'ng 30 kun bepul
+                            qo'llab-quvvatlash</div>
+                    </div>
+                    <div>
+                        <div style="font-size:32px;margin-bottom:8px"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9.5h10a5.5 5.5 0 0 1 0 11h-3"/><path d="M8 5 4 9.5 8 14"/></svg></span></div>
+                        <div
+                            style="font-family:var(--font-d);font-size:12px;color:var(--electric);letter-spacing:.1em;margin-bottom:6px">
+                            QAYTARISH</div>
+                        <div style="font-size:13px;color:var(--silver)">Ish boshlanmagan bo'lsa avans to'liq qaytariladi
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOCATION -->
+    <section id="location-sec">
+        <div class="location-grid">
+            <div class="location-map reveal">
+                <div class="map-pin">
+                    <div class="map-pin-dot"></div>
+                    <div class="map-pin-stem"></div>
+                    <div class="map-city">TOSHKENT</div>
+                </div>
+                <!-- Xarita uchun joy — embed qilishingiz mumkin -->
+                <!-- <img src="./img/map.png" alt="Toshkent xaritasi" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.3"> -->
+            </div>
+            <div class="location-info reveal rd2">
+                <div class="sec-label" data-n="">Joylashuv</div>
+                <h2 class="sec-title">Dunyo bo'ylab <span class="ae">remote</span></h2>
+                <p class="sec-desc">Toshkentda joylashgan, dunyo bo'ylab masofadan ishlash tajribasi. Barcha vaqt
+                    mintaqalari bilan ishlash imkoni mavjud.</p>
+                <div class="avail-card">
+                    <div class="avail-title">Hozirgi Holat</div>
+                    <div class="avail-item"><span class="avail-key">Status</span><span class="avail-val"><span
+                                class="avail-dot"></span>Online — Mavjud</span></div>
+                    <div class="avail-item"><span class="avail-key">Vaqt mintaqasi</span><span class="avail-val">UZT
+                            (UTC+5)</span></div>
+                    <div class="avail-item"><span class="avail-key">Javob vaqti</span><span class="avail-val">~2
+                            soat</span></div>
+                    <div class="avail-item"><span class="avail-key">Til</span><span class="avail-val">UZ · EN ·
+                            RU</span></div>
+                    <div class="avail-item"><span class="avail-key">Yangi loyiha</span><span class="avail-val"
+                            style="color:var(--lightning)">Qabul qilaman <span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5l5.5 5.5L20 6.5"/></svg></span></span></div>
+                </div>
+                <a href="https://t.me/montrax_offical" target="_blank" class="btn-e">Telegram orqali tez bog'lanish
+                    →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cta-con" class="cta-section">
+        <div class="cta-line top"></div>
+        <div class="cta-line bot"></div>
+        <div class="cta-eye reveal">Tayyormisiz?</div>
+        <h2 class="cta-title reveal rd1">Bugun <span class="ae">boshlaylik.</span></h2>
+        <p class="cta-desc reveal rd2">Formani to'ldiring yoki to'g'ridan-to'g'ri Telegram orqali yozing — birgalikda
+            ajoyib narsa yaratamiz.</p>
+        <div class="cta-btns reveal rd3">
+            <a href="https://t.me/montrax_offical" target="_blank" class="btn-gold">Telegram orqali →</a>
+            <a href="pricing.html" class="btn-o" data-i18n="nav_pricing">Narxlarni Ko'rish</a>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="foot-grid">
+            <div>
+                <span class="foot-brand-name">MONTRAX</span>
+                <p class="foot-tag" data-i18n="foot_desc">Frontend Dasturchi va Grafik Dizayner.</p>
+                <div class="foot-socs">
+                    <a href="https://t.me/montrax_offical" target="_blank" rel="noopener" class="soc-btn"
+                        aria-label="Telegram"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4 3 11.2l6 2.2M21 4 15.5 20l-6.5-6.6M21 4 9 13.4v6.1"/></svg></span></a>
+                    <a href="https://instagram.com/montrax_offical" target="_blank" rel="noopener" class="soc-btn"
+                        aria-label="Instagram"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.2" cy="6.8" r="1"/></svg></span></a>
+                </div>
+            </div>
+            <div>
+                <div class="foot-col-t" data-i18n="foot_services">Xizmatlar</div>
+                <ul class="foot-links">
+                    <li><a href="frontend.html">Frontend Dev</a></li>
+                    <li><a href="design.html">UI/UX Dizayn</a></li>
+                    <li><a href="pricing.html">Narxlar</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="foot-col-t" data-i18n="foot_navigate">Navigatsiya</div>
+                <ul class="foot-links">
+                    <li><a href="index.html" data-i18n="nav_home">Asosiy</a></li>
+                    <li><a href="frontend.html" data-i18n="nav_frontend">Frontend</a></li>
+                    <li><a href="design.html" data-i18n="nav_design">Dizayn</a></li>
+
+                </ul>
+            </div>
+            <div>
+                <div class="foot-col-t" data-i18n="foot_touch">Bog'laning</div>
+                <div style="display:flex;flex-direction:column;gap:10px"><a href="https://t.me/montrax_offical"
+                        target="_blank" class="btn-e" style="justify-content:center">Telegram →</a><a
+                        href="mailto:islombeksobirjonov1821@gmail.com" class="btn-o"
+                        style="justify-content:center">Email</a></div>
+            </div>
+        </div>
+        <div class="foot-bottom"><span class="foot-copy">© 2025 <span>MONTRAX</span>. <span data-i18n="foot_copy">Barcha
+                    huquqlar himoyalangan.</span></span><span class="foot-made"><span class="mtx-ico" aria-hidden="true" style="color:var(--pulse)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.2S3 15 3 8.7A4.7 4.7 0 0 1 12 6a4.7 4.7 0 0 1 9 2.7C21 15 12 20.2 12 20.2z"/></svg></span> <span data-i18n="foot_made">Elektr
+                    aniqlik bilan yaratilgan</span></span></div>
+    </footer>
+
+    <!-- ── LIVE CHAT WIDGET ── -->
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-panel" id="chatPanel">
+            <div class="chat-header">
+                <div class="chat-avatar">M</div>
+                <div class="chat-info">
+                    <span class="chat-name">MONTRAX Admin</span>
+                    <span class="chat-status">Online</span>
+                </div>
+                <button class="chat-close" onclick="toggleChat()" aria-label="Chatni yopish"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 5l14 14M19 5 5 19"/></svg></span></button>
+            </div>
+            <div class="chat-messages" id="chatMessages">
+                <div class="msg admin">
+                    <div class="msg-av admin">M</div>
+                    <div>
+                        <div class="msg-bubble">Salom! Men MONTRAX — Frontend va Grafik Dizayner. Loyihangiz haqida
+                            gaplashamizmi?</div>
+                        <span class="msg-time">Hozir</span>
+                    </div>
+                </div>
+                <div class="msg admin">
+                    <div class="msg-av admin">M</div>
+                    <div>
+                        <div class="msg-bubble">Savol va takliflaringizni yozing — tez javob beraman! <span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z"/></svg></span></div>
+                        <span class="msg-time">Hozir</span>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-quick" id="chatQuick">
+                <button class="quick-btn" onclick="quickMsg('Narxlar haqida')"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M9.5 8.5h3.7a2 2 0 0 1 0 4H9.5m0 0h4a2 2 0 0 1 0 4H9.5m2-9v10.5"/></svg></span> Narxlar</button>
+                <button class="quick-btn" onclick="quickMsg('Loyiha muddati')"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M12 7v5l3.5 2"/></svg></span> Muddat</button>
+                <button class="quick-btn" onclick="quickMsg('Portfolio')"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21a9 9 0 1 1 9-9c0 1.5-1 2.5-2.5 2.5H16a2 2 0 0 0-1.4 3.4c.5.5.5 1.4-.2 1.8-.7.4-1.5.3-2.4.3z"/><circle cx="7.5" cy="10.5" r="1.2"/><circle cx="11" cy="7" r="1.2"/><circle cx="15.5" cy="8" r="1.2"/></svg></span> Portfolio</button>
+                <button class="quick-btn" onclick="quickMsg('To\'lov usullari')"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="2"/><path d="M2.5 9.5h19M6 15h4"/></svg></span> To'lov</button>
+            </div>
+            <div class="chat-footer">
+                <input class="chat-input" id="chatInput" placeholder="Xabar yozing..."
+                    onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendChat()}">
+                <button class="chat-send" onclick="sendChat()">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M2 21l21-9L2 3v7l15 2-15 2z" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <button class="chat-bubble" id="chatBtn" onclick="toggleChat()">
+            <svg viewBox="0 0 24 24">
+                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z" />
+            </svg>
+            <span class="chat-notif" id="chatNotif">1</span>
+        </button>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="lang.js"></script>
+    <script>
+        window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('sc', scrollY > 60));
+        const ham = document.getElementById('hamburger'), mob = document.getElementById('mobMenu');
+        ham.addEventListener('click', () => { const open = ham.classList.toggle('open'); mob.classList.toggle('open'); ham.setAttribute('aria-expanded', open) });
+        mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { ham.classList.remove('open'); mob.classList.remove('open'); ham.setAttribute('aria-expanded', false) }));
+
+        /* ── FORM ── */
+        let selectedBudget = '';
+        function selectBudget(el, val) {
+            document.querySelectorAll('.budget-chip').forEach(c => c.classList.remove('active'));
+            el.classList.add('active');
+            selectedBudget = val;
+            document.getElementById('fbudget').value = val;
+        }
+
+        /* File drop */
+        const dz = document.getElementById('fileDropZone');
+        const fi = document.getElementById('ffile');
+        dz.addEventListener('click', () => fi.click());
+        dz.addEventListener('dragover', e => { e.preventDefault(); dz.style.borderColor = 'var(--electric)' });
+        dz.addEventListener('dragleave', () => dz.style.borderColor = 'rgba(45,58,92,.6)');
+        dz.addEventListener('drop', e => { e.preventDefault(); dz.style.borderColor = 'rgba(45,58,92,.6)'; const files = e.dataTransfer.files; showFiles(files) });
+        fi.addEventListener('change', () => showFiles(fi.files));
+        function showFiles(files) {
+            if (files.length) {
+                const names = Array.from(files).map(f => f.name).join(', ');
+                const target = dz.querySelector('div:nth-child(2)');
+                target.innerHTML = mtxIcon('paperclip');
+                target.appendChild(document.createTextNode(' ' + names));
+            }
+        }
+
+        async function submitForm() {
+            const name = document.getElementById('fname').value.trim();
+            const email = document.getElementById('femail').value.trim();
+            const message = document.getElementById('fmessage').value.trim();
+            if (!name || !email || !message) { alert('Iltimos, ismingiz, emailingiz va xabaringizni to\'ldiring.'); return }
+            const btn = document.querySelector('.form-btn span');
+            btn.textContent = 'Yuborilmoqda...';
+            const data = {
+                name, email,
+                phone: document.getElementById('fphone').value,
+                service: document.getElementById('fservice').value,
+                budget: selectedBudget,
+                subject: document.getElementById('fsubject').value,
+                message
+            };
+            try {
+                const apiBase = (typeof MONTRAX_CONFIG !== 'undefined') ? MONTRAX_CONFIG.API_BASE : '';
+                const r = await fetch(apiBase + '/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) });
+                const result = await r.json();
+                if (r.ok && result.ok) {
+                    document.getElementById('formContent').style.display = 'none';
+                    document.getElementById('formSuccess').classList.add('show');
+                } else {
+                    alert('Xatolik: ' + (result.error || 'Xabar yuborilmadi'));
+                }
+            } catch (e) {
+                alert('Xatolik: Internet ulanishini tekshiring');
+            }
+        }
+
+
+        /* ── LIVE CHAT ── */
+        let chatOpen = false;
+        let userId = 'user_' + Math.random().toString(36).substr(2, 8);
+        let ws = null;
+        const adminNum = '882552882';
+
+        function toggleChat() {
+            chatOpen = !chatOpen;
+            const panel = document.getElementById('chatPanel');
+            const btn = document.getElementById('chatBtn');
+            panel.classList.toggle('show', chatOpen);
+            btn.classList.toggle('open', chatOpen);
+            document.getElementById('chatNotif').style.display = chatOpen ? 'none' : 'flex';
+            if (chatOpen) {
+                document.getElementById('chatInput').focus();
+                connectWS();
+            }
+        }
+
+        function connectWS() {
+            if (ws && (ws.readyState === WebSocket.OPEN || ws.readyState === WebSocket.CONNECTING)) return;
+            const wsUrl = (typeof MONTRAX_CONFIG !== 'undefined') ? MONTRAX_CONFIG.WS_URL : (location.protocol === 'https:' ? 'wss:' : 'ws:') + '//' + location.host;
+            try {
+                ws = new WebSocket(wsUrl);
+                ws.onmessage = e => {
+                    const d = JSON.parse(e.data);
+                    if (d.type === 'msg' && d.from === 'admin') { appendMsg('admin', d.text) }
+                };
+                ws.onerror = () => { ws = null };
+            } catch (e) { ws = null }
+        }
+
+        function appendMsg(from, text) {
+            const box = document.getElementById('chatMessages');
+            const isUser = from === 'user';
+            const div = document.createElement('div');
+            div.className = 'msg ' + (isUser ? 'user' : 'admin');
+            const now = new Date().toLocaleTimeString('uz-UZ', { hour: '2-digit', minute: '2-digit' });
+            const av = document.createElement('div');
+            av.className = 'msg-av ' + (isUser ? 'user-av' : 'admin');
+            av.textContent = isUser ? 'S' : 'M';
+            const body = document.createElement('div');
+            const bubble = document.createElement('div');
+            bubble.className = 'msg-bubble';
+            bubble.textContent = text; // always plain text — never render as HTML (avoids XSS from chat input)
+            const time = document.createElement('span');
+            time.className = 'msg-time';
+            time.textContent = now;
+            body.appendChild(bubble);
+            body.appendChild(time);
+            div.appendChild(av);
+            div.appendChild(body);
+            box.appendChild(div);
+            box.scrollTop = box.scrollHeight;
+            // Hide quick buttons after first user message
+            if (isUser) document.getElementById('chatQuick').style.display = 'none';
+        }
+
+        function sendChat() {
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            if (!text) return;
+            appendMsg('user', text);
+            input.value = '';
+            if (ws && ws.readyState === WebSocket.OPEN) {
+                ws.send(JSON.stringify({ type: 'msg', from: 'user', userId, text }));
+            } else {
+                // Fallback — auto reply
+                setTimeout(() => {
+                    appendMsg('admin', 'Xabaringiz qabul qilindi! 24 soat ichida javob beraman. Tez muloqot uchun Telegram: @montrax_offical');
+                }, 1200);
+            }
+        }
+
+        function quickMsg(text) {
+            document.getElementById('chatInput').value = text;
+            sendChat();
+        }
+
+        // Show chat notification after 5s
+        setTimeout(() => {
+            if (!chatOpen) {
+                document.getElementById('chatNotif').textContent = '!';
+                setTimeout(() => { if (!chatOpen) appendAdminMsg('Loyihangiz haqida gaplashamizmi?') }, 8000);
+            }
+        }, 5000);
+
+        function appendAdminMsg(text) {
+            if (!chatOpen) return;
+            appendMsg('admin', text);
+        }
+
+        /* ── REVEAL ── */
+        const ro = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }), { threshold: .08 });
+        document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+    </script>
+</body>
+
+</html>

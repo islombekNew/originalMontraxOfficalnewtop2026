@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MONTRAX — Narxlar</title>
+    <meta name="description"
+        content="MONTRAX narx rejalari — frontend dasturlash va grafik dizayn xizmatlari uchun shaffof, aniq narxlar. O'zingizga mos rejani tanlang.">
+    <meta name="theme-color" content="#0a0d1a">
+    <link rel="canonical" href="https://montrax.uz/pricing.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="MONTRAX — Narx Rejalari">
+    <meta property="og:description" content="Frontend va dizayn xizmatlari uchun shaffof narx rejalari.">
+    <meta property="og:image" content="./img/icon/og-cover.svg">
+    <meta property="og:locale" content="uz_UZ">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" type="image/svg+xml" href="./img/icon/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Exo+2:ital,wght@0,200;0,300;0,400;0,600;0,700;1,300&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./base.css">
+    <script src="./icons.js"></script>
+    <style>
+        .page-hero {
+            min-height: 46vh;
+            display: flex;
+            align-items: center;
+            padding: 140px 60px 70px;
+            position: relative;
+            overflow: hidden;
+            background: var(--steel);
+            text-align: center;
+            justify-content: center;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(0, 200, 255, .03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 200, 255, .03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gd 25s linear infinite
+        }
+
+        @keyframes gd {
+            0% {
+                background-position: 0 0
+            }
+
+            100% {
+                background-position: 60px 60px
+            }
+        }
+
+        .ph-content {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .ph-bread {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-size: 10px;
+            letter-spacing: .28em;
+            text-transform: uppercase;
+            color: var(--silver);
+            margin-bottom: 24px;
+            font-family: var(--font-d);
+        }
+
+        .ph-bread a {
+            color: var(--silver);
+            text-decoration: none;
+            transition: color .3s
+        }
+
+        .ph-bread a:hover {
+            color: var(--electric)
+        }
+
+        .ph-bread span {
+            color: var(--electric)
+        }
+
+        .ph-title {
+            font-family: var(--font-d);
+            font-weight: 900;
+            font-size: clamp(32px, 5.5vw, 60px);
+            line-height: 1.1;
+            color: var(--white);
+            margin-bottom: 16px;
+        }
+
+        .ph-title span {
+            color: var(--electric)
+        }
+
+        .ph-sub {
+            font-size: 16px;
+            color: var(--silver);
+            line-height: 1.75;
+            font-weight: 300;
+            max-width: 520px;
+            margin: 0 auto;
+        }
+
+        .billing-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            margin-top: 34px;
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .6);
+            border-radius: 3px;
+            padding: 5px;
+        }
+
+        .billing-btn {
+            background: transparent;
+            border: none;
+            color: var(--silver);
+            font-family: var(--font-d);
+            font-size: 11px;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            padding: 9px 20px;
+            border-radius: 2px;
+            transition: all .3s;
+        }
+
+        .billing-btn.active {
+            background: var(--electric);
+            color: var(--abyss);
+        }
+
+        #plans {
+            background: var(--abyss);
+        }
+
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+            align-items: stretch;
+        }
+
+        .plan-card {
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .6);
+            border-radius: 8px;
+            padding: 40px 32px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: all .4s;
+        }
+
+        .plan-card:hover {
+            border-color: rgba(0, 200, 255, .35);
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .35);
+        }
+
+        .plan-card.popular {
+            border-color: var(--electric);
+            box-shadow: var(--glow-e);
+        }
+
+        .plan-badge {
+            position: absolute;
+            top: -13px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--electric);
+            color: var(--abyss);
+            font-family: var(--font-d);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            padding: 6px 16px;
+            border-radius: 20px;
+        }
+
+        .plan-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            background: rgba(0, 200, 255, .08);
+            border: 1px solid rgba(0, 200, 255, .18);
+            color: var(--electric);
+            margin-bottom: 22px;
+        }
+
+        .plan-card.popular .plan-icon {
+            background: rgba(123, 47, 255, .1);
+            border-color: rgba(123, 47, 255, .25);
+            color: var(--plasma);
+        }
+
+        .plan-name {
+            font-family: var(--font-d);
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--white);
+            letter-spacing: .06em;
+            margin-bottom: 8px;
+        }
+
+        .plan-desc {
+            font-size: 13px;
+            color: var(--silver);
+            line-height: 1.6;
+            margin-bottom: 26px;
+            min-height: 40px;
+        }
+
+        .plan-price {
+            font-family: var(--font-d);
+            font-weight: 900;
+            font-size: 40px;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+
+        .plan-price .cur {
+            font-size: 18px;
+            color: var(--electric);
+            vertical-align: top;
+        }
+
+        .plan-price.custom {
+            font-size: 26px;
+            color: var(--electric);
+        }
+
+        .plan-from {
+            font-size: 11px;
+            color: var(--slate);
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            margin-bottom: 28px;
+        }
+
+        .plan-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+            margin-bottom: 32px;
+            flex: 1;
+        }
+
+        .plan-features li {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--frost);
+            line-height: 1.5;
+        }
+
+        .plan-features li .mtx-ico {
+            color: var(--lightning);
+            margin-top: 2px;
+            font-size: 14px;
+        }
+
+        .plan-btn {
+            text-align: center;
+            justify-content: center;
+        }
+
+        #faq {
+            background: var(--steel);
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            max-width: 760px;
+        }
+
+        .faq-item {
+            background: var(--chrome);
+            border: 1px solid rgba(45, 58, 92, .5);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .faq-q {
+            width: 100%;
+            text-align: left;
+            background: none;
+            border: none;
+            padding: 22px 26px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            font-family: var(--font-d);
+            font-size: 13px;
+            color: var(--white);
+            letter-spacing: .03em;
+        }
+
+        .faq-q .mtx-ico {
+            color: var(--electric);
+            transition: transform .3s;
+            flex-shrink: 0;
+        }
+
+        .faq-item.open .faq-q .mtx-ico {
+            transform: rotate(45deg);
+        }
+
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .35s ease;
+        }
+
+        .faq-item.open .faq-a {
+            max-height: 200px;
+        }
+
+        .faq-a p {
+            padding: 0 26px 22px;
+            font-size: 13px;
+            color: var(--silver);
+            line-height: 1.7;
+            max-width: 640px;
+        }
+
+        @media (max-width: 1024px) {
+            .plans-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-hero {
+                padding: 120px 20px 60px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#plans" class="skip-link">Asosiy mazmunga o'tish</a>
+    <div class="mob-menu" id="mobMenu">
+        <a href="index.html" data-i18n="nav_home">Asosiy</a>
+        <a href="frontend.html" data-i18n="nav_frontend">Frontend</a>
+        <a href="design.html" data-i18n="nav_design">Dizayn</a>
+        <a href="pricing.html" class="active" data-i18n="nav_pricing">Narxlar</a>
+        <a href="contact.html" data-i18n="nav_contact">Aloqa</a>
+        <a href="contact.html" class="mob-cta" data-i18n="nav_hire">Yollash</a>
+        <div class="mob-lang">
+            <button class="lang-btn" data-lang="uz" onclick="setLang('uz')">UZ</button>
+            <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+            <button class="lang-btn" data-lang="ru" onclick="setLang('ru')">RU</button>
+        </div>
+    </div>
+
+    <nav id="nav">
+        <a href="index.html" class="nav-logo">MO<span>N</span>TRAX</a>
+        <ul class="nav-links">
+            <li><a href="index.html" data-i18n="nav_home">Asosiy</a></li>
+            <li><a href="frontend.html" data-i18n="nav_frontend">Frontend</a></li>
+            <li><a href="design.html" data-i18n="nav_design">Dizayn</a></li>
+            <li><a href="pricing.html" class="active" data-i18n="nav_pricing">Narxlar</a></li>
+            <li><a href="contact.html" data-i18n="nav_contact">Aloqa</a></li>
+        </ul>
+        <div class="nav-right">
+            <div class="lang-switcher">
+                <button class="lang-btn" data-lang="uz" onclick="setLang('uz')">UZ</button>
+                <button class="lang-btn" data-lang="en" onclick="setLang('en')">EN</button>
+                <button class="lang-btn" data-lang="ru" onclick="setLang('ru')">RU</button>
+            </div>
+            <a href="contact.html" class="nav-cta" data-i18n="nav_hire">Yollash</a>
+        </div>
+        <button class="hamburger" id="hamburger" aria-label="Menyuni ochish" aria-expanded="false"
+            aria-controls="mobMenu"><span></span><span></span><span></span></button>
+    </nav>
+
+    <div class="page-hero">
+        <div class="ph-content">
+            <div class="ph-bread"><a href="index.html" data-i18n="nav_home">Asosiy</a> / <span
+                    data-i18n="nav_pricing">Narxlar</span></div>
+            <h1 class="ph-title" data-i18n="pricing_title">Sizga mos <span class="ae">rejani</span> tanlang.</h1>
+            <p class="ph-sub" data-i18n="pricing_desc">Har bir loyiha uchun shaffof va adolatli narxlar.</p>
+        </div>
+    </div>
+
+    <section id="plans">
+        <div class="sec-label reveal" data-n="01"><span data-i18n="pricing_label">Narx Rejalari</span></div>
+        <div class="plans-grid">
+            <div class="plan-card reveal">
+                <div class="plan-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8z" />
+                        </svg></span></div>
+                <div class="plan-name" data-i18n="plan_basic">Boshlang'ich</div>
+                <div class="plan-desc" data-i18n="plan_basic_desc">Kichik loyihalar va startaplar uchun</div>
+                <div class="plan-price">$250<span class="cur">/loyiha</span></div>
+                <div class="plan-from" data-i18n="plan_from">dan boshlab</div>
+                <ul class="plan-features">
+                    <li><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 12.5l5.5 5.5L20 6.5" />
+                            </svg></span> 1 sahifali landing yoki vizit-karta sayt</li>
+                    <li><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 12.5l5.5 5.5L20 6.5" />
+                            </svg></span> To'liq responsive dizayn</li>
+                    <li><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 12.5l5.5 5.5L20 6.5" />
+                            </svg></span> Asosiy SEO sozlash</li>
+                    <li><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 12.5l5.5 5.5L20 6.5" />
+                            </svg></span> 7 kun bepul texnik yordam</li>
+                    <li><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 12.5l5.5 5.5L20 6.5" />
+                            </svg></span> 1-2 marta bepul tuzatish</li>
+                </ul>
+                <a href="contact.html" class="btn-o plan-btn" data-i18n="plan_btn_basic">Boshlash</a>
+            </div>
+
+            <div class="plan-card popular reveal rd1">
+                <div class="plan-badge" data-i18n="plan_popular">Mashhur</div>
+                <div class="plan-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.5" stroke-linejoin="round">
+                            <path
+                                d="M12 2v6M12 16v6M2 12h6M16 12h6M5.5 5.5l4 4M14.5 14.5l4 4M18.5 5.5l-4 4M9.5 14.5l-4 4" />
+                        </svg></span></div>
+                <div class="plan-name" data-i18n="plan_pro">Professional</div>
+                <div class="plan-desc" data-i18n="plan_pro_desc">O'sib borayotgan bizneslar uchun</div>
+                <div class="plan-price">$700<span class="cur">/loyiha</span></div>
+                <div class="plan-from" data-i18n="plan_from">dan boshlab</div>
+                <ul class="plan-features">
+                    <li><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 12.5l5.5 5.5L20 6.5" />
+                            </svg></span> 5-10 sahifali to'liq veb-sayt</li>
+                    <li><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 12.5l5.5 5.5L20 6.5" />
+                            </svg></span> React / Next.js interfeys</li>
+                    <li><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 12.5l5.5 5.5L20 6.5" />
+                            </svg></span> Maxsus UI/UX dizayn</li>
+                    <li><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 12.5l5.5 5.5L20 6.5" />
+                            </svg></span> Chuqur SEO va tezlik optimallashtirish</li>
+                    <li><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 12.5l5.5 5.5L20 6.5" />
+                            </svg></span> 30 kun texnik yordam</li>
+                    <li><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 12.5l5.5 5.5L20 6.5" />
+                            </svg></span> Admin panel integratsiyasi</li>
+                </ul>
+                <a href="contact.html" class="btn-e plan-btn" data-i18n="plan_btn_pro">Tanlash</a>
+            </div>
+
+            <div class="plan-card reveal rd2">
+                <div class="plan-icon"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M7 4h10v5a5 5 0 0 1-10 0V4z" />
+                            <path
+                                d="M7 5H4.5A1.5 1.5 0 0 0 3 6.5C3 8.5 4.5 10 7 10M17 5h2.5A1.5 1.5 0 0 1 21 6.5C21 8.5 19.5 10 17 10" />
+                            <path d="M9 20h6M12 14v6" />
+                        </svg></span></div>
+                <div class="plan-name" data-i18n="plan_elite">Elite</div>
+                <div class="plan-desc" data-i18n="plan_elite_desc">Yirik korporativ loyihalar uchun</div>
+                <div class="plan-price custom" data-i18n="plan_custom">Maxsus narx</div>
+                <div class="plan-from">&nbsp;</div>
+                <ul class="plan-features">
+                    <li><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 12.5l5.5 5.5L20 6.5" />
+                            </svg></span> Full-stack veb-ilova / SaaS</li>
+                    <li><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 12.5l5.5 5.5L20 6.5" />
+                            </svg></span> To'liq brend identifikatsiya</li>
+                    <li><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 12.5l5.5 5.5L20 6.5" />
+                            </svg></span> Individual arxitektura va rejalashtirish</li>
+                    <li><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 12.5l5.5 5.5L20 6.5" />
+                            </svg></span> Uzoq muddatli hamkorlik va qo'llab-quvvatlash</li>
+                    <li><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M4 12.5l5.5 5.5L20 6.5" />
+                            </svg></span> Maxsus integratsiyalar (to'lov, CRM, va h.k.)</li>
+                </ul>
+                <a href="contact.html" class="btn-o plan-btn" data-i18n="plan_btn_elite">Bog'lanish</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq">
+        <div class="sec-label reveal" data-n="02">Tez-tez So'raladigan Savollar</div>
+        <h2 class="sec-title reveal rd1">Savolingiz <span class="ae">bormi?</span></h2>
+        <p class="sec-desc reveal rd2">Narxlar bo'yicha eng ko'p beriladigan savollarga javoblar.</p>
+        <div class="faq-list reveal rd3">
+            <div class="faq-item">
+                <button class="faq-q"><span>To'lov qanday amalga oshiriladi?</span><span class="mtx-ico"
+                        aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round">
+                            <path d="M12 5v14M5 12h14" />
+                        </svg></span></button>
+                <div class="faq-a">
+                    <p>Odatda 50% oldindan, qolgan 50% loyiha topshirilganda to'lanadi. Karta, bank o'tkazmasi yoki
+                        kelishilgan boshqa usul orqali.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q"><span>Loyiha qancha vaqt oladi?</span><span class="mtx-ico" aria-hidden="true">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                            stroke-linecap="round">
+                            <path d="M12 5v14M5 12h14" />
+                        </svg></span></button>
+                <div class="faq-a">
+                    <p>Boshlang'ich loyihalar 1-2 hafta, Professional loyihalar 3-5 hafta, Elite loyihalar
+                        murakkabligiga qarab belgilanadi.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q"><span>Tuzatish/qayta ishlash kiritilganmi?</span><span class="mtx-ico"
+                        aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round">
+                            <path d="M12 5v14M5 12h14" />
+                        </svg></span></button>
+                <div class="faq-a">
+                    <p>Ha, har bir rejaga bir necha bepul tuzatish kiritilgan. Qo'shimcha o'zgarishlar alohida
+                        kelishiladi.</p>
+                </div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q"><span>Narxga qanday narsalar kirmaydi?</span><span class="mtx-ico"
+                        aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round">
+                            <path d="M12 5v14M5 12h14" />
+                        </svg></span></button>
+                <div class="faq-a">
+                    <p>Domen, hosting va uchinchi tomon servis to'lovlari (masalan, to'lov tizimlari komissiyasi)
+                        narxga kirmaydi.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cta-pricing" class="cta-section">
+        <div class="cta-line top"></div>
+        <div class="cta-line bot"></div>
+        <div class="cta-eye reveal">Aniq narx bilmoqchimisiz?</div>
+        <h2 class="cta-title reveal rd1">Loyihangiz haqida <span class="ae">gaplashaylik.</span></h2>
+        <p class="cta-desc reveal rd2">Talablaringizga qarab aniq narx va muddatni belgilab beraman.</p>
+        <div class="cta-btns reveal rd3">
+            <a href="contact.html" class="btn-e">Bepul Konsultatsiya →</a>
+            <a href="frontend.html" class="btn-o">Ishlarni Ko'rish</a>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="foot-grid">
+            <div>
+                <span class="foot-brand-name">MONTRAX</span>
+                <p class="foot-tag" data-i18n="foot_desc">Frontend Dasturchi va Grafik Dizayner.</p>
+                <div class="foot-socs">
+                    <a href="https://t.me/montrax_offical" target="_blank" rel="noopener" class="soc-btn"
+                        aria-label="Telegram"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <path d="M21 4 3 11.2l6 2.2M21 4 15.5 20l-6.5-6.6M21 4 9 13.4v6.1" />
+                            </svg></span></a>
+                    <a href="https://instagram.com/montrax_offical" target="_blank" rel="noopener" class="soc-btn"
+                        aria-label="Instagram"><span class="mtx-ico" aria-hidden="true"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+                                stroke-linejoin="round">
+                                <rect x="3" y="3" width="18" height="18" rx="5" />
+                                <circle cx="12" cy="12" r="4.2" />
+                                <circle cx="17.2" cy="6.8" r="1" />
+                            </svg></span></a>
+                </div>
+            </div>
+            <div>
+                <div class="foot-col-t" data-i18n="foot_services">Xizmatlar</div>
+                <ul class="foot-links">
+                    <li><a href="frontend.html">Frontend Dev</a></li>
+                    <li><a href="design.html">UI/UX Dizayn</a></li>
+                    <li><a href="pricing.html">Narxlar</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="foot-col-t" data-i18n="foot_navigate">Navigatsiya</div>
+                <ul class="foot-links">
+                    <li><a href="index.html" data-i18n="nav_home">Asosiy</a></li>
+                    <li><a href="frontend.html" data-i18n="nav_frontend">Frontend</a></li>
+                    <li><a href="design.html" data-i18n="nav_design">Dizayn</a></li>
+                    <li><a href="contact.html" data-i18n="nav_contact">Aloqa</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="foot-col-t" data-i18n="foot_touch">Bog'laning</div>
+                <div style="display:flex;flex-direction:column;gap:10px"><a href="contact.html" class="btn-e"
+                        style="justify-content:center" data-i18n="nav_hire">Yollash</a></div>
+            </div>
+        </div>
+        <div class="foot-bottom">
+            <span class="foot-copy">© 2025 <span>MONTRAX</span>. <span data-i18n="foot_copy">Barcha huquqlar
+                    himoyalangan.</span></span>
+            <span class="foot-made"><span class="mtx-ico" aria-hidden="true" style="color:var(--pulse)"><svg
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path
+                            d="M12 20.2S3 15 3 8.7A4.7 4.7 0 0 1 12 6a4.7 4.7 0 0 1 9 2.7C21 15 12 20.2 12 20.2z" />
+                    </svg></span> <span data-i18n="foot_made">Elektr aniqlik bilan yaratilgan</span></span>
+        </div>
+    </footer>
+
+    <script src="./config.js"></script>
+    <script src="./lang.js"></script>
+    <script>
+        window.addEventListener('scroll', () => document.getElementById('nav').classList.toggle('sc', scrollY > 60));
+        const ham = document.getElementById('hamburger'), mob = document.getElementById('mobMenu');
+        ham.addEventListener('click', () => { const open = ham.classList.toggle('open'); mob.classList.toggle('open'); ham.setAttribute('aria-expanded', open) });
+        mob.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { ham.classList.remove('open'); mob.classList.remove('open'); ham.setAttribute('aria-expanded', false) }));
+
+        document.querySelectorAll('.faq-q').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const item = btn.closest('.faq-item');
+                const wasOpen = item.classList.contains('open');
+                document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+                if (!wasOpen) item.classList.add('open');
+            });
+        });
+
+        const ro = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }), { threshold: .08 });
+        document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+    </script>
+</body>
+
+</html>
