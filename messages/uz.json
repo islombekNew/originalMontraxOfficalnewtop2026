@@ -21,7 +21,7 @@
     "line1": "Dizayn.",
     "line2Prefix": "Va",
     "line2": "kod.",
-    "sub": "Men Islombek — Namangandan developer va grafik dizayner. MONTRAX — mening brend imzom. Yakka o'zim ishlayman: CRM tizimlar, thumbnail, poster, SMM. G'oya eskizdan production'gacha bitta qo'ldan o'tadi.",
+    "sub": "Men Islombek — Namanganlik dasturchi va grafik dizayner. MONTRAX — o'zimning brendim. CRM tizim quraman, thumbnail va poster chizaman, SMM ham qilaman. G'oyadan tayyor ishgacha — hammasi bitta odamdan.",
     "ctaPrimary": "Loyihani boshlash",
     "ctaSecondary": "Ishlarni ko'rish",
     "cornerStatus": "Buyurtmalarga ochiq",
@@ -43,14 +43,14 @@
   },
   "designStrip": {
     "kicker": "Grafik dizayn",
-    "title": "Kod'dan tashqari — ko'z ham bor",
-    "serifWord": "ko'z",
-    "sub": "YouTube thumbnail, poster va social media dizaynlar. Har biri real buyurtma.",
-    "scrollHint": "Scroll qilib ko'ring — ishlar siz bilan birga siljiydi"
+    "title": "Faqat kod emas — dizayn ham",
+    "serifWord": "dizayn",
+    "sub": "YouTube thumbnail, poster va social media dizaynlar. Hammasi real buyurtmalar, birortasi mashq uchun emas.",
+    "scrollHint": "Scroll qilsang — ishlar sen bilan birga siljiydi"
   },
   "aboutTeaser": {
     "kicker": "Men haqimda",
-    "text": "18 yoshdaman, lekin ishlarim gapiradi: 2026-yilning o'zida 4 ta tizim deploy qildim. Dizayner ko'zi bilan qurilgan kod — mening farqim shu.",
+    "text": "18 yoshdaman, lekin gap yoshda emas — shu yilning o'zida 4 ta tizimni ishga tushirdim. Kod yozganda dizaynerdek o'ylayman, meni ajratib turadigani shu.",
     "cta": "To'liq hikoya"
   },
   "services": {
@@ -60,27 +60,27 @@
     "viewAll": "Batafsil va narxlar",
     "web": {
       "title": "Web tizimlar & CRM",
-      "desc": "Next.js + Prisma asosida inventar, savdo, qarz nazorati — Mix Mobile va Montrax Savdo kabi to'liq ishlaydigan tizimlar."
+      "desc": "Do'kon yoki biznesing uchun tizim kerakmi? Inventar, savdo, qarz nazorati — Mix Mobile va Montrax Savdo shunaqa tizimlar, ikkalasi ham hozir ishlab turibdi."
     },
     "design": {
       "title": "Grafik dizayn",
-      "desc": "YouTube thumbnail, poster, e-commerce card, brand identity. CTR uchun ishlaydigan, ko'zga tashlanadigan vizuallar."
+      "desc": "Thumbnail, poster, banner, logo — ko'rganda to'xtatadigan dizaynlar. Chiroyli bo'lishi yetmaydi, natija ham berishi kerak."
     },
     "bot": {
       "title": "Telegram botlar",
-      "desc": "grammY asosida botlar — kontent tarqatish, buyurtma qabul qilish, CRM bilan integratsiya."
+      "desc": "Buyurtma qabul qilish, kontent tarqatish, mijozlar bilan ishlash — hammasini Telegram bot qilib beraman. Ish qo'lda emas, avtomatik ketadi."
     },
     "vibe": {
       "title": "Vibe coding & loyihalar",
-      "desc": "AI tool'lar (Claude Code, Cursor) bilan g'oyani bir necha kunda ishlaydigan mahsulotga aylantiraman. Landing, Telegram bot, mini avtomatlashtirish — arzon va tez."
+      "desc": "G'oyang bormi? AI tool'lar (Claude Code, Cursor) bilan bir necha kunda ishlaydigan holatga keltiraman. Landing, bot, kichik tizim — tez va hamyonbop."
     },
     "ai": {
       "title": "AI & Prompt Engineering",
-      "desc": "AI'dan real natija olish uchun: prompt yozish, maxsus AI workflow qurish, chatbot setup. ComfyUI, Claude va boshqa tool'lar bilan ishlayman."
+      "desc": "AI'dan foyda olmoqchimisan? Prompt yozib beraman, workflow qurib beraman, chatbot sozlab beraman. ComfyUI, Claude — kunda ishlatadigan tool'larim."
     },
     "smm": {
       "title": "SMM & kontent",
-      "desc": "Telegram va Instagram uchun kontent reja, post dizayn va kanal yuritish. Dizayner ko'zi bilan qilingan SMM — shunchaki post emas, brend."
+      "desc": "Instagram yoki Telegram sahifangni o'zim yuritaman: kontent reja, post dizayn, oy oxirida natija hisoboti. Shunchaki post emas — brend."
     }
   },
   "cta": {
@@ -88,7 +88,7 @@
     "bgWord": "Salom",
     "titlePrefix": "G'oyang bormi",
     "titleAccent": "gaplashamiz",
-    "sub": "Telegram'da yozsang — odatda bir necha soat ichida javob beraman. Loyiha, savol yoki shunchaki maslahat — farqi yo'q.",
+    "sub": "Telegram'da yoz — odatda bir-ikki soat ichida javob qaytaraman. Loyiha bo'ladimi, oddiy savolmi — bemalol yozaver.",
     "button": "@Montrax_offical'ga yozish",
     "or": "yoki formani to'ldir",
     "formLink": "Aloqa sahifasi",
@@ -97,7 +97,7 @@
     "footNote3": "Uzbek · English · Русский"
   },
   "footer": {
-    "tagline": "Dizayn + kod. Bitta odam, ikkita hunar. G'oyani ishlaydigan mahsulotga aylantirish — Namangan'dan.",
+    "tagline": "Dizayn ham, kod ham — bitta odamdan. Namangan, O'zbekiston.",
     "status": "Yangi loyihalarga ochiq",
     "navHeading": "Navigatsiya",
     "linkWork": "Ishlar",
@@ -130,9 +130,9 @@
   },
   "about": {
     "title": "Salom, men Islombek",
-    "intro": "Namanganlik 18 yoshli developer va grafik dizayner. MONTRAX — mening brendim: jamoa yo'q, yakka o'zim — va aynan shu kuchli tomonim: dizayn ham, kod ham bitta qo'ldan.",
-    "story1": "Ko'pchilik yo chizadi, yo quradi. Men ikkalasini qilaman — va aynan shu kombinatsiya mijozlarimga vaqt va pul tejaydi: dizayner bilan developer o'rtasidagi \"tarjima\" bosqichi yo'q, g'oya to'g'ridan-to'g'ri ishlaydigan mahsulotga aylanadi.",
-    "story2": "2026-yilda 4 ta tizimni production'ga chiqardim: telefon do'koni uchun Mix Mobile CRM, savdo boshqaruvi uchun Montrax Savdo, kino qidiruv uchun KinoDam bot. Parallel ravishda YouTube kanallar va do'konlar uchun thumbnail, poster va karta dizaynlar qilaman.",
+    "intro": "Namanganlik 18 yoshli dasturchi va grafik dizaynerman. MONTRAX — mening brendim. Jamoam yo'q, yakka ishlayman — lekin aynan shu kuchli tomonim: dizayn ham, kod ham bitta qo'ldan chiqadi.",
+    "story1": "Ko'pchilik yo chizadi, yo kod yozadi. Men ikkalasini qilaman — va bu mijozga vaqt ham, pul ham tejaydi: dizayner bilan dasturchi bir-birini tushunmay o'tiradigan bosqich yo'q, g'oya to'g'ridan-to'g'ri ishlaydigan mahsulotga aylanadi.",
+    "story2": "Shu yilning o'zida 4 ta tizimni ishga tushirdim: telefon do'koni uchun Mix Mobile CRM, savdo boshqaruvi uchun Montrax Savdo, kino qidirish uchun KinoDam bot. Yonida YouTube kanallar va do'konlar uchun thumbnail, poster, karta dizaynlar qilib turaman.",
     "processTitle": "Qanday ishlayman",
     "process1title": "Tinglayman",
     "process1desc": "Avval muammoni tushunaman — texnik yechim keyin. Noto'g'ri savolga chiroyli javob foydasiz.",
@@ -145,7 +145,7 @@
   },
   "servicesPage": {
     "title": "Xizmatlar & minimal narxlar",
-    "sub": "Bu — boshlang'ich narxlar. Aniq raqam loyiha hajmiga bog'liq: Telegram'da 10 daqiqalik suhbatdan keyin aniq taklif beraman.",
+    "sub": "Bular boshlang'ich narxlar — aniq summa ish hajmiga qarab kelishiladi. Telegram'da 10 daqiqa gaplashsak, aniq taklif aytaman.",
     "priceFrom": "dan boshlab",
     "duration": "Muddat",
     "example": "Real misol",
@@ -163,16 +163,16 @@
   },
   "contact": {
     "title": "Gaplashamiz",
-    "sub": "Eng tezi — Telegram. Formani afzal ko'rsang, to'ldir: xabaring to'g'ridan-to'g'ri Telegram'imga tushadi.",
+    "sub": "Eng tezi — Telegram. Forma qulayroq bo'lsa, to'ldir: xabaring to'g'ridan-to'g'ri telefonimga tushadi.",
     "telegramTitle": "To'g'ridan-to'g'ri yozish",
-    "telegramDesc": "Odatda bir necha soat ichida javob beraman",
+    "telegramDesc": "Odatda bir-ikki soat ichida javob qaytaraman",
     "formName": "Isming",
     "formContact": "Telegram yoki email",
-    "formMessage": "Loyihang haqida qisqacha",
+    "formMessage": "Loyihang haqida qisqacha yozib qoldirsang bo'ldi",
     "formSubmit": "Yuborish",
     "formSending": "Yuborilmoqda...",
-    "formSuccess": "Xabar yetib bordi! Tez orada javob beraman.",
-    "formError": "Xatolik bo'ldi — Telegram'da to'g'ridan-to'g'ri yozganing yaxshi.",
+    "formSuccess": "Xabaring yetib keldi! Tez orada javob yozaman.",
+    "formError": "Nimadir xato ketdi — yaxshisi Telegram'dan to'g'ridan-to'g'ri yoz.",
     "socialTitle": "Boshqa kanallar"
   },
   "meta": {

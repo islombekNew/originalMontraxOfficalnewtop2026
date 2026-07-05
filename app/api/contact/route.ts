@@ -1,12 +1,17 @@
 import { NextResponse } from "next/server";
 
-/** Contact form → Telegram bot orqali Janobning shaxsiy chatiga.
- *  .env: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID */
+/** Contact form → Telegram bot orqali FAQAT .env'da ro'yxatlangan
+ *  chat ID'larga yuboriladi (Islombekning 2 akkaunti). Boshqa hech kimga
+ *  yuborilmaydi — ID'lar server tarafda qattiq belgilangan.
+ *  .env: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_IDS (vergul bilan) */
 export async function POST(req: Request) {
   const token = process.env.TELEGRAM_BOT_TOKEN;
-  const chatId = process.env.TELEGRAM_CHAT_ID;
+  const chatIds = (process.env.TELEGRAM_CHAT_IDS ?? "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
 
-  if (!token || !chatId) {
+  if (!token || chatIds.length === 0) {
     return NextResponse.json(
       { ok: false, error: "Telegram not configured" },
       { status: 503 }
@@ -37,13 +42,22 @@ export async function POST(req: Request) {
     message,
   ].join("\n");
 
-  const res = await fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ chat_id: chatId, text }),
-  });
+  // Ikkala akkauntga parallel yuborish — bittasi yetib borsa ham ok
+  const results = await Promise.allSettled(
+    chatIds.map((chatId) =>
+      fetch(`https://api.telegram.org/bot${token}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ chat_id: chatId, text }),
+      })
+    )
+  );
 
-  if (!res.ok) {
+  const anyOk = results.some(
+    (r) => r.status === "fulfilled" && r.value.ok
+  );
+
+  if (!anyOk) {
     return NextResponse.json({ ok: false }, { status: 502 });
   }
   return NextResponse.json({ ok: true });
