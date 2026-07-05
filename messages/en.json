@@ -71,8 +71,12 @@
       "desc": "Bots built with grammY — content delivery, order intake, CRM integration."
     },
     "vibe": {
-      "title": "Vibe coding & MVP",
-      "desc": "I turn ideas into working prototypes in days using AI tools (Claude Code, Cursor). Startup MVPs, internal tools, quick sites — fast and affordable."
+      "title": "Vibe coding & projects",
+      "desc": "I turn ideas into working products in days using AI tools (Claude Code, Cursor). Landing pages, Telegram bots, mini automations — fast and affordable."
+    },
+    "ai": {
+      "title": "AI & Prompt Engineering",
+      "desc": "Getting real results out of AI: prompt writing, custom AI workflows, chatbot setup. I work with ComfyUI, Claude and other tools."
     },
     "smm": {
       "title": "SMM & content",
@@ -140,11 +144,13 @@
     "photoAlt": "Islombek — founder of MONTRAX"
   },
   "servicesPage": {
-    "title": "Services",
-    "sub": "Prices are ranges — the exact number depends on scope. After a 10-minute chat on Telegram I'll give you a concrete quote.",
+    "title": "Services & starting prices",
+    "sub": "These are starting prices. The exact number depends on scope — after a 10-minute chat on Telegram I'll give you a concrete quote.",
     "priceFrom": "from",
     "duration": "Timeline",
     "example": "Real example",
+    "customPrice": "Per project",
+    "priceNote": "Listed prices are minimum starting values. The final quote depends on scope, timeline and complexity. Larger projects can be split into milestone payments.",
     "faqTitle": "Frequently asked",
     "faq1q": "How does payment work?",
     "faq1a": "50% upfront, 50% on delivery. Larger projects can be split into milestones — we'll agree on it.",

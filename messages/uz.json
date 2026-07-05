@@ -71,8 +71,12 @@
       "desc": "grammY asosida botlar — kontent tarqatish, buyurtma qabul qilish, CRM bilan integratsiya."
     },
     "vibe": {
-      "title": "Vibe coding & MVP",
-      "desc": "AI tool'lar (Claude Code, Cursor) bilan g'oyani bir necha kunda ishlaydigan prototipga aylantiraman. Startup MVP, ichki tool, tezkor sayt — arzon va tez."
+      "title": "Vibe coding & loyihalar",
+      "desc": "AI tool'lar (Claude Code, Cursor) bilan g'oyani bir necha kunda ishlaydigan mahsulotga aylantiraman. Landing, Telegram bot, mini avtomatlashtirish — arzon va tez."
+    },
+    "ai": {
+      "title": "AI & Prompt Engineering",
+      "desc": "AI'dan real natija olish uchun: prompt yozish, maxsus AI workflow qurish, chatbot setup. ComfyUI, Claude va boshqa tool'lar bilan ishlayman."
     },
     "smm": {
       "title": "SMM & kontent",
@@ -140,11 +144,13 @@
     "photoAlt": "Islombek — MONTRAX asoschisi"
   },
   "servicesPage": {
-    "title": "Xizmatlar",
-    "sub": "Narxlar diapazon sifatida — aniq raqam loyiha hajmiga bog'liq. Telegram'da 10 daqiqalik suhbatdan keyin aniq taklif beraman.",
+    "title": "Xizmatlar & minimal narxlar",
+    "sub": "Bu — boshlang'ich narxlar. Aniq raqam loyiha hajmiga bog'liq: Telegram'da 10 daqiqalik suhbatdan keyin aniq taklif beraman.",
     "priceFrom": "dan boshlab",
     "duration": "Muddat",
     "example": "Real misol",
+    "customPrice": "Loyihaga qarab",
+    "priceNote": "Ko'rsatilgan narxlar — minimal boshlang'ich qiymatlar. Ish hajmi, muddat va murakkablikka qarab yakuniy narx kelishiladi. Katta loyihalarda bosqichma-bosqich to'lov mumkin.",
     "faqTitle": "Ko'p so'raladigan savollar",
     "faq1q": "To'lov qanday ishlaydi?",
     "faq1a": "50% oldindan, 50% topshirishda. Katta loyihalarda bosqichma-bosqich bo'lish mumkin — kelishamiz.",

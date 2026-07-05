@@ -61,6 +61,18 @@ const SERVICES = [
       </svg>
     ),
   },
+  {
+    key: "ai" as const,
+    index: "06",
+    tools: ["Prompt", "AI workflow", "Chatbot", "ComfyUI"],
+    icon: (
+      <svg width="42" height="42" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
+        <path d="M12 3v3M12 18v3M3 12h3M18 12h3" />
+        <rect x="7" y="7" width="10" height="10" rx="3" />
+        <circle cx="12" cy="12" r="1.6" />
+      </svg>
+    ),
+  },
 ];
 
 /** Services teaser — 3 ta bir xil karta EMAS. Editorial magazine list style. */
