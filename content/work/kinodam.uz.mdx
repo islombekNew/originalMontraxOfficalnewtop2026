@@ -1,0 +1,34 @@
+---
+title: "KinoDam Bot"
+client: "KinoDam — kino kanal"
+year: "2026"
+role: "Bot arxitekturasi + development"
+tools: ["grammY", "TypeScript", "Node.js", "Telegram Bot API"]
+summary: "Kino qidiruv va yetkazish boti: kod orqali qidirish, obuna tekshiruvi va admin panel — hammasi Telegram ichida."
+cover: "/media/covers/kinodam.svg"
+category: "dev"
+order: 3
+---
+
+## Muammo
+
+Kino kanallari auditoriyani ushlab turish uchun kontentni tez yetkazishi kerak. Klassik usul — har film uchun kanalda post qidirish — foydalanuvchi uchun sekin, admin uchun tartibsiz. Kerak edi: foydalanuvchi kod yozadi, bot filmni darhol beradi, kanalga obuna bo'lganlargagina.
+
+## Yechim
+
+grammY framework asosida qurilgan bot:
+
+- Kod bo'yicha qidiruv — foydalanuvchi raqam yuboradi, bot filmni topib beradi
+- Obuna tekshiruvi — kanalga obuna bo'lmagan foydalanuvchiga avval obuna taklifi
+- Admin panel — yangi film qo'shish, kod biriktirish, statistika — hammasi bot ichida, alohida sayt kerak emas
+- Xatolikka chidamlilik — noto'g'ri kod, o'chirilgan kontent, bloklangan foydalanuvchi — har holat uchun aniq javob
+
+## Texnik qarorlar
+
+- **grammY + TypeScript** — bot logikasi tipli, sessiya boshqaruvi toza
+- **Middleware zanjiri** — obuna tekshiruvi bitta middleware, har handler'da takrorlanmaydi
+- **Kontent ID map** — fayllar Telegram serverida, bot faqat file_id saqlaydi — hosting xarajati nol
+
+## Natija
+
+Bot 2026-yil aprelda ishga tushdi — mening birinchi production loyiham. Kanal auditoriyasi uchun kino olish endi ikki qadam: kodni yoz, filmni ol. Obuna tekshiruvi kanal o'sishiga to'g'ridan-to'g'ri ishlaydi.

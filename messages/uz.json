@@ -1,0 +1,180 @@
+{
+  "nav": {
+    "work": "Ishlar",
+    "about": "Men haqimda",
+    "services": "Xizmatlar",
+    "contact": "Aloqa",
+    "cta": "Yozish"
+  },
+  "floating": {
+    "message": "Menga yozing",
+    "via": "Telegram orqali"
+  },
+  "expertise": {
+    "dev": "Dasturchilik",
+    "design": "Grafik dizayn",
+    "smm": "SMM",
+    "vibe": "Vibe coding"
+  },
+  "hero": {
+    "kicker": "MONTRAX — Studio v2",
+    "line1": "Dizayn.",
+    "line2Prefix": "Va",
+    "line2": "kod.",
+    "sub": "Men Islombek — Namangandan developer va grafik dizayner. MONTRAX — mening brend imzom. Yakka o'zim ishlayman: CRM tizimlar, thumbnail, poster, SMM. G'oya eskizdan production'gacha bitta qo'ldan o'tadi.",
+    "ctaPrimary": "Loyihani boshlash",
+    "ctaSecondary": "Ishlarni ko'rish",
+    "cornerStatus": "Buyurtmalarga ochiq",
+    "cornerLocation": "Namangan, UZ",
+    "scrollHint": "Pastga",
+    "stat1value": "4",
+    "stat1label": "deployed loyiha",
+    "stat2value": "10+",
+    "stat2label": "tugallangan ish",
+    "stat3value": "2×",
+    "stat3label": "dizayn + kod"
+  },
+  "featured": {
+    "kicker": "Tanlangan ishlar",
+    "title": "Oxirgi loyihalar",
+    "serifWord": "loyihalar",
+    "viewAll": "Barcha ishlarni ko'rish",
+    "caseCta": "Case study'ni o'qish"
+  },
+  "designStrip": {
+    "kicker": "Grafik dizayn",
+    "title": "Kod'dan tashqari — ko'z ham bor",
+    "serifWord": "ko'z",
+    "sub": "YouTube thumbnail, poster va social media dizaynlar. Har biri real buyurtma.",
+    "scrollHint": "Scroll qilib ko'ring — ishlar siz bilan birga siljiydi"
+  },
+  "aboutTeaser": {
+    "kicker": "Men haqimda",
+    "text": "18 yoshdaman, lekin ishlarim gapiradi: 2026-yilning o'zida 4 ta tizim deploy qildim. Dizayner ko'zi bilan qurilgan kod — mening farqim shu.",
+    "cta": "To'liq hikoya"
+  },
+  "services": {
+    "kicker": "Xizmatlar",
+    "title": "Nima qilib beraman",
+    "serifWord": "qilib",
+    "viewAll": "Batafsil va narxlar",
+    "web": {
+      "title": "Web tizimlar & CRM",
+      "desc": "Next.js + Prisma asosida inventar, savdo, qarz nazorati — Mix Mobile va Montrax Savdo kabi to'liq ishlaydigan tizimlar."
+    },
+    "design": {
+      "title": "Grafik dizayn",
+      "desc": "YouTube thumbnail, poster, e-commerce card, brand identity. CTR uchun ishlaydigan, ko'zga tashlanadigan vizuallar."
+    },
+    "bot": {
+      "title": "Telegram botlar",
+      "desc": "grammY asosida botlar — kontent tarqatish, buyurtma qabul qilish, CRM bilan integratsiya."
+    },
+    "vibe": {
+      "title": "Vibe coding & MVP",
+      "desc": "AI tool'lar (Claude Code, Cursor) bilan g'oyani bir necha kunda ishlaydigan prototipga aylantiraman. Startup MVP, ichki tool, tezkor sayt — arzon va tez."
+    },
+    "smm": {
+      "title": "SMM & kontent",
+      "desc": "Telegram va Instagram uchun kontent reja, post dizayn va kanal yuritish. Dizayner ko'zi bilan qilingan SMM — shunchaki post emas, brend."
+    }
+  },
+  "cta": {
+    "kicker": "Buyurtmalarga ochiq — 2026",
+    "bgWord": "Salom",
+    "titlePrefix": "G'oyang bormi",
+    "titleAccent": "gaplashamiz",
+    "sub": "Telegram'da yozsang — odatda bir necha soat ichida javob beraman. Loyiha, savol yoki shunchaki maslahat — farqi yo'q.",
+    "button": "@Montrax_offical'ga yozish",
+    "or": "yoki formani to'ldir",
+    "formLink": "Aloqa sahifasi",
+    "footNote1": "Odatda ~2 soat ichida javob",
+    "footNote2": "GMT+5, Namangan",
+    "footNote3": "Uzbek · English · Русский"
+  },
+  "footer": {
+    "tagline": "Dizayn + kod. Bitta odam, ikkita hunar. G'oyani ishlaydigan mahsulotga aylantirish — Namangan'dan.",
+    "status": "Yangi loyihalarga ochiq",
+    "navHeading": "Navigatsiya",
+    "linkWork": "Ishlar",
+    "linkAbout": "Men haqimda",
+    "linkServices": "Xizmatlar",
+    "linkContact": "Aloqa",
+    "socialHeading": "Ijtimoiy",
+    "metaHeading": "Meta",
+    "locationLine": "Namangan · UZ",
+    "timezoneLine": "GMT+5",
+    "rights": "MONTRAX — Islombek tomonidan qurilgan",
+    "backToTop": "Yuqoriga"
+  },
+  "work": {
+    "title": "Ishlar",
+    "sub": "Har loyiha — real, deploy qilingan yoki mijozga topshirilgan. Demo yoki template yo'q.",
+    "filterAll": "Hammasi",
+    "filterDev": "Tizimlar & botlar",
+    "filterDesign": "Grafik dizayn",
+    "openCase": "Case study",
+    "designNote": "Grafik ishlar — thumbnail va poster dizaynlar"
+  },
+  "caseStudy": {
+    "client": "Klient",
+    "year": "Yil",
+    "role": "Rol",
+    "tools": "Tools",
+    "nextProject": "Keyingi loyiha",
+    "backToWork": "Barcha ishlar"
+  },
+  "about": {
+    "title": "Salom, men Islombek",
+    "intro": "Namanganlik 18 yoshli developer va grafik dizayner. MONTRAX — mening brendim: jamoa yo'q, yakka o'zim — va aynan shu kuchli tomonim: dizayn ham, kod ham bitta qo'ldan.",
+    "story1": "Ko'pchilik yo chizadi, yo quradi. Men ikkalasini qilaman — va aynan shu kombinatsiya mijozlarimga vaqt va pul tejaydi: dizayner bilan developer o'rtasidagi \"tarjima\" bosqichi yo'q, g'oya to'g'ridan-to'g'ri ishlaydigan mahsulotga aylanadi.",
+    "story2": "2026-yilda 4 ta tizimni production'ga chiqardim: telefon do'koni uchun Mix Mobile CRM, savdo boshqaruvi uchun Montrax Savdo, kino qidiruv uchun KinoDam bot. Parallel ravishda YouTube kanallar va do'konlar uchun thumbnail, poster va karta dizaynlar qilaman.",
+    "processTitle": "Qanday ishlayman",
+    "process1title": "Tinglayman",
+    "process1desc": "Avval muammoni tushunaman — texnik yechim keyin. Noto'g'ri savolga chiroyli javob foydasiz.",
+    "process2title": "Eskiz → prototip",
+    "process2desc": "Qog'oz yoki Figma'da tez eskiz, keyin ishlaydigan prototip. Har bosqichda mijoz ko'rib boradi.",
+    "process3title": "Build & deploy",
+    "process3desc": "Next.js, TypeScript, Prisma — production darajadagi kod. Deploy, o'rgatish, qo'llab-quvvatlash.",
+    "toolsTitle": "Tools",
+    "photoAlt": "Islombek — MONTRAX asoschisi"
+  },
+  "servicesPage": {
+    "title": "Xizmatlar",
+    "sub": "Narxlar diapazon sifatida — aniq raqam loyiha hajmiga bog'liq. Telegram'da 10 daqiqalik suhbatdan keyin aniq taklif beraman.",
+    "priceFrom": "dan boshlab",
+    "duration": "Muddat",
+    "example": "Real misol",
+    "faqTitle": "Ko'p so'raladigan savollar",
+    "faq1q": "To'lov qanday ishlaydi?",
+    "faq1a": "50% oldindan, 50% topshirishda. Katta loyihalarda bosqichma-bosqich bo'lish mumkin — kelishamiz.",
+    "faq2q": "Muddat kechiksa nima bo'ladi?",
+    "faq2a": "Muddatni boshida real qilib belgilayman va o'zgarish bo'lsa oldindan aytaman. Yashirin kechikish bo'lmaydi.",
+    "faq3q": "Tayyor tizimga keyin o'zgartirish kiritib berasizmi?",
+    "faq3a": "Ha. Topshirgandan keyin 2 hafta kichik tuzatishlar bepul, keyin soatbay yoki oylik qo'llab-quvvatlash bo'yicha ishlaymiz.",
+    "faq4q": "Faqat dizayn yoki faqat kod buyurtma qilsam bo'ladimi?",
+    "faq4a": "Albatta. Ko'p mijozlar faqat thumbnail yoki faqat bot uchun keladi — kombinatsiya majburiy emas."
+  },
+  "contact": {
+    "title": "Gaplashamiz",
+    "sub": "Eng tezi — Telegram. Formani afzal ko'rsang, to'ldir: xabaring to'g'ridan-to'g'ri Telegram'imga tushadi.",
+    "telegramTitle": "To'g'ridan-to'g'ri yozish",
+    "telegramDesc": "Odatda bir necha soat ichida javob beraman",
+    "formName": "Isming",
+    "formContact": "Telegram yoki email",
+    "formMessage": "Loyihang haqida qisqacha",
+    "formSubmit": "Yuborish",
+    "formSending": "Yuborilmoqda...",
+    "formSuccess": "Xabar yetib bordi! Tez orada javob beraman.",
+    "formError": "Xatolik bo'ldi — Telegram'da to'g'ridan-to'g'ri yozganing yaxshi.",
+    "socialTitle": "Boshqa kanallar"
+  },
+  "meta": {
+    "homeTitle": "Islombek — Developer & Grafik dizayner | MONTRAX",
+    "homeDesc": "Dizayn qilaman. Kod yozaman. CRM tizimlar, Telegram botlar, thumbnail va poster dizaynlar — Namangan, O'zbekiston.",
+    "workTitle": "Ishlar — MONTRAX",
+    "aboutTitle": "Men haqimda — MONTRAX",
+    "servicesTitle": "Xizmatlar — MONTRAX",
+    "contactTitle": "Aloqa — MONTRAX"
+  }
+}

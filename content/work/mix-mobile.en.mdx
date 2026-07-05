@@ -1,0 +1,36 @@
+---
+title: "Mix Mobile CRM"
+client: "Mix Mobile — phone store"
+year: "2026"
+role: "Design + full-stack development"
+tools: ["Next.js 15", "TypeScript", "Prisma", "NextAuth", "Tailwind CSS"]
+summary: "A complete CRM for a phone store: inventory, sales, debt & balance tracking, PDF receipts and Telegram notifications."
+cover: "/media/covers/mix-mobile.svg"
+category: "dev"
+order: 2
+---
+
+## The problem
+
+Mix Mobile is a phone retail store. Phone trade has its own pains: every unit is unique (IMEI, condition, purchase price), customers often pay in installments, and returns or exchanges happen weekly. General-purpose CRMs don't understand this flow.
+
+## The solution
+
+A custom CRM built around the logic of phone retail:
+
+- Inventory — every phone as an individual unit: model, condition, cost price, sale price
+- Sales & installments — customer balance and debt tracked automatically
+- Return/exchange flow — the old sale closes, the new one links to it, the balance recalculates itself
+- PDF receipt — one click per sale
+- Telegram notifications — key events (big sale, debt payment) reach the owner instantly
+- Excel export and pagination — stays fast even on large lists
+
+## Design decisions
+
+- **Cards, not tables** — the phone list is image cards: a seller recognizes a device by eye, not by memorizing IMEIs
+- **Status colors** — in stock / sold / returned are distinguishable at a glance
+- **Math stays invisible** — balance, profit, debt are all automatic; the seller never opens a calculator
+
+## Outcome
+
+The CRM went live in June 2026, delivered in two stages (the system on June 20, the interface polish on June 25). The store's daily books now live in the system — who bought what, what debt remains, which device earned how much.

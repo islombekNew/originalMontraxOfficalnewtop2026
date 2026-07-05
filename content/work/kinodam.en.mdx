@@ -1,0 +1,34 @@
+---
+title: "KinoDam Bot"
+client: "KinoDam — movie channel"
+year: "2026"
+role: "Bot architecture + development"
+tools: ["grammY", "TypeScript", "Node.js", "Telegram Bot API"]
+summary: "A movie search & delivery bot: code-based lookup, subscription gate and an admin panel — all inside Telegram."
+cover: "/media/covers/kinodam.svg"
+category: "dev"
+order: 3
+---
+
+## The problem
+
+Movie channels need to deliver content fast to keep their audience. The classic way — scrolling the channel to find a post per film — is slow for users and messy for admins. What was needed: the user sends a code, the bot delivers the movie instantly — but only to channel subscribers.
+
+## The solution
+
+A bot built on the grammY framework:
+
+- Code-based search — the user sends a number, the bot returns the film
+- Subscription gate — non-subscribers get a join prompt before content
+- Admin panel — adding films, assigning codes, viewing stats — all inside the bot, no separate website needed
+- Fault tolerance — wrong code, deleted content, blocked user — every case gets a clear response
+
+## Technical decisions
+
+- **grammY + TypeScript** — typed bot logic, clean session management
+- **Middleware chain** — the subscription check is a single middleware, not repeated in every handler
+- **Content ID map** — files live on Telegram's servers; the bot stores only file_ids — zero hosting cost for media
+
+## Outcome
+
+The bot launched in April 2026 — my first production project. Getting a movie is now two steps for the audience: send the code, receive the film. The subscription gate feeds channel growth directly.

@@ -1,0 +1,180 @@
+{
+  "nav": {
+    "work": "Work",
+    "about": "About",
+    "services": "Services",
+    "contact": "Contact",
+    "cta": "Say hi"
+  },
+  "floating": {
+    "message": "Message me",
+    "via": "via Telegram"
+  },
+  "expertise": {
+    "dev": "Development",
+    "design": "Graphic design",
+    "smm": "SMM",
+    "vibe": "Vibe coding"
+  },
+  "hero": {
+    "kicker": "MONTRAX — Studio v2",
+    "line1": "Design.",
+    "line2Prefix": "And",
+    "line2": "code.",
+    "sub": "I'm Islombek — a developer and graphic designer from Namangan, Uzbekistan. MONTRAX is my brand mark. I work solo: CRM systems, thumbnails, posters, SMM. One pair of hands takes the idea from sketch to production.",
+    "ctaPrimary": "Start a project",
+    "ctaSecondary": "See the work",
+    "cornerStatus": "Open for briefs",
+    "cornerLocation": "Namangan, UZ",
+    "scrollHint": "Scroll",
+    "stat1value": "4",
+    "stat1label": "deployed projects",
+    "stat2value": "10+",
+    "stat2label": "completed works",
+    "stat3value": "2×",
+    "stat3label": "design + code"
+  },
+  "featured": {
+    "kicker": "Selected work",
+    "title": "Recent projects",
+    "serifWord": "projects",
+    "viewAll": "View all work",
+    "caseCta": "Read case study"
+  },
+  "designStrip": {
+    "kicker": "Graphic design",
+    "title": "Beyond code — an eye for it",
+    "serifWord": "eye",
+    "sub": "YouTube thumbnails, posters and social media designs. Every piece is a real commission.",
+    "scrollHint": "Scroll to move — the work drifts with you"
+  },
+  "aboutTeaser": {
+    "kicker": "About me",
+    "text": "I'm 18, but the work speaks: four systems shipped to production in 2026 alone. Code built with a designer's eye — that's my edge.",
+    "cta": "Full story"
+  },
+  "services": {
+    "kicker": "Services",
+    "title": "What I do",
+    "serifWord": "do",
+    "viewAll": "Details & pricing",
+    "web": {
+      "title": "Web systems & CRM",
+      "desc": "Inventory, sales and debt tracking built on Next.js + Prisma — fully working systems like Mix Mobile and Montrax Savdo."
+    },
+    "design": {
+      "title": "Graphic design",
+      "desc": "YouTube thumbnails, posters, e-commerce cards, brand identity. Visuals that earn clicks, not just compliments."
+    },
+    "bot": {
+      "title": "Telegram bots",
+      "desc": "Bots built with grammY — content delivery, order intake, CRM integration."
+    },
+    "vibe": {
+      "title": "Vibe coding & MVP",
+      "desc": "I turn ideas into working prototypes in days using AI tools (Claude Code, Cursor). Startup MVPs, internal tools, quick sites — fast and affordable."
+    },
+    "smm": {
+      "title": "SMM & content",
+      "desc": "Content plans, post design and channel management for Telegram and Instagram. SMM with a designer's eye — not just posts, a brand."
+    }
+  },
+  "cta": {
+    "kicker": "Open for briefs — 2026",
+    "bgWord": "Hello",
+    "titlePrefix": "Got an idea",
+    "titleAccent": "let's build it",
+    "sub": "Message me on Telegram — I usually reply within a few hours. A project, a question, or just advice — all welcome.",
+    "button": "Message @Montrax_offical",
+    "or": "or fill in the form",
+    "formLink": "Contact page",
+    "footNote1": "Usually replies within ~2 hours",
+    "footNote2": "GMT+5, Namangan",
+    "footNote3": "Uzbek · English · Русский"
+  },
+  "footer": {
+    "tagline": "Design + code. One person, two crafts. Turning ideas into working products — from Namangan.",
+    "status": "Open for new projects",
+    "navHeading": "Navigation",
+    "linkWork": "Work",
+    "linkAbout": "About",
+    "linkServices": "Services",
+    "linkContact": "Contact",
+    "socialHeading": "Social",
+    "metaHeading": "Meta",
+    "locationLine": "Namangan · UZ",
+    "timezoneLine": "GMT+5",
+    "rights": "MONTRAX — built by Islombek",
+    "backToTop": "Back to top"
+  },
+  "work": {
+    "title": "Work",
+    "sub": "Every project here is real — deployed or delivered to a client. No demos, no templates.",
+    "filterAll": "All",
+    "filterDev": "Systems & bots",
+    "filterDesign": "Graphic design",
+    "openCase": "Case study",
+    "designNote": "Graphic works — thumbnail and poster designs"
+  },
+  "caseStudy": {
+    "client": "Client",
+    "year": "Year",
+    "role": "Role",
+    "tools": "Tools",
+    "nextProject": "Next project",
+    "backToWork": "All work"
+  },
+  "about": {
+    "title": "Hi, I'm Islombek",
+    "intro": "An 18-year-old developer and graphic designer from Namangan. MONTRAX is my brand: no team, just me — and that's the strength: design and code from one pair of hands.",
+    "story1": "Most people either draw or build. I do both — and that combination saves my clients time and money: there's no \"translation\" step between designer and developer, the idea goes straight into a working product.",
+    "story2": "In 2026 I shipped four systems to production: Mix Mobile CRM for a phone store, Montrax Savdo for sales management, and the KinoDam movie-search bot. In parallel I design thumbnails, posters and product cards for YouTube channels and shops.",
+    "processTitle": "How I work",
+    "process1title": "Listen first",
+    "process1desc": "I start with the problem, not the tech. A beautiful answer to the wrong question is useless.",
+    "process2title": "Sketch → prototype",
+    "process2desc": "Quick sketches on paper or Figma, then a working prototype. The client sees progress at every step.",
+    "process3title": "Build & deploy",
+    "process3desc": "Next.js, TypeScript, Prisma — production-grade code. Deploy, handover, support.",
+    "toolsTitle": "Tools",
+    "photoAlt": "Islombek — founder of MONTRAX"
+  },
+  "servicesPage": {
+    "title": "Services",
+    "sub": "Prices are ranges — the exact number depends on scope. After a 10-minute chat on Telegram I'll give you a concrete quote.",
+    "priceFrom": "from",
+    "duration": "Timeline",
+    "example": "Real example",
+    "faqTitle": "Frequently asked",
+    "faq1q": "How does payment work?",
+    "faq1a": "50% upfront, 50% on delivery. Larger projects can be split into milestones — we'll agree on it.",
+    "faq2q": "What if the deadline slips?",
+    "faq2a": "I set realistic deadlines upfront and flag any change early. No silent delays.",
+    "faq3q": "Do you make changes after delivery?",
+    "faq3a": "Yes. Two weeks of small fixes are free after handover; after that we work hourly or on a monthly support plan.",
+    "faq4q": "Can I order just design, or just code?",
+    "faq4a": "Absolutely. Many clients come for a thumbnail alone or a bot alone — the combo is optional."
+  },
+  "contact": {
+    "title": "Let's talk",
+    "sub": "Telegram is fastest. Prefer a form? Fill it in — your message lands straight in my Telegram.",
+    "telegramTitle": "Message me directly",
+    "telegramDesc": "I usually reply within a few hours",
+    "formName": "Your name",
+    "formContact": "Telegram or email",
+    "formMessage": "Briefly about your project",
+    "formSubmit": "Send",
+    "formSending": "Sending...",
+    "formSuccess": "Message received! I'll get back to you soon.",
+    "formError": "Something went wrong — better to message me directly on Telegram.",
+    "socialTitle": "Other channels"
+  },
+  "meta": {
+    "homeTitle": "Islombek — Developer & Graphic Designer | MONTRAX",
+    "homeDesc": "I design. I build. CRM systems, Telegram bots, thumbnails and posters — Namangan, Uzbekistan.",
+    "workTitle": "Work — MONTRAX",
+    "aboutTitle": "About — MONTRAX",
+    "servicesTitle": "Services — MONTRAX",
+    "contactTitle": "Contact — MONTRAX"
+  }
+}

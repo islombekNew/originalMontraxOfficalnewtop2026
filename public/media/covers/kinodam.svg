@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 700" width="1600" height="700">
+  <defs>
+    <linearGradient id="bg3" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#ede2c8"/>
+      <stop offset="1" stop-color="#d8c9a8"/>
+    </linearGradient>
+    <pattern id="lines3" width="12" height="12" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="12" stroke="#c9b898" stroke-width="0.5" opacity="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="1600" height="700" fill="url(#bg3)"/>
+  <rect width="1600" height="700" fill="url(#lines3)"/>
+
+  <!-- Chocolate wash -->
+  <path d="M900 0 L1600 0 L1600 700 L820 700 Z" fill="#1a1512" opacity="0.94"/>
+
+  <!-- Telegram chat mock -->
+  <g transform="translate(940,90)">
+    <rect width="520" height="520" rx="20" fill="#f2ebde" stroke="#c9b898" stroke-width="2"/>
+
+    <!-- Header -->
+    <rect x="0" y="0" width="520" height="72" rx="20" fill="#1a1512"/>
+    <rect x="0" y="52" width="520" height="20" fill="#1a1512"/>
+    <circle cx="46" cy="36" r="20" fill="#a06d3a"/>
+    <text x="39" y="43" fill="#f2ebde" font-family="Arial" font-size="18" font-weight="700">K</text>
+    <rect x="80" y="24" width="140" height="10" rx="5" fill="#f2ebde"/>
+    <rect x="80" y="42" width="80" height="8" rx="4" fill="#6b7a4f"/>
+
+    <!-- Incoming: /film 342 -->
+    <g transform="translate(24,100)">
+      <rect width="220" height="46" rx="14" fill="#ebe2d0"/>
+      <rect x="16" y="14" width="150" height="8" rx="4" fill="#4a3f37"/>
+      <rect x="16" y="28" width="80" height="6" rx="3" fill="#7a6f64"/>
+    </g>
+
+    <!-- Outgoing: search -->
+    <g transform="translate(276,166)">
+      <rect width="220" height="46" rx="14" fill="#a06d3a"/>
+      <rect x="16" y="14" width="120" height="8" rx="4" fill="#faf4e8"/>
+      <rect x="16" y="28" width="70" height="6" rx="3" fill="#faf4e8" opacity="0.7"/>
+    </g>
+
+    <!-- Movie result card -->
+    <g transform="translate(24,232)">
+      <rect width="336" height="180" rx="14" fill="#faf4e8" stroke="#d5c8b0"/>
+      <rect x="16" y="16" width="90" height="130" rx="8" fill="#1a1512"/>
+      <polygon points="52,72 74,84 52,96" fill="#a06d3a"/>
+      <rect x="122" y="20" width="180" height="12" rx="6" fill="#1a1512"/>
+      <rect x="122" y="44" width="120" height="8" rx="4" fill="#7a6f64"/>
+      <rect x="122" y="62" width="150" height="8" rx="4" fill="#7a6f64"/>
+      <!-- Stars -->
+      <g transform="translate(122,90)" fill="#a06d3a">
+        <text x="0" y="12" font-family="Arial" font-size="14">★★★★</text>
+        <text x="60" y="12" font-family="Arial" font-size="14" fill="#c9b898">★</text>
+      </g>
+      <rect x="122" y="118" width="120" height="30" rx="15" fill="#a06d3a"/>
+      <rect x="150" y="129" width="64" height="8" rx="4" fill="#faf4e8"/>
+    </g>
+
+    <!-- Buttons row -->
+    <g transform="translate(24,432)">
+      <rect width="160" height="40" rx="20" fill="#1a1512"/>
+      <rect x="52" y="16" width="56" height="8" rx="4" fill="#f2ebde"/>
+      <rect x="176" width="160" height="40" rx="20" fill="none" stroke="#a06d3a" stroke-width="1.5"/>
+      <rect x="228" y="16" width="56" height="8" rx="4" fill="#a06d3a"/>
+    </g>
+  </g>
+
+  <!-- Title -->
+  <g font-family="Arial, sans-serif">
+    <text x="80" y="220" fill="#7a6f64" font-size="16" letter-spacing="6">TELEGRAM BOT · 2026</text>
+    <text x="80" y="340" fill="#1a1512" font-size="96" font-weight="700" letter-spacing="-3">KINODAM</text>
+    <text x="80" y="440" fill="#a06d3a" font-size="96" font-weight="400" font-style="italic" font-family="'Times New Roman', serif">bot</text>
+  </g>
+  <rect x="80" y="470" width="60" height="3" fill="#a06d3a"/>
+  <text x="80" y="520" fill="#4a3f37" font-size="14" font-family="Arial, sans-serif">Kod yubor — filmni oling. Telegram ichida.</text>
+</svg>

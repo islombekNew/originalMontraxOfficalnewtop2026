@@ -1,0 +1,37 @@
+---
+title: "Montrax Savdo"
+client: "Internal product (MONTRAX)"
+year: "2026"
+role: "Design + full-stack development"
+tools: ["Next.js 15", "TypeScript", "Prisma", "Tailwind CSS", "PostgreSQL"]
+summary: "A management system for retail points: products, customers, debt tracking and reports — in one dashboard."
+cover: "/media/covers/montrax-savdo.svg"
+category: "dev"
+order: 1
+---
+
+## The problem
+
+Small retail shops in Uzbekistan still keep their books in notebooks or Excel. Stock levels are fuzzy, customer debts get forgotten, and compiling a monthly report takes a full day. Off-the-shelf CRMs are either too expensive or don't match local trade habits — the debt ledger, mixed cash-and-credit payments.
+
+## The solution
+
+Montrax Savdo is a system built from scratch for local retail. It drops the bloat of big CRMs and makes the things a seller touches every day fast and simple:
+
+- Product catalog — stock tracking with low-stock alerts
+- Sales screen — a sale in a few clicks, mixed payment (cash + credit)
+- Customer debt ledger — who owes what, since when, with full history
+- Reports — daily/monthly sales, Excel export
+- Soft-delete — accidentally removed records can be restored
+
+## Design decisions
+
+This is where having the designer and the developer in one head paid off: the interface isn't a "pretty admin template" — it's drawn around how a real seller actually moves.
+
+- **Big buttons, big numbers** — it's used in a hurry, on a shop counter; delicate UI doesn't survive there
+- **Dark theme** — a screen that stays on until late evening shouldn't tire the eyes
+- **One screen — one task** — the seller never has to wonder "where am I?"
+
+## Outcome
+
+The system shipped to production in July 2026 and is used in live trade. Debt tracking moved from the notebook into the system — one search now pulls up a customer's entire history.

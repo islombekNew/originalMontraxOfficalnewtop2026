@@ -1,0 +1,373 @@
+@import "tailwindcss";
+
+/* ============ MONTRAX Design Tokens v3 — Warm Editorial ============
+   Palette photo'dan olingan: iliq qora fon, teri ranglari, kaymoq/paper.
+   Default: LIGHT (cream). Dark: warm-black.
+   Accent: bronze (asosiy) + olive (ikkinchi). */
+
+@theme {
+  /* --- Semantik tokenlar (light/dark ikkalasi ostida ishlaydi) --- */
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-warm: var(--line-warm);
+  --color-ink: var(--ink);
+  --color-ink-dim: var(--ink-dim);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
+  --color-accent-soft: var(--accent-soft);
+  --color-olive: var(--olive);
+  --color-olive-deep: var(--olive-deep);
+  --color-paper: var(--paper);
+  /* Backward compat alias — eski komponentlar text-warm/bg-warm ishlatgan */
+  --color-warm: var(--accent);
+  --color-warm-deep: var(--accent-deep);
+
+  /* --- Typography --- */
+  --font-display: "Clash Display", "Inter", system-ui, sans-serif;
+  --font-editorial: var(--font-instrument), "Instrument Serif", Georgia, serif;
+  --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+
+  --text-hero: clamp(3.5rem, 11vw, 10rem);
+  --text-display: clamp(3rem, 9vw, 8.5rem);
+  --text-h1: clamp(2.5rem, 5.5vw, 4.5rem);
+  --text-h2: clamp(1.75rem, 3.5vw, 2.5rem);
+  --text-lead: clamp(1.05rem, 1.4vw, 1.25rem);
+
+  --spacing-section: clamp(5rem, 12vw, 10rem);
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+}
+
+/* ============ LIGHT THEME (default) — iliq qaymoq ============ */
+:root,
+:root[data-theme="light"] {
+  --bg: #f2ebde;             /* Iliq qaymoq / paper */
+  --surface: #ebe2d0;        /* Yumshoq porcelain */
+  --surface-2: #ded1bb;      /* Deeper cream */
+  --line: #d5c8b0;           /* Nozik chegara */
+  --line-warm: #c8b998;      /* Iliq chegara */
+  --ink: #1a1512;            /* Deep warm ink — sof qora emas */
+  --ink-dim: #4a3f37;        /* Ikkinchi darajali matn */
+  --muted: #7a6f64;          /* Muted metadata */
+  --accent: #a06d3a;         /* Bronze — kontrast cream ustida */
+  --accent-deep: #7a5028;    /* Chuqurroq bronze */
+  --accent-soft: #d4a568;    /* Ochroq bronze — hover/glow */
+  --olive: #6b7a4f;          /* Zaytun ikkinchi accent */
+  --olive-deep: #4d5a37;
+  --paper: #faf4e8;          /* Eng ochroq paper — cards uchun */
+
+  color-scheme: light;
+}
+
+/* ============ DARK THEME — iliq qora ============ */
+:root[data-theme="dark"] {
+  --bg: #0f0c0a;             /* Iliq deep-warm black */
+  --surface: #1a1613;        /* Warm surface */
+  --surface-2: #241e1a;      /* Deeper surface */
+  --line: #2a231d;
+  --line-warm: #3a2f25;
+  --ink: #ecebe6;            /* Warm off-white */
+  --ink-dim: #b8b0a5;
+  --muted: #7a7267;
+  --accent: #d4a568;         /* Ochroq bronze — dark ustida */
+  --accent-deep: #a07a3a;
+  --accent-soft: #e8c48c;
+  --olive: #a8b878;          /* Ochroq olive dark ustida */
+  --olive-deep: #7a8a56;
+  --paper: #1a1613;
+
+  color-scheme: dark;
+}
+
+/* ============ Base ============ */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+  transition: background-color 0.6s var(--ease-out-expo),
+    color 0.6s var(--ease-out-expo);
+}
+
+/* Subtle nozik warm glow — light va dark'da farqli */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      ellipse 70% 50% at 15% 10%,
+      color-mix(in srgb, var(--accent) 8%, transparent),
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 60% 40% at 85% 90%,
+      color-mix(in srgb, var(--olive) 6%, transparent),
+      transparent 60%
+    );
+  opacity: 0.9;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--accent-deep); }
+
+/* ============ Typography utility ============ */
+.font-display { font-family: var(--font-display); }
+.font-editorial {
+  font-family: var(--font-editorial);
+  font-style: italic;
+}
+.font-mono { font-family: var(--font-mono); }
+
+.text-hero {
+  font-size: var(--text-hero);
+  line-height: 0.9;
+  letter-spacing: -0.045em;
+  font-weight: 600;
+}
+.text-display {
+  font-size: var(--text-display);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+}
+.text-h1 {
+  font-size: var(--text-h1);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+.text-h2 {
+  font-size: var(--text-h2);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  font-weight: 500;
+}
+.text-lead {
+  font-size: var(--text-lead);
+  line-height: 1.6;
+}
+
+.section-gap { padding-block: var(--spacing-section); }
+
+.container-x {
+  margin-inline: auto;
+  width: min(100% - 2.5rem, 80rem);
+}
+.container-wide {
+  margin-inline: auto;
+  width: min(100% - 2rem, 96rem);
+}
+
+/* Accent underline */
+.link-accent { position: relative; transition: color 0.25s var(--ease-out-expo); }
+.link-accent::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.4s var(--ease-out-expo);
+}
+.link-accent:hover { color: var(--accent); }
+.link-accent:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* Char split reveal helper */
+.char-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: top;
+  padding: 0.05em 0;
+}
+.char-mask > span {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* Grain overlay — film hissi */
+.grain-overlay::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' /%3E%3C/svg%3E");
+}
+
+/* Scroll progress */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--olive));
+  transform-origin: 0 50%;
+  z-index: 60;
+  pointer-events: none;
+}
+
+/* Custom cursor — hidden on touch */
+@media (pointer: fine) {
+  * { cursor: none; }
+  .cursor-dot {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ink);
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    border: 1px solid color-mix(in srgb, var(--ink) 45%, transparent);
+    pointer-events: none;
+    z-index: 9998;
+    transition: width 0.35s var(--ease-out-expo),
+      height 0.35s var(--ease-out-expo), border-color 0.3s,
+      background-color 0.3s;
+  }
+  .cursor-ring.is-hover {
+    width: 66px;
+    height: 66px;
+    border-color: var(--accent);
+    background-color: color-mix(in srgb, var(--accent) 10%, transparent);
+    backdrop-filter: blur(2px);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html { scroll-behavior: auto; }
+}
+
+/* Case study prose */
+.prose-case { max-width: 42rem; }
+.prose-case h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-h2);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  margin-top: 3.5rem;
+  margin-bottom: 1.25rem;
+  color: var(--ink);
+}
+.prose-case h3 {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 500;
+  margin-top: 2.5rem;
+  margin-bottom: 0.85rem;
+  color: var(--ink);
+}
+.prose-case p {
+  color: var(--ink-dim);
+  line-height: 1.75;
+  margin-bottom: 1.15rem;
+}
+.prose-case strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+.prose-case ul {
+  list-style: none;
+  margin-bottom: 1.25rem;
+  color: var(--ink-dim);
+}
+.prose-case ul li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.7;
+}
+.prose-case ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.7em;
+  width: 8px;
+  height: 1px;
+  background: var(--accent);
+}
+.prose-case blockquote {
+  border-left: 2px solid var(--accent);
+  padding-left: 1.5rem;
+  margin-block: 2rem;
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-size: 1.35rem;
+  color: var(--ink);
+}
+
+/* ============ Sticky stack — "card deck" ============
+   Har panel sticky: keyingisi ustiga tabiiy chiqadi. Transform/opacity YO'Q —
+   shuning uchun scroll'da hech qanday miltillash bo'lmaydi. */
+.stack-panel {
+  position: relative;
+  background: var(--bg);
+}
+
+@media (min-width: 768px) {
+  .stack-panel {
+    position: sticky;
+    /* top qiymati JS'da o'lchanadi (StackSection): vh - height, yoki 0 */
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-top: 1px solid var(--line-warm);
+    border-radius: 2rem 2rem 0 0;
+    box-shadow: 0 -24px 48px -24px color-mix(in srgb, var(--ink) 18%, transparent);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .stack-panel {
+    /* Mobil'da sticky o'chadi — inline top qiymati ta'sir qilmasin */
+    top: auto !important;
+  }
+}
