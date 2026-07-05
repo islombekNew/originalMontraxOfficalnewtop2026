@@ -43,11 +43,10 @@ const CATEGORIES = [
   },
   {
     key: "web",
-    custom: true, // narx loyihaga qarab — item ro'yxati o'rniga izoh
     items: [
-      { uz: "CRM / boshqaruv tizimi", en: "CRM / management system", price: "" },
-      { uz: "E-commerce", en: "E-commerce", price: "" },
-      { uz: "Murakkab web ilova", en: "Complex web app", price: "" },
+      { uz: "CRM / boshqaruv tizimi", en: "CRM / management system", price: "600 000+" },
+      { uz: "E-commerce", en: "E-commerce", price: "600 000+" },
+      { uz: "Murakkab web ilova", en: "Complex web app", price: "600 000+" },
     ],
   },
 ] as const;
