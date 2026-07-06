@@ -44,20 +44,17 @@ export function getCaseSlugs(): string[] {
   ];
 }
 
-/** Grafik dizayn ishlari — public/media/design/ dagi rasmlar */
+/** Grafik dizayn ishlari — public/media/design/ dagi rasmlar.
+ *  Har fayl BIR marta, w/h — real o'lchamlar (sharp bilan tekshirilgan). */
 export const designWorks: DesignWork[] = [
   { src: "/media/design/thumb-oppo-findx9.jpg", alt: "OPPO Find X9 Ultra — YouTube thumbnail", category: "Thumbnail", w: 1280, h: 720 },
-  { src: "/media/design/thumb-2.jpg", alt: "YouTube thumbnail dizayn", category: "Thumbnail", w: 1280, h: 720 },
-  { src: "/media/design/thumb-3.jpg", alt: "YouTube thumbnail dizayn", category: "Thumbnail", w: 1280, h: 720 },
-  { src: "/media/design/thumb-4.jpg", alt: "YouTube thumbnail dizayn", category: "Thumbnail", w: 1280, h: 720 },
-  { src: "/media/design/poster-ios27.jpg", alt: "iOS 27 — poster dizayn", category: "Poster", w: 1080, h: 1350 },
-  { src: "/media/design/poster-iphonevivo.jpg", alt: "iPhone vs Vivo — poster", category: "Poster", w: 1080, h: 1350 },
-  { src: "/media/design/poster-oppo.jpg", alt: "OPPO — poster dizayn", category: "Poster", w: 1080, h: 1350 },
-  { src: "/media/design/poster-realme.jpg", alt: "Realme — poster dizayn", category: "Poster", w: 1080, h: 1350 },
-  { src: "/media/design/work-1.jpg", alt: "Grafik dizayn ishi", category: "Design", w: 1080, h: 1080 },
-  { src: "/media/design/work-2.jpg", alt: "Grafik dizayn ishi", category: "Design", w: 1080, h: 1080 },
-  { src: "/media/design/work-3.jpg", alt: "Grafik dizayn ishi", category: "Design", w: 1080, h: 1080 },
-  { src: "/media/design/work-4.jpg", alt: "Grafik dizayn ishi", category: "Design", w: 1080, h: 1080 },
-  { src: "/media/design/work-5.jpg", alt: "Grafik dizayn ishi", category: "Design", w: 1080, h: 1080 },
-  { src: "/media/design/work-6.png", alt: "Grafik dizayn ishi", category: "Design", w: 1080, h: 1080 },
+  { src: "/media/design/thumb-3.jpg", alt: "Realme GT 8 Pro — YouTube thumbnail", category: "Thumbnail", w: 1280, h: 767 },
+  { src: "/media/design/thumb-2.jpg", alt: "iPhone vs Vivo — kamera jangi poster", category: "Poster", w: 947, h: 1280 },
+  { src: "/media/design/thumb-4.jpg", alt: "iOS 27 obzor — poster", category: "Poster", w: 960, h: 1280 },
+  { src: "/media/design/work-1.jpg", alt: "E-commerce mahsulot kartasi", category: "E-commerce", w: 1024, h: 1024 },
+  { src: "/media/design/work-2.jpg", alt: "E-commerce mahsulot kartasi", category: "E-commerce", w: 1024, h: 1024 },
+  { src: "/media/design/work-3.jpg", alt: "E-commerce mahsulot kartasi", category: "E-commerce", w: 1024, h: 1024 },
+  { src: "/media/design/work-4.jpg", alt: "E-commerce mahsulot kartasi", category: "E-commerce", w: 1024, h: 1024 },
+  { src: "/media/design/work-5.jpg", alt: "E-commerce mahsulot kartasi", category: "E-commerce", w: 1024, h: 1024 },
+  { src: "/media/design/work-6.png", alt: "Banner dizayn", category: "Banner", w: 1536, h: 1024 },
 ];

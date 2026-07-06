@@ -19,7 +19,7 @@ export default function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          className="flex select-none items-center gap-4 font-display text-[clamp(4rem,17vw,16rem)] font-semibold leading-none tracking-tighter md:gap-6"
+          className="flex select-none items-center gap-3 whitespace-nowrap font-display text-[clamp(2.4rem,12vw,13rem)] font-semibold leading-none tracking-tighter md:gap-6"
         >
           <Image
             src="/media/brand/logo-mark.png"
