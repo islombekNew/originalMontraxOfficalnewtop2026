@@ -84,3 +84,5 @@ Thumbs.db
 
 # Data files
 data.json
+# TypeScript build cache
+*.tsbuildinfo

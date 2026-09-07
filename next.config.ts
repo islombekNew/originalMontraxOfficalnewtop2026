@@ -9,6 +9,10 @@ const nextConfig: NextConfig = {
     // Case study cover'lari SVG — local fayllar, xavfsiz
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    // Admin paneldan yuklangan rasmlar Supabase Storage'da turadi
+    remotePatterns: [
+      { protocol: "https", hostname: "*.supabase.co", pathname: "/storage/v1/object/public/**" },
+    ],
   },
 };
 

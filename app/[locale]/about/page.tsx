@@ -5,12 +5,7 @@ import path from "path";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import Reveal from "@/components/Reveal";
 import CTASection from "@/components/home/CTASection";
-
-const TOOLS = [
-  "Next.js 15", "TypeScript", "Prisma", "Tailwind CSS", "grammY",
-  "NextAuth", "PostgreSQL", "Photoshop", "Figma", "ComfyUI / Flux",
-  "GSAP", "Framer Motion",
-];
+import { getSettings } from "@/lib/cms/read";
 
 export async function generateMetadata({
   params,
@@ -31,9 +26,13 @@ export default async function AboutPage({
   setRequestLocale(locale);
   const t = await getTranslations("about");
 
-  const hasPhoto = fs.existsSync(
-    path.join(process.cwd(), "public", "media", "personal", "islombek.jpg")
-  );
+  const { aboutTools: TOOLS, aboutPhoto } = await getSettings();
+
+  /* Lokal rasm bo'lsa mavjudligini tekshiramiz — yo'q faylga so'rov yubormaymiz */
+  const hasPhoto =
+    Boolean(aboutPhoto) &&
+    (!aboutPhoto.startsWith("/") ||
+      fs.existsSync(path.join(process.cwd(), "public", aboutPhoto)));
 
   const steps = [1, 2, 3] as const;
 
@@ -54,7 +53,7 @@ export default async function AboutPage({
             <div className="relative aspect-[4/5] overflow-hidden rounded-xl border border-line bg-surface">
               {hasPhoto ? (
                 <Image
-                  src="/media/personal/islombek.jpg"
+                  src={aboutPhoto}
                   alt={t("photoAlt")}
                   fill
                   sizes="(max-width: 768px) 100vw, 35vw"

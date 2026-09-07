@@ -5,7 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
-import { TELEGRAM_URL } from "@/lib/nav-data";
+import { useSiteSettings } from "@/components/SiteSettings";
 import MagneticButton from "@/components/MagneticButton";
 import ThemeToggle from "@/components/ThemeToggle";
 
@@ -18,6 +18,7 @@ const LINKS = [
 
 export default function Nav() {
   const t = useTranslations("nav");
+  const { telegramUrl } = useSiteSettings();
   const locale = useLocale();
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
@@ -107,7 +108,7 @@ export default function Nav() {
             <LocaleSwitcher locale={locale} pathname={pathname} />
             <MagneticButton
               as="a"
-              href={TELEGRAM_URL}
+              href={telegramUrl}
               target="_blank"
               rel="noopener noreferrer"
               data-cursor
@@ -169,7 +170,7 @@ export default function Nav() {
                   </motion.div>
                 ))}
                 <a
-                  href={TELEGRAM_URL}
+                  href={telegramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="mt-4 inline-flex items-center justify-center gap-2 rounded-full bg-ink px-4 py-3 text-sm font-medium text-paper"

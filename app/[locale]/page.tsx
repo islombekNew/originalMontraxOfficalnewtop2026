@@ -1,5 +1,6 @@
 import { setRequestLocale } from "next-intl/server";
-import { getCaseStudies, designWorks } from "@/lib/work";
+import { getCaseStudies, getDesignWorks } from "@/lib/work";
+import { getSections } from "@/lib/cms/read";
 import Hero from "@/components/home/Hero";
 import ExpertiseStrip from "@/components/home/ExpertiseStrip";
 import FeaturedWork from "@/components/home/FeaturedWork";
@@ -10,7 +11,8 @@ import CTASection from "@/components/home/CTASection";
 import StackSection from "@/components/StackSection";
 
 /** Home — sticky stack tuzilishi.
- *  Hero → Featured → Design → About → Services → CTA — har biri sticky, keyingisi ustiga siljiydi. */
+ *  Bo'limlar tartibi va ko'rinishi admin paneldan boshqariladi
+ *  (Boshqaruv → Bosh sahifa bo'limlari). */
 export default async function HomePage({
   params,
 }: {
@@ -19,35 +21,53 @@ export default async function HomePage({
   const { locale } = await params;
   setRequestLocale(locale);
 
-  const featured = getCaseStudies(locale).slice(0, 3);
+  const [cases, designs, sections] = await Promise.all([
+    getCaseStudies(locale),
+    getDesignWorks(),
+    getSections(),
+  ]);
+
+  const featured = cases.slice(0, 3);
+  const visible = sections.filter((s) => s.visible);
+
+  /* Hero va lenta stack'dan tashqarida — qolganlari sticky panel */
+  const showHero = visible.some((s) => s.key === "hero");
+  const showExpertise = visible.some((s) => s.key === "expertise");
+
+  const panels = visible
+    .filter((s) => s.key !== "hero" && s.key !== "expertise")
+    .map((s) => {
+      switch (s.key) {
+        case "featured":
+          return featured.length ? (
+            <FeaturedWork key={s.key} featured={featured} />
+          ) : null;
+        case "designStrip":
+          return designs.length ? (
+            <DesignStrip key={s.key} works={designs.slice(0, 8)} />
+          ) : null;
+        case "aboutTeaser":
+          return <AboutTeaser key={s.key} />;
+        case "servicesTeaser":
+          return <ServicesTeaser key={s.key} />;
+        case "cta":
+          return <CTASection key={s.key} />;
+        default:
+          return null;
+      }
+    })
+    .filter(Boolean);
 
   return (
     <div className="stack-root relative">
-      {/* Hero — sticky emas, oddiy tepada. Keyingi bo'limlar ustiga chiqadi. */}
-      <Hero />
+      {showHero && <Hero />}
+      {showExpertise && <ExpertiseStrip />}
 
-      {/* Yo'nalishlar marquee — dasturchilik · dizayn · SMM · vibe coding */}
-      <ExpertiseStrip />
-
-      <StackSection index={1}>
-        <FeaturedWork featured={featured} />
-      </StackSection>
-
-      <StackSection index={2}>
-        <DesignStrip works={designWorks.slice(0, 8)} />
-      </StackSection>
-
-      <StackSection index={3}>
-        <AboutTeaser />
-      </StackSection>
-
-      <StackSection index={4}>
-        <ServicesTeaser />
-      </StackSection>
-
-      <StackSection index={5}>
-        <CTASection />
-      </StackSection>
+      {panels.map((panel, i) => (
+        <StackSection key={i} index={i + 1}>
+          {panel}
+        </StackSection>
+      ))}
     </div>
   );
 }

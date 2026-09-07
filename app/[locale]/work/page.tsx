@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { getCaseStudies, designWorks } from "@/lib/work";
+import { getCaseStudies, getDesignWorks } from "@/lib/work";
 import WorkGrid from "@/components/WorkGrid";
 
 export async function generateMetadata({
@@ -22,7 +22,10 @@ export default async function WorkPage({
   setRequestLocale(locale);
   const t = await getTranslations("work");
 
-  const cases = getCaseStudies(locale);
+  const [cases, designWorks] = await Promise.all([
+    getCaseStudies(locale),
+    getDesignWorks(),
+  ]);
 
   return (
     <div className="container-x pt-36 pb-24">

@@ -4,10 +4,12 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { Link } from "@/i18n/navigation";
-import { SOCIAL } from "@/lib/nav-data";
+import { useSiteSettings, useSocialLinks } from "@/components/SiteSettings";
 
 export default function Footer() {
   const t = useTranslations("footer");
+  const { brandLogo } = useSiteSettings();
+  const social = useSocialLinks();
   const year = new Date().getFullYear();
 
   return (
@@ -21,14 +23,16 @@ export default function Footer() {
           transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
           className="flex select-none items-center gap-3 whitespace-nowrap font-display text-[clamp(2.4rem,12vw,13rem)] font-semibold leading-none tracking-tighter md:gap-6"
         >
-          <Image
-            src="/media/brand/logo-mark.png"
-            alt=""
-            aria-hidden
-            width={512}
-            height={512}
-            className="h-[0.62em] w-[0.62em] shrink-0 opacity-90"
-          />
+          {brandLogo && (
+            <Image
+              src={brandLogo}
+              alt=""
+              aria-hidden
+              width={512}
+              height={512}
+              className="h-[0.62em] w-[0.62em] shrink-0 opacity-90"
+            />
+          )}
           <span>
             MONTRAX
             <span className="font-editorial italic text-accent">.</span>
@@ -81,13 +85,8 @@ export default function Footer() {
               {t("socialHeading")}
             </h3>
             <ul className="space-y-2 text-sm">
-              {[
-                { href: SOCIAL.telegram, label: "Telegram" },
-                { href: SOCIAL.channel, label: "Kanal" },
-                { href: SOCIAL.instagram, label: "Instagram" },
-                { href: SOCIAL.github, label: "GitHub" },
-              ].map((s) => (
-                <li key={s.label}>
+              {social.map((s) => (
+                <li key={s.id}>
                   <a
                     href={s.href}
                     target="_blank"

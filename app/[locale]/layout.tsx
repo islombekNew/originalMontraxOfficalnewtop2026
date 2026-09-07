@@ -4,6 +4,8 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
+import { getSettings } from "@/lib/cms/read";
+import { SiteSettingsProvider } from "@/components/SiteSettings";
 import SmoothScroll from "@/components/SmoothScroll";
 import Cursor from "@/components/Cursor";
 import Nav from "@/components/Nav";
@@ -47,6 +49,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
+  const settings = await getSettings();
   return {
     title: t("homeTitle"),
     description: t("homeDesc"),
@@ -54,6 +57,7 @@ export async function generateMetadata({
       title: t("homeTitle"),
       description: t("homeDesc"),
       type: "website",
+      ...(settings.ogImage ? { images: [settings.ogImage] } : {}),
     },
   };
 }
@@ -70,6 +74,8 @@ export default async function LocaleLayout({
     notFound();
   }
   setRequestLocale(locale);
+
+  const settings = await getSettings();
 
   return (
     <html
@@ -88,14 +94,16 @@ export default async function LocaleLayout({
       {/* suppressHydrationWarning: brauzer kengaytmalari body'ga atribut qo'shadi (cz-shortcut-listen) */}
       <body className="grain-overlay" suppressHydrationWarning>
         <NextIntlClientProvider>
-          <SmoothScroll>
-            <ScrollProgress />
-            <Cursor />
-            <Nav />
-            <main>{children}</main>
-            <Footer />
-            <FloatingTelegram />
-          </SmoothScroll>
+          <SiteSettingsProvider value={settings}>
+            <SmoothScroll>
+              <ScrollProgress />
+              <Cursor />
+              <Nav />
+              <main>{children}</main>
+              <Footer />
+              <FloatingTelegram />
+            </SmoothScroll>
+          </SiteSettingsProvider>
         </NextIntlClientProvider>
       </body>
     </html>

@@ -7,7 +7,7 @@ import { useTranslations } from "next-intl";
 import SplitText from "@/components/SplitText";
 import MagneticButton from "@/components/MagneticButton";
 import { Link } from "@/i18n/navigation";
-import { TELEGRAM_URL } from "@/lib/nav-data";
+import { useSiteSettings } from "@/components/SiteSettings";
 import { EASE_OUT_EXPO } from "@/lib/design/motion";
 
 /** MONTRAX Hero v3 — editorial cover story tuzilishi.
@@ -15,6 +15,7 @@ import { EASE_OUT_EXPO } from "@/lib/design/motion";
  *  scroll'ga parallax bog'langan katta serif "M" harfi va nozik grid. */
 export default function Hero() {
   const t = useTranslations("hero");
+  const { telegramUrl } = useSiteSettings();
   const ref = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -143,7 +144,7 @@ export default function Hero() {
             >
               <MagneticButton
                 as="a"
-                href={TELEGRAM_URL}
+                href={telegramUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full bg-ink px-7 py-4 text-sm font-medium text-paper transition-colors hover:bg-accent hover:text-paper"

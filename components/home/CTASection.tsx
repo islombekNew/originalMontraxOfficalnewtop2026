@@ -6,11 +6,12 @@ import { useRef } from "react";
 import { Link } from "@/i18n/navigation";
 import Reveal from "@/components/Reveal";
 import MagneticButton from "@/components/MagneticButton";
-import { TELEGRAM_URL } from "@/lib/nav-data";
+import { useSiteSettings } from "@/components/SiteSettings";
 
 /** Yakuniy CTA — editorial, dramatic. Marquee o'rniga scroll-linked oversized text. */
 export default function CTASection() {
   const t = useTranslations("cta");
+  const { telegramUrl } = useSiteSettings();
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -68,7 +69,7 @@ export default function CTASection() {
           <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
             <MagneticButton
               as="a"
-              href={TELEGRAM_URL}
+              href={telegramUrl}
               target="_blank"
               rel="noopener noreferrer"
               data-cursor

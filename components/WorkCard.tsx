@@ -66,17 +66,20 @@ export default function WorkCard({
         >
           {/* Image — hover scale */}
           <div className="absolute inset-0 overflow-hidden">
-            <Image
-              src={item.cover}
-              alt={item.title}
-              fill
-              sizes={
-                large
-                  ? "(max-width: 768px) 100vw, 66vw"
-                  : "(max-width: 768px) 100vw, 33vw"
-              }
-              className="object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
-            />
+            {/* Muqova hali yuklanmagan bo'lsa — bo'sh surface qoladi, sahifa buzilmaydi */}
+            {item.cover && (
+              <Image
+                src={item.cover}
+                alt={item.title}
+                fill
+                sizes={
+                  large
+                    ? "(max-width: 768px) 100vw, 66vw"
+                    : "(max-width: 768px) 100vw, 33vw"
+                }
+                className="object-cover transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.06]"
+              />
+            )}
           </div>
 
           {/* Mask reveal — pastdan yuqoriga (overlay bilan, image ustidan) */}

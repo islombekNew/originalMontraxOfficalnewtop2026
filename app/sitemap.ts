@@ -4,9 +4,9 @@ import { getCaseSlugs } from "@/lib/work";
 
 const BASE = "https://montraxportfolios.netlify.app";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPaths = ["", "/work", "/about", "/services", "/contact"];
-  const casePaths = getCaseSlugs().map((slug) => `/work/${slug}`);
+  const casePaths = (await getCaseSlugs()).map((slug) => `/work/${slug}`);
 
   return routing.locales.flatMap((locale) =>
     [...staticPaths, ...casePaths].map((p) => ({

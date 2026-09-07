@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { setRequestLocale, getTranslations } from "next-intl/server";
 import Reveal from "@/components/Reveal";
 import ContactForm from "@/components/ContactForm";
-import { SOCIAL, TELEGRAM_URL } from "@/lib/nav-data";
+import { getSettings } from "@/lib/cms/read";
 
 export async function generateMetadata({
   params,
@@ -22,6 +22,11 @@ export default async function ContactPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("contact");
+  const { telegramUrl, social } = await getSettings();
+  const handle = `@${telegramUrl.replace(/\/+$/, "").split("/").pop() ?? ""}`;
+  const otherLinks = social.filter(
+    (s) => s.visible !== false && s.href && s.href !== telegramUrl
+  );
 
   return (
     <div className="container-x pt-36 pb-24">
@@ -34,7 +39,7 @@ export default async function ContactPage({
         {/* Telegram — asosiy kanal */}
         <Reveal>
           <a
-            href={TELEGRAM_URL}
+            href={telegramUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="group flex h-full flex-col justify-between rounded-xl border border-accent/30 bg-surface p-8 transition-colors duration-400 hover:border-accent"
@@ -51,7 +56,7 @@ export default async function ContactPage({
               <p className="mt-2 text-sm text-muted">{t("telegramDesc")}</p>
             </div>
             <span className="mt-8 inline-block text-lg font-medium text-accent transition-transform duration-300 group-hover:translate-x-1.5">
-              @Montrax_offical →
+              {handle} →
             </span>
           </a>
         </Reveal>
@@ -68,15 +73,17 @@ export default async function ContactPage({
           {t("socialTitle")}
         </p>
         <div className="mt-4 flex flex-wrap gap-6 text-sm">
-          <a href={SOCIAL.channel} target="_blank" rel="noopener noreferrer" className="link-accent text-muted">
-            Telegram kanal
-          </a>
-          <a href={SOCIAL.instagram} target="_blank" rel="noopener noreferrer" className="link-accent text-muted">
-            Instagram
-          </a>
-          <a href={SOCIAL.github} target="_blank" rel="noopener noreferrer" className="link-accent text-muted">
-            GitHub
-          </a>
+          {otherLinks.map((s) => (
+            <a
+              key={s.id}
+              href={s.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="link-accent text-muted"
+            >
+              {s.label}
+            </a>
+          ))}
         </div>
       </Reveal>
     </div>

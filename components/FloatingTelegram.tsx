@@ -3,12 +3,13 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
-import { TELEGRAM_URL } from "@/lib/nav-data";
+import { useSiteSettings } from "@/components/SiteSettings";
 
 /** Har sahifada o'ng chekkada doim ko'rinadigan CTA.
  *  Hero'da (scroll < 200) yashiringan — hero'ning o'z CTA'siga xalaqit bermaydi. */
 export default function FloatingTelegram() {
   const t = useTranslations("floating");
+  const { telegramUrl } = useSiteSettings();
   const [visible, setVisible] = useState(false);
   const [expanded, setExpanded] = useState(false);
 
@@ -23,7 +24,7 @@ export default function FloatingTelegram() {
     <AnimatePresence>
       {visible && (
         <motion.a
-          href={TELEGRAM_URL}
+          href={telegramUrl}
           target="_blank"
           rel="noopener noreferrer"
           data-cursor

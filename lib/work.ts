@@ -1,60 +1,63 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
+import { getDesignItems, getWorkItems } from "./cms/read";
 import type { CaseMeta, DesignWork } from "./work-types";
 
 export type { CaseMeta, DesignWork };
 export type CaseStudy = CaseMeta & { body: string };
 
-const WORK_DIR = path.join(process.cwd(), "content", "work");
+/** Ishlar endi CMS'dan keladi (admin panel). CMS bo'sh bo'lsa —
+ *  content/work/*.mdx fayllari ishlatiladi, ya'ni sayt hech qachon bo'sh qolmaydi. */
 
-export function getCaseStudies(locale: string): CaseMeta[] {
-  if (!fs.existsSync(WORK_DIR)) return [];
-  const files = fs
-    .readdirSync(WORK_DIR)
-    .filter((f) => f.endsWith(`.${locale}.mdx`));
-
-  return files
-    .map((file) => {
-      const slug = file.replace(`.${locale}.mdx`, "");
-      const raw = fs.readFileSync(path.join(WORK_DIR, file), "utf-8");
-      const { data } = matter(raw);
-      return { slug, ...(data as Omit<CaseMeta, "slug">) };
-    })
-    .sort((a, b) => a.order - b.order);
+function toMeta(
+  w: Awaited<ReturnType<typeof getWorkItems>>[number],
+  locale: string
+): CaseMeta {
+  const side = locale === "en" ? w.en : w.uz;
+  const fb = locale === "en" ? w.uz : w.en;
+  const pick = (a: string, b: string) => (a && a.trim() ? a : b);
+  return {
+    slug: w.slug,
+    title: pick(side.title, fb.title),
+    client: pick(side.client, fb.client),
+    year: pick(side.year, fb.year),
+    role: pick(side.role, fb.role),
+    tools: w.tools,
+    summary: pick(side.summary, fb.summary),
+    cover: w.cover,
+    category: w.category,
+    order: w.order,
+  };
 }
 
-export function getCaseStudy(slug: string, locale: string): CaseStudy | null {
-  const file = path.join(WORK_DIR, `${slug}.${locale}.mdx`);
-  if (!fs.existsSync(file)) return null;
-  const raw = fs.readFileSync(file, "utf-8");
-  const { data, content } = matter(raw);
-  return { slug, ...(data as Omit<CaseMeta, "slug">), body: content };
+export async function getCaseStudies(locale: string): Promise<CaseMeta[]> {
+  const items = await getWorkItems();
+  return items
+    .filter((w) => w.published !== false)
+    .map((w) => toMeta(w, locale));
 }
 
-export function getCaseSlugs(): string[] {
-  if (!fs.existsSync(WORK_DIR)) return [];
-  return [
-    ...new Set(
-      fs
-        .readdirSync(WORK_DIR)
-        .filter((f) => f.endsWith(".mdx"))
-        .map((f) => f.replace(/\.(uz|en)\.mdx$/, ""))
-    ),
-  ];
+export async function getCaseStudy(
+  slug: string,
+  locale: string
+): Promise<CaseStudy | null> {
+  const items = await getWorkItems();
+  const w = items.find((x) => x.slug === slug && x.published !== false);
+  if (!w) return null;
+  const side = locale === "en" ? w.en : w.uz;
+  const fb = locale === "en" ? w.uz : w.en;
+  return {
+    ...toMeta(w, locale),
+    body: side.body?.trim() ? side.body : fb.body ?? "",
+  };
 }
 
-/** Grafik dizayn ishlari — public/media/design/ dagi rasmlar.
- *  Har fayl BIR marta, w/h — real o'lchamlar (sharp bilan tekshirilgan). */
-export const designWorks: DesignWork[] = [
-  { src: "/media/design/thumb-oppo-findx9.jpg", alt: "OPPO Find X9 Ultra — YouTube thumbnail", category: "Thumbnail", w: 1280, h: 720 },
-  { src: "/media/design/thumb-3.jpg", alt: "Realme GT 8 Pro — YouTube thumbnail", category: "Thumbnail", w: 1280, h: 767 },
-  { src: "/media/design/thumb-2.jpg", alt: "iPhone vs Vivo — kamera jangi poster", category: "Poster", w: 947, h: 1280 },
-  { src: "/media/design/thumb-4.jpg", alt: "iOS 27 obzor — poster", category: "Poster", w: 960, h: 1280 },
-  { src: "/media/design/work-1.jpg", alt: "E-commerce mahsulot kartasi", category: "E-commerce", w: 1024, h: 1024 },
-  { src: "/media/design/work-2.jpg", alt: "E-commerce mahsulot kartasi", category: "E-commerce", w: 1024, h: 1024 },
-  { src: "/media/design/work-3.jpg", alt: "E-commerce mahsulot kartasi", category: "E-commerce", w: 1024, h: 1024 },
-  { src: "/media/design/work-4.jpg", alt: "E-commerce mahsulot kartasi", category: "E-commerce", w: 1024, h: 1024 },
-  { src: "/media/design/work-5.jpg", alt: "E-commerce mahsulot kartasi", category: "E-commerce", w: 1024, h: 1024 },
-  { src: "/media/design/work-6.png", alt: "Banner dizayn", category: "Banner", w: 1536, h: 1024 },
-];
+export async function getCaseSlugs(): Promise<string[]> {
+  const items = await getWorkItems();
+  return items.filter((w) => w.published !== false).map((w) => w.slug);
+}
+
+export async function getDesignWorks(): Promise<DesignWork[]> {
+  const items = await getDesignItems();
+  return items
+    .filter((d) => d.src)
+    .map(({ src, alt, category, w, h }) => ({ src, alt, category, w, h }));
+}

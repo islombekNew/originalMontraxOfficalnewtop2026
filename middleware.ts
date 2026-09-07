@@ -3,6 +3,7 @@ import { routing } from "./i18n/routing";
 
 export default createMiddleware(routing);
 
+/** /admin — til prefiksisiz alohida bo'lim, next-intl unga tegmaydi */
 export const config = {
-  matcher: "/((?!api|_next|_vercel|.*\\..*).*)",
+  matcher: "/((?!api|admin|_next|_vercel|.*\\..*).*)",
 };
