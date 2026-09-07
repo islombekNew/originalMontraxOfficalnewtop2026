@@ -1,7 +1,13 @@
 # MONTRAX — Boshqaruv paneli (admin)
 
 Sayt matnlari, ishlar, rasmlar va narxlarni kod tegmasdan o'zgartirish uchun.
-Manzil: **`/admin`**
+
+- **Manzil:** `/admin` (lokal: `http://localhost:3000/admin`)
+- **Login:** yo'q — faqat parol
+- **Parol:** `.env` faylidagi `ADMIN_PASS` qiymati
+
+Parolni istagan vaqt `.env` da o'zgartirsangiz bo'ladi (Vercel'da ham
+yangilashni unutmang). O'zgartirgach eski sessiyalar avtomatik bekor bo'ladi.
 
 ---
 
@@ -12,7 +18,7 @@ Ikkita rejim bor. Qaysi biri ishlashini `.env` dagi kalitlar hal qiladi:
 | Rejim | Qachon | Ma'lumot qayerda | Yozish mumkinmi |
 |---|---|---|---|
 | **Lokal** | `SUPABASE_SERVICE_ROLE_KEY` bo'sh | `content/cms/*.json` + `public/uploads/` | Faqat kompyuteringizda (`npm run dev`) |
-| **Supabase** | URL + service_role kalit bor | Supabase bazasi + Storage | Ha, jonli saytda ham |
+| **Supabase** | URL + service_role kalit bor | Supabase Storage (`montrax-cms` va `media` bucket) | Ha, jonli saytda ham |
 
 **Muhim:** Vercel'da fayl tizimiga yozib bo'lmaydi. Shuning uchun jonli saytda
 admin ishlashi uchun Supabase **shart**.
@@ -23,23 +29,18 @@ bo'sh qolmaydi** — Supabase o'chib qolsa ham.
 
 ---
 
-## 2. Supabase'ni ulash (bir marta)
+## 2. Supabase'ni ulash — 3 qadam
 
-Hozirgi `.env` dagi Supabase loyihasi **o'chirilgan** (bepul loyihalar uzoq
-ishlatilmasa o'chib ketadi). Yangisini ochish kerak:
+**SQL yozish kerak emas.** Bucket'larni admin panel o'zi yaratadi.
 
 ### 2.1. Loyiha ochish
 1. [supabase.com/dashboard](https://supabase.com/dashboard) → **New project**
 2. Nom: `montrax`, region: **Frankfurt** (O'zbekistonga eng yaqini)
-3. Parolni saqlab qo'ying
+3. Database password'ni saqlab qo'ying (bizga kerak emas, lekin yo'qotmang)
+4. ~2 daqiqa kutasiz — loyiha tayyorlanadi
 
-### 2.2. Jadval va bucket yaratish
-1. Chapdagi menyudan **SQL Editor** → **New query**
-2. Loyihadagi `supabase/schema.sql` faylini to'liq nusxalab qo'ying
-3. **Run** bosing
-
-### 2.3. Kalitlarni olish
-**Settings → API** bo'limida uchta narsa bor:
+### 2.2. Kalitlarni ko'chirish
+**Settings → API** bo'limida uchta qiymat bor:
 
 | Supabase'da | `.env` da |
 |---|---|
@@ -47,29 +48,30 @@ ishlatilmasa o'chib ketadi). Yangisini ochish kerak:
 | `anon` `public` | `SUPABASE_ANON_KEY` |
 | `service_role` `secret` | `SUPABASE_SERVICE_ROLE_KEY` |
 
-> `service_role` — to'liq huquqli maxfiy kalit. Uni **hech qachon** frontend
-> kodga, GitHub'ga yoki hech kimga bermang. U faqat serverda ishlatiladi.
-
-### 2.4. `.env` ga yozish (lokal)
 ```
 SUPABASE_URL=https://xxxxx.supabase.co
 SUPABASE_ANON_KEY=eyJ...
 SUPABASE_SERVICE_ROLE_KEY=eyJ...
-ADMIN_PASS=sizning_parolingiz
 ```
-Keyin `npm run dev` ni qayta ishga tushiring.
 
-### 2.5. Vercel'ga yozish (jonli sayt)
-Vercel → loyiha → **Settings → Environment Variables**. Yuqoridagi
-to'rttasini qo'shing (Production + Preview + Development), keyin
+> `service_role` — to'liq huquqli maxfiy kalit. Uni **hech qachon** frontend
+> kodga, GitHub'ga yoki hech kimga bermang. Faqat serverda ishlatiladi.
+
+Xuddi shu uchtasini (+ `ADMIN_PASS`) Vercel → **Settings → Environment
+Variables** ga ham qo'shing (Production + Preview + Development), keyin
 **Redeploy** qiling.
 
-### 2.6. Boshlang'ich ma'lumotni yuklash
-`/admin` sahifasiga kiring → **«Boshlang'ich ma'lumotni yuklash»** tugmasini
-bosing. Saytning hozirgi matnlari, loyihalari va narxlari bazaga ko'chadi.
+Lokalda `npm run dev` ni qayta ishga tushiring.
 
-Bu tugma mavjud yozuvlarga tegmaydi — ikkinchi marta bossangiz ham
-tahrirlaringiz o'chmaydi.
+### 2.3. Tugmani bosish
+`/admin` ga kiring → **«Boshlang'ich ma'lumotni yuklash»**.
+
+Bu bir bosishda:
+- `montrax-cms` (yopiq) va `media` (ochiq) bucket'larini yaratadi
+- saytning hozirgi matnlari, loyihalari, narxlarini bazaga ko'chiradi
+
+Mavjud yozuvlarga tegmaydi — ikkinchi marta bossangiz ham tahrirlaringiz
+o'chmaydi.
 
 ---
 
@@ -117,13 +119,18 @@ Eski cookie'lar avtomatik bekor bo'ladi.
 
 **Rasm yuklanmayapti**
 → 8 MB dan katta yoki format qo'llab-quvvatlanmaydi (jpg, png, webp, avif,
-gif, svg). Yoki `media` bucket yaratilmagan — `schema.sql` ni qayta ishga
-tushiring.
+gif, svg). Yoki `media` bucket yaratilmagan — `/admin` dagi «Boshlang'ich
+ma'lumotni yuklash» tugmasini bosing.
+
+**«bucket yaratilmadi» xatosi**
+→ `SUPABASE_SERVICE_ROLE_KEY` noto'g'ri yoki `anon` kalit tushib qolgan.
+Settings → API dan `service_role` (secret) ni qayta nusxalang.
 
 **Matnni bo'shatib qo'ydim, saytda bo'sh joy**
 → CMS'dagi bo'sh matn standart matnni ham bosib ketadi. Qaytarish uchun
 o'sha maydonga qayta yozing (eski matn `messages/uz.json` da turibdi).
 
 **Hammasini boshidan tiklash**
-→ Supabase → Table Editor → `cms_docs` → kerakli qatorni o'chiring. Sayt
-darhol kodga kiritilgan standart holatga qaytadi.
+→ Supabase → **Storage → montrax-cms** → kerakli JSON faylni o'chiring
+(masalan `messages-uz.json`). Sayt darhol kodga kiritilgan standart holatga
+qaytadi, keyin «Boshlang'ich ma'lumotni yuklash» bilan qayta to'ldiriladi.

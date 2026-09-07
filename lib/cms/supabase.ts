@@ -8,7 +8,9 @@ const URL = process.env.SUPABASE_URL?.trim() || "";
 const ANON = process.env.SUPABASE_ANON_KEY?.trim() || "";
 const SERVICE = process.env.SUPABASE_SERVICE_ROLE_KEY?.trim() || "";
 
-export const CMS_TABLE = "cms_docs";
+/** Kontent Storage'da JSON fayl sifatida saqlanadi — Postgres jadval kerak emas,
+ *  ya'ni foydalanuvchi SQL yozmaydi: bucket'larni admin panel o'zi yaratadi. */
+export const CMS_BUCKET = "montrax-cms";
 export const MEDIA_BUCKET = "media";
 
 /** Supabase o'qish uchun sozlanganmi */
@@ -41,6 +43,17 @@ export function supabaseWrite(): SupabaseClient | null {
 /** Storage'dagi fayl uchun ochiq URL */
 export function publicMediaUrl(path: string) {
   return `${URL}/storage/v1/object/public/${MEDIA_BUCKET}/${path}`;
+}
+
+/** Bucket'ni yo'q bo'lsa yaratadi. Bor bo'lsa — indamay o'tadi. */
+export async function ensureBucket(id: string, isPublic: boolean) {
+  const sb = supabaseWrite();
+  if (!sb) return { ok: false, error: "service_role kalit yo'q" };
+  const { error } = await sb.storage.createBucket(id, { public: isPublic });
+  if (!error) return { ok: true, created: true };
+  // "already exists" — bu xato emas
+  if (/exist/i.test(error.message)) return { ok: true, created: false };
+  return { ok: false, error: error.message };
 }
 
 export function supabaseHost() {

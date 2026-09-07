@@ -1,6 +1,11 @@
 import { NextResponse } from "next/server";
 import { isAuthed } from "@/lib/cms/auth";
-import { readDoc, writeDoc } from "@/lib/cms/store";
+import { driverName, readDoc, writeDoc } from "@/lib/cms/store";
+import {
+  CMS_BUCKET,
+  MEDIA_BUCKET,
+  ensureBucket,
+} from "@/lib/cms/supabase";
 import { readMdxWork, revalidateCms } from "@/lib/cms/read";
 import {
   defaultDesign,
@@ -27,6 +32,24 @@ export async function POST(req: Request) {
     overwrite = Boolean((await req.json())?.overwrite);
   } catch {
     /* tana bo'sh — standart rejim */
+  }
+
+  /* Bucket'larni tayyorlash — foydalanuvchi SQL yozmasin */
+  if (driverName() === "supabase") {
+    for (const [id, isPublic] of [
+      [CMS_BUCKET, false],
+      [MEDIA_BUCKET, true],
+    ] as const) {
+      const r = await ensureBucket(id, isPublic);
+      if (!r.ok) {
+        return NextResponse.json(
+          {
+            error: `«${id}» bucket yaratilmadi: ${r.error}. SUPABASE_SERVICE_ROLE_KEY to'g'ri ekanini tekshiring.`,
+          },
+          { status: 500 }
+        );
+      }
+    }
   }
 
   const docs: Array<[string, unknown]> = [

@@ -26,7 +26,8 @@ export default async function AdminHome() {
     getFaq(),
   ]);
 
-  const ok = status.driver === "supabase" && status.tableReady;
+  const ok =
+    status.driver === "supabase" && status.cmsReady && status.mediaReady;
 
   return (
     <>
@@ -59,13 +60,13 @@ export default async function AdminHome() {
           <Flag ok={status.urlSet} label="SUPABASE_URL" />
           <Flag ok={status.anonSet} label="SUPABASE_ANON_KEY" />
           <Flag ok={status.serviceSet} label="SUPABASE_SERVICE_ROLE_KEY" />
-          <Flag ok={status.tableReady} label="cms_docs jadvali" />
-          <Flag ok={status.bucketReady} label="media bucket" />
+          <Flag ok={status.cmsReady} label="kontent bucket" />
+          <Flag ok={status.mediaReady} label="media bucket" />
         </div>
 
         {!ok && (
           <div className="mt-4 rounded-lg border border-a-line bg-a-panel-2 p-4 text-sm leading-relaxed text-a-dim">
-            <b>Jonli saytda ishlashi uchun:</b>
+            <b>Jonli saytda ishlashi uchun — 3 qadam:</b>
             <ol className="mt-2 list-decimal space-y-1 pl-5">
               <li>
                 <a
@@ -76,32 +77,29 @@ export default async function AdminHome() {
                 >
                   supabase.com
                 </a>
-                &nbsp;da yangi loyiha oching (bepul).
+                &nbsp;da yangi loyiha oching (bepul, region:{" "}
+                <b>Frankfurt</b>).
               </li>
               <li>
-                SQL Editor'ga <code>supabase/schema.sql</code> faylini
-                nusxalab «Run» bosing.
+                <b>Settings → API</b> dan uchta qiymatni oling va{" "}
+                <code>.env</code> hamda Vercel → Settings → Environment
+                Variables ga qo'ying:
+                <br />
+                <code>SUPABASE_URL</code>, <code>SUPABASE_ANON_KEY</code>,{" "}
+                <code>SUPABASE_SERVICE_ROLE_KEY</code>
               </li>
               <li>
-                Settings → API dan <code>URL</code>, <code>anon</code> va{" "}
-                <code>service_role</code> kalitlarini oling.
-              </li>
-              <li>
-                Ularni <code>.env</code> (lokal) va Vercel → Settings →
-                Environment Variables ga qo'ying.
-              </li>
-              <li>
-                Shu yerga qaytib «Boshlang'ich ma'lumotni yuklash» tugmasini
-                bosing.
+                Shu sahifaga qaytib pastdagi tugmani bosing — bucket'lar va
+                boshlang'ich ma'lumot avtomatik yaratiladi.
               </li>
             </ol>
             <p className="mt-3">
-              To'liq yo'riqnoma: <code>ADMIN.md</code> faylida.
+              SQL yozish shart emas. To'liq yo'riqnoma: <code>ADMIN.md</code>.
             </p>
           </div>
         )}
 
-        {status.tableReady && <SeedButton />}
+        {status.reachable && <SeedButton />}
       </div>
 
       {/* Raqamlar */}

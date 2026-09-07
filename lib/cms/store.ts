@@ -1,8 +1,9 @@
 import fs from "fs/promises";
 import path from "path";
 import {
-  CMS_TABLE,
+  CMS_BUCKET,
   MEDIA_BUCKET,
+  ensureBucket,
   publicMediaUrl,
   supabaseRead,
   supabaseWrite,
@@ -41,7 +42,8 @@ export function canWrite(): { ok: boolean; reason?: string } {
   return { ok: true };
 }
 
-/** Admin bosh sahifasi uchun ulanish holati */
+/** Admin bosh sahifasi uchun ulanish holati.
+ *  Jadval kerak emas — faqat ikkita Storage bucket, ular avtomatik yaratiladi. */
 export async function cmsStatus() {
   const status = {
     driver: driverName(),
@@ -49,8 +51,8 @@ export async function cmsStatus() {
     anonSet: Boolean(process.env.SUPABASE_ANON_KEY?.trim()),
     serviceSet: Boolean(process.env.SUPABASE_SERVICE_ROLE_KEY?.trim()),
     reachable: false,
-    tableReady: false,
-    bucketReady: false,
+    cmsReady: false,
+    mediaReady: false,
     message: "",
   };
 
@@ -61,36 +63,29 @@ export async function cmsStatus() {
 
   const sb = supabaseRead()!;
   try {
-    const { error } = await sb.from(CMS_TABLE).select("key").limit(1);
-    status.reachable = true;
+    const { data, error } = await sb.storage.listBuckets();
     if (error) {
-      status.reachable = !/fetch failed|ENOTFOUND|ECONNREFUSED/i.test(
+      status.reachable = !/fetch failed|ENOTFOUND|ECONNREFUSED|Unable to connect/i.test(
         error.message
       );
-      status.message = !status.reachable
-        ? "SUPABASE_URL manzili javob bermayapti — loyiha o'chirilgan yoki manzil noto'g'ri. Yangi Supabase loyihasi ochib, kalitlarni yangilang."
-        : error.code === "42P01"
-        ? "Ulanish bor, lekin cms_docs jadvali topilmadi — supabase/schema.sql ni ishga tushiring."
-        : `Jadvalni o'qishda xato: ${error.message}`;
-    } else {
-      status.tableReady = true;
+      status.message = status.reachable
+        ? `Supabase javob berdi, lekin bucket ro'yxatini o'qib bo'lmadi: ${error.message}. SUPABASE_SERVICE_ROLE_KEY to'g'ri ekanini tekshiring.`
+        : "SUPABASE_URL javob bermayapti — loyiha o'chirilgan yoki manzil noto'g'ri.";
+      return status;
+    }
+    status.reachable = true;
+    const ids = new Set((data ?? []).map((b) => b.id));
+    status.cmsReady = ids.has(CMS_BUCKET);
+    status.mediaReady = ids.has(MEDIA_BUCKET);
+    if (!status.cmsReady || !status.mediaReady) {
+      status.message =
+        "Ulanish bor. Bucket'lar hali yaratilmagan — pastdagi tugmani bosing, o'zi yaratadi.";
     }
   } catch (e) {
     status.message =
       e instanceof Error
         ? `Supabase'ga ulanib bo'lmadi: ${e.message}`
         : "Supabase'ga ulanib bo'lmadi";
-    return status;
-  }
-
-  try {
-    const { error } = await sb.storage.from(MEDIA_BUCKET).list("", { limit: 1 });
-    status.bucketReady = !error;
-    if (error && status.tableReady) {
-      status.message = `«media» bucket topilmadi: ${error.message}`;
-    }
-  } catch {
-    /* bucket yo'q — yuqoridagi xabar yetarli */
   }
 
   return status;
@@ -105,20 +100,26 @@ function fsFile(key: string) {
 
 // ─── Doc o'qish / yozish ────────────────────────────────────────────────────
 
+/** "messages:uz" → "messages-uz.json" */
+function docPath(key: string) {
+  return `${key.replace(/[^a-z0-9_-]/gi, "-")}.json`;
+}
+
 export async function readDoc<T>(key: string): Promise<T | null> {
   if (useSupabase()) {
     const sb = supabaseRead();
     if (!sb) return null;
-    const { data, error } = await sb
-      .from(CMS_TABLE)
-      .select("value")
-      .eq("key", key)
-      .maybeSingle();
-    if (error) {
-      console.warn(`[cms] "${key}" o'qishda xato:`, error.message);
+    const { data, error } = await sb.storage
+      .from(CMS_BUCKET)
+      .download(docPath(key));
+    // Fayl yo'q — bu xato emas, shunchaki hali saqlanmagan
+    if (error || !data) return null;
+    try {
+      return JSON.parse(await data.text()) as T;
+    } catch {
+      console.warn(`[cms] "${key}" buzilgan JSON — standart qiymat ishlatildi`);
       return null;
     }
-    return (data?.value as T) ?? null;
   }
 
   try {
@@ -131,20 +132,6 @@ export async function readDoc<T>(key: string): Promise<T | null> {
 
 export async function readDocs<T>(keys: string[]): Promise<Record<string, T | null>> {
   const out: Record<string, T | null> = {};
-  if (useSupabase()) {
-    const sb = supabaseRead();
-    if (sb) {
-      const { data, error } = await sb
-        .from(CMS_TABLE)
-        .select("key,value")
-        .in("key", keys);
-      if (!error && data) {
-        for (const row of data) out[row.key as string] = row.value as T;
-      }
-    }
-    for (const k of keys) if (!(k in out)) out[k] = null;
-    return out;
-  }
   await Promise.all(
     keys.map(async (k) => {
       out[k] = await readDoc<T>(k);
@@ -158,13 +145,20 @@ export async function writeDoc(key: string, value: unknown): Promise<void> {
   if (!gate.ok) throw new Error(gate.reason);
 
   if (supabaseWriteEnabled()) {
+    const bucket = await ensureBucket(CMS_BUCKET, false);
+    if (!bucket.ok) throw new Error(`Bucket tayyorlanmadi: ${bucket.error}`);
+
     const sb = supabaseWrite()!;
-    const { error } = await sb
-      .from(CMS_TABLE)
-      .upsert(
-        { key, value, updated_at: new Date().toISOString() },
-        { onConflict: "key" }
-      );
+    const body = new Blob([JSON.stringify(value, null, 2)], {
+      type: "application/json",
+    });
+    const { error } = await sb.storage
+      .from(CMS_BUCKET)
+      .upload(docPath(key), body, {
+        contentType: "application/json",
+        upsert: true,
+        cacheControl: "0",
+      });
     if (error) throw new Error(`Supabase yozishda xato: ${error.message}`);
     return;
   }
@@ -201,6 +195,9 @@ export async function uploadMedia(
   const key = `${folder}/${name}`;
 
   if (supabaseWriteEnabled()) {
+    const bucket = await ensureBucket(MEDIA_BUCKET, true);
+    if (!bucket.ok) throw new Error(`Bucket tayyorlanmadi: ${bucket.error}`);
+
     const sb = supabaseWrite()!;
     const { error } = await sb.storage
       .from(MEDIA_BUCKET)
