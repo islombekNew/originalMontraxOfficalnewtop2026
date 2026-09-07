@@ -144,6 +144,13 @@ export default function SettingsEditor({ initial }: { initial: SettingsDoc }) {
             label="Footer'dagi logo belgisi"
             value={value.brandLogo}
             onChange={(r) => patch({ brandLogo: r.url })}
+            hint="MONTRAX yozuvi yonidagi belgi. Har qanday nisbat bo'ladi — balandligi matnga moslanadi."
+          />
+          <ImageField
+            label="Brauzer tab belgisi (favicon)"
+            value={value.favicon}
+            onChange={(r) => patch({ favicon: r.url })}
+            hint="Kvadrat va o'z foni bilan bo'lsin: shaffof to'q belgi qora tab panelida ko'rinmay qoladi. 512×512 px yetarli."
           />
           <ImageField
             label="Ijtimoiy tarmoqlarda ulashish rasmi (OG image)"

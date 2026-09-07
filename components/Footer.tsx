@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { Link } from "@/i18n/navigation";
@@ -24,13 +23,15 @@ export default function Footer() {
           className="flex select-none items-center gap-3 whitespace-nowrap font-display text-[clamp(2.4rem,12vw,13rem)] font-semibold leading-none tracking-tighter md:gap-6"
         >
           {brandLogo && (
-            <Image
+            /* Belgi admin paneldan keladi — nisbati oldindan noma'lum, shuning
+               uchun balandlik qat'iy, eni rasmning o'z nisbatidan.
+               next/image bunda width/height talab qiladi va nisbatni buzardi. */
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
               src={brandLogo}
               alt=""
               aria-hidden
-              width={512}
-              height={512}
-              className="h-[0.62em] w-[0.62em] shrink-0 opacity-90"
+              className="h-[0.62em] w-auto shrink-0 opacity-90"
             />
           )}
           <span>

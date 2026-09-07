@@ -99,7 +99,8 @@ export const defaultSettings: SettingsDoc = {
     "GSAP", "Framer Motion",
   ],
   aboutPhoto: "/media/personal/islombek.jpg",
-  brandLogo: "/media/brand/logo-mark.png",
+  brandLogo: "/media/brand/logo-mark.svg",
+  favicon: "/media/brand/icon.svg",
   ogImage: "",
 };
 

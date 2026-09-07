@@ -1,8 +1,7 @@
 import type { MetadataRoute } from "next";
 import { routing } from "@/i18n/routing";
 import { getCaseSlugs } from "@/lib/work";
-
-const BASE = "https://montraxportfolios.netlify.app";
+import { SITE_URL as BASE } from "@/lib/site";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPaths = ["", "/work", "/about", "/services", "/contact"];

@@ -5,6 +5,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import { getSettings } from "@/lib/cms/read";
+import { SITE_URL } from "@/lib/site";
 import { SiteSettingsProvider } from "@/components/SiteSettings";
 import SmoothScroll from "@/components/SmoothScroll";
 import Cursor from "@/components/Cursor";
@@ -51,8 +52,10 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "meta" });
   const settings = await getSettings();
   return {
+    metadataBase: new URL(SITE_URL),
     title: t("homeTitle"),
     description: t("homeDesc"),
+    ...(settings.favicon ? { icons: { icon: settings.favicon } } : {}),
     openGraph: {
       title: t("homeTitle"),
       description: t("homeDesc"),

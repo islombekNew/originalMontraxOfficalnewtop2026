@@ -73,6 +73,9 @@ export type SettingsDoc = {
   aboutTools: string[];
   aboutPhoto: string;
   brandLogo: string;
+  /** Brauzer tab belgisi. Kvadrat va o'z foniga ega bo'lgani ma'qul —
+   *  shaffof to'q belgi qora tab panelida ko'rinmay qoladi. */
+  favicon: string;
   ogImage: string;
   /** contact sahifasidagi FAQ va boshqa bir martalik qiymatlar shu yerda emas —
    *  ular messages ichida, chunki tarjima qilinadi */

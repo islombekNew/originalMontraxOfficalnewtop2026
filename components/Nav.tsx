@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useTranslations, useLocale } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
@@ -18,7 +17,7 @@ const LINKS = [
 
 export default function Nav() {
   const t = useTranslations("nav");
-  const { telegramUrl } = useSiteSettings();
+  const { telegramUrl, brandLogo } = useSiteSettings();
   const locale = useLocale();
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
@@ -60,7 +59,22 @@ export default function Nav() {
               whileHover={{ rotate: -8, scale: 1.08 }}
               transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
             >
-              <span className="font-display text-xs font-bold leading-none">M</span>
+              {/* Belgi mask sifatida chiziladi — rangi badge matn rangidan keladi,
+                  shunda to'q fonda ham ko'rinadi (SVG ichidagi rangga bog'liq emas). */}
+              <span
+                aria-hidden
+                className="h-3 w-[0.95rem] bg-current"
+                style={{
+                  WebkitMaskImage: `url(${brandLogo})`,
+                  maskImage: `url(${brandLogo})`,
+                  WebkitMaskRepeat: "no-repeat",
+                  maskRepeat: "no-repeat",
+                  WebkitMaskPosition: "center",
+                  maskPosition: "center",
+                  WebkitMaskSize: "contain",
+                  maskSize: "contain",
+                }}
+              />
             </motion.span>
             <span className="font-display font-semibold tracking-tight">
               MONTRAX
