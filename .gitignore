@@ -86,3 +86,5 @@ Thumbs.db
 data.json
 # TypeScript build cache
 *.tsbuildinfo
+
+.vercel
